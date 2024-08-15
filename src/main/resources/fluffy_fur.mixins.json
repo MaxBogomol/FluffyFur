@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "mod.maxbogomol.fluffy_fur.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "fluffy_fur.refmap.json",
+  "mixins": [
+    "common.ItemEntityMixin",
+    "common.BlocksMixin",
+    "common.ItemStackMixin",
+    "common.BlockItemMixin"
+  ],
+  "client": [
+    "client.TitleScreenMixin",
+    "client.HumanoidModelMixin",
+    "client.ItemInHandLayerMixin",
+    "client.ItemInHandRendererMixin",
+    "client.ClientMusicChoiceMixin",
+    "client.AbstractClientPlayerMixin",
+    "client.GuiGraphicsMixin",
+    "client.CameraMixin"
+  ],
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

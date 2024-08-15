@@ -1,0 +1,147 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+
+repositories {
+    maven { url = "https://maven.theillusivec4.top/" }
+    maven { url = "https://maven.tterrag.com/" }
+    maven { url = "https://modmaven.k-4u.nl"}
+    maven { url = "https://cursemaven.com" }
+    maven { url = "https://maven.blamejared.com" }
+    maven { url = 'https://maven.saps.dev/releases' }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'java-library'
+
+version = "${minecraft_version}-${mod_version}"
+group = 'mod.maxbogomol.fluffy_fur'
+archivesBaseName = 'fluffy_fur'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    mappings channel: 'parchment', version: '2023.06.26-1.20.1'
+    
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            jvmArg "-Dmixin.env.disableRefMap=true"
+            arg "-mixin.config=fluffy_fur.mixins.json"
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods { fluffy_fur { source sourceSets.main } }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            jvmArg "-Dmixin.env.disableRefMap=true"
+            arg "-mixin.config=fluffy_fur.mixins.json"
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods { fluffy_fur { source sourceSets.main } }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            jvmArg "-Dmixin.env.disableRefMap=true"
+            arg "-mixin.config=fluffy_fur.mixins.json"
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'fluffy_fur', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods { fluffy_fur { source sourceSets.main } }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
+    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+    implementation fg.deobf("curse.maven:configured-457570:5180900")
+    implementation fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+    implementation fg.deobf("curse.maven:embeddium-908741:5566632")
+    implementation fg.deobf("curse.maven:jade-324717:5493390")
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "fluffy_fur",
+            "Specification-Vendor": "MaxBogomol",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"MaxBogomol",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    repositories {
+        def token = providers.environmentVariable("SAPS_TOKEN") // This is exposed from your github secrets & workflows env: section
+        if (token.isPresent()) {
+            maven {
+                url "https://maven.saps.dev/releases" // Use snapshots if you ever start working with snapshots
+                credentials {
+                    username = "maxbogomol"
+                    password = token.get()
+                }
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            artifactId = archivesBaseName
+
+            from components.java
+            fg.component(it)
+            jarJar.component(it)
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "fluffy_fur.refmap.json"
+    config 'fluffy_fur.mixins.json'
+    dumpTargetOnFailure true
+}

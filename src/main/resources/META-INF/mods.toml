@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GPL-2.0"
+
+[[mods]]
+    modId="fluffy_fur"
+    version="${file.jarVersion}"
+    displayName="Fluffy Fur"
+    logoFile="fluffy_fur.png"
+    authors='''
+    MaxBogomol - Developer
+    '''
+    description='''
+    Adds fluffy and renders things
+    '''
+
+[[dependencies.fluffy_fur]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.fluffy_fur]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
