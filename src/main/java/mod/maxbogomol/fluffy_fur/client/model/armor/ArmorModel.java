@@ -13,16 +13,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 public abstract class ArmorModel extends HumanoidModel {
     public EquipmentSlot slot;
-    final ModelPart root;
-    final ModelPart head;
-    final ModelPart body;
-    final ModelPart leftArm;
-    final ModelPart rightArm;
-    final ModelPart pelvis;
-    final ModelPart leftLegging;
-    final ModelPart rightLegging;
-    final ModelPart leftFoot;
-    final ModelPart rightFoot;
+    public final ModelPart root;
+    public final ModelPart head;
+    public final ModelPart body;
+    public final ModelPart leftArm;
+    public final ModelPart rightArm;
+    public final ModelPart pelvis;
+    public final ModelPart leftLegging;
+    public final ModelPart rightLegging;
+    public final ModelPart leftFoot;
+    public final ModelPart rightFoot;
 
     public ArmorModel(ModelPart root) {
         super(root);
