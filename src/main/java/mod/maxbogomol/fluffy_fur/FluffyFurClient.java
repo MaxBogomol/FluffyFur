@@ -80,8 +80,15 @@ public class FluffyFurClient {
         @SubscribeEvent
         public static void registerFactories(RegisterParticleProvidersEvent event) {
             Minecraft.getInstance().particleEngine.register(FluffyFur.WISP_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.TINY_WISP_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.SPARKLE_PARTICLE.get(), GenericParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.STEAM_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.STAR_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.TINY_STAR_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.SQUARE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.DOT_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.CIRCLE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.TINY_CIRCLE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.HEART_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.SMOKE_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.TRAIL_PARTICLE.get(), GenericParticleType.Factory::new);
@@ -89,16 +96,11 @@ public class FluffyFurClient {
 
         @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing"), DefaultVertexFormat.POSITION_COLOR),
-                    shader -> { GLOWING_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_sprite"), DefaultVertexFormat.POSITION_TEX_COLOR),
-                    shader -> { GLOWING_SPRITE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { GLOWING_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:sprite_particle"), DefaultVertexFormat.PARTICLE),
-                    shader -> { SPRITE_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP),
-                    shader -> { FLUID_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing"), DefaultVertexFormat.POSITION_COLOR), shader -> { GLOWING_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_sprite"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> { GLOWING_SPRITE_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_particle"), DefaultVertexFormat.PARTICLE), shader -> { GLOWING_PARTICLE_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:sprite_particle"), DefaultVertexFormat.PARTICLE), shader -> { SPRITE_PARTICLE_SHADER = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP), shader -> { FLUID_SHADER = shader; });
         }
 
         @SubscribeEvent

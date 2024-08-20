@@ -3,13 +3,14 @@ package mod.maxbogomol.fluffy_fur.client.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
-import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 
@@ -20,10 +21,13 @@ public class GenericParticle extends TextureSheetParticle {
 
     public static final Random random = new Random();
 
+    public final RenderType renderType;
+
     public final ColorParticleData colorData;
     public final GenericParticleData transparencyData;
     public final GenericParticleData scaleData;
     public final SpinParticleData spinData;
+    public final LightParticleData lightData;
 
     public final boolean shouldCull;
     public float randomSpin;
@@ -33,10 +37,12 @@ public class GenericParticle extends TextureSheetParticle {
     public GenericParticle(ClientLevel level, GenericParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
         super(level, x, y, z, vx, vy, vz);
         this.setPos(x, y, z);
+        this.renderType = options.renderType;
         this.colorData = options.colorData;
         this.transparencyData = options.transparencyData;
         this.scaleData = options.scaleData;
         this.spinData = options.spinData;
+        this.lightData = options.lightData;
         this.xd = vx;
         this.yd = vy;
         this.zd = vz;
@@ -90,7 +96,12 @@ public class GenericParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(VertexConsumer b, Camera info, float pticks) {
-        super.render(WorldRenderHandler.getDelayedRender().getBuffer(RenderUtils.GLOWING_PARTICLE), info, pticks);
+    protected int getLightColor(float partialTicks) {
+        return lightData.getLight(this, this.level, partialTicks);
+    }
+
+    @Override
+    public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
+        super.render(WorldRenderHandler.getDelayedRender().getBuffer(renderType), camera, partialTicks);
     }
 }

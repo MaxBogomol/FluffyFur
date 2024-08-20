@@ -78,8 +78,15 @@ public class FluffyFur {
 
     //PARTICLES
     public static RegistryObject<GenericParticleType> WISP_PARTICLE = PARTICLES.register("wisp", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> TINY_WISP_PARTICLE = PARTICLES.register("tiny_wisp", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> STEAM_PARTICLE = PARTICLES.register("steam", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> STAR_PARTICLE = PARTICLES.register("star", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> TINY_STAR_PARTICLE = PARTICLES.register("tiny_star", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> SQUARE_PARTICLE = PARTICLES.register("square", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> DOT_PARTICLE = PARTICLES.register("dot", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> CIRCLE_PARTICLE = PARTICLES.register("circle", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> TINY_CIRCLE_PARTICLE = PARTICLES.register("tiny_circle", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> HEART_PARTICLE = PARTICLES.register("heart", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> CUBE_PARTICLE = PARTICLES.register("cube", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", GenericParticleType::new);

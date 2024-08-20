@@ -2,9 +2,11 @@ package mod.maxbogomol.fluffy_fur.client.particle;
 
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
@@ -35,6 +37,11 @@ public class ParticleBuilder {
         return options;
     }
 
+    public ParticleBuilder setRenderType(RenderType renderType) {
+        options.renderType = renderType;
+        return this;
+    }
+
     public ParticleBuilder setColorData(ColorParticleData colorData) {
         options.colorData = colorData;
         return this;
@@ -52,6 +59,11 @@ public class ParticleBuilder {
 
     public ParticleBuilder setSpinData(SpinParticleData spinData) {
         options.spinData = spinData;
+        return this;
+    }
+
+    public ParticleBuilder setLightData(LightParticleData lightData) {
+        options.lightData = lightData;
         return this;
     }
 
@@ -103,6 +115,19 @@ public class ParticleBuilder {
 
     public ParticleBuilder setShouldCull(boolean shouldCull) {
         options.shouldCull = shouldCull;
+        return this;
+    }
+
+    public ParticleBuilder enablePhysics() {
+        return setHasPhysics(true);
+    }
+
+    public ParticleBuilder disablePhysics() {
+        return setHasPhysics(false);
+    }
+
+    public ParticleBuilder setHasPhysics(boolean hasPhysics) {
+        options.hasPhysics = hasPhysics;
         return this;
     }
 

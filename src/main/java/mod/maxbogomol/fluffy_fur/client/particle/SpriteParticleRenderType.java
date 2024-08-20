@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import org.lwjgl.opengl.GL11;
 
 public class SpriteParticleRenderType implements ParticleRenderType {
+
     public static final SpriteParticleRenderType INSTANCE = new SpriteParticleRenderType();
 
     private static void beginRenderCommon(BufferBuilder bufferBuilder, TextureManager textureManager) {
@@ -32,13 +33,13 @@ public class SpriteParticleRenderType implements ParticleRenderType {
     }
 
     @Override
-    public void begin(BufferBuilder b, TextureManager tex) {
-        beginRenderCommon(b, tex);
+    public void begin(BufferBuilder bufferBuilder, TextureManager textureManager) {
+        beginRenderCommon(bufferBuilder, textureManager);
     }
 
     @Override
-    public void end(Tesselator t) {
-        t.end();
+    public void end(Tesselator tesselator) {
+        tesselator.end();
         RenderSystem.enableDepthTest();
         endRenderCommon();
     }
