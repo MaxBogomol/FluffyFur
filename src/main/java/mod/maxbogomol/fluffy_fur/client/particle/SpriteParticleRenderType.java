@@ -1,16 +1,16 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import org.lwjgl.opengl.GL11;
 
 public class SpriteParticleRenderType implements ParticleRenderType {

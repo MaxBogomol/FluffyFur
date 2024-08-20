@@ -7,12 +7,8 @@ license="GPL-2.0"
     version="${file.jarVersion}"
     displayName="Fluffy Fur"
     logoFile="fluffy_fur.png"
-    authors='''
-    MaxBogomol - Developer
-    '''
-    description='''
-    Adds fluffy and renders things
-    '''
+    authors="MaxBogomol"
+    description="Adds fluffy and renders things"
 
 [[dependencies.fluffy_fur]]
     modId="forge"

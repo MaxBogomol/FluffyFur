@@ -4,20 +4,21 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
-    "common.ItemEntityMixin",
+    "common.BlockItemMixin",
     "common.BlocksMixin",
-    "common.ItemStackMixin",
-    "common.BlockItemMixin"
+    "common.ItemEntityMixin",
+    "common.ItemStackMixin"
   ],
   "client": [
-    "client.TitleScreenMixin",
+    "client.AbstractClientPlayerMixin",
+    "client.CameraMixin",
+    "client.ClientMusicChoiceMixin",
+    "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
-    "client.ClientMusicChoiceMixin",
-    "client.AbstractClientPlayerMixin",
-    "client.GuiGraphicsMixin",
-    "client.CameraMixin"
+    "client.MinecraftMixin",
+    "client.TitleScreenMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

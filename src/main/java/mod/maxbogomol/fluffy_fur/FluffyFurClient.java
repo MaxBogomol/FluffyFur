@@ -79,12 +79,12 @@ public class FluffyFurClient {
 
         @SubscribeEvent
         public static void registerFactories(RegisterParticleProvidersEvent event) {
-            Minecraft.getInstance().particleEngine.register(FluffyFur.WISP_PARTICLE.get(), WispParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.SPARKLE_PARTICLE.get(), SparkleParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.STEAM_PARTICLE.get(), SteamParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.SMOKE_PARTICLE.get(), SmokeParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), CubeParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.TRAIL_PARTICLE.get(), TrailParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.WISP_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.SPARKLE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.STEAM_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.SMOKE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.TRAIL_PARTICLE.get(), GenericParticleType.Factory::new);
         }
 
         @SubscribeEvent

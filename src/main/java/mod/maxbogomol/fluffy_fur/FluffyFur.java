@@ -77,12 +77,12 @@ public class FluffyFur {
     public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> HANGING_SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, getBlocks(CustomHangingSignBlockEntity.class, CustomWallHangingSignBlock.class)).build(null));
 
     //PARTICLES
-    public static RegistryObject<WispParticleType> WISP_PARTICLE = PARTICLES.register("wisp", WispParticleType::new);
-    public static RegistryObject<SparkleParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", SparkleParticleType::new);
-    public static RegistryObject<SteamParticleType> STEAM_PARTICLE = PARTICLES.register("steam", SteamParticleType::new);
-    public static RegistryObject<SmokeParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", SmokeParticleType::new);
-    public static RegistryObject<CubeParticleType> CUBE_PARTICLE = PARTICLES.register("cube", CubeParticleType::new);
-    public static RegistryObject<TrailParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", TrailParticleType::new);
+    public static RegistryObject<GenericParticleType> WISP_PARTICLE = PARTICLES.register("wisp", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> SPARKLE_PARTICLE = PARTICLES.register("sparkle", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> STEAM_PARTICLE = PARTICLES.register("steam", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> CUBE_PARTICLE = PARTICLES.register("cube", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", GenericParticleType::new);
 
     //public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));
 

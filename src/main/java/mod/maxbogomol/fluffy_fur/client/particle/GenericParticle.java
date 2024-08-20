@@ -1,6 +1,12 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
-import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
+import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
@@ -8,33 +14,47 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 
 import java.awt.*;
+import java.util.Random;
 
 public class GenericParticle extends TextureSheetParticle {
 
-    GenericParticleData data;
+    public static final Random random = new Random();
+
+    public final ColorParticleData colorData;
+    public final GenericParticleData transparencyData;
+    public final GenericParticleData scaleData;
+    public final SpinParticleData spinData;
+
+    public final boolean shouldCull;
+    public float randomSpin;
+
     float[] hsv1 = new float[3], hsv2 = new float[3];
 
-    public GenericParticle(ClientLevel world, GenericParticleData data, double x, double y, double z, double vx, double vy, double vz) {
-        super(world, x, y, z, vx, vy, vz);
+    public GenericParticle(ClientLevel level, GenericParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
+        super(level, x, y, z, vx, vy, vz);
         this.setPos(x, y, z);
-        this.data = data;
+        this.colorData = options.colorData;
+        this.transparencyData = options.transparencyData;
+        this.scaleData = options.scaleData;
+        this.spinData = options.spinData;
         this.xd = vx;
         this.yd = vy;
         this.zd = vz;
-        this.setLifetime(data.lifetime);
-        this.gravity = data.gravity ? 1 : 0;
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, data.r1)), (int)(255 * Math.min(1.0f, data.g1)), (int)(255 * Math.min(1.0f, data.b1)), hsv1);
-        Color.RGBtoHSB((int)(255 * Math.min(1.0f, data.r2)), (int)(255 * Math.min(1.0f, data.g2)), (int)(255 * Math.min(1.0f, data.b2)), hsv2);
+        this.setLifetime(options.lifetime + random.nextInt(options.additionalLifetime + 1));
+        this.gravity = options.gravity;
+        if (options.additionalGravity > 0) this.gravity = this.gravity + random.nextFloat(options.additionalGravity);
+        this.friction = options.friction;
+        if (options.additionalFriction > 0) this.friction = this.friction + random.nextFloat(options.additionalFriction);
+        this.shouldCull = options.shouldCull;
+        this.hasPhysics = options.hasPhysics;
+        this.randomSpin = 0;
+        if (options.randomSpin > 0) this.randomSpin = options.randomSpin * ((random.nextFloat() - 0.5f) * 2);
+        Color.RGBtoHSB((int)(255 * Math.min(1.0f, colorData.r1)), (int)(255 * Math.min(1.0f, colorData.g1)), (int)(255 * Math.min(1.0f, colorData.b1)), hsv1);
+        Color.RGBtoHSB((int)(255 * Math.min(1.0f, colorData.r2)), (int)(255 * Math.min(1.0f, colorData.g2)), (int)(255 * Math.min(1.0f, colorData.b2)), hsv2);
         updateTraits();
     }
 
-    protected float getCoeff() {
-        return (float)this.age / this.lifetime;
-    }
-
-    protected void updateTraits() {
-        float coeff = Easing.BOUNCE_IN_OUT.ease(getCoeff(), 0, 1, 1);
-        quadSize = Mth.lerp(Easing.EXPO_IN.ease(getCoeff(), 0, 1, 1), data.scale1, data.scale2);
+    public void pickColor(float coeff) {
         float h = Mth.rotLerp(coeff, 360 * hsv1[0], 360 * hsv2[0]) / 360;
         float s = Mth.lerp(coeff, hsv1[1], hsv2[1]);
         float v = Mth.lerp(coeff, hsv1[2], hsv2[2]);
@@ -43,9 +63,14 @@ public class GenericParticle extends TextureSheetParticle {
         float g = FastColor.ARGB32.green(packed) / 255.0f;
         float b = FastColor.ARGB32.blue(packed) / 255.0f;
         setColor(r, g, b);
-        setAlpha(Mth.lerp(coeff, data.a1, data.a2));
+    }
+
+    protected void updateTraits() {
+        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(age, lifetime), 0, 1, 1));
+        quadSize = scaleData.getValue(age, lifetime);
+        alpha = transparencyData.getValue(age, lifetime);
         oRoll = roll;
-        roll += data.spin;
+        roll = roll + spinData.getValue(age, lifetime) + randomSpin;
     }
 
     @Override
@@ -61,6 +86,11 @@ public class GenericParticle extends TextureSheetParticle {
 
     @Override
     public boolean shouldCull() {
-        return false;
+        return shouldCull;
+    }
+
+    @Override
+    public void render(VertexConsumer b, Camera info, float pticks) {
+        super.render(WorldRenderHandler.getDelayedRender().getBuffer(RenderUtils.GLOWING_PARTICLE), info, pticks);
     }
 }
