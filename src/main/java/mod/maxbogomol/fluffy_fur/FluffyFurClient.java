@@ -90,7 +90,7 @@ public class FluffyFurClient {
             Minecraft.getInstance().particleEngine.register(FluffyFur.TINY_CIRCLE_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.HEART_PARTICLE.get(), GenericParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.SMOKE_PARTICLE.get(), GenericParticleType.Factory::new);
-            Minecraft.getInstance().particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), GenericParticleType.Factory::new);
+            Minecraft.getInstance().particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), CubeParticleType.Factory::new);
             Minecraft.getInstance().particleEngine.register(FluffyFur.TRAIL_PARTICLE.get(), GenericParticleType.Factory::new);
         }
 

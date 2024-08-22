@@ -34,7 +34,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 6);
+            nbt.putInt("mode", (mode + 1) % 7);
             mode = nbt.getInt("mode");
         }
 
@@ -182,6 +182,18 @@ public class TestShrimpItem extends Item {
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
                 ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(200)
+                        .randomVelocity(0.35f, 0.35f, 0.35f)
+                        .randomSpin(0.1f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 5);
+            }
+
+            if (mode == 6) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())

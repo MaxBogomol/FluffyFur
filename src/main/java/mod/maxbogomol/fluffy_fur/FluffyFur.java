@@ -52,6 +52,7 @@ import java.util.Arrays;
 @Mod("fluffy_fur")
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
+    public static final String VERSION = "0.1";
     public static final int VERSION_NUMBER = 1;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
@@ -88,7 +89,7 @@ public class FluffyFur {
     public static RegistryObject<GenericParticleType> TINY_CIRCLE_PARTICLE = PARTICLES.register("tiny_circle", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> HEART_PARTICLE = PARTICLES.register("heart", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SMOKE_PARTICLE = PARTICLES.register("smoke", GenericParticleType::new);
-    public static RegistryObject<GenericParticleType> CUBE_PARTICLE = PARTICLES.register("cube", GenericParticleType::new);
+    public static RegistryObject<CubeParticleType> CUBE_PARTICLE = PARTICLES.register("cube", CubeParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL_PARTICLE = PARTICLES.register("trail", GenericParticleType::new);
 
     //public static final RegistryObject<BlockStateProviderType<?>> AN_STATEPROVIDER = BLOCK_STATE_PROVIDER_TYPE.register("an_stateprovider", () -> new BlockStateProviderType<>(SupplierBlockStateProvider.CODEC));

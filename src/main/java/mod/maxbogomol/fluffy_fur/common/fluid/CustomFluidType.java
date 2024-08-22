@@ -14,7 +14,6 @@ import org.joml.Vector3f;
 
 import java.util.function.Consumer;
 
-
 public class CustomFluidType extends FluidType {
     private final ResourceLocation stillTexture;
     private final ResourceLocation flowingTexture;
@@ -22,8 +21,7 @@ public class CustomFluidType extends FluidType {
     private final int tintColor;
     private final Vector3f fogColor;
 
-    public CustomFluidType(final ResourceLocation stillTexture, final ResourceLocation flowingTexture, final ResourceLocation overlayTexture,
-                         final int tintColor, final Vector3f fogColor, final Properties properties) {
+    public CustomFluidType(final ResourceLocation stillTexture, final ResourceLocation flowingTexture, final ResourceLocation overlayTexture, final int tintColor, final Vector3f fogColor, final Properties properties) {
         super(properties);
         this.stillTexture = stillTexture;
         this.flowingTexture = flowingTexture;
