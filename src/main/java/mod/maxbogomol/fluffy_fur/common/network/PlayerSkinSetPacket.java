@@ -24,7 +24,9 @@ public class PlayerSkinSetPacket extends ServerPacket {
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();
         PlayerSkinHandler.setSkin(player, skin.getString());
-        PacketHandler.sendToTracking(player.level(), player.getOnPos(), new PlayerSkinUpdatePacket(player));
+        for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
+            PacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
+        }
     }
 
     public static void register(SimpleChannel instance, int index) {

@@ -171,9 +171,14 @@ public class FluffyFurClient {
             .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/ears"))
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/tail"))
             .setSlim(true);
+    public static PlayerSkin ONIXTHECAT_SKIN = new PlayerSkin(FluffyFur.MOD_ID + ":onixthecat")
+            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin"))
+            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin_blink"))
+            .setSlim(true);
 
     public static void setupPlayerSkins() {
         PlayerSkinHandler.registerSkin(MAXBOGOMOL_SKIN);
+        PlayerSkinHandler.registerSkin(ONIXTHECAT_SKIN);
     }
 
     public static void makeBow(Item item) {

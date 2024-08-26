@@ -15,7 +15,9 @@ public class KeyBindHandler {
     public static void onInput(InputEvent event) {
         if (FluffyFurClient.SKIN_MENU_KEY.isDown()) {
             if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurClient.MAXBOGOMOL_SKIN) {
-                PlayerSkinHandler.setSkinPacket("");
+                PlayerSkinHandler.setSkinPacket(FluffyFurClient.ONIXTHECAT_SKIN);
+            } else if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurClient.ONIXTHECAT_SKIN) {
+                PlayerSkinHandler.setSkinPacket(FluffyFurClient.MAXBOGOMOL_SKIN);
             } else {
                 PlayerSkinHandler.setSkinPacket(FluffyFurClient.MAXBOGOMOL_SKIN);
             }
