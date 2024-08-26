@@ -23,7 +23,7 @@ public abstract class ItemEntityMixin {
             if (ClientConfig.ITEM_PARTICLE.get()) {
                 if (self.getItem().getItem() instanceof IParticleItem) {
                     IParticleItem item = (IParticleItem) self.getItem().getItem();
-                    item.addParticles(FluffyFur.proxy.getWorld(), self);
+                    item.addParticles(FluffyFur.proxy.getLevel(), self);
                 }
             }
         }

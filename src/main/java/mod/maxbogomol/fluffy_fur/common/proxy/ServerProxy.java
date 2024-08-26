@@ -10,7 +10,7 @@ public class ServerProxy implements ISidedProxy {
     }
 
     @Override
-    public Level getWorld() {
+    public Level getLevel() {
         return null;
     }
 }

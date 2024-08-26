@@ -8,6 +8,8 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -34,7 +36,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 7);
+            nbt.putInt("mode", (mode + 1) % 8);
             mode = nbt.getInt("mode");
         }
 
@@ -201,6 +203,20 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
+            }
+
+            if (mode == 7) {
+                Vec3 pos = player.getEyePosition();
+                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                        .setColorData(ColorParticleData.create(1, 1, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(1f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(100)
+                        .randomVelocity(0.35f, 0.35f, 0.35f)
+                        .randomSpin(0.1f)
+                        .flatRandomOffset(1, 2, 1)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+                level.playSound(player, pos.x(), pos.y(), pos.z(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
             }
         }
 

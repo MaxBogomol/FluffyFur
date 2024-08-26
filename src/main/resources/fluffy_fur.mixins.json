@@ -18,6 +18,7 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.MinecraftMixin",
+    "client.PlayerRendererMixin",
     "client.TitleScreenMixin"
   ],
   "minVersion": "0.8",

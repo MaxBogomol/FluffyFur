@@ -5,42 +5,42 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class PositionEffectPacket extends ClientPacket {
-    protected final double posX;
-    protected final double posY;
-    protected final double posZ;
+    protected final double x;
+    protected final double y;
+    protected final double z;
 
-    public PositionEffectPacket(double posX, double posY, double posZ) {
-        this.posX = posX;
-        this.posY = posY;
-        this.posZ = posZ;
+    public PositionEffectPacket(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     public PositionEffectPacket(BlockPos pos) {
-        this.posX = pos.getX();
-        this.posY = pos.getY();
-        this.posZ = pos.getZ();
+        this.x = pos.getX();
+        this.y = pos.getY();
+        this.z = pos.getZ();
     }
 
     public PositionEffectPacket(Vec3 vec) {
-        this.posX = vec.x();
-        this.posY = vec.y();
-        this.posZ = vec.z();
+        this.x = vec.x();
+        this.y = vec.y();
+        this.z = vec.z();
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeDouble(posX);
-        buf.writeDouble(posY);
-        buf.writeDouble(posZ);
+        buf.writeDouble(x);
+        buf.writeDouble(y);
+        buf.writeDouble(z);
     }
 
     public static <T extends PositionEffectPacket> T decode(PacketProvider<T> provider, FriendlyByteBuf buf) {
-        double posX = buf.readDouble();
-        double posY = buf.readDouble();
-        double posZ = buf.readDouble();
-        return provider.getPacket(posX, posY, posZ);
+        double x = buf.readDouble();
+        double y = buf.readDouble();
+        double z = buf.readDouble();
+        return provider.getPacket(x, y, z);
     }
 
     public interface PacketProvider<T extends PositionEffectPacket> {
-        T getPacket(double posX, double posY, double posZ);
+        T getPacket(double x, double y, double z);
     }
 }

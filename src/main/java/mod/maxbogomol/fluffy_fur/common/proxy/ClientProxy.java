@@ -11,7 +11,7 @@ public class ClientProxy implements ISidedProxy {
     }
 
     @Override
-    public Level getWorld() {
+    public Level getLevel() {
         return Minecraft.getInstance().level;
     }
 }

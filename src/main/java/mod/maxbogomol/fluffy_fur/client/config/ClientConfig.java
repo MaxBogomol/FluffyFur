@@ -5,25 +5,17 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            BETTER_LAYERING,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE,
             CUSTOM_PANORAMA, PANORAMA_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             PANORAMA_BUTTON_ROW, PANORAMA_BUTTON_ROW_X_OFFSET, PANORAMA_BUTTON_X_OFFSET, PANORAMA_BUTTON_Y_OFFSET;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("Graphics").push("graphics");
-        BETTER_LAYERING = builder.comment("Enable better particle/effect layering.")
-                .comment("Fixes particles and effects rendering behind clouds and weather.")
-                .comment("NOTE: Does NOT work with fabulous graphics mode.")
-                .define("betterLayering", true);
-
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.")
                 .define("itemParticle", true);
         ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.")
                 .define("itemGuiParticle", true);
-        builder.pop();
         builder.pop();
 
         builder.comment("Menu").push("menu");

@@ -25,6 +25,9 @@ public final class PacketHandler {
 
     public static void init() {
         int id = 0;
+        PlayerSkinUpdatePacket.register(HANDLER, id++);
+        PlayerSkinChangeEffectPacket.register(HANDLER, id++);
+        PlayerSkinSetPacket.register(HANDLER, id++);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(
@@ -56,8 +59,8 @@ public final class PacketHandler {
         }
     }
 
-    public static void sendToTracking(Level world, BlockPos pos, Object msg) {
-        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(world, pos)), msg);
+    public static void sendToTracking(Level level, BlockPos pos, Object msg) {
+        HANDLER.send(TRACKING_CHUNK_AND_NEAR.with(() -> Pair.of(level, pos)), msg);
     }
 
     public static void sendTo(Player entity, Object msg) {

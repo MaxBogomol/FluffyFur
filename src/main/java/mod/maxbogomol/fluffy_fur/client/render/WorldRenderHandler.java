@@ -43,23 +43,21 @@ public class WorldRenderHandler {
             particleList.clear();
         }
 
-        if (ClientConfig.BETTER_LAYERING.get()) {
-            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-                RenderSystem.getModelViewStack().pushPose();
-                RenderSystem.getModelViewStack().setIdentity();
-                if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
-                RenderSystem.applyModelViewMatrix();
-                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
-                RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-                getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
-                RenderSystem.getModelViewStack().popPose();
-                RenderSystem.applyModelViewMatrix();
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+            RenderSystem.getModelViewStack().pushPose();
+            RenderSystem.getModelViewStack().setIdentity();
+            if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
+            RenderSystem.applyModelViewMatrix();
+            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            getDelayedRender().endBatch(RenderUtils.DELAYED_PARTICLE);
+            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+            getDelayedRender().endBatch(RenderUtils.GLOWING_PARTICLE);
+            RenderSystem.getModelViewStack().popPose();
+            RenderSystem.applyModelViewMatrix();
 
-                getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
-                getDelayedRender().endBatch(RenderUtils.GLOWING);
-                getDelayedRender().endBatch(RenderUtils.FLUID);
-            }
+            getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
+            getDelayedRender().endBatch(RenderUtils.GLOWING);
+            getDelayedRender().endBatch(RenderUtils.FLUID);
         }
     }
 
