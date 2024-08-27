@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.particle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -18,7 +18,7 @@ public class CubeParticle extends GenericParticle implements ICustomRenderPartic
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
-        WorldRenderHandler.particleList.add(this);
+        LevelRenderHandler.particleList.add(this);
     }
 
     private void decoVert(VertexConsumer vc, float u, float v, float alpha, int lmap) {

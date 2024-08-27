@@ -2,7 +2,8 @@ package mod.maxbogomol.fluffy_fur.mixin.common;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
+import mod.maxbogomol.fluffy_fur.client.tooltip.AttributeTooltipModifier;
+import mod.maxbogomol.fluffy_fur.client.tooltip.TooltipModifierHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -37,9 +38,11 @@ public class ItemStackMixin {
     @ModifyVariable(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;getOperation()Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;", ordinal = 0), index = 16)
     public boolean fluffy_fur$getTooltip(boolean value, @Nullable Player player, TooltipFlag flag) {
         if (player != null) {
-            //if (fluffy_fur$attributeModifier.getId().equals(ScytheItem.BASE_ENTITY_REACH_UUID)) {
-            //    return true;
-            //}
+            for (AttributeTooltipModifier modifier : TooltipModifierHandler.getModifiers()) {
+                if (modifier.isToolBase(fluffy_fur$attributeModifier, player, flag)) {
+                    return true;
+                }
+            }
         }
         return value;
     }
@@ -52,25 +55,22 @@ public class ItemStackMixin {
                 Attribute key = entry.getKey();
                 AttributeModifier modifier = entry.getValue();
                 double amount = modifier.getAmount();
-                boolean flagAdd = false;
                 AttributeModifier.Operation operation = modifier.getOperation();
-/*
-                if (modifier.getId().equals(ScytheItem.BASE_ENTITY_REACH_UUID)) flagAdd = true;
-                if (key.equals(FluffyFur.WISSEN_DISCOUNT.get())) {
-                    operation = AttributeModifier.Operation.MULTIPLY_BASE;
-                    amount = amount / 100f;
-                    flagAdd = true;
+                boolean flagAdd = false;
+
+                for (AttributeTooltipModifier tooltipModifier : TooltipModifierHandler.getModifiers()) {
+                    if (tooltipModifier.isModifiable(key, modifier, player, flag)) {
+                        AttributeTooltipModifier.ModifyResult result = tooltipModifier.modify(modifier, amount, operation);
+                        modifier = result.getModifier();
+                        amount = result.getAmount();
+                        operation = result.getOperation();
+                        flagAdd = true;
+                        break;
+                    }
                 }
-                if (key.equals(FluffyFur.MAGIC_ARMOR.get())) {
-                    operation = AttributeModifier.Operation.MULTIPLY_BASE;
-                    amount = amount / 100f;
-                    flagAdd = true;
-                }*/
 
                 if (flagAdd) {
-                    copied.put(key, new AttributeModifier(
-                            modifier.getId(), modifier.getName(), amount, operation
-                    ));
+                    copied.put(key, new AttributeModifier(modifier.getId(), modifier.getName(), amount, operation));
                 } else {
                     copied.put(key, modifier);
                 }
@@ -89,6 +89,6 @@ public class ItemStackMixin {
 
     @Inject(at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;getId()Ljava/util/UUID;"), method = "getTooltipLines")
     public void fluffy_fur$getTooltip(Player player, TooltipFlag isAdvanced, CallbackInfoReturnable<List<Component>> cir) {
-        ClientEvents.attributeModifierTooltip = fluffy_fur$componentList.size();
+        TooltipModifierHandler.attributeTooltipSize = fluffy_fur$componentList.size();
     }
 }

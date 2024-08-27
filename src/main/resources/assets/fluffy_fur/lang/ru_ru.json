@@ -1,3 +1,8 @@
 {
+  "gui.fluffy_fur.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine ломает Fluffy Fur и другие моды",
+  "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
 
+  "item.fluffy_fur.test_shrimp": "Тестовая креветка",
+  "item.fluffy_fur.thing": "Штуковина"
 }

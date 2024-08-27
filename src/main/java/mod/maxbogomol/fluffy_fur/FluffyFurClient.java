@@ -3,17 +3,18 @@ package mod.maxbogomol.fluffy_fur;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
-import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
-import mod.maxbogomol.fluffy_fur.client.event.KeyBindHandler;
 import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxEarsModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxTailModel;
+import mod.maxbogomol.fluffy_fur.client.model.playerskin.NanachiTailModel;
+import mod.maxbogomol.fluffy_fur.client.model.playerskin.RabbitEarsModel;
 import mod.maxbogomol.fluffy_fur.client.particle.CubeParticleType;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.client.playerskin.FoxPlayerSkin;
+import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
-import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.item.Item2DRenderer;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -46,13 +47,17 @@ public class FluffyFurClient {
     private static final String CATEGORY_KEY = "key.category."+FluffyFur.MOD_ID+".general";
     public static final KeyMapping SKIN_MENU_KEY = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
 
-    public static final ModelLayerLocation FOX_EARS_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "ears"), "main");
-    public static final ModelLayerLocation FOX_TAIL_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "tail"), "main");
+    public static final ModelLayerLocation FOX_EARS_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "fox_ears"), "main");
+    public static final ModelLayerLocation FOX_TAIL_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "fox_tail"), "main");
+    public static final ModelLayerLocation RABBIT_EARS_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "rabbit_ears"), "main");
+    public static final ModelLayerLocation NANACHI_TAIL_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "nanachi_tail"), "main");
 
     public static final ModelLayerLocation EMPTY_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "empty_armor"), "main");
 
     public static FoxEarsModel FOX_EARS_MODEL = null;
     public static FoxTailModel FOX_TAIL_MODEL = null;
+    public static RabbitEarsModel RABBIT_EARS_MODEL = null;
+    public static NanachiTailModel NANACHI_TAIL_MODEL = null;
 
     public static EmptyArmorModel EMPTY_ARMOR_MODEL = null;
 
@@ -70,9 +75,7 @@ public class FluffyFurClient {
     public static class ClientOnly {
         public static void clientInit() {
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-            forgeBus.addListener(ClientTickHandler::clientTickEnd);
-            forgeBus.addListener(WorldRenderHandler::onRenderWorldLast);
-            forgeBus.addListener(KeyBindHandler::onInput);
+            forgeBus.addListener(LevelRenderHandler::onLevelRender);
             forgeBus.register(new ClientEvents());
         }
     }
@@ -152,6 +155,8 @@ public class FluffyFurClient {
         public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(FOX_EARS_LAYER, FoxEarsModel::createBodyLayer);
             event.registerLayerDefinition(FOX_TAIL_LAYER, FoxTailModel::createBodyLayer);
+            event.registerLayerDefinition(RABBIT_EARS_LAYER, RabbitEarsModel::createBodyLayer);
+            event.registerLayerDefinition(NANACHI_TAIL_LAYER, NanachiTailModel::createBodyLayer);
 
             event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
         }
@@ -160,6 +165,8 @@ public class FluffyFurClient {
         public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
             FOX_EARS_MODEL = new FoxEarsModel(event.getEntityModels().bakeLayer(FOX_EARS_LAYER));
             FOX_TAIL_MODEL = new FoxTailModel(event.getEntityModels().bakeLayer(FOX_TAIL_LAYER));
+            RABBIT_EARS_MODEL = new RabbitEarsModel(event.getEntityModels().bakeLayer(RABBIT_EARS_LAYER));
+            NANACHI_TAIL_MODEL = new NanachiTailModel(event.getEntityModels().bakeLayer(NANACHI_TAIL_LAYER));
 
             EMPTY_ARMOR_MODEL = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
         }
@@ -175,10 +182,17 @@ public class FluffyFurClient {
             .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin"))
             .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin_blink"))
             .setSlim(true);
+    public static PlayerSkin NANACHI_SKIN = new NanachiPlayerSkin(FluffyFur.MOD_ID + ":nanachi")
+            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/skin"))
+            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/skin_blink"))
+            .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/ears"))
+            .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/tail"))
+            .setSlim(true);
 
     public static void setupPlayerSkins() {
-        PlayerSkinHandler.registerSkin(MAXBOGOMOL_SKIN);
-        PlayerSkinHandler.registerSkin(ONIXTHECAT_SKIN);
+        PlayerSkinHandler.register(MAXBOGOMOL_SKIN);
+        PlayerSkinHandler.register(ONIXTHECAT_SKIN);
+        PlayerSkinHandler.register(NANACHI_SKIN);
     }
 
     public static void makeBow(Item item) {

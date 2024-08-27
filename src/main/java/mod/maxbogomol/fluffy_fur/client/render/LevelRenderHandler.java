@@ -3,7 +3,6 @@ package mod.maxbogomol.fluffy_fur.client.render;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomRenderParticle;
 import mod.maxbogomol.fluffy_fur.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -21,16 +20,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WorldRenderHandler {
+public class LevelRenderHandler {
     @OnlyIn(Dist.CLIENT)
     public static Matrix4f particleMVMatrix = null;
     @OnlyIn(Dist.CLIENT)
     public static List<ICustomRenderParticle> particleList = new ArrayList<>();
 
-    public static void onRenderWorldLast(RenderLevelStageEvent event) {
+    public static void onLevelRender(RenderLevelStageEvent event) {
         PoseStack stack = event.getPoseStack();
         float partialTicks = event.getPartialTick();
-        MultiBufferSource bufferDelayed = WorldRenderHandler.getDelayedRender();
+        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             stack.pushPose();

@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
-import mod.maxbogomol.fluffy_fur.client.render.WorldRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -102,6 +102,6 @@ public class GenericParticle extends TextureSheetParticle {
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
-        super.render(WorldRenderHandler.getDelayedRender().getBuffer(renderType), camera, partialTicks);
+        super.render(LevelRenderHandler.getDelayedRender().getBuffer(renderType), camera, partialTicks);
     }
 }

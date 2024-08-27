@@ -12,14 +12,14 @@
   "client": [
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
-    "client.ClientMusicChoiceMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
-    "client.TitleScreenMixin"
+    "client.TitleScreenMixin",
+    "client.CurioTooltipMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

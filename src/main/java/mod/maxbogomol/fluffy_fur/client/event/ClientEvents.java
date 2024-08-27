@@ -5,10 +5,14 @@ import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,7 +23,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
     public static ResourceLocation panorama = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama_0");
-    public static int attributeModifierTooltip = 0;
+
+    private static final RandomSource RANDOM = RandomSource.create();
 
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {
@@ -65,5 +70,36 @@ public class ClientEvents {
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
         PlayerSkinHandler.skinTick(event.player);
+    }
+
+    @SubscribeEvent
+    public static void clientTick(TickEvent.ClientTickEvent event) {
+        Minecraft minecraft = Minecraft.getInstance();
+        ClientTickHandler.clientTick(event);
+        if (event.phase == TickEvent.Phase.END) {
+            if (minecraft.isPaused()) {
+                return;
+            }
+            Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+            ScreenshakeHandler.clientTick(camera, RANDOM);
+        }
+    }
+
+    @SubscribeEvent
+    public static void renderTick(TickEvent.RenderTickEvent event) {
+        ClientTickHandler.renderTick(event);
+    }
+
+    @SubscribeEvent
+    public static void onInput(InputEvent event) {
+        if (FluffyFurClient.SKIN_MENU_KEY.isDown()) {
+            if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurClient.MAXBOGOMOL_SKIN) {
+                PlayerSkinHandler.setSkinPacket(FluffyFurClient.NANACHI_SKIN);
+            } else if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurClient.NANACHI_SKIN) {
+                PlayerSkinHandler.setSkinPacket(FluffyFurClient.MAXBOGOMOL_SKIN);
+            } else {
+                PlayerSkinHandler.setSkinPacket(FluffyFurClient.MAXBOGOMOL_SKIN);
+            }
+        }
     }
 }

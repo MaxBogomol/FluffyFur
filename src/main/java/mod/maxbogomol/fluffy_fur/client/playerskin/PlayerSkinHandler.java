@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PlayerSkinHandler {
     public static Map<String, PlayerSkin> skins = new HashMap<>();
 
-    public static void registerSkin(PlayerSkin skin) {
+    public static void register(PlayerSkin skin) {
         skins.put(skin.getId(), skin);
     }
 

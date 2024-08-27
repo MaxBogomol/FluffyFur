@@ -1,6 +1,7 @@
 {
-  "gui.fluffy_fur.menu.optifine.0": "DELETE FUCKING OPTIFINE!!!",
-  "gui.fluffy_fur.menu.optifine.1": "YOU STUPID BITCH!!!",
+  "gui.fluffy_fur.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine breaks Fluffy Fur and other mods",
+  "gui.fluffy_fur.menu.optifine.2": "Delete Optifine :3",
 
   "item.fluffy_fur.test_shrimp": "Test Shrimp",
   "item.fluffy_fur.thing": "Thing"

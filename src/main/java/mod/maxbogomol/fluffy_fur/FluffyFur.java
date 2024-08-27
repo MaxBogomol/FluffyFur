@@ -37,9 +37,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 @Mod("fluffy_fur")
 public class FluffyFur {
@@ -48,6 +52,7 @@ public class FluffyFur {
     public static final int VERSION_NUMBER = 1;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MOD_ID);
@@ -108,7 +113,21 @@ public class FluffyFur {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        hi();
         PacketHandler.init();
+    }
+
+    public static void hi() {
+        List<String> text = new ArrayList<>();
+        Random random = new Random();
+        text.add("I love shrimps");
+        text.add("I wanna cuddle");
+        text.add("wow you are cute");
+        text.add("UwU");
+        text.add(":3");
+        text.add("MEOW");
+        text.add("prrrr");
+        LOGGER.info(text.get(random.nextInt(0, text.size())));
     }
 
     public static Block[] getBlocks(Class<?>... blockClasses) {

@@ -52,19 +52,15 @@ public class Events {
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
         if (!event.player.level().isClientSide) {
-            if (playerSkinUpdate.size() > 0) {
-                List<Player> delete = new ArrayList<>();
-                for (Player player : playerSkinUpdate) {
-                    for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
-                        PacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
-                        if (player != serverPlayer) {
-                            PacketHandler.sendTo(player, new PlayerSkinUpdatePacket(serverPlayer));
-                        }
+            for (Player player : playerSkinUpdate) {
+                for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
+                    PacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
+                    if (player != serverPlayer) {
+                        PacketHandler.sendTo(player, new PlayerSkinUpdatePacket(serverPlayer));
                     }
-                    delete.add(player);
                 }
-                playerSkinUpdate.removeAll(delete);
             }
+            playerSkinUpdate.clear();
         }
     }
 }

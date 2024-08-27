@@ -6,6 +6,8 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,7 +34,9 @@ public class PlayerSkinChangeEffectPacket extends PositionEffectPacket {
                 .randomVelocity(0.35f)
                 .randomSpin(0.1f)
                 .flatRandomOffset(1, 2, 1)
+                .disableDistanceSpawn()
                 .repeat(level, x, y, z, 50);
+        level.playSound(null, x, y, z, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
     }
 
     public static void register(SimpleChannel instance, int index) {

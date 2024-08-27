@@ -83,12 +83,14 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
-    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
-    implementation fg.deobf("curse.maven:configured-457570:5180900")
-    implementation fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-    implementation fg.deobf("curse.maven:embeddium-908741:5566632")
-    implementation fg.deobf("curse.maven:jade-324717:5493390")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:5493390")
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
 }
 
 jar {
