@@ -36,19 +36,17 @@ group = 'mod.maxbogomol.fluffy_fur'
 archivesBaseName = 'fluffy_fur'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-
 minecraft {
-    mappings channel: 'parchment', version: '2023.06.26-1.20.1'
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    copyIdeResources = true
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         configureEach {
             workingDirectory project.file('run')
-            jvmArg "-Dmixin.env.disableRefMap=true"
-            arg "-mixin.config=fluffy_fur.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            jvmArg "-Dmixin.env.disableRefMap=true"
             mods { fluffy_fur { source sourceSets.main } }
         }
 
@@ -74,10 +72,8 @@ minecraft {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.9.1+1.20.1")
@@ -86,8 +82,8 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:jade-324717:5493390")
 }
 
-task customRun {
-    dependencies {
+tasks.register('customRun'){
+    dependencies{
         runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
         runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
         runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
