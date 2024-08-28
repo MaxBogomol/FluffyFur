@@ -1,5 +1,5 @@
-buildscript{
-    repositories{
+buildscript {
+    repositories {
         maven{ url = 'https://maven.minecraftforge.net' }
         maven{ url = 'https://repo.spongepowered.org/repository/maven-public/' }
         maven{ url = 'https://maven.parchmentmc.org' }
@@ -7,13 +7,13 @@ buildscript{
     }
 
     dependencies{
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 
-plugins{
+plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
@@ -49,15 +49,11 @@ minecraft {
             arg "-mixin.config=fluffy_fur.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            mods {
-                fluffy_fur {
-                    source sourceSets.main
-                }
-            }
+            mods { fluffy_fur { source sourceSets.main } }
         }
 
-        client{
-            args "--username", "MaxBogomol"
+        client {
+            args "--username", "Dev"
             property 'forge.enabledGameTestNamespaces', "fluffy_fur"
         }
 
