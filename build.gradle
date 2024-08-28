@@ -36,7 +36,9 @@ group = 'mod.maxbogomol.fluffy_fur'
 archivesBaseName = 'fluffy_fur'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
 minecraft {
     mappings channel: 'parchment', version: '2023.09.03-1.20.1'
     copyIdeResources = true
@@ -80,19 +82,10 @@ dependencies {
 
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.8.2.25")
     runtimeOnly fg.deobf("curse.maven:jade-324717:5493390")
-}
-
-tasks.register('customRun'){
-    dependencies{
-        runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
-        runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
-        runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
-        runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
-        runtimeOnly fg.deobf("curse.maven:oculus-581495:5299671")
-        runtimeOnly fg.deobf("curse.maven:free-cam-557076:4643128")
-    }
-
-    finalizedBy 'runClient'
+    runtimeOnly fg.deobf("curse.maven:fusion-connected-textures-854949:5129294")
+    runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+    runtimeOnly fg.deobf("curse.maven:model-gap-fix-676136:5200949")
+    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5566632")
 }
 
 jar {
