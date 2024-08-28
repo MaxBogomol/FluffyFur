@@ -18,8 +18,8 @@ public class CubeParticleType extends AbstractParticleType<GenericParticleOption
         }
 
         @Override
-        public Particle createParticle(GenericParticleOptions data, ClientLevel world, double x, double y, double z, double mx, double my, double mz) {
-            CubeParticle ret = new CubeParticle(world, data, x, y, z, mx, my, mz);
+        public Particle createParticle(GenericParticleOptions options, ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
+            CubeParticle ret = new CubeParticle(level, options, x, y, z, mx, my, mz);
             ret.pickSprite(sprite);
             return ret;
         }

@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.render.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -15,50 +15,47 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-public class Item2DRenderer {
-    public static final String[] HAND_MODEL_ITEMS = new String[]{"arcane_gold_scythe", "arcane_wood_scythe", "innocent_wood_scythe", "blaze_reap", "skin/soul_hunter_scythe", "skin/implosion_scythe"};
+public class LargeItemRenderer {
 
-    @SubscribeEvent
-    public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
-        Map<ResourceLocation, BakedModel> map = event.getModels();
-        for (String item : HAND_MODEL_ITEMS) {
-            bakeModel(map, FluffyFur.MOD_ID, item);
-        }
+    public static ModelResourceLocation getModelResourceLocation(String modId, String item) {
+        return new ModelResourceLocation(new ResourceLocation(modId, item + "_in_hand"), "inventory");
     }
 
-    public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item, CustomModelOverrideList itemOverrideList) {
+    public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item, CustomItemOverrides itemOverrides) {
         ResourceLocation modelInventory = new ModelResourceLocation(new ResourceLocation(modId, item), "inventory");
         ResourceLocation modelHand = new ModelResourceLocation(new ResourceLocation(modId, item + "_in_hand"), "inventory");
 
         BakedModel bakedModelDefault = map.get(modelInventory);
         BakedModel bakedModelHand = map.get(modelHand);
-        BakedModel modelWrapper = new LargeItemModel(bakedModelDefault, bakedModelHand, itemOverrideList);
+        BakedModel modelWrapper = new LargeItemModel(bakedModelDefault, bakedModelHand, itemOverrides);
         map.put(modelInventory, modelWrapper);
     }
 
     public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item) {
-        bakeModel(map, modId, item, new CustomModelOverrideList());
+        bakeModel(map, modId, item, new CustomItemOverrides());
     }
 
     public static class LargeItemModel implements BakedModel {
+        private final BakedModel bakedModelDefault;
+        private final BakedModel bakedModelHand;
+        private final CustomItemOverrides itemOverrides;
+
         public LargeItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand) {
             this.bakedModelDefault = bakedModelDefault;
             this.bakedModelHand = bakedModelHand;
-            this.itemOverrideList = new CustomModelOverrideList();
+            this.itemOverrides = new CustomItemOverrides();
         }
 
-        public LargeItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand, CustomModelOverrideList itemOverrideList) {
+        public LargeItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand, CustomItemOverrides itemOverrides) {
             this.bakedModelDefault = bakedModelDefault;
             this.bakedModelHand = bakedModelHand;
-            this.itemOverrideList = itemOverrideList;
+            this.itemOverrides = itemOverrides;
         }
 
         @Override
@@ -93,20 +90,16 @@ public class Item2DRenderer {
 
         @Override
         public ItemOverrides getOverrides() {
-            return itemOverrideList;
+            return itemOverrides;
         }
 
         @Override
-        public BakedModel applyTransform(ItemDisplayContext transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
+        public BakedModel applyTransform(ItemDisplayContext context, PoseStack poseStack, boolean applyLeftHandTransform) {
             BakedModel modelToUse = bakedModelDefault;
-            if (transformType != ItemDisplayContext.GUI && transformType != ItemDisplayContext.GROUND  && transformType != ItemDisplayContext.FIXED){
+            if (context != ItemDisplayContext.GUI && context != ItemDisplayContext.GROUND  && context != ItemDisplayContext.FIXED){
                 modelToUse = bakedModelHand;
             }
-            return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, transformType, applyLeftHandTransform);
+            return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, context, applyLeftHandTransform);
         }
-
-        private BakedModel bakedModelDefault;
-        private BakedModel bakedModelHand;
-        private CustomModelOverrideList itemOverrideList;
     }
 }

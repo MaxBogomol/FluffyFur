@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.render.item;
+package mod.maxbogomol.fluffy_fur.client.model.item;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -13,20 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomFinalisedModel implements BakedModel {
+    private final BakedModel parentModel;
+    private final BakedModel subModel;
 
-    public CustomFinalisedModel(BakedModel i_parentModel, BakedModel i_subModel) {
-        parentModel = i_parentModel;
-        subModel = i_subModel;
+    public CustomFinalisedModel(BakedModel parentModel, BakedModel subModel) {
+        this.parentModel = parentModel;
+        this.subModel = subModel;
     }
 
     @Override
-    public List<BakedQuad> getQuads(BlockState pState, Direction pDirection, RandomSource pRandom) {
-        if (pDirection != null) {
-            return parentModel.getQuads(pState, pDirection, pRandom);
+    public List<BakedQuad> getQuads(BlockState state, Direction direction, RandomSource random) {
+        if (direction != null) {
+            return parentModel.getQuads(state, direction, random);
         }
 
-        List<BakedQuad> combinedQuadsList = new ArrayList<>(parentModel.getQuads(pState, pDirection, pRandom));
-        combinedQuadsList.addAll(subModel.getQuads(pState, pDirection, pRandom));
+        List<BakedQuad> combinedQuadsList = new ArrayList<>(parentModel.getQuads(state, direction, random));
+        combinedQuadsList.addAll(subModel.getQuads(state, direction, random));
         return combinedQuadsList;
     }
 
@@ -64,7 +66,4 @@ public class CustomFinalisedModel implements BakedModel {
     public ItemOverrides getOverrides() {
         throw new UnsupportedOperationException("The finalised model does not have an override list.");
     }
-
-    private BakedModel parentModel;
-    private BakedModel subModel;
 }

@@ -18,8 +18,8 @@ public class GenericParticleType extends AbstractParticleType<GenericParticleOpt
         }
 
         @Override
-        public Particle createParticle(GenericParticleOptions data, ClientLevel world, double x, double y, double z, double mx, double my, double mz) {
-            GenericParticle ret = new GenericParticle(world, data, x, y, z, mx, my, mz);
+        public Particle createParticle(GenericParticleOptions options, ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
+            GenericParticle ret = new GenericParticle(level, options, x, y, z, mx, my, mz);
             ret.pickSprite(sprite);
             return ret;
         }

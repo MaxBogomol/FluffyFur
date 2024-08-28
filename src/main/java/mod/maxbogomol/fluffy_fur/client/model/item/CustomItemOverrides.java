@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.render.item;
+package mod.maxbogomol.fluffy_fur.client.model.item;
 
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -8,14 +8,10 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public class CustomModelOverrideList extends ItemOverrides {
-
-    public CustomModelOverrideList() {
-        super();
-    }
+public class CustomItemOverrides extends ItemOverrides {
 
     @Override
-    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int pSeed) {
+    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
         return originalModel;
     }
 }

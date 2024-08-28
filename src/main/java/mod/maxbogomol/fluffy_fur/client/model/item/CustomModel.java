@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.render.item;
+package mod.maxbogomol.fluffy_fur.client.model.item;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -12,19 +12,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 public class CustomModel implements BakedModel {
-    public CustomModel(BakedModel i_baseModel, CustomModelOverrideList i_itemOverrideList) {
-        baseModel = i_baseModel;
-        itemOverrideList = i_itemOverrideList;
+    private final BakedModel baseModel;
+    private final CustomItemOverrides itemOverrides;
+
+    public CustomModel(BakedModel baseModel, CustomItemOverrides itemOverrides) {
+        this.baseModel = baseModel;
+        this.itemOverrides = itemOverrides;
     }
 
     @Override
     public ItemOverrides getOverrides() {
-        return itemOverrideList;
+        return itemOverrides;
     }
 
     @Override
-    public List<BakedQuad> getQuads(BlockState pState, Direction pDirection, RandomSource pRandom) {
-        return baseModel.getQuads(pState, pDirection, pRandom);
+    public List<BakedQuad> getQuads(BlockState state, Direction direction, RandomSource random) {
+        return baseModel.getQuads(state, direction, random);
     }
 
     @Override
@@ -56,7 +59,4 @@ public class CustomModel implements BakedModel {
     public ItemTransforms getTransforms() {
         return baseModel.getTransforms();
     }
-
-    private BakedModel baseModel;
-    private CustomModelOverrideList itemOverrideList;
 }

@@ -12,8 +12,8 @@ import net.minecraft.util.Mth;
 
 public class CubeParticle extends GenericParticle implements ICustomRenderParticle {
 
-    public CubeParticle(ClientLevel world, GenericParticleOptions data, double x, double y, double z, double vx, double vy, double vz) {
-        super(world, data, x, y, z, vx, vy, vz);
+    public CubeParticle(ClientLevel level, GenericParticleOptions data, double x, double y, double z, double vx, double vy, double vz) {
+        super(level, data, x, y, z, vx, vy, vz);
     }
 
     @Override
@@ -21,12 +21,12 @@ public class CubeParticle extends GenericParticle implements ICustomRenderPartic
         LevelRenderHandler.particleList.add(this);
     }
 
-    private void decoVert(VertexConsumer vc, float u, float v, float alpha, int lmap) {
-        vc.uv(u, v).color(rCol, gCol, bCol, alpha).uv2(lmap).endVertex();
+    private void decoVert(VertexConsumer vertexConsumer, float u, float v, float alpha, int lmap) {
+        vertexConsumer.uv(u, v).color(rCol, gCol, bCol, alpha).uv2(lmap).endVertex();
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource buffer, float partialTicks) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, float partialTicks) {
         double dX = Mth.lerp(partialTicks, this.xo, this.x);
         double dY = Mth.lerp(partialTicks, this.yo, this.y);
         double dZ = Mth.lerp(partialTicks, this.zo, this.z);
@@ -34,10 +34,10 @@ public class CubeParticle extends GenericParticle implements ICustomRenderPartic
         float size = scaleData.getValue(age + partialTicks, lifetime);
         float size1 = -(size / 2f);
 
-        stack.pushPose();
-        stack.translate(dX, dY, dZ);
-        stack.mulPose(Axis.YP.rotation(Mth.lerp(partialTicks, oRoll, roll)));
-        RenderUtils.litQuadCube(stack, buffer, size1, size1, size1, size, size, size, rCol, gCol, bCol, alpha);
-        stack.popPose();
+        poseStack.pushPose();
+        poseStack.translate(dX, dY, dZ);
+        poseStack.mulPose(Axis.YP.rotation(Mth.lerp(partialTicks, oRoll, roll)));
+        RenderUtils.litQuadCube(poseStack, buffer, size1, size1, size1, size, size, size, rCol, gCol, bCol, alpha);
+        poseStack.popPose();
     }
 }

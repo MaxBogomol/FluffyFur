@@ -15,7 +15,6 @@ import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.fluffy_fur.client.render.item.Item2DRenderer;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -26,7 +25,6 @@ import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -103,15 +101,12 @@ public class FluffyFurClient {
 
         @SubscribeEvent
         public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
-            for (String item : Item2DRenderer.HAND_MODEL_ITEMS) {
-                event.register(new ModelResourceLocation(new ResourceLocation(FluffyFur.MOD_ID, item + "_in_hand"), "inventory"));
-            }
+
         }
 
         @SubscribeEvent
         public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
-            Item2DRenderer.onModelBakeEvent(event);
         }
 
         @SubscribeEvent
@@ -200,7 +195,7 @@ public class FluffyFurClient {
             if (entity == null) {
                 return 0.0F;
             } else {
-                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+                return entity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
             }
         });
 
