@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.client.particle.CubeParticleType;
@@ -17,9 +18,14 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -86,6 +92,8 @@ public class FluffyFur {
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM = LOOT_MODIFIERS.register("add_item", AddItemLootModifier.CODEC);
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM_LIST = LOOT_MODIFIERS.register("add_item_list", AddItemListLootModifier.CODEC);
 
+    public static FireBlock fireblock;
+
     public FluffyFur() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -113,6 +121,7 @@ public class FluffyFur {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        fireblock = (FireBlock) Blocks.FIRE;
         hi();
         PacketHandler.init();
     }
@@ -128,6 +137,18 @@ public class FluffyFur {
         text.add("MEOW");
         text.add("prrrr");
         LOGGER.info(text.get(random.nextInt(0, text.size())));
+    }
+
+    public static void axeStrippables(Block block, Block result) {
+        AxeItem.STRIPPABLES = new ImmutableMap.Builder<Block, Block>().putAll(AxeItem.STRIPPABLES).put(block, result).build();
+    }
+
+    public static void fireBlock(Block block, int encouragement, int flammability) {
+        fireblock.setFlammable(block, encouragement, flammability);
+    }
+
+    public static void composterBlock(float chance, ItemLike item) {
+        ComposterBlock.add(chance, item);
     }
 
     public static Block[] getBlocks(Class<?>... blockClasses) {
