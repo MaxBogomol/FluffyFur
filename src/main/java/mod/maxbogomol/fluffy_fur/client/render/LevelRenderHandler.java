@@ -58,7 +58,9 @@ public class LevelRenderHandler {
             getDelayedRender().endBatch(RenderUtils.GLOWING);
         }
 
-        getDelayedRender().endBatch(RenderUtils.FLUID);
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
+            getDelayedRender().endBatch(RenderUtils.FLUID);
+        }
     }
 
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;

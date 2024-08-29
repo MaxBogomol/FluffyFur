@@ -17,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemInHandLayerMixin {
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"), method = "renderArmWithItem")
-    public void fluffy_fur$renderArmWithItem(LivingEntity pLivingEntity, ItemStack pItemStack, ItemDisplayContext pDisplayContext, HumanoidArm pArm, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, CallbackInfo ci) {
-        if (pLivingEntity.isUsingItem() && pLivingEntity.getUseItemRemainingTicks() > 0) {
-            if (pItemStack.getItem() instanceof ICustomAnimationItem item) {
-                if (item.getAnimation(pItemStack) != null) {
-                    item.getAnimation(pItemStack).renderArmWithItem(pLivingEntity, pItemStack, pDisplayContext, pArm, pPoseStack, pBuffer, pPackedLight);
+    public void fluffy_fur$renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext displayContext, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci) {
+        if (livingEntity.isUsingItem() && livingEntity.getUseItemRemainingTicks() > 0) {
+            if (itemStack.getItem() instanceof ICustomAnimationItem item) {
+                if (item.getAnimation(itemStack) != null) {
+                    item.getAnimation(itemStack).renderArmWithItem(livingEntity, itemStack, displayContext, arm, poseStack, buffer, packedLight);
                 }
             }
         }

@@ -72,7 +72,7 @@ public class RenderUtils {
             RenderType.CompositeState.builder()
                     .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
                     .setLightmapState(new RenderStateShard.LightmapStateShard(false))
-                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurClient::getGlowingSpriteShader))
                     .createCompositeState(false)
@@ -117,13 +117,14 @@ public class RenderUtils {
     public static final RenderType FLUID = RenderType.create(
             FluffyFur.MOD_ID + ":fluid",
             DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
-            VertexFormat.Mode.QUADS, 256, false, true,
+            VertexFormat.Mode.QUADS, 256, true, true,
             RenderType.CompositeState.builder()
                     .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurClient::getFluidShader))
                     .setCullState(new RenderStateShard.CullStateShard(true))
+                    .setOverlayState(new RenderStateShard.OverlayStateShard(true))
                     .createCompositeState(true)
     );
 

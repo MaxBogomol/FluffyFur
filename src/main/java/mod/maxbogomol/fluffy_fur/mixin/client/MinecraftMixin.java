@@ -1,66 +1,64 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.sound.MusicHandler;
+import mod.maxbogomol.fluffy_fur.client.sound.MusicModifier;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.WinScreen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.Music;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.sounds.Musics;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
 
-    @Shadow
-    @Nullable
-    public Screen screen;
+    @Unique
+    Random random = new Random();
 
-    @Shadow
-    @Nullable
-    public LocalPlayer player;
-
-    @Shadow
-    @Final
-    public Gui gui;
-
-    @Inject(method = "getSituationalMusic", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
     private void fluffy_fur$getSituationalMusic(final CallbackInfoReturnable<Music> cir) {
-        if (screen instanceof WinScreen) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.screen instanceof WinScreen) {
             return;
         }
-/*
-        if (screen instanceof TitleScreen) {
-            if (ClientConfig.CUSTOM_PANORAMA.get()) {
-                cir.setReturnValue(FluffyFurClient.REBORN_MUSIC);
-            }
-        }
 
-        List<Music> possibleTracks = new ArrayList<>();
+        List<Music> possibleMusic = new ArrayList<>();
+        List<Music> menuMusic = new ArrayList<>();
+        Music defaultMusic = cir.getReturnValue();
 
-        if (this.player != null) {
-            Holder<Biome> holder = this.player.level().getBiome(this.player.blockPosition());
-            final Music biomeMusic = holder.value().getBackgroundMusic().orElse(null);
-            if (holder.is(Tags.Biomes.IS_SWAMP)) {
-                if (random.nextFloat() < 0.8f) {
-                    cir.setReturnValue(FluffyFurClient.MOR_MUSIC);
-                }
-            }
-            if (holder.is(Tags.Biomes.IS_CAVE)) {
-                if (player.getY() >= -40 && player.getY() <= 30) {
-                    if (random.nextFloat() < 0.6f) {
-                        cir.setReturnValue(FluffyFurClient.SHIMMER_MUSIC);
+        for (MusicModifier modifier : MusicHandler.getModifiers()) {
+            if (modifier.isCanPlay(defaultMusic, minecraft)) {
+                Music music = modifier.play(defaultMusic, minecraft);
+                if (music != null) {
+                    if (modifier.isMenu(defaultMusic, minecraft)) {
+                        menuMusic.add(music);
+                    } else {
+                        possibleMusic.add(music);
                     }
                 }
             }
-        }*/
+        }
+
+        if (menuMusic.size() > 0) {
+            if (minecraft.screen instanceof TitleScreen || defaultMusic == Musics.MENU) {
+                if (!menuMusic.contains(defaultMusic)) {
+                    cir.setReturnValue(menuMusic.get(random.nextInt(0, menuMusic.size())));
+                }
+            }
+        }
+
+        if (possibleMusic.size() > 0) {
+            cir.setReturnValue(possibleMusic.get(random.nextInt(0, possibleMusic.size())));
+        }
     }
 
     @Inject(at = @At("RETURN"), method = "isDemo", cancellable = true)

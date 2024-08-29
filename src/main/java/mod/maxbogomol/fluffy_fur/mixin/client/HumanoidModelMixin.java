@@ -15,19 +15,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HumanoidModelMixin<T extends LivingEntity>  {
 
     @Inject(at = @At("RETURN"), method = "setupAnim")
-    public void fluffy_fur$setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
+    public void fluffy_fur$setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         HumanoidModel self = (HumanoidModel) ((Object) this);
-        if (pEntity instanceof Player player) {
-            if (pEntity.isUsingItem() && pEntity.getUseItemRemainingTicks() > 0) {
+        if (entity instanceof Player player) {
+            if (entity.isUsingItem() && entity.getUseItemRemainingTicks() > 0) {
                 if (player.getItemInHand(player.getUsedItemHand()).getItem() instanceof ICustomAnimationItem item) {
                     ItemStack stack = player.getItemInHand(player.getUsedItemHand());
                     if (item.getAnimation(stack) != null) {
                         if (ItemAnimation.isRightHand(player, player.getUsedItemHand())) {
-                            item.getAnimation(stack).setupAnimRight(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                            item.getAnimation(stack).setupAnimRight(self, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                         } else {
-                            item.getAnimation(stack).setupAnimLeft(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                            item.getAnimation(stack).setupAnimLeft(self, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                         }
-                        item.getAnimation(stack).setupAnim(self, pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+                        item.getAnimation(stack).setupAnim(self, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                     }
                 }
             }

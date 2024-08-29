@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin {
     @Inject(at = @At(value = "TAIL"), method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V")
-    private void fluffy_fur$renderItem(LivingEntity pEntity, Level pLevel, ItemStack pStack, int pX, int pY, int pSeed, int pGuiOffset, CallbackInfo ci) {
+    private void fluffy_fur$renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset, CallbackInfo ci) {
         if (ClientConfig.ITEM_GUI_PARTICLE.get()) {
-            if (pStack.getItem() instanceof IGuiParticleItem guiParticleItem) {
+            if (stack.getItem() instanceof IGuiParticleItem guiParticleItem) {
                 GuiGraphics self = (GuiGraphics) ((Object) this);
-                guiParticleItem.renderParticle(self.pose(), pEntity, pLevel, pStack, pX, pY, pSeed, pGuiOffset);
+                guiParticleItem.renderParticle(self.pose(), entity, level, stack, x, y, seed, guiOffset);
             }
         }
     }
