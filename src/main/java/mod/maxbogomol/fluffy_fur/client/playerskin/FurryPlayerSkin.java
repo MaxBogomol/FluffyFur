@@ -116,7 +116,7 @@ public class FurryPlayerSkin extends PlayerSkin {
     }
 
     @Override
-    public void extraRender(PoseStack pose, MultiBufferSource buffer, int packedLight, Player player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, HumanoidModel defaultModel) {
+    public void extraRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Player player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, HumanoidModel defaultModel) {
         EarsModel earsModel = getEarsModel(player);
         ResourceLocation earsTexture = getEars(player);
         if (earsModel != null && earsTexture != null) {
@@ -124,7 +124,7 @@ public class FurryPlayerSkin extends PlayerSkin {
             earsModel.copyFromDefault(defaultModel);
             earsModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
             earsAnimation(earsModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            earsModel.renderToBuffer(pose, buffer.getBuffer(RenderType.entityCutoutNoCull(earsTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            earsModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(earsTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         }
 
         TailModel tailModel = getTailModel(player);
@@ -134,7 +134,7 @@ public class FurryPlayerSkin extends PlayerSkin {
             tailModel.copyFromDefault(defaultModel);
             tailModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
             tailAnimation(tailModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            tailModel.renderToBuffer(pose, buffer.getBuffer(RenderType.entityCutoutNoCull(tailTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            tailModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(tailTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         }
     }
 

@@ -56,8 +56,9 @@ public class LevelRenderHandler {
 
             getDelayedRender().endBatch(RenderUtils.GLOWING_SPRITE);
             getDelayedRender().endBatch(RenderUtils.GLOWING);
-            getDelayedRender().endBatch(RenderUtils.FLUID);
         }
+
+        getDelayedRender().endBatch(RenderUtils.FLUID);
     }
 
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;

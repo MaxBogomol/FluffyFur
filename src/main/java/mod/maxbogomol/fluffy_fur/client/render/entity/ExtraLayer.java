@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.render;
+package mod.maxbogomol.fluffy_fur.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
@@ -19,12 +19,12 @@ public class ExtraLayer <T extends LivingEntity, M extends EntityModel<T>> exten
         this.defaultModel = (HumanoidModel) renderer.getModel();
     }
 
-    public void render(PoseStack pose, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
         if (livingEntity instanceof Player player) {
             PlayerSkin skin = PlayerSkinHandler.getSkin(player);
 
             if (skin != null) {
-                skin.extraRender(pose, buffer, packedLight, player, limbSwing, limbSwingAmount, partialTick, ageInTicks, netHeadYaw, headPitch, defaultModel);
+                skin.extraRender(poseStack, buffer, packedLight, player, limbSwing, limbSwingAmount, partialTick, ageInTicks, netHeadYaw, headPitch, defaultModel);
             }
         }
     }

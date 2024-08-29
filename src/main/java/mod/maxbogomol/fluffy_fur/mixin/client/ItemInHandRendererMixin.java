@@ -1,12 +1,14 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.client.event.BowHandler;
 import mod.maxbogomol.fluffy_fur.common.item.ICustomAnimationItem;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,10 +32,12 @@ public abstract class ItemInHandRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "evaluateWhichHandsToRender", cancellable = true)
     private static void fluffy_fur$evaluateWhichHandsToRender(LocalPlayer pPlayer, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir) {
-        ItemStack itemstack = pPlayer.getUseItem();
-        InteractionHand interactionhand = pPlayer.getUsedItemHand();
-        //if (itemstack.is(FluffyFur.ARCANE_WOOD_BOW.get())) {
-        //    cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(interactionhand));
-        //}
+        ItemStack itemStack = pPlayer.getUseItem();
+        InteractionHand hand = pPlayer.getUsedItemHand();
+        for (Item item : BowHandler.getBows()) {
+            if (itemStack.is(item)) {
+                cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(hand));
+            }
+        }
     }
 }

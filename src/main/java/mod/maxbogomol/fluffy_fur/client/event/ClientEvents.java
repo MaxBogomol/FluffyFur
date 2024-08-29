@@ -12,13 +12,13 @@ import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
@@ -53,27 +53,12 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public void loggedPlayer(PlayerEvent.PlayerLoggedInEvent event) {
-
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public void onTooltip(ItemTooltipEvent event) {
-
-    }
-
-    @SubscribeEvent
-    public void input(MovementInputUpdateEvent event) {
-
-    }
-
-    @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
         PlayerSkinHandler.skinTick(event.player);
     }
 
     @SubscribeEvent
-    public static void clientTick(TickEvent.ClientTickEvent event) {
+    public void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         ClientTickHandler.clientTick(event);
         if (event.phase == TickEvent.Phase.END) {
@@ -86,12 +71,35 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void renderTick(TickEvent.RenderTickEvent event) {
+    public void renderTick(TickEvent.RenderTickEvent event) {
         ClientTickHandler.renderTick(event);
     }
 
     @SubscribeEvent
-    public static void onInput(InputEvent event) {
+    public void getFovModifier(ComputeFovModifierEvent event) {
+        Player player = event.getPlayer();
+        ItemStack itemStack = player.getUseItem();
+        if (player.isUsingItem()) {
+            for (Item item : BowHandler.getBows()) {
+                if (itemStack.is(item)) {
+                    float f = event.getFovModifier();
+                    int i = player.getTicksUsingItem();
+                    float f1 = (float) i / 20.0F;
+                    if (f1 > 1.0F) {
+                        f1 = 1.0F;
+                    } else {
+                        f1 *= f1;
+                    }
+
+                    f *= 1.0F - f1 * 0.15F;
+                    event.setNewFovModifier(f);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onInput(InputEvent event) {
         if (FluffyFurClient.SKIN_MENU_KEY.isDown()) {
             if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurClient.MAXBOGOMOL_SKIN) {
                 PlayerSkinHandler.setSkinPacket(FluffyFurClient.NANACHI_SKIN);

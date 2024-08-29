@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
-import mod.maxbogomol.fluffy_fur.client.render.ExtraLayer;
+import mod.maxbogomol.fluffy_fur.client.render.entity.ExtraLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import org.spongepowered.asm.mixin.Mixin;
