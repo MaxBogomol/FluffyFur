@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.NonNullList;
 
-public abstract class BlockSimpleInventory extends BlockEntity {
+public abstract class BlockSimpleInventory extends BlockEntityBase {
 
     private final SimpleContainer itemHandler = createItemHandler();
 
