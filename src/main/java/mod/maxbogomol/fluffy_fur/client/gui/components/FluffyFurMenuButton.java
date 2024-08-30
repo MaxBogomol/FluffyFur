@@ -1,20 +1,16 @@
 package mod.maxbogomol.fluffy_fur.client.gui.components;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMenuScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.client.renderer.CubeMap;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,29 +37,8 @@ public class FluffyFurMenuButton extends Button {
         guiGraphics.renderItem(icon, this.getX() + 2, this.getY() + 2);
     }
 
-    public static void click(Button b) {
-        if (Minecraft.getInstance().screen instanceof TitleScreen titleScreen) {
-            float spin = titleScreen.panorama.spin;
-            float bob = titleScreen.panorama.bob;
-            if (!ClientConfig.CUSTOM_PANORAMA.get()) {
-                ResourceLocation base = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama");
-                TitleScreen.CUBE_MAP = new CubeMap(base);
-                titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
-                titleScreen.logoRenderer = new CustomLogoRenderer(false);
-            } else {
-                ResourceLocation base = new ResourceLocation("textures/gui/title/background/panorama");
-                TitleScreen.CUBE_MAP = new CubeMap(base);
-                titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
-                titleScreen.logoRenderer = new LogoRenderer(false);
-            }
-            titleScreen.panorama.spin = spin;
-            titleScreen.panorama.bob = bob;
-            setPanorama(!ClientConfig.CUSTOM_PANORAMA.get());
-        }
-    }
-
-    public static void setPanorama(boolean panorama) {
-        ClientConfig.CUSTOM_PANORAMA.set(panorama);
+    public static void click(Button button) {
+        Minecraft.getInstance().setScreen(new FluffyFurMenuScreen(Minecraft.getInstance().screen));
     }
 
     @Override

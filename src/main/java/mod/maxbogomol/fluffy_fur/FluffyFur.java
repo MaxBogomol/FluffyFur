@@ -54,6 +54,7 @@ import java.util.Random;
 @Mod("fluffy_fur")
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
+    public static final String NAME = "Fluffy Fur";
     public static final String VERSION = "0.1";
     public static final int VERSION_NUMBER = 1;
 

@@ -3,6 +3,9 @@ package mod.maxbogomol.fluffy_fur;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxEarsModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxTailModel;
@@ -25,8 +28,11 @@ import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -37,6 +43,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Map;
 
@@ -68,7 +75,6 @@ public class FluffyFurClient {
     public static ShaderInstance getFluidShader() { return FLUID_SHADER; }
 
     public static boolean optifinePresent = false;
-    public static boolean firstScreen = true;
 
     public static class ClientOnly {
         public static void clientInit() {
@@ -88,6 +94,7 @@ public class FluffyFurClient {
 
         event.enqueueWork(() -> {
             setupPlayerSkins();
+            setupMenu();
         });
     }
 
@@ -188,6 +195,36 @@ public class FluffyFurClient {
         PlayerSkinHandler.register(MAXBOGOMOL_SKIN);
         PlayerSkinHandler.register(ONIXTHECAT_SKIN);
         PlayerSkinHandler.register(NANACHI_SKIN);
+    }
+
+    public static FluffyFurMod MOD_INSTANCE;
+    public static FluffyFurPanorama VANILLA_PANORAMA;
+    public static FluffyFurPanorama FLUFFY_PANORAMA;
+
+    public static void setupMenu() {
+        MOD_INSTANCE = new FluffyFurMod(FluffyFur.MOD_ID, FluffyFur.NAME, FluffyFur.VERSION).setDev("MaxBogomol").setItem(new ItemStack(Items.PINK_PETALS))
+                .setEdition(FluffyFur.VERSION_NUMBER).setNameColor(new Color(254, 200, 207)).setVersionColor(new Color(92, 72, 90))
+                .setDescription(Component.translatable("mod_description.fluffy_fur"))
+                .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
+                .addCurseForgeLink("")
+                .addModrinthLink("");
+        VANILLA_PANORAMA = new FluffyFurPanorama("minecraft:vanilla", net.minecraft.network.chat.Component.translatable("panorama.minecraft.vanilla")).setItem(new ItemStack(Items.GRASS_BLOCK));
+        FLUFFY_PANORAMA = new FluffyFurPanorama(FluffyFur.MOD_ID + ":fluffy_zone", Component.translatable("panorama.fluffy_fur.fluffy_zone"))
+                .setMod(MOD_INSTANCE).setItem(new ItemStack(Items.CHERRY_LEAVES))
+                .setTexture(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama"))
+                .setLogo(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/fluffy_fur.png"));
+
+        registerMod(MOD_INSTANCE);
+        registerPanorama(VANILLA_PANORAMA);
+        registerPanorama(FLUFFY_PANORAMA);
+    }
+
+    public static void registerMod(FluffyFurMod mod) {
+        FluffyFurModsHandler.registerMod(mod);
+    }
+
+    public static void registerPanorama(FluffyFurPanorama panorama) {
+        FluffyFurModsHandler.registerPanorama(panorama);
     }
 
     public static void makeBow(Item item) {

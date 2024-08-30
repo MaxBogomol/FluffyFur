@@ -6,9 +6,11 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             ITEM_PARTICLE, ITEM_GUI_PARTICLE,
-            CUSTOM_PANORAMA, PANORAMA_BUTTON;
+            PANORAMA_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             PANORAMA_BUTTON_ROW, PANORAMA_BUTTON_ROW_X_OFFSET, PANORAMA_BUTTON_X_OFFSET, PANORAMA_BUTTON_Y_OFFSET;
+    public static ForgeConfigSpec.ConfigValue<String>
+            CUSTOM_PANORAMA;
 
     public ClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Particles").push("particles");
@@ -19,8 +21,8 @@ public class ClientConfig {
         builder.pop();
 
         builder.comment("Menu").push("menu");
-        CUSTOM_PANORAMA = builder.comment("Enable custom panorama.")
-                .define("customPanorama", false);
+        CUSTOM_PANORAMA = builder.comment("Enable custom panorama button.")
+                .define("panorama", "minecraft:vanilla");
         PANORAMA_BUTTON = builder.comment("Enable custom panorama button.")
                 .define("panoramaButton", true);
         PANORAMA_BUTTON_ROW = builder.comment("Custom panorama button row.")

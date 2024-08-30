@@ -3,6 +3,20 @@
   "gui.fluffy_fur.menu.optifine.1": "Optifine breaks Fluffy Fur and other mods",
   "gui.fluffy_fur.menu.optifine.2": "Delete Optifine :3",
 
+  "gui.fluffy_fur.menu.panoramas": "Panoramas",
+  "gui.fluffy_fur.menu.mods": "Mods",
+  "gui.fluffy_fur.menu.id": "ID:",
+  "gui.fluffy_fur.menu.version": "Version:",
+  "gui.fluffy_fur.menu.edition": "Edition:",
+  "gui.fluffy_fur.menu.autor": "Autor:",
+  "gui.fluffy_fur.menu.links": "Links:",
+  "gui.fluffy_fur.menu.mod": "Mod:",
+
+  "mod_description.fluffy_fur": "Fluffy Fur - a mod library by MaxBogomol. \n Adds various things for rendering and simplifying development. \n \n Meow :3",
+
+  "panorama.minecraft.vanilla": "Vanilla",
+  "panorama.fluffy_fur.fluffy_zone": "Fluffy Zone",
+
   "item.fluffy_fur.test_shrimp": "Test Shrimp",
   "item.fluffy_fur.thing": "Thing"
 }

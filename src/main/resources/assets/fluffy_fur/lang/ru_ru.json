@@ -3,6 +3,20 @@
   "gui.fluffy_fur.menu.optifine.1": "Optifine ломает Fluffy Fur и другие моды",
   "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
 
+  "gui.fluffy_fur.menu.panoramas": "Панорамы",
+  "gui.fluffy_fur.menu.mods": "Моды",
+  "gui.fluffy_fur.menu.id": "ID:",
+  "gui.fluffy_fur.menu.version": "Версия:",
+  "gui.fluffy_fur.menu.edition": "Издание:",
+  "gui.fluffy_fur.menu.autor": "Автор:",
+  "gui.fluffy_fur.menu.links": "Ссылки:",
+  "gui.fluffy_fur.menu.mod": "Мод:",
+
+  "mod_description.fluffy_fur": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
+
+  "panorama.minecraft.vanilla": "Ванилла",
+  "panorama.fluffy_fur.fluffy_zone": "Пушистое место",
+
   "item.fluffy_fur.test_shrimp": "Тестовая креветка",
   "item.fluffy_fur.thing": "Штуковина"
 }
