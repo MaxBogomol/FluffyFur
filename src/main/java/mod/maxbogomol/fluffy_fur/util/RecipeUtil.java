@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.utils;
+package mod.maxbogomol.fluffy_fur.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class RecipeUtils {
+public class RecipeUtil {
     public static FluidStack deserializeFluidStack(JsonObject json) {
         String fluidName = GsonHelper.getAsString(json, "fluid");
         Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName));

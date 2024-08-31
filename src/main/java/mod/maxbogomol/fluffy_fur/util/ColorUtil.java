@@ -1,8 +1,8 @@
-package mod.maxbogomol.fluffy_fur.utils;
+package mod.maxbogomol.fluffy_fur.util;
 
 import java.awt.*;
 
-public class ColorUtils {
+public class ColorUtil {
     public static int getAlpha(int packedColor) {
         return packedColor >>> 24;
     }

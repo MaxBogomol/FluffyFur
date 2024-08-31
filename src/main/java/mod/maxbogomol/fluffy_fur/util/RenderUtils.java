@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.utils;
+package mod.maxbogomol.fluffy_fur.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;

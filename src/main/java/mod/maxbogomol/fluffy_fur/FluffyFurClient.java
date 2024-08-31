@@ -206,8 +206,8 @@ public class FluffyFurClient {
                 .setEdition(FluffyFur.VERSION_NUMBER).setNameColor(new Color(254, 200, 207)).setVersionColor(new Color(92, 72, 90))
                 .setDescription(Component.translatable("mod_description.fluffy_fur"))
                 .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
-                .addCurseForgeLink("")
-                .addModrinthLink("");
+                .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/fluffy-fur")
+                .addModrinthLink("https://modrinth.com/mod/fluffy-fur");
         VANILLA_PANORAMA = new FluffyFurPanorama("minecraft:vanilla", net.minecraft.network.chat.Component.translatable("panorama.minecraft.vanilla")).setItem(new ItemStack(Items.GRASS_BLOCK));
         FLUFFY_PANORAMA = new FluffyFurPanorama(FluffyFur.MOD_ID + ":fluffy_zone", Component.translatable("panorama.fluffy_fur.fluffy_zone"))
                 .setMod(MOD_INSTANCE).setItem(new ItemStack(Items.CHERRY_LEAVES))

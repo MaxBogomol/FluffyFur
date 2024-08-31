@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -36,7 +36,7 @@ public abstract class TitleScreenMixin {
                 if (i == 25) {
                     RenderSystem.setShaderColor(1, 1, 1, 1);
                 } else {
-                    Color color = ColorUtils.rainbowColor(ticks * 0.05f);
+                    Color color = ColorUtil.rainbowColor(ticks * 0.05f);
                     RenderSystem.setShaderColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 0.1f);
                 }
                 poseStack.pushPose();

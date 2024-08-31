@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
-import mod.maxbogomol.fluffy_fur.utils.ColorUtils;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -130,8 +130,8 @@ public class FluffyFurMenuScreen extends Screen {
         FluffyFurMod mod = mods.get(selectedMod);
 
         Font font = Minecraft.getInstance().font;
-        Component component = Component.literal(mod.getName()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(mod.getNameColor())))
-                .append(" ").append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(ColorUtils.packColor(mod.getVersionColor()))));
+        Component component = Component.literal(mod.getName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getNameColor())))
+                .append(" ").append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getVersionColor()))));
         drawBlackBackground(gui, x + 80, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 80, y - 11, 16777215);
 
@@ -223,7 +223,7 @@ public class FluffyFurMenuScreen extends Screen {
             gui.renderItem(mod.getItem(), x + 2, y + 2 + (i * 20));
             MutableComponent name = Component.empty().append(mod.getName());
             if (mod.getDev().equals("MaxBogomol")) {
-                name = name.withStyle(Style.EMPTY.withColor(ColorUtils.packColor(ColorUtils.rainbowColor((ticks + partialTicks) * 0.005f))));
+                name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(ColorUtil.rainbowColor((ticks + partialTicks) * 0.005f))));
             }
             if (selectedMod == index) {
                 name.withStyle(ChatFormatting.UNDERLINE);

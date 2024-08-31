@@ -1,1 +1,1 @@
-Adds fluffy and renders things
+[![](https://img.shields.io/badge/License-GPL--2.0-blue)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE)[![](https://img.shields.io/discord/1155188824360624148?color=Green&label=Discord&logo=Discord&style=flat-square)](https://discord.gg/cKf55qNugw)
