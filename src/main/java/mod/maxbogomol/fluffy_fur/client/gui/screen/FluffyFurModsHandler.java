@@ -106,6 +106,10 @@ public class FluffyFurModsHandler {
         return sorted;
     }
 
+    public static FluffyFurPanorama getPanorama() {
+        return getPanorama(ClientConfig.CUSTOM_PANORAMA.get());
+    }
+
     public static void setPanorama(FluffyFurPanorama panorama) {
         ClientConfig.CUSTOM_PANORAMA.set(panorama.getId());
     }

@@ -1,5 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.sound;
 
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
@@ -34,5 +36,31 @@ public class MusicModifier {
             return (holder.is(biome));
         }
         return false;
+    }
+
+    public static class Panorama extends MusicModifier {
+        public Music music;
+        public FluffyFurPanorama panorama;
+
+        public Panorama(Music music, FluffyFurPanorama panorama) {
+            this.music = music;
+            this.panorama = panorama;
+        }
+
+        @Override
+        public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
+            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama();
+            return panorama != null && panorama == this.panorama;
+        }
+
+        @Override
+        public Music play(Music defaultMisic, Minecraft minecraft) {
+            return music;
+        }
+
+        @Override
+        public boolean isMenu(Music defaultMisic, Minecraft minecraft) {
+            return true;
+        }
     }
 }
