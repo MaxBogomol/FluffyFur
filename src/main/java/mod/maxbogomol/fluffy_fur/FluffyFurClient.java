@@ -11,30 +11,24 @@ import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxEarsModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxTailModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.NanachiTailModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.RabbitEarsModel;
-import mod.maxbogomol.fluffy_fur.client.particle.CubeParticleType;
-import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
 import mod.maxbogomol.fluffy_fur.client.playerskin.FoxPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -45,7 +39,6 @@ import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Map;
 
 public class FluffyFurClient {
 
@@ -101,47 +94,8 @@ public class FluffyFurClient {
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class RegistryEvents {
         @SubscribeEvent
-        public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            BlockEntityRenderers.register(FluffyFur.SIGN_BLOCK_ENTITY.get(), SignRenderer::new);
-            BlockEntityRenderers.register(FluffyFur.HANGING_SIGN_BLOCK_ENTITY.get(), HangingSignRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
-
-        }
-
-        @SubscribeEvent
-        public static void onModelBakeEvent(ModelEvent.ModifyBakingResult event) {
-            Map<ResourceLocation, BakedModel> map = event.getModels();
-        }
-
-        @SubscribeEvent
-        public static void afterModelBake(ModelEvent.BakingCompleted event) {
-
-        }
-
-        @SubscribeEvent
         public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
             event.register(FluffyFurClient.SKIN_MENU_KEY);
-        }
-
-        @SubscribeEvent
-        public static void registerFactories(RegisterParticleProvidersEvent event) {
-            ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-            particleEngine.register(FluffyFur.WISP_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.TINY_WISP_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.SPARKLE_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.STAR_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.TINY_STAR_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.SQUARE_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.DOT_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.CIRCLE_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.TINY_CIRCLE_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.HEART_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.SMOKE_PARTICLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFur.CUBE_PARTICLE.get(), CubeParticleType.Factory::new);
-            particleEngine.register(FluffyFur.TRAIL_PARTICLE.get(), GenericParticleType.Factory::new);
         }
 
         @SubscribeEvent

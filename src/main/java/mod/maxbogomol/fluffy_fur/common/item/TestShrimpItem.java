@@ -1,11 +1,11 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -43,7 +43,7 @@ public class TestShrimpItem extends Item {
         if (level.isClientSide()) {
             if (mode == 0) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(1.75f));
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -54,7 +54,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 1) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -65,7 +65,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 2) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -77,7 +77,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 3) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -89,7 +89,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 4) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setRenderType(RenderUtils.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(0, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
@@ -103,7 +103,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 5) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(10f));
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -111,7 +111,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.TINY_WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_WISP)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -119,7 +119,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.SPARKLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SPARKLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -127,7 +127,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.STAR)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -135,7 +135,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.TINY_STAR_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -143,7 +143,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.SQUARE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SQUARE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -151,7 +151,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.DOT_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.DOT)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -159,7 +159,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.CIRCLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.CIRCLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -167,7 +167,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.TINY_CIRCLE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -175,7 +175,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.HEART_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.HEART)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -183,7 +183,7 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.35f, 0.35f, 0.35f)
                         .randomSpin(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-                ParticleBuilder.create(FluffyFur.SMOKE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.SMOKE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -195,7 +195,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 6) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
-                ParticleBuilder.create(FluffyFur.CUBE_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.CUBE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -207,7 +207,7 @@ public class TestShrimpItem extends Item {
 
             if (mode == 7) {
                 Vec3 pos = player.getEyePosition();
-                ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+                ParticleBuilder.create(FluffyFurParticles.WISP)
                         .setColorData(ColorParticleData.create(1, 1, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(1f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())

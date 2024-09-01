@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.block.sign;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
@@ -14,6 +14,6 @@ public class CustomSignBlockEntity extends SignBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return FluffyFur.SIGN_BLOCK_ENTITY.get();
+        return FluffyFurBlockEntities.SIGN.get();
     }
 }

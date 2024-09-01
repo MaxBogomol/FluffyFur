@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -26,7 +27,7 @@ public class PlayerSkinChangeEffectPacket extends PositionEffectPacket {
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = FluffyFur.proxy.getLevel();
-        ParticleBuilder.create(FluffyFur.WISP_PARTICLE)
+        ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(1, 1, 1, 1, 0, 0).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(1f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
