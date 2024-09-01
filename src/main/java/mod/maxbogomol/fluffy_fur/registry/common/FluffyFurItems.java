@@ -2,6 +2,8 @@ package mod.maxbogomol.fluffy_fur.registry.common;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.TestShrimpItem;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
@@ -23,5 +25,17 @@ public class FluffyFurItems {
 
     public static void composterItem(float chance, ItemLike item) {
         ComposterBlock.add(chance, item);
+    }
+
+    public static void makeBow(Item item) {
+        ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, entity, seed) -> {
+            if (entity == null) {
+                return 0.0F;
+            } else {
+                return entity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+            }
+        });
+
+        ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

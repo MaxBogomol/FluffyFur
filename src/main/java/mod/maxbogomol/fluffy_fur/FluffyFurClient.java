@@ -6,27 +6,18 @@ import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
-import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxEarsModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxTailModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.NanachiTailModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.RabbitEarsModel;
 import mod.maxbogomol.fluffy_fur.client.playerskin.FoxPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -44,20 +35,6 @@ public class FluffyFurClient {
 
     private static final String CATEGORY_KEY = "key.category."+FluffyFur.MOD_ID+".general";
     public static final KeyMapping SKIN_MENU_KEY = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
-
-    public static final ModelLayerLocation FOX_EARS_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "fox_ears"), "main");
-    public static final ModelLayerLocation FOX_TAIL_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "fox_tail"), "main");
-    public static final ModelLayerLocation RABBIT_EARS_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "rabbit_ears"), "main");
-    public static final ModelLayerLocation NANACHI_TAIL_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "nanachi_tail"), "main");
-
-    public static final ModelLayerLocation EMPTY_ARMOR_LAYER = new ModelLayerLocation(new ResourceLocation(FluffyFur.MOD_ID, "empty_armor"), "main");
-
-    public static FoxEarsModel FOX_EARS_MODEL = null;
-    public static FoxTailModel FOX_TAIL_MODEL = null;
-    public static RabbitEarsModel RABBIT_EARS_MODEL = null;
-    public static NanachiTailModel NANACHI_TAIL_MODEL = null;
-
-    public static EmptyArmorModel EMPTY_ARMOR_MODEL = null;
 
     public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER, FLUID_SHADER;
 
@@ -105,26 +82,6 @@ public class FluffyFurClient {
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_particle"), DefaultVertexFormat.PARTICLE), shader -> { GLOWING_PARTICLE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:sprite_particle"), DefaultVertexFormat.PARTICLE), shader -> { SPRITE_PARTICLE_SHADER = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP), shader -> { FLUID_SHADER = shader; });
-        }
-
-        @SubscribeEvent
-        public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(FOX_EARS_LAYER, FoxEarsModel::createBodyLayer);
-            event.registerLayerDefinition(FOX_TAIL_LAYER, FoxTailModel::createBodyLayer);
-            event.registerLayerDefinition(RABBIT_EARS_LAYER, RabbitEarsModel::createBodyLayer);
-            event.registerLayerDefinition(NANACHI_TAIL_LAYER, NanachiTailModel::createBodyLayer);
-
-            event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
-        }
-
-        @SubscribeEvent
-        public static void onRegisterLayers(EntityRenderersEvent.AddLayers event) {
-            FOX_EARS_MODEL = new FoxEarsModel(event.getEntityModels().bakeLayer(FOX_EARS_LAYER));
-            FOX_TAIL_MODEL = new FoxTailModel(event.getEntityModels().bakeLayer(FOX_TAIL_LAYER));
-            RABBIT_EARS_MODEL = new RabbitEarsModel(event.getEntityModels().bakeLayer(RABBIT_EARS_LAYER));
-            NANACHI_TAIL_MODEL = new NanachiTailModel(event.getEntityModels().bakeLayer(NANACHI_TAIL_LAYER));
-
-            EMPTY_ARMOR_MODEL = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
         }
     }
 
@@ -179,17 +136,5 @@ public class FluffyFurClient {
 
     public static void registerPanorama(FluffyFurPanorama panorama) {
         FluffyFurModsHandler.registerPanorama(panorama);
-    }
-
-    public static void makeBow(Item item) {
-        ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, entity, seed) -> {
-            if (entity == null) {
-                return 0.0F;
-            } else {
-                return entity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
-            }
-        });
-
-        ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

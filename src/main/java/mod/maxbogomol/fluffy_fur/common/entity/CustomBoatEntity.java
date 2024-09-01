@@ -17,10 +17,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class CustomBoatEntity extends Boat {
     private final RegistryObject<Item> boatItem;
+    private final boolean isRaft;
 
-    public CustomBoatEntity(EntityType<? extends CustomBoatEntity> type, Level level, RegistryObject<Item> boatItem) {
+    public CustomBoatEntity(EntityType<? extends CustomBoatEntity> type, Level level, RegistryObject<Item> boatItem, boolean isRaft) {
         super(type, level);
         this.boatItem = boatItem;
+        this.isRaft = isRaft;
     }
 
     @Override
@@ -55,6 +57,11 @@ public class CustomBoatEntity extends Boat {
             }
 
         }
+    }
+
+    @Override
+    public double getPassengersRidingOffset() {
+        return isRaft ? 0.25D : -0.1D;
     }
 
     @Override

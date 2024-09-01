@@ -1,8 +1,8 @@
 package mod.maxbogomol.fluffy_fur.client.playerskin;
 
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.EarsModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.TailModel;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import net.minecraft.world.entity.player.Player;
 
 public class NanachiPlayerSkin extends FurryPlayerSkin {
@@ -12,10 +12,10 @@ public class NanachiPlayerSkin extends FurryPlayerSkin {
     }
 
     public EarsModel getEarsModel(Player player) {
-        return FluffyFurClient.RABBIT_EARS_MODEL;
+        return FluffyFurModels.RABBIT_EARS;
     }
 
     public TailModel getTailModel(Player player) {
-        return FluffyFurClient.NANACHI_TAIL_MODEL;
+        return FluffyFurModels.NANACHI_TAIL;
     }
 }
