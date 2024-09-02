@@ -50,8 +50,6 @@ public class FluffyFur {
         FluffyFurParticles.register(eventBus);
         FluffyFurLootModifier.register(eventBus);
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
@@ -69,8 +67,8 @@ public class FluffyFur {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        FluffyFurBlocks.setFireBlock();
         hi();
+        FluffyFurBlocks.setFireBlock();
         PacketHandler.init();
     }
 
@@ -85,6 +83,10 @@ public class FluffyFur {
         text.add("MEOW");
         text.add("prrrr");
         LOGGER.info(text.get(random.nextInt(0, text.size())));
+
+        LOGGER.info(" /\\_/\\");
+        LOGGER.info("( o.o )");
+        LOGGER.info(" > ^ <");
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
