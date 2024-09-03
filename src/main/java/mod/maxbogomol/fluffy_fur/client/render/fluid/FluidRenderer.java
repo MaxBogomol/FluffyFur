@@ -2,7 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.render.fluid;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -338,7 +338,7 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 
 
@@ -378,6 +378,6 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(RenderUtils.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 }

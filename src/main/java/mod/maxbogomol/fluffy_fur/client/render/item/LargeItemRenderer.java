@@ -59,8 +59,8 @@ public class LargeItemRenderer {
         }
 
         @Override
-        public List<BakedQuad> getQuads(@Nullable BlockState pState, @Nullable Direction pDirection, RandomSource pRandom) {
-            return bakedModelDefault.getQuads(pState, pDirection, pRandom);
+        public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
+            return bakedModelDefault.getQuads(state, direction, random);
         }
 
         @Override

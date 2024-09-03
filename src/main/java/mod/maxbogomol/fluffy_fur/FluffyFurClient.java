@@ -1,7 +1,6 @@
 package mod.maxbogomol.fluffy_fur;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
@@ -12,14 +11,12 @@ import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,20 +26,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
-import java.io.IOException;
 
 public class FluffyFurClient {
 
     private static final String CATEGORY_KEY = "key.category."+FluffyFur.MOD_ID+".general";
     public static final KeyMapping SKIN_MENU_KEY = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
-
-    public static ShaderInstance GLOWING_SHADER, GLOWING_SPRITE_SHADER, GLOWING_PARTICLE_SHADER, SPRITE_PARTICLE_SHADER, FLUID_SHADER;
-
-    public static ShaderInstance getGlowingShader() { return GLOWING_SHADER; }
-    public static ShaderInstance getGlowingSpriteShader() { return GLOWING_SPRITE_SHADER; }
-    public static ShaderInstance getGlowingParticleShader() { return GLOWING_PARTICLE_SHADER; }
-    public static ShaderInstance getSpriteParticleShader() { return SPRITE_PARTICLE_SHADER; }
-    public static ShaderInstance getFluidShader() { return FLUID_SHADER; }
 
     public static boolean optifinePresent = false;
 
@@ -73,15 +61,6 @@ public class FluffyFurClient {
         @SubscribeEvent
         public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
             event.register(FluffyFurClient.SKIN_MENU_KEY);
-        }
-
-        @SubscribeEvent
-        public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing"), DefaultVertexFormat.POSITION_COLOR), shader -> { GLOWING_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_sprite"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> { GLOWING_SPRITE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:glowing_particle"), DefaultVertexFormat.PARTICLE), shader -> { GLOWING_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:sprite_particle"), DefaultVertexFormat.PARTICLE), shader -> { SPRITE_PARTICLE_SHADER = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("fluffy_fur:fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP), shader -> { FLUID_SHADER = shader; });
         }
     }
 

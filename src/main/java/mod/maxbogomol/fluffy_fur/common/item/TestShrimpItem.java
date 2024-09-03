@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -90,7 +90,7 @@ public class TestShrimpItem extends Item {
             if (mode == 4) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(RenderUtils.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
                         .setColorData(ColorParticleData.create(0, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
