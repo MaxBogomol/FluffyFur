@@ -1,17 +1,31 @@
-package mod.maxbogomol.fluffy_fur.registry.common;
+package mod.maxbogomol.fluffy_fur.registry.common.block;
 
 import com.google.common.collect.ImmutableMap;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FluffyFurBlocks {
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FluffyFur.MOD_ID);
+
+    public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+    }
+
     public static FireBlock fireblock;
     public static Block[] getBlocks(Class<?>... blockClasses) {
         IForgeRegistry<Block> blocks = ForgeRegistries.BLOCKS;

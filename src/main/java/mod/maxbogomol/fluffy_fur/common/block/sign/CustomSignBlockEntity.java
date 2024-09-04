@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.block.sign;
 
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurBlockEntities;
+import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;

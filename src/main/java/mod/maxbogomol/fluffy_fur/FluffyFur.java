@@ -10,8 +10,8 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurBlockEntities;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurBlocks;
+import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
+import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import net.minecraftforge.api.distmarker.Dist;
@@ -46,6 +46,7 @@ public class FluffyFur {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         FluffyFurItems.register(eventBus);
+        FluffyFurBlocks.register(eventBus);
         FluffyFurBlockEntities.register(eventBus);
         FluffyFurParticles.register(eventBus);
         FluffyFurLootModifier.register(eventBus);

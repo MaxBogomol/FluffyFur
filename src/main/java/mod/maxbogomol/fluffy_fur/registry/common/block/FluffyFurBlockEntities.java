@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.registry.common;
+package mod.maxbogomol.fluffy_fur.registry.common.block;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.block.sign.*;
@@ -19,7 +19,7 @@ public class FluffyFurBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, FluffyFur.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<CustomSignBlockEntity>> SIGN = BLOCK_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomStandingSignBlock.class, CustomWallSignBlock.class)).build(null));
-    public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> HANGING_SIGN = BLOCK_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomHangingSignBlockEntity.class, CustomWallHangingSignBlock.class)).build(null));
+    public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> HANGING_SIGN = BLOCK_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomCeilingHangingSignBlock.class, CustomWallHangingSignBlock.class)).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

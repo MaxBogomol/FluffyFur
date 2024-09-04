@@ -1,4 +1,17 @@
 {
+  "_comment_1": "Предметы и блоки",
+  "block.fluffy_fur.potted_pink_petals": "Розовые лепестки в горшке",
+
+  "item.fluffy_fur.test_shrimp": "Тестовая креветка",
+  "item.fluffy_fur.thing": "Штуковина",
+
+  "_comment_2": "Меню",
+  "mod_description.fluffy_fur": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
+
+  "panorama.minecraft.vanilla": "Ванилла",
+  "panorama.fluffy_fur.fluffy_zone": "Пушистое место",
+
+  "_comment_3": "Интерфейс",
   "gui.fluffy_fur.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine ломает Fluffy Fur и другие моды",
   "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
@@ -12,11 +25,7 @@
   "gui.fluffy_fur.menu.links": "Ссылки:",
   "gui.fluffy_fur.menu.mod": "Мод:",
 
-  "mod_description.fluffy_fur": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
-
-  "panorama.minecraft.vanilla": "Ванилла",
-  "panorama.fluffy_fur.fluffy_zone": "Пушистое место",
-
-  "item.fluffy_fur.test_shrimp": "Тестовая креветка",
-  "item.fluffy_fur.thing": "Штуковина"
+  "_comment_4": "Привязка клавиш",
+  "key.category.fluffy_fur.general": "Fluffy Fur",
+  "key.fluffy_fur.skin_menu": "Меню обликов"
 }

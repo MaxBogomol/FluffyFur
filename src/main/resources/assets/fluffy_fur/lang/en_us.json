@@ -1,4 +1,17 @@
 {
+  "_comment_1": "Items and Blocks",
+  "block.fluffy_fur.potted_pink_petals": "Potted Pink Petals",
+
+  "item.fluffy_fur.test_shrimp": "Test Shrimp",
+  "item.fluffy_fur.thing": "Thing",
+
+  "_comment_2": "Menu",
+  "mod_description.fluffy_fur": "Fluffy Fur - a mod library by MaxBogomol. \n Adds various things for rendering and simplifying development. \n \n Meow :3",
+
+  "panorama.minecraft.vanilla": "Vanilla",
+  "panorama.fluffy_fur.fluffy_zone": "Fluffy Zone",
+
+  "_comment_3": "Gui",
   "gui.fluffy_fur.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.fluffy_fur.menu.optifine.1": "Optifine breaks Fluffy Fur and other mods",
   "gui.fluffy_fur.menu.optifine.2": "Delete Optifine :3",
@@ -12,11 +25,7 @@
   "gui.fluffy_fur.menu.links": "Links:",
   "gui.fluffy_fur.menu.mod": "Mod:",
 
-  "mod_description.fluffy_fur": "Fluffy Fur - a mod library by MaxBogomol. \n Adds various things for rendering and simplifying development. \n \n Meow :3",
-
-  "panorama.minecraft.vanilla": "Vanilla",
-  "panorama.fluffy_fur.fluffy_zone": "Fluffy Zone",
-
-  "item.fluffy_fur.test_shrimp": "Test Shrimp",
-  "item.fluffy_fur.thing": "Thing"
+  "_comment_4": "Key binds",
+  "key.category.fluffy_fur.general": "Fluffy Fur",
+  "key.fluffy_fur.skin_menu": "Skin Menu"
 }
