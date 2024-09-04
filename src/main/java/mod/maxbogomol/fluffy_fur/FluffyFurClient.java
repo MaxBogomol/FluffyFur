@@ -1,36 +1,21 @@
 package mod.maxbogomol.fluffy_fur;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.fluffy_fur.client.event.ClientEvents;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
-import mod.maxbogomol.fluffy_fur.client.playerskin.FoxPlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 
 public class FluffyFurClient {
-
-    private static final String CATEGORY_KEY = "key.category."+FluffyFur.MOD_ID+".general";
-    public static final KeyMapping SKIN_MENU_KEY = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY_KEY);
 
     public static boolean optifinePresent = false;
 
@@ -45,46 +30,12 @@ public class FluffyFurClient {
     public static void clientSetup(final FMLClientSetupEvent event) {
         try {
             Class.forName("net.optifine.Config");
-            FluffyFurClient.optifinePresent = true;
+            optifinePresent = true;
         } catch (ClassNotFoundException e) {
-            FluffyFurClient.optifinePresent = false;
+            optifinePresent = false;
         }
 
-        event.enqueueWork(() -> {
-            setupPlayerSkins();
-            setupMenu();
-        });
-    }
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-            event.register(FluffyFurClient.SKIN_MENU_KEY);
-        }
-    }
-
-    public static PlayerSkin MAXBOGOMOL_SKIN = new FoxPlayerSkin(FluffyFur.MOD_ID + ":maxbogomol")
-            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/skin"))
-            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/skin_blink"))
-            .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/ears"))
-            .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/tail"))
-            .setSlim(true);
-    public static PlayerSkin ONIXTHECAT_SKIN = new PlayerSkin(FluffyFur.MOD_ID + ":onixthecat")
-            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin"))
-            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin_blink"))
-            .setSlim(true);
-    public static PlayerSkin NANACHI_SKIN = new NanachiPlayerSkin(FluffyFur.MOD_ID + ":nanachi")
-            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/skin"))
-            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/skin_blink"))
-            .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/ears"))
-            .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/tail"))
-            .setSlim(true);
-
-    public static void setupPlayerSkins() {
-        PlayerSkinHandler.register(MAXBOGOMOL_SKIN);
-        PlayerSkinHandler.register(ONIXTHECAT_SKIN);
-        PlayerSkinHandler.register(NANACHI_SKIN);
+        setupMenu();
     }
 
     public static FluffyFurMod MOD_INSTANCE;
