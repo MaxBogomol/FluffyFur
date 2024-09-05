@@ -6,6 +6,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
 public class GenericParticleType extends AbstractParticleType<GenericParticleOptions> {
+
     public GenericParticleType() {
         super();
     }

@@ -54,8 +54,7 @@ public class FluffyFurRenderTypes {
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingSprite))
-                    .createCompositeState(false)
-    );
+                    .createCompositeState(false));
 
     public static final RenderType GLOWING = RenderType.create(
             FluffyFur.MOD_ID + ":glowing",
@@ -66,8 +65,7 @@ public class FluffyFurRenderTypes {
                     .setLightmapState(new RenderStateShard.LightmapStateShard(false))
                     .setTransparencyState(ADDITIVE_TRANSPARENCY)
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowing))
-                    .createCompositeState(false)
-    );
+                    .createCompositeState(false));
 
     public static RenderType GLOWING_PARTICLE = RenderType.create(
             FluffyFur.MOD_ID + ":glowing_particle",
@@ -81,6 +79,18 @@ public class FluffyFurRenderTypes {
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingParticle))
                     .createCompositeState(false));
 
+    public static RenderType GLOWING_TERRAIN_PARTICLE = RenderType.create(
+            FluffyFur.MOD_ID + ":glowing_terrain_particle",
+            DefaultVertexFormat.PARTICLE,
+            VertexFormat.Mode.QUADS, 256, true, false,
+            RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(false))
+                    .setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingParticle))
+                    .createCompositeState(false));
+
     public static RenderType DELAYED_PARTICLE = RenderType.create(
             FluffyFur.MOD_ID + ":delayed_particle",
             DefaultVertexFormat.PARTICLE,
@@ -90,8 +100,18 @@ public class FluffyFurRenderTypes {
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle))
-                    .createCompositeState(false)
-    );
+                    .createCompositeState(false));
+
+    public static RenderType DELAYED_TERRAIN_PARTICLE = RenderType.create(
+            FluffyFur.MOD_ID + ":delayed_terrain_particle",
+            DefaultVertexFormat.PARTICLE,
+            VertexFormat.Mode.QUADS, 256, true, false,
+            RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle))
+                    .createCompositeState(false));
 
     public static final RenderType FLUID = RenderType.create(
             FluffyFur.MOD_ID + ":fluid",
@@ -104,15 +124,16 @@ public class FluffyFurRenderTypes {
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getFluid))
                     .setCullState(new RenderStateShard.CullStateShard(true))
                     .setOverlayState(new RenderStateShard.OverlayStateShard(true))
-                    .createCompositeState(true)
-    );
+                    .createCompositeState(true));
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerRenderTypes(FMLClientSetupEvent event) {
             renderTypes.add(DELAYED_PARTICLE);
+            renderTypes.add(DELAYED_TERRAIN_PARTICLE);
             renderTypes.add(GLOWING_PARTICLE);
+            renderTypes.add(GLOWING_TERRAIN_PARTICLE);
             renderTypes.add(GLOWING_SPRITE);
             renderTypes.add(GLOWING);
             renderTypes.add(FLUID);

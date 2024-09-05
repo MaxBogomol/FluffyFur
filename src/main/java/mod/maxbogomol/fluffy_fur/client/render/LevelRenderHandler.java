@@ -49,8 +49,10 @@ public class LevelRenderHandler {
             RenderSystem.applyModelViewMatrix();
             RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_PARTICLE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE);
             RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_PARTICLE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_TERRAIN_PARTICLE);
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
 

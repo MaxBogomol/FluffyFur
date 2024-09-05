@@ -6,6 +6,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
 public class CubeParticleType extends AbstractParticleType<GenericParticleOptions> {
+
     public CubeParticleType() {
         super();
     }

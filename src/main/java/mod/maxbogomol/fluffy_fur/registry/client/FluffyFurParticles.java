@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.CubeParticleType;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleType;
+import mod.maxbogomol.fluffy_fur.client.particle.ItemParticleType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
@@ -31,6 +32,7 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> SMOKE = PARTICLES.register("smoke", GenericParticleType::new);
     public static RegistryObject<CubeParticleType> CUBE = PARTICLES.register("cube", CubeParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
+    public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
 
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
@@ -41,19 +43,20 @@ public class FluffyFurParticles {
         @SubscribeEvent
         public static void registerParticles(RegisterParticleProvidersEvent event) {
             ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-            particleEngine.register(FluffyFurParticles.WISP.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.TINY_WISP.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.SPARKLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.STAR.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.TINY_STAR.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.SQUARE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.DOT.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.CIRCLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.TINY_CIRCLE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.HEART.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.SMOKE.get(), GenericParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.CUBE.get(), CubeParticleType.Factory::new);
-            particleEngine.register(FluffyFurParticles.TRAIL.get(), GenericParticleType.Factory::new);
+            particleEngine.register(WISP.get(), GenericParticleType.Factory::new);
+            particleEngine.register(TINY_WISP.get(), GenericParticleType.Factory::new);
+            particleEngine.register(SPARKLE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(STAR.get(), GenericParticleType.Factory::new);
+            particleEngine.register(TINY_STAR.get(), GenericParticleType.Factory::new);
+            particleEngine.register(SQUARE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(DOT.get(), GenericParticleType.Factory::new);
+            particleEngine.register(CIRCLE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(TINY_CIRCLE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(HEART.get(), GenericParticleType.Factory::new);
+            particleEngine.register(SMOKE.get(), GenericParticleType.Factory::new);
+            particleEngine.register(CUBE.get(), CubeParticleType.Factory::new);
+            particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
+            particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
         }
     }
 }

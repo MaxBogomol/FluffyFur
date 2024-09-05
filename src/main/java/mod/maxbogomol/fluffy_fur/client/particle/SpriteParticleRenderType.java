@@ -17,8 +17,8 @@ public class SpriteParticleRenderType implements ParticleRenderType {
 
     public static final SpriteParticleRenderType INSTANCE = new SpriteParticleRenderType();
 
-    private static void beginRenderCommon(BufferBuilder bufferBuilder, TextureManager textureManager) {
-        RenderSystem.depthMask(false);
+    @Override
+    public void begin(BufferBuilder bufferBuilder, TextureManager textureManager) {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShader(FluffyFurShaders::getSpriteParticle);
@@ -27,20 +27,11 @@ public class SpriteParticleRenderType implements ParticleRenderType {
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
-    private static void endRenderCommon() {
-        Minecraft.getInstance().textureManager.getTexture(TextureAtlas.LOCATION_PARTICLES).restoreLastBlurMipmap();
-        RenderSystem.depthMask(true);
-    }
-
-    @Override
-    public void begin(BufferBuilder bufferBuilder, TextureManager textureManager) {
-        beginRenderCommon(bufferBuilder, textureManager);
-    }
-
     @Override
     public void end(Tesselator tesselator) {
         tesselator.end();
         RenderSystem.enableDepthTest();
-        endRenderCommon();
+        Minecraft.getInstance().textureManager.getTexture(TextureAtlas.LOCATION_PARTICLES).restoreLastBlurMipmap();
+        RenderSystem.depthMask(true);
     }
 }

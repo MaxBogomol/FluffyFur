@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
+import mod.maxbogomol.fluffy_fur.client.particle.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
@@ -17,6 +18,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import java.awt.*;
 
 public class TestShrimpItem extends Item {
 
@@ -36,7 +39,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 8);
+            nbt.putInt("mode", (mode + 1) % 9);
             mode = nbt.getInt("mode");
         }
 
@@ -217,6 +220,20 @@ public class TestShrimpItem extends Item {
                         .flatRandomOffset(1, 2, 1)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
                 level.playSound(player, pos.x(), pos.y(), pos.z(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
+            }
+
+            if (mode == 8) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
+                ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
+                ParticleBuilder.create(options)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                        .setColorData(ColorParticleData.create(Color.WHITE).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(200)
+                        .randomVelocity(0.035f, 0.035f, 0.035f)
+                        .setLightData(LightParticleData.DEFAULT)
+                        .spawn(level, pos.x(), pos.y(), pos.z());
             }
         }
 

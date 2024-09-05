@@ -282,4 +282,8 @@ public class ParticleBuilder {
     public static ParticleBuilder create(RegistryObject<?> type) {
         return new ParticleBuilder(new GenericParticleOptions((ParticleType<?>)type.get()));
     }
+
+    public static ParticleBuilder create(GenericParticleOptions options) {
+        return new ParticleBuilder(options);
+    }
 }
