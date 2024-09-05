@@ -3,7 +3,8 @@ package mod.maxbogomol.fluffy_fur.client.playerskin;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
-import mod.maxbogomol.fluffy_fur.common.network.PlayerSkinSetPacket;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinEffectSetPacket;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class PlayerSkinHandler {
     public static Map<String, PlayerSkin> skins = new HashMap<>();
+    public static Map<String, PlayerSkinEffect> skinEffects = new HashMap<>();
 
     public static void register(PlayerSkin skin) {
         skins.put(skin.getId(), skin);
@@ -53,6 +55,11 @@ public class PlayerSkinHandler {
         if (skin != null) {
             skin.tick(player);
         }
+
+        PlayerSkinEffect skinEffect = getSkinEffect(player);
+        if (skinEffect != null) {
+            skinEffect.tick(player);
+        }
     }
 
     public static void setSkin(Player player, String skin) {
@@ -82,5 +89,54 @@ public class PlayerSkinHandler {
 
     public static void setSkinPacket(String skin) {
         PacketHandler.sendToServer(new PlayerSkinSetPacket(skin));
+    }
+
+    public static void register(PlayerSkinEffect effect) {
+        skinEffects.put(effect.getId(), effect);
+    }
+
+    public static PlayerSkinEffect getSkinEffect(Player player) {
+        AtomicReference<String> id  = new AtomicReference<>();
+        player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+            id.set(s.getSkinEffect());
+        });
+        if (skinEffects.containsKey(id.get())) {
+            return skinEffects.get(id.get());
+        }
+
+        return null;
+    }
+
+    public static List<PlayerSkinEffect> getSkinEffects() {
+        return skinEffects.values().stream().toList();
+    }
+
+    public static void setSkinEffect(Player player, String effect) {
+        if (effect != null) {
+            player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+                s.setSkinEffect(effect);
+            });
+            setSkinData(player, new PlayerSkinData());
+        } else {
+            player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+                s.setSkinEffect("");
+            });
+        }
+    }
+
+    public static void setSkinEffect(Player player, PlayerSkinEffect effect) {
+        if (effect != null) {
+            setSkinEffect(player, effect.getId());
+        } else {
+            setSkinEffect(player, "");
+        }
+    }
+
+    public static void setSkinEffectPacket(PlayerSkinEffect effect) {
+        PacketHandler.sendToServer(new PlayerSkinEffectSetPacket(effect.getId()));
+    }
+
+    public static void setSkinEffectPacket(String effect) {
+        PacketHandler.sendToServer(new PlayerSkinEffectSetPacket(effect));
     }
 }

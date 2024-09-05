@@ -4,7 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.capability.PlayerSkinProvider;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
-import mod.maxbogomol.fluffy_fur.common.network.PlayerSkinUpdatePacket;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinUpdatePacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

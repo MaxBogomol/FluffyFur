@@ -13,4 +13,7 @@ public interface IPlayerSkin {
 
     void setSkin(String id);
     String getSkin();
+
+    void setSkinEffect(String id);
+    String getSkinEffect();
 }

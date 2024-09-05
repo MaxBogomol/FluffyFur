@@ -1,10 +1,11 @@
-package mod.maxbogomol.fluffy_fur.common.network;
+package mod.maxbogomol.fluffy_fur.common.network.playerskin;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.PositionEffectPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;

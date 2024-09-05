@@ -1,7 +1,8 @@
-package mod.maxbogomol.fluffy_fur.common.network;
+package mod.maxbogomol.fluffy_fur.common.network.playerskin;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
+import mod.maxbogomol.fluffy_fur.common.network.ClientPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;

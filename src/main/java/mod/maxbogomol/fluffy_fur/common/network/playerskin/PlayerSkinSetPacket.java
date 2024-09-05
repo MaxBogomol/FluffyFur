@@ -1,6 +1,8 @@
-package mod.maxbogomol.fluffy_fur.common.network;
+package mod.maxbogomol.fluffy_fur.common.network.playerskin;
 
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

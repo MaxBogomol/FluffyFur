@@ -30,6 +30,7 @@ public class GenericParticle extends TextureSheetParticle {
     public final LightParticleData lightData;
 
     public final boolean shouldCull;
+    public final boolean shouldRenderTraits;
     public float randomSpin;
 
     float[] hsv1 = new float[3], hsv2 = new float[3];
@@ -52,6 +53,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.friction = options.friction;
         if (options.additionalFriction > 0) this.friction = this.friction + random.nextFloat(options.additionalFriction);
         this.shouldCull = options.shouldCull;
+        this.shouldRenderTraits = options.shouldRenderTraits;
         this.hasPhysics = options.hasPhysics;
         this.randomSpin = 0;
         if (options.randomSpin > 0) this.randomSpin = options.randomSpin * ((random.nextFloat() - 0.5f) * 2);
@@ -102,6 +104,14 @@ public class GenericParticle extends TextureSheetParticle {
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
+        if (shouldRenderTraits) updateRenderTraits(partialTicks);
         super.render(LevelRenderHandler.getDelayedRender().getBuffer(renderType), camera, partialTicks);
+    }
+
+    public void updateRenderTraits(float partialTicks) {
+        float time = age + partialTicks;
+        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(time, lifetime), 0, 1, 1));
+        quadSize = scaleData.getValue(time, lifetime);
+        alpha = transparencyData.getValue(time, lifetime);
     }
 }

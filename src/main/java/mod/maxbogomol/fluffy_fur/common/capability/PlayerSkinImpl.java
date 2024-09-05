@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag> {
     PlayerSkinData data;
     String skinId = "";
+    String skinEffectId = "";
 
     @Override
     public void setSkinData(PlayerSkinData data) {
@@ -29,9 +30,20 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     }
 
     @Override
+    public void setSkinEffect(String id) {
+        this.skinEffectId = id;
+    }
+
+    @Override
+    public String getSkinEffect() {
+        return skinEffectId;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag wrapper = new CompoundTag();
         wrapper.putString("skin", skinId);
+        wrapper.putString("skinEffect", skinEffectId);
 
         return wrapper;
     }
@@ -40,6 +52,9 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     public void deserializeNBT(CompoundTag nbt) {
         if (nbt.contains("skin")) {
             skinId = nbt.getString("skin");
+        }
+        if (nbt.contains("skinEffect")) {
+            skinEffectId = nbt.getString("skinEffect");
         }
     }
 }

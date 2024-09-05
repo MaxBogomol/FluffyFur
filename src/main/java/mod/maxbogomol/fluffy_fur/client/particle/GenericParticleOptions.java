@@ -36,6 +36,7 @@ public class GenericParticleOptions implements ParticleOptions {
     public float friction = 0.98f;
     public float additionalFriction = 0;
     public boolean shouldCull = false;
+    public boolean shouldRenderTraits = true;
     public boolean hasPhysics = true;
     public float randomSpin = 0;
 

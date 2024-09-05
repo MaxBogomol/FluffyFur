@@ -118,6 +118,19 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder enableRenderTraits() {
+        return setShouldRenderTraits(true);
+    }
+
+    public ParticleBuilder disableRenderTraits() {
+        return setShouldRenderTraits(false);
+    }
+
+    public ParticleBuilder setShouldRenderTraits(boolean shouldRenderTraits) {
+        options.shouldRenderTraits = shouldRenderTraits;
+        return this;
+    }
+
     public ParticleBuilder enablePhysics() {
         return setHasPhysics(true);
     }

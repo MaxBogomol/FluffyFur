@@ -1,10 +1,7 @@
 package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.client.playerskin.FoxPlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.NanachiPlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.client.playerskin.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +25,8 @@ public class FluffyFurPlayerSkins {
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/tail"))
             .setSlim(true);
 
+    public static PlayerSkinEffect PINK_HEARTS_EFFECT = new PinkHeartsPlayerSkinEffect(FluffyFur.MOD_ID + ":pink_hearts");
+
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
@@ -35,6 +34,8 @@ public class FluffyFurPlayerSkins {
             PlayerSkinHandler.register(MAXBOGOMOL);
             PlayerSkinHandler.register(ONIXTHECAT);
             PlayerSkinHandler.register(NANACHI);
+
+            PlayerSkinHandler.register(PINK_HEARTS_EFFECT);
         }
     }
 }
