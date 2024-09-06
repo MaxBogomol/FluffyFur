@@ -2,12 +2,14 @@ package mod.maxbogomol.fluffy_fur.registry.common.block;
 
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.common.block.plush.PlushBlock;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +23,9 @@ public class FluffyFurBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FluffyFur.MOD_ID);
 
     public static final RegistryObject<Block> POTTED_PINK_PETALS = BLOCKS.register("potted_pink_petals", () -> new FlowerPotBlock(Blocks.PINK_PETALS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT).instabreak().noOcclusion()));
+
+    public static final RegistryObject<Block> MAXBOGOMOL_PLUSH = BLOCKS.register("maxbogomol_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_PINK).noOcclusion()));
+    public static final RegistryObject<Block> ONIXTHECAT_PLUSH = BLOCKS.register("onixthecat_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

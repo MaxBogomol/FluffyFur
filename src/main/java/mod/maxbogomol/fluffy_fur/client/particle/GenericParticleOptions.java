@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -17,6 +18,7 @@ public class GenericParticleOptions implements ParticleOptions {
     ParticleType<?> type;
 
     public RenderType renderType = FluffyFurRenderTypes.GLOWING_PARTICLE;
+    public ParticleRenderType particleRenderType = SpriteParticleRenderType.INSTANCE;
 
     public static final ColorParticleData DEFAULT_COLOR = ColorParticleData.create(Color.WHITE, Color.WHITE).build();
     public static final GenericParticleData DEFAULT_GENERIC = GenericParticleData.create(1, 0).build();

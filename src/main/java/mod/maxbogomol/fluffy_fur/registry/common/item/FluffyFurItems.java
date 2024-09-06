@@ -1,9 +1,11 @@
-package mod.maxbogomol.fluffy_fur.registry.common;
+package mod.maxbogomol.fluffy_fur.registry.common.item;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.TestShrimpItem;
+import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
@@ -18,6 +20,9 @@ public class FluffyFurItems {
 
     public static final RegistryObject<Item> TEST_SHRIMP = ITEMS.register("test_shrimp", () -> new TestShrimpItem(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> THING = ITEMS.register("thing", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> MAXBOGOMOL_PLUSH = ITEMS.register("maxbogomol_plush", () -> new BlockItem(FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ONIXTHECAT_PLUSH = ITEMS.register("onixthecat_plush", () -> new BlockItem(FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

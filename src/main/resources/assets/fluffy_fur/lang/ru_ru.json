@@ -5,6 +5,9 @@
   "item.fluffy_fur.test_shrimp": "Тестовая креветка",
   "item.fluffy_fur.thing": "Штуковина",
 
+  "block.fluffy_fur.maxbogomol_plush": "Плюшка MaxBogomol",
+  "block.fluffy_fur.onixthecat_plush": "Плюшка OnixTheCat",
+
   "_comment_2": "Меню",
   "mod_description.fluffy_fur": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
 

@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
@@ -39,6 +40,12 @@ public class ParticleBuilder {
 
     public ParticleBuilder setRenderType(RenderType renderType) {
         options.renderType = renderType;
+        return this;
+    }
+
+    public ParticleBuilder setParticleRenderType(ParticleRenderType particleRenderType) {
+        options.renderType = null;
+        options.particleRenderType = particleRenderType;
         return this;
     }
 

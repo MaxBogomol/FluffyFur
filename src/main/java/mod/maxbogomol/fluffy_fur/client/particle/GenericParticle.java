@@ -21,16 +21,17 @@ public class GenericParticle extends TextureSheetParticle {
 
     public static final Random random = new Random();
 
-    public final RenderType renderType;
+    public RenderType renderType;
+    public ParticleRenderType particleRenderType;
 
-    public final ColorParticleData colorData;
-    public final GenericParticleData transparencyData;
-    public final GenericParticleData scaleData;
-    public final SpinParticleData spinData;
-    public final LightParticleData lightData;
+    public ColorParticleData colorData;
+    public GenericParticleData transparencyData;
+    public GenericParticleData scaleData;
+    public SpinParticleData spinData;
+    public LightParticleData lightData;
 
-    public final boolean shouldCull;
-    public final boolean shouldRenderTraits;
+    public boolean shouldCull;
+    public boolean shouldRenderTraits;
     public float randomSpin;
 
     float[] hsv1 = new float[3], hsv2 = new float[3];
@@ -39,6 +40,7 @@ public class GenericParticle extends TextureSheetParticle {
         super(level, x, y, z, vx, vy, vz);
         this.setPos(x, y, z);
         this.renderType = options.renderType;
+        this.particleRenderType = options.particleRenderType;
         this.colorData = options.colorData;
         this.transparencyData = options.transparencyData;
         this.scaleData = options.scaleData;
@@ -89,7 +91,7 @@ public class GenericParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return SpriteParticleRenderType.INSTANCE;
+        return particleRenderType;
     }
 
     @Override
@@ -105,7 +107,7 @@ public class GenericParticle extends TextureSheetParticle {
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
         if (shouldRenderTraits) updateRenderTraits(partialTicks);
-        super.render(LevelRenderHandler.getDelayedRender().getBuffer(renderType), camera, partialTicks);
+        super.render(renderType != null ? LevelRenderHandler.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
     }
 
     public void updateRenderTraits(float partialTicks) {

@@ -97,6 +97,7 @@ public class ClientEvents {
                 PlayerSkinHandler.setSkinPacket(FluffyFurPlayerSkins.MAXBOGOMOL);
             }
             PlayerSkinHandler.setSkinEffectPacket(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT);
+            PlayerSkinHandler.setSkinEffectPacket("");
         }
     }
 }

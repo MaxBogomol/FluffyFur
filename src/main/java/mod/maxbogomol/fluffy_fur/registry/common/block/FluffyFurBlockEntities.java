@@ -1,6 +1,8 @@
 package mod.maxbogomol.fluffy_fur.registry.common.block;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.block.PlushRenderer;
+import mod.maxbogomol.fluffy_fur.common.block.plush.PlushBlockEntity;
 import mod.maxbogomol.fluffy_fur.common.block.sign.*;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
@@ -21,6 +23,10 @@ public class FluffyFurBlockEntities {
     public static final RegistryObject<BlockEntityType<CustomSignBlockEntity>> SIGN = BLOCK_ENTITIES.register("sign", () -> BlockEntityType.Builder.of(CustomSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomStandingSignBlock.class, CustomWallSignBlock.class)).build(null));
     public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> HANGING_SIGN = BLOCK_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomCeilingHangingSignBlock.class, CustomWallHangingSignBlock.class)).build(null));
 
+    public static final RegistryObject<BlockEntityType<PlushBlockEntity>> PLUSH = BLOCK_ENTITIES.register("plush", () -> BlockEntityType.Builder.of(PlushBlockEntity::new,
+            FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), FluffyFurBlocks.ONIXTHECAT_PLUSH.get())
+            .build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
@@ -29,8 +35,9 @@ public class FluffyFurBlockEntities {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            BlockEntityRenderers.register(FluffyFurBlockEntities.SIGN.get(), SignRenderer::new);
-            BlockEntityRenderers.register(FluffyFurBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
+            BlockEntityRenderers.register(SIGN.get(), SignRenderer::new);
+            BlockEntityRenderers.register(HANGING_SIGN.get(), HangingSignRenderer::new);
+            BlockEntityRenderers.register(PLUSH.get(), (context) -> new PlushRenderer());
         }
     }
 }

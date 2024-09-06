@@ -12,7 +12,7 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurItems;
+import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;

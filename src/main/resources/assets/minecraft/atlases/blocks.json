@@ -4,6 +4,11 @@
       "type": "directory",
       "source": "particle",
       "prefix": "particle/"
+    },
+    {
+      "type": "directory",
+      "source": "plush",
+      "prefix": "plush/"
     }
   ]
 }

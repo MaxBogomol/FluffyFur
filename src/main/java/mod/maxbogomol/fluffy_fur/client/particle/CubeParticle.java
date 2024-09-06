@@ -18,6 +18,7 @@ public class CubeParticle extends GenericParticle implements ICustomRenderPartic
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
+        if (shouldRenderTraits) updateRenderTraits(partialTicks);
         LevelRenderHandler.particleList.add(this);
     }
 
@@ -31,7 +32,7 @@ public class CubeParticle extends GenericParticle implements ICustomRenderPartic
         double dY = Mth.lerp(partialTicks, this.yo, this.y);
         double dZ = Mth.lerp(partialTicks, this.zo, this.z);
 
-        float size = scaleData.getValue(age + partialTicks, lifetime);
+        float size = quadSize;
         float size1 = -(size / 2f);
 
         poseStack.pushPose();
