@@ -1,8 +1,15 @@
 #version 150
 
+#moj_import <fog.glsl>
+
 in vec4 vertexColor;
 
 uniform vec4 ColorModulator;
+uniform float FogStart;
+uniform float FogEnd;
+uniform vec4 FogColor;
+
+in float vertexDistance;
 
 out vec4 fragColor;
 
@@ -11,5 +18,5 @@ void main() {
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = color * ColorModulator;
+    fragColor = linear_fog(color * ColorModulator, vertexDistance, FogStart, FogEnd, FogColor);
 }

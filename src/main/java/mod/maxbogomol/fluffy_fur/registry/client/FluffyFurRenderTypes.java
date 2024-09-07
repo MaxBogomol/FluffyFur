@@ -5,6 +5,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -20,7 +22,7 @@ public class FluffyFurRenderTypes {
 
     public static List<RenderType> renderTypes = new ArrayList<>();
 
-    public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
+    public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("additive_transparency", () -> {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
     }, () -> {
@@ -28,7 +30,7 @@ public class FluffyFurRenderTypes {
         RenderSystem.defaultBlendFunc();
     });
 
-    public static final RenderStateShard.TransparencyStateShard NORMAL_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("lightning_transparency", () -> {
+    public static final RenderStateShard.TransparencyStateShard NORMAL_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("normal_transparency", () -> {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     }, () -> {
@@ -116,15 +118,16 @@ public class FluffyFurRenderTypes {
     public static final RenderType FLUID = RenderType.create(
             FluffyFur.MOD_ID + ":fluid",
             DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
-            VertexFormat.Mode.QUADS, 256, true, true,
+            VertexFormat.Mode.QUADS, 256, true, false,
             RenderType.CompositeState.builder()
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
                     .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getFluid))
                     .setCullState(new RenderStateShard.CullStateShard(true))
                     .setOverlayState(new RenderStateShard.OverlayStateShard(true))
-                    .createCompositeState(true));
+                    .createCompositeState(false));
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
@@ -138,5 +141,9 @@ public class FluffyFurRenderTypes {
             renderTypes.add(GLOWING);
             renderTypes.add(FLUID);
         }
+    }
+
+    public static MultiBufferSource.BufferSource getDelayedRender() {
+        return LevelRenderHandler.getDelayedRender();
     }
 }

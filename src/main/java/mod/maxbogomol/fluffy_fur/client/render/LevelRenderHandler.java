@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class LevelRenderHandler {
     @OnlyIn(Dist.CLIENT)
-    public static Matrix4f particleMVMatrix = null;
+    public static Matrix4f MATRIX4F = null;
     @OnlyIn(Dist.CLIENT)
     public static List<ICustomRenderParticle> particleList = new ArrayList<>();
 
@@ -40,28 +40,26 @@ public class LevelRenderHandler {
             }
             stack.popPose();
             particleList.clear();
+            MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
         }
 
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-            RenderSystem.getModelViewStack().pushPose();
-            RenderSystem.getModelViewStack().setIdentity();
-            if (particleMVMatrix != null) RenderSystem.getModelViewStack().mulPoseMatrix(particleMVMatrix);
-            RenderSystem.applyModelViewMatrix();
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+            Matrix4f last = new Matrix4f(RenderSystem.getModelViewMatrix());
+            if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
+
+            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_SPRITE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.FLUID);
+
+            RenderSystem.getModelViewMatrix().set(last);
+
             RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_PARTICLE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE);
             RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_PARTICLE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_TERRAIN_PARTICLE);
-            RenderSystem.getModelViewStack().popPose();
-            RenderSystem.applyModelViewMatrix();
-
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_SPRITE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
-        }
-
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-            getDelayedRender().endBatch(FluffyFurRenderTypes.FLUID);
+            RenderSystem.defaultBlendFunc();
         }
     }
 
