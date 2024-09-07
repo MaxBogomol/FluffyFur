@@ -252,17 +252,21 @@ public class FluffyFurMenuScreen extends Screen {
         gui.blit(BACKGROUND, x + 1, y + 1 + i, 170, 0, 8, 10, 256, 256);
     }
 
-    public static void drawBlackBackground(GuiGraphics gui, int x, int y, int size, int mouseX, int mouseY, float partialTicks) {
+    public static void drawBlackBackground(GuiGraphics gui, int x, int y, int size, float alpha, int mouseX, int mouseY, float partialTicks) {
         if (size < 4) size = 4;
         if (size % 2 != 0) size++;
 
         RenderSystem.enableBlend();
-        gui.setColor(1f, 1f, 1f, 0.5f);
+        gui.setColor(1f, 1f, 1f, alpha);
         gui.blit(BACKGROUND, x - (size / 2), y, 178, 0, 1, 10, 256, 256);
         gui.blit(BACKGROUND, x - (size / 2) + 1, y, size - 2, 10, 179, 0, 1, 10, 256, 256);
         gui.blit(BACKGROUND, x + (size / 2) - 1, y, 178, 0, 1, 10, 256, 256);
         gui.setColor(1f, 1f, 1f, 1f);
         RenderSystem.disableBlend();
+    }
+
+    public static void drawBlackBackground(GuiGraphics gui, int x, int y, int size, int mouseX, int mouseY, float partialTicks) {
+        drawBlackBackground(gui, x, y , size, 0.5f, mouseX, mouseY, partialTicks);
     }
 
     public static List<Component> getDescription(FluffyFurMod mod) {

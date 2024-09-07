@@ -28,6 +28,9 @@
   "gui.fluffy_fur.menu.links": "Links:",
   "gui.fluffy_fur.menu.mod": "Mod:",
 
+  "gui.fluffy_fur.skin_menu.skins": "Skins",
+  "gui.fluffy_fur.skin_menu.skin_effects": "Skin Effects",
+
   "_comment_4": "Key binds",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Skin Menu"

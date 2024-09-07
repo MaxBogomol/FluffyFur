@@ -28,6 +28,9 @@
   "gui.fluffy_fur.menu.links": "Ссылки:",
   "gui.fluffy_fur.menu.mod": "Мод:",
 
+  "gui.fluffy_fur.skin_menu.skins": "Облики",
+  "gui.fluffy_fur.skin_menu.skin_effects": "Эффекты обликов",
+
   "_comment_4": "Привязка клавиш",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню обликов"

@@ -1,12 +1,11 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurPlayerSkins;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -89,15 +88,7 @@ public class ClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurPlayerSkins.MAXBOGOMOL) {
-                PlayerSkinHandler.setSkinPacket(FluffyFurPlayerSkins.NANACHI);
-            } else if (PlayerSkinHandler.getSkin(FluffyFur.proxy.getPlayer()) == FluffyFurPlayerSkins.NANACHI) {
-                PlayerSkinHandler.setSkinPacket(FluffyFurPlayerSkins.MAXBOGOMOL);
-            } else {
-                PlayerSkinHandler.setSkinPacket(FluffyFurPlayerSkins.MAXBOGOMOL);
-            }
-            PlayerSkinHandler.setSkinEffectPacket(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT);
-            PlayerSkinHandler.setSkinEffectPacket("");
+            Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
         }
     }
 }

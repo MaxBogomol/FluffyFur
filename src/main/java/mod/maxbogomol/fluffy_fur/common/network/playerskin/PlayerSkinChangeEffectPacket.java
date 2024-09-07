@@ -35,10 +35,10 @@ public class PlayerSkinChangeEffectPacket extends PositionEffectPacket {
                 .setLifetime(100)
                 .randomVelocity(0.35f)
                 .randomSpin(0.1f)
-                .flatRandomOffset(1, 2, 1)
+                .flatRandomOffset(1, 1.5f, 1)
                 .disableDistanceSpawn()
                 .repeat(level, x, y, z, 50);
-        level.playSound(null, x, y, z, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
+        level.playSound(FluffyFur.proxy.getPlayer(), x, y, z, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
     }
 
     public static void register(SimpleChannel instance, int index) {

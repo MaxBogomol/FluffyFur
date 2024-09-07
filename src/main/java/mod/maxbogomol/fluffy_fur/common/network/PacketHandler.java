@@ -3,10 +3,7 @@ package mod.maxbogomol.fluffy_fur.common.network;
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsEffectsPacket;
-import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinChangeEffectPacket;
-import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinEffectSetPacket;
-import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
-import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinUpdatePacket;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerChunkCache;
@@ -31,9 +28,10 @@ public final class PacketHandler {
     public static void init() {
         int id = 0;
         PlayerSkinUpdatePacket.register(HANDLER, id++);
-        PlayerSkinChangeEffectPacket.register(HANDLER, id++);
         PlayerSkinSetPacket.register(HANDLER, id++);
         PlayerSkinEffectSetPacket.register(HANDLER, id++);
+        PlayerSkinChangeEffectPacket.register(HANDLER, id++);
+        PlayerSkinChangePacket.register(HANDLER, id++);
         PlushHeartsEffectsPacket.register(HANDLER, id++);
     }
 
