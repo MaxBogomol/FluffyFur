@@ -39,7 +39,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 9);
+            nbt.putInt("mode", (mode + 1) % 10);
             mode = nbt.getInt("mode");
         }
 
@@ -234,6 +234,19 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.035f, 0.035f, 0.035f)
                         .setLightData(LightParticleData.DEFAULT)
                         .spawn(level, pos.x(), pos.y(), pos.z());
+            }
+
+            if (mode == 9) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.WISP)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLightData(LightParticleData.DEFAULT)
+                        .setLifetime(200, 100)
+                        .randomVelocity(0.35f, 0.35f, 0.35f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
         }
 

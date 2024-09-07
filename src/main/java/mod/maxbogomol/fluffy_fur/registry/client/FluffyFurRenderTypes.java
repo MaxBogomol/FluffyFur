@@ -99,6 +99,7 @@ public class FluffyFurRenderTypes {
             VertexFormat.Mode.QUADS, 256, true, false,
             RenderType.CompositeState.builder()
                     .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle))
@@ -110,6 +111,7 @@ public class FluffyFurRenderTypes {
             VertexFormat.Mode.QUADS, 256, true, false,
             RenderType.CompositeState.builder()
                     .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false))
                     .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle))

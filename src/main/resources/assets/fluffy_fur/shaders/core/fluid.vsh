@@ -7,8 +7,6 @@ in vec2 UV0;
 in vec2 UV2;
 in vec4 Color;
 
-uniform sampler2D Sampler2;
-
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform int FogShape;

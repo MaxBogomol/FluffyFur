@@ -5,6 +5,8 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -22,6 +24,7 @@ public class SpriteParticleRenderType implements ParticleRenderType {
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShader(FluffyFurShaders::getSpriteParticle);
         RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+        if (ShadersIntegration.isShadersEnabled()) LevelRenderHandler.MATRIX4F = RenderSystem.getModelViewMatrix();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 

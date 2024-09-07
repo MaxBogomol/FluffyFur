@@ -238,7 +238,7 @@ public class PlayerSkinMenuScreen extends Screen {
             return true;
         }
 
-        return false;
+        return (super.keyPressed(keyCode, scanCode, modifiers));
     }
 
     @Override

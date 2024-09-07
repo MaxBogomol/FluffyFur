@@ -9,8 +9,9 @@
     "attributes": [
         "Position",
         "UV0",
-        "Color",
-        "UV2"
+        "UV1",
+        "UV2",
+        "Color"
     ],
     "samplers": [
         { "name": "Sampler0" },

@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -36,6 +37,8 @@ public class FluffyFurClient {
         }
 
         setupMenu();
+
+        ShadersIntegration.init();
     }
 
     public static FluffyFurMod MOD_INSTANCE;
