@@ -1,5 +1,7 @@
-package mod.maxbogomol.fluffy_fur.client.particle;
+package mod.maxbogomol.fluffy_fur.client.particle.type;
 
+import mod.maxbogomol.fluffy_fur.client.particle.ItemParticle;
+import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;

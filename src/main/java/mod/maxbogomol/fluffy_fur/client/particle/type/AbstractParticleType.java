@@ -1,7 +1,8 @@
-package mod.maxbogomol.fluffy_fur.client.particle;
+package mod.maxbogomol.fluffy_fur.client.particle.type;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.serialization.Codec;
+import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;

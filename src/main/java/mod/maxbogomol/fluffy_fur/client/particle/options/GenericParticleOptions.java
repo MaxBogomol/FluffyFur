@@ -1,5 +1,6 @@
-package mod.maxbogomol.fluffy_fur.client.particle;
+package mod.maxbogomol.fluffy_fur.client.particle.options;
 
+import mod.maxbogomol.fluffy_fur.client.particle.SpriteParticleRenderType;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -40,7 +41,6 @@ public class GenericParticleOptions implements ParticleOptions {
     public boolean shouldCull = false;
     public boolean shouldRenderTraits = true;
     public boolean hasPhysics = true;
-    public float randomSpin = 0;
 
     public GenericParticleOptions(ParticleType<?> type) {
         this.type = type;
@@ -58,6 +58,6 @@ public class GenericParticleOptions implements ParticleOptions {
 
     @Override
     public String writeToString() {
-        return getClass().getSimpleName() + ":internal";
+        return getClass().getSimpleName();
     }
 }

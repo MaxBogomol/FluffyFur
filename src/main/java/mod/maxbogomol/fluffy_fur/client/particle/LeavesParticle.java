@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 
 public class LeavesParticle extends GenericParticle {

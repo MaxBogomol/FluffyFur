@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.PositionEffectPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -32,9 +33,9 @@ public class PlayerSkinChangeEffectPacket extends PositionEffectPacket {
                 .setColorData(ColorParticleData.create(1, 1, 1, 1, 0, 0).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(1f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                 .setLifetime(100)
                 .randomVelocity(0.35f)
-                .randomSpin(0.1f)
                 .flatRandomOffset(1, 1.5f, 1)
                 .disableDistanceSpawn()
                 .repeat(level, x, y, z, 50);

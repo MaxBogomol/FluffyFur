@@ -6,20 +6,26 @@ import net.minecraft.util.RandomSource;
 public class SpinParticleData extends GenericParticleData {
 
     public final float spinOffset;
+    public final float rsp1, rsp2;
+    public final float rso1, rso2;
 
-    protected SpinParticleData(float spinOffset, float startingValue, float middleValue, float endingValue, float coefficient, Easing startToMiddleEasing, Easing middleToEndEasing) {
-        super(startingValue, middleValue, endingValue, coefficient, startToMiddleEasing, middleToEndEasing);
+    protected SpinParticleData(float spinOffset, float rsp1, float rsp2, float rso1, float rso2, float startingValue, float middleValue, float endingValue, float rs1, float rs2, float rm1, float rm2, float re1, float re2, float coefficient, Easing startToMiddleEasing, Easing middleToEndEasing) {
+        super(startingValue, middleValue, endingValue, rs1, rs2, rm1, rm2, re1, re2, coefficient, startToMiddleEasing, middleToEndEasing);
         this.spinOffset = spinOffset;
+        this.rsp1 = rsp1;
+        this.rsp2 = rsp2;
+        this.rso1 = rso1;
+        this.rso2 = rso2;
     }
 
     @Override
     public SpinParticleData copy() {
-        return new SpinParticleData(spinOffset, startingValue, middleValue, endingValue, coefficient, startToMiddleEasing, middleToEndEasing).overrideValueMultiplier(valueMultiplier).overrideCoefficientMultiplier(coefficientMultiplier);
+        return new SpinParticleData(spinOffset, rsp1, rsp2, rso1, rso2, startingValue, middleValue, endingValue, rs1, rs2, rm1, rm2, re1, re2, coefficient, startToMiddleEasing, middleToEndEasing).overrideValueMultiplier(valueMultiplier).overrideCoefficientMultiplier(coefficientMultiplier);
     }
 
     @Override
     public SpinParticleData bake() {
-        return new SpinParticleData(spinOffset, startingValue*valueMultiplier, middleValue*valueMultiplier, endingValue*valueMultiplier, coefficient*coefficientMultiplier, startToMiddleEasing, middleToEndEasing);
+        return new SpinParticleData(spinOffset, rsp1, rsp2, rso1, rso2, startingValue*valueMultiplier, middleValue*valueMultiplier, endingValue*valueMultiplier, rs1*valueMultiplier, rs2*valueMultiplier, rm1*valueMultiplier, rm2*valueMultiplier, re1*valueMultiplier, re2*valueMultiplier, coefficient*coefficientMultiplier, startToMiddleEasing, middleToEndEasing);
     }
 
     @Override
@@ -30,6 +36,10 @@ public class SpinParticleData extends GenericParticleData {
     @Override
     public SpinParticleData overrideCoefficientMultiplier(float coefficientMultiplier) {
         return (SpinParticleData) super.overrideCoefficientMultiplier(coefficientMultiplier);
+    }
+
+    public static SpinParticleDataBuilder create() {
+        return new SpinParticleDataBuilder(0, 0, 0);
     }
 
     public static SpinParticleDataBuilder create(float value) {

@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.PositionEffectPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -37,10 +38,10 @@ public class PlushHeartsEffectsPacket extends PositionEffectPacket {
                 .setColorData(ColorParticleData.create(new Color(DyeColor.PINK.getMapColor().col)).build())
                 .setTransparencyData(GenericParticleData.create(0.2f, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
                 .setScaleData(GenericParticleData.create(0.04f, 0.05f, 0).setEasing(Easing.QUINTIC_IN_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.01f).build())
                 .setLifetime(45)
                 .randomVelocity(0.015f)
                 .addVelocity(0, 0.01f, 0)
-                .randomSpin(0.01f)
                 .flatRandomOffset(0.3f, 0.3f, 0.3f)
                 .repeat(level, x, y, z, 5);
     }

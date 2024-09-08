@@ -1,13 +1,15 @@
-package mod.maxbogomol.fluffy_fur.client.particle;
+package mod.maxbogomol.fluffy_fur.client.particle.type;
 
+import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
+import mod.maxbogomol.fluffy_fur.client.particle.LeavesParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
-public class GenericParticleType extends AbstractParticleType<GenericParticleOptions> {
+public class LeavesParticleType extends AbstractParticleType<GenericParticleOptions> {
 
-    public GenericParticleType() {
+    public LeavesParticleType() {
         super();
     }
 
@@ -20,7 +22,7 @@ public class GenericParticleType extends AbstractParticleType<GenericParticleOpt
 
         @Override
         public Particle createParticle(GenericParticleOptions options, ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
-            GenericParticle ret = new GenericParticle(level, options, x, y, z, mx, my, mz);
+            LeavesParticle ret = new LeavesParticle(level, options, x, y, z, mx, my, mz);
             ret.pickSprite(sprite);
             return ret;
         }
