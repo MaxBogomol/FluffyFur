@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -41,7 +42,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 14);
+            nbt.putInt("mode", (mode + 1) % 15);
             mode = nbt.getInt("mode");
         }
 
@@ -300,6 +301,24 @@ public class TestShrimpItem extends Item {
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
                         .setLifetime(200, 100)
                         .randomVelocity(0.35f, 0.35f, 0.35f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 14) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.WISP)
+                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setBehavior(ParticleBehavior.create(90, 0, 0)
+                                .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
+                                .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
+                                .build())
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
+                        .setLightData(LightParticleData.DEFAULT)
+                        .setLifetime(200, 100)
+                        .randomVelocity(0.15f, 0, 0.15f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
         }

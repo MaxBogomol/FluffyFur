@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -47,6 +48,11 @@ public class ParticleBuilder {
     public ParticleBuilder setParticleRenderType(ParticleRenderType particleRenderType) {
         options.renderType = null;
         options.particleRenderType = particleRenderType;
+        return this;
+    }
+
+    public ParticleBuilder setBehavior(ParticleBehavior behavior) {
+        options.behavior = behavior;
         return this;
     }
 

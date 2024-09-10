@@ -51,7 +51,8 @@ public class FluffyFurClient {
                 .setDescription(Component.translatable("mod_description.fluffy_fur"))
                 .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/fluffy-fur")
-                .addModrinthLink("https://modrinth.com/mod/fluffy-fur");
+                .addModrinthLink("https://modrinth.com/mod/fluffy-fur")
+                .addDiscordLink("https://discord.gg/cKf55qNugw");
         VANILLA_PANORAMA = new FluffyFurPanorama("minecraft:vanilla", net.minecraft.network.chat.Component.translatable("panorama.minecraft.vanilla")).setItem(new ItemStack(Items.GRASS_BLOCK));
         FLUFFY_PANORAMA = new FluffyFurPanorama(FluffyFur.MOD_ID + ":fluffy_zone", Component.translatable("panorama.fluffy_fur.fluffy_zone"))
                 .setMod(MOD_INSTANCE).setItem(new ItemStack(Items.CHERRY_LEAVES))

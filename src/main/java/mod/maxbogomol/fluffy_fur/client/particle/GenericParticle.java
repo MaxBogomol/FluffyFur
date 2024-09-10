@@ -1,6 +1,8 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.ParticleBehaviorComponent;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -14,9 +16,6 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.Random;
@@ -28,6 +27,9 @@ public class GenericParticle extends TextureSheetParticle {
     public RenderType renderType;
     public ParticleRenderType particleRenderType;
 
+    public ParticleBehavior behavior;
+    public ParticleBehaviorComponent behaviorComponent;
+
     public ColorParticleData colorData;
     public GenericParticleData transparencyData;
     public GenericParticleData scaleData;
@@ -36,10 +38,6 @@ public class GenericParticle extends TextureSheetParticle {
 
     public boolean shouldCull;
     public boolean shouldRenderTraits;
-
-    public float xRoll = 0;
-    public float yRoll = 0;
-    public float zRoll = 0;
 
     public float st;
     public float mt;
@@ -79,7 +77,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.roll = spinData.spinOffset + spinData.startingValue;
         this.randomSpin = (pickRandomValue(0, spinData.rsp1, spinData.rsp2));
         if (random.nextBoolean()) this.randomSpin = -this.randomSpin;
-        this.roll = this.roll + pickRandomValue(0, spinData.rso1, spinData.rso2);
+        this.roll = this.roll + pickRandomRollValue(0, spinData.rso1, spinData.rso2);
 
         float r1 = pickRandomValue(colorData.r1, colorData.rr11, colorData.rr12);
         float g1 = pickRandomValue(colorData.g1, colorData.rg11, colorData.rg12);
@@ -100,9 +98,8 @@ public class GenericParticle extends TextureSheetParticle {
         mr = pickRandomValue(spinData.middleValue, spinData.rm1, spinData.rm2);
         er = pickRandomValue(spinData.endingValue, spinData.re1, spinData.re2);
 
-        xRoll = (float) Math.toRadians(random.nextFloat() * 360);
-        yRoll = (float) Math.toRadians(random.nextFloat() * 360);
-        zRoll = (float) Math.toRadians(random.nextFloat() * 360);
+        behavior = options.behavior;
+        if (behavior != null) behavior.init(this);
 
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), hsv2);
@@ -111,6 +108,13 @@ public class GenericParticle extends TextureSheetParticle {
 
     public static float pickRandomValue(float value, float value1, float value2) {
         if (value1 >= 0 && value2 >= 0) {
+            return (value1 != value2) ? random.nextFloat(Math.min(value1, value2), Math.max(value1, value2)) : value1;
+        }
+        return value;
+    }
+
+    public static float pickRandomRollValue(float value, float value1, float value2) {
+        if (value1 != 0 && value2 != 0) {
             return (value1 != value2) ? random.nextFloat(Math.min(value1, value2), Math.max(value1, value2)) : value1;
         }
         return value;
@@ -133,6 +137,8 @@ public class GenericParticle extends TextureSheetParticle {
         alpha = transparencyData.getValue(age, lifetime, st, mt, et);
         oRoll = roll;
         roll = roll + spinData.getValue(age, lifetime, sr, mr, er) + randomSpin;
+
+        if (behavior != null) behavior.updateTraits(this);
     }
 
     @Override
@@ -152,59 +158,38 @@ public class GenericParticle extends TextureSheetParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTicks) {
+    public int getLightColor(float partialTicks) {
         return lightData.getLight(this, this.level, partialTicks);
+    }
+
+    @Override
+    public float getU0() {
+        return this.sprite.getU0();
+    }
+
+    @Override
+    public float getU1() {
+        return this.sprite.getU1();
+    }
+
+    @Override
+    public float getV0() {
+        return this.sprite.getV0();
+    }
+
+    @Override
+    public float getV1() {
+        return this.sprite.getV1();
     }
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
         if (shouldRenderTraits) updateRenderTraits(partialTicks);
-        super.render(renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
-    }
-
-    public void render1(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
-        Vec3 vec3 = pRenderInfo.getPosition();
-        float f = (float)(Mth.lerp((double)pPartialTicks, this.xo, this.x) - vec3.x());
-        float f1 = (float)(Mth.lerp((double)pPartialTicks, this.yo, this.y) - vec3.y());
-        float f2 = (float)(Mth.lerp((double)pPartialTicks, this.zo, this.z) - vec3.z());
-        Quaternionf quaternionf;
-        if (this.roll == 0.0F) {
-            quaternionf = pRenderInfo.rotation();
+        if (behavior == null) {
+            super.render(renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
         } else {
-            quaternionf = new Quaternionf(pRenderInfo.rotation());
-            quaternionf.rotateZ(Mth.lerp(pPartialTicks, this.oRoll, this.roll));
+            behavior.render(this, renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
         }
-
-        quaternionf = new Quaternionf();
-        quaternionf.rotateX(xRoll);
-        quaternionf.rotateY(yRoll);
-        quaternionf.rotateZ(zRoll);
-        quaternionf.rotateZ(Mth.lerp(pPartialTicks, this.oRoll, this.roll));
-
-        Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-        float f3 = this.getQuadSize(pPartialTicks);
-
-        for(int i = 0; i < 4; ++i) {
-            Vector3f vector3f = avector3f[i];
-            vector3f.rotate(quaternionf);
-            vector3f.mul(f3);
-            vector3f.add(f, f1, f2);
-        }
-
-        float f6 = this.getU0();
-        float f7 = this.getU1();
-        float f4 = this.getV0();
-        float f5 = this.getV1();
-        int j = this.getLightColor(pPartialTicks);
-        pBuffer.vertex((double)avector3f[0].x(), (double)avector3f[0].y(), (double)avector3f[0].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[1].x(), (double)avector3f[1].y(), (double)avector3f[1].z()).uv(f7, f4).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[2].x(), (double)avector3f[2].y(), (double)avector3f[2].z()).uv(f6, f4).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[3].x(), (double)avector3f[3].y(), (double)avector3f[3].z()).uv(f6, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-
-        pBuffer.vertex((double)avector3f[3].x(), (double)avector3f[3].y(), (double)avector3f[3].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[2].x(), (double)avector3f[2].y(), (double)avector3f[2].z()).uv(f7, f4).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[1].x(), (double)avector3f[1].y(), (double)avector3f[1].z()).uv(f6, f4).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
-        pBuffer.vertex((double)avector3f[0].x(), (double)avector3f[0].y(), (double)avector3f[0].z()).uv(f6, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
     }
 
     public void updateRenderTraits(float partialTicks) {

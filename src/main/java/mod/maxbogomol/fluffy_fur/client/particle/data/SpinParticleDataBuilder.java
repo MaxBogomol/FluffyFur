@@ -26,6 +26,11 @@ public class SpinParticleDataBuilder extends GenericParticleDataBuilder {
         return this;
     }
 
+    public SpinParticleDataBuilder setSpinOffsetDegrees(float spinOffset) {
+        this.spinOffset = (float) Math.toRadians(spinOffset);
+        return this;
+    }
+
     public SpinParticleDataBuilder randomOffset() {
         this.rso2 = 6.28f;
         return this;
@@ -42,6 +47,17 @@ public class SpinParticleDataBuilder extends GenericParticleDataBuilder {
         return this;
     }
 
+    public SpinParticleDataBuilder randomOffsetDegrees(float spinOffset) {
+        this.rso2 = (float) Math.toRadians(spinOffset);
+        return this;
+    }
+
+    public SpinParticleDataBuilder randomOffsetDegrees(float spinOffset1, float spinOffset2) {
+        this.rso1 = (float) Math.toRadians(spinOffset1);
+        this.rso2 = (float) Math.toRadians(spinOffset2);
+        return this;
+    }
+
     public SpinParticleDataBuilder randomSpin(float spin) {
         this.rsp2 = spin;
         return this;
@@ -50,6 +66,17 @@ public class SpinParticleDataBuilder extends GenericParticleDataBuilder {
     public SpinParticleDataBuilder randomSpin(float spin1, float spin2) {
         this.rsp1 = spin1;
         this.rsp2 = spin2;
+        return this;
+    }
+
+    public SpinParticleDataBuilder randomSpinDegrees(float spin) {
+        this.rsp2 = (float) Math.toRadians(spin);
+        return this;
+    }
+
+    public SpinParticleDataBuilder randomSpinDegrees(float spin1, float spin2) {
+        this.rsp1 = (float) Math.toRadians(spin1);
+        this.rsp2 = (float) Math.toRadians(spin2);
         return this;
     }
 

@@ -8,9 +8,11 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 
@@ -36,8 +38,16 @@ public class SphereParticle extends GenericParticle implements ICustomRenderPart
         float size1 = -(size / 2f);
 
         poseStack.pushPose();
-        poseStack.translate(dX, dY, dZ);
-        poseStack.mulPose(Axis.YP.rotation(Mth.lerp(partialTicks, oRoll, roll)));
+        if (behavior == null) {
+            poseStack.translate(dX, dY, dZ);
+            poseStack.mulPose(Axis.YP.rotation(Mth.lerp(partialTicks, oRoll, roll)));
+        } else {
+            Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+            Vec3 vec3 = camera.getPosition();
+            Vec3 pos = behavior.getPosition(this, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks);
+            poseStack.translate((float) pos.x() + vec3.x(), (float) pos.y() + vec3.y(), (float) pos.z() + vec3.z());
+            poseStack.mulPose(behavior.getRotate(this, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks));
+        }
         RenderUtils.renderSphere(poseStack, buffer.getBuffer(FluffyFurRenderTypes.GLOWING), size1, 8, 8, new Color(rCol, gCol, bCol), alpha);
         poseStack.popPose();
     }

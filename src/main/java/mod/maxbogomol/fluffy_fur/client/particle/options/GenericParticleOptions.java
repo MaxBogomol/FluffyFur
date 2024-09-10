@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.particle.options;
 
 import mod.maxbogomol.fluffy_fur.client.particle.SpriteParticleRenderType;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -20,6 +21,8 @@ public class GenericParticleOptions implements ParticleOptions {
 
     public RenderType renderType = FluffyFurRenderTypes.GLOWING_PARTICLE;
     public ParticleRenderType particleRenderType = SpriteParticleRenderType.INSTANCE;
+
+    public ParticleBehavior behavior = null;
 
     public static final ColorParticleData DEFAULT_COLOR = ColorParticleData.create(Color.WHITE, Color.WHITE).build();
     public static final GenericParticleData DEFAULT_GENERIC = GenericParticleData.create(1, 0).build();

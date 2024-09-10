@@ -121,17 +121,22 @@ public class FluffyFurMod {
     }
 
     public FluffyFurMod addGithubLink(String string) {
-        links.add(new Link(Component.literal("Github").withStyle(ChatFormatting.DARK_GRAY), string));
+        addLink(Component.literal("Github").withStyle(ChatFormatting.DARK_GRAY), string);
         return this;
     }
 
     public FluffyFurMod addCurseForgeLink(String string) {
-        links.add(new Link(Component.literal("CurseForge").withStyle(ChatFormatting.GOLD), string));
+        addLink(Component.literal("CurseForge").withStyle(ChatFormatting.GOLD), string);
         return this;
     }
 
     public FluffyFurMod addModrinthLink(String string) {
-        links.add(new Link(Component.literal("Modrinth").withStyle(ChatFormatting.GREEN), string));
+        addLink(Component.literal("Modrinth").withStyle(ChatFormatting.GREEN), string);
+        return this;
+    }
+
+    public FluffyFurMod addDiscordLink(String string) {
+        addLink(Component.literal("Discord").withStyle(ChatFormatting.BLUE), string);
         return this;
     }
 }
