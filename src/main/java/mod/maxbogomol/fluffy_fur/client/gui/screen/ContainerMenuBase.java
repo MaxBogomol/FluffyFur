@@ -7,7 +7,6 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ContainerMenuBase extends AbstractContainerMenu {
@@ -32,7 +31,7 @@ public class ContainerMenuBase extends AbstractContainerMenu {
 
     public int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0; i < amount; i++) {
-            addSlot(new SlotItemHandler(handler, index, x, y));
+            addSlot(new InputSlot(handler, index, x, y));
             x += dx;
             index++;
         }
