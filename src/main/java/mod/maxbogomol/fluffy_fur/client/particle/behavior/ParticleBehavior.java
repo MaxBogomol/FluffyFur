@@ -152,7 +152,7 @@ public class ParticleBehavior {
     public Quaternionf getRotate(GenericParticle particle, Camera renderInfo, float partialTicks) {
         Quaternionf quaternionf = new Quaternionf();
         if (camera) {
-            float x = xRotCam ? renderInfo.getYRot() : 0;
+            float x = xRotCam ? renderInfo.getXRot() : 0;
             float y = yRotCam ? renderInfo.getYRot() : 0;
             quaternionf.rotationYXZ(-y * ((float)Math.PI / 180F), x * ((float)Math.PI / 180F), 0.0F);
         }

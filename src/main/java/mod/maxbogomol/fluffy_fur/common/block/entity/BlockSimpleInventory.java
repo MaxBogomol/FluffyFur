@@ -2,15 +2,19 @@ package mod.maxbogomol.fluffy_fur.common.block.entity;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public abstract class BlockSimpleInventory extends BlockEntityBase {
 
@@ -57,5 +61,26 @@ public abstract class BlockSimpleInventory extends BlockEntityBase {
 
     public final Container getItemHandler() {
         return itemHandler;
+    }
+
+    public static void addHandPlayerItem(Level level, Player player, InteractionHand hand, ItemStack stack, ItemStack addStack) {
+        if (player.getInventory().getSlotWithRemainingSpace(addStack) >= 0) {
+            addPlayerItem(level, player, addStack);
+        } else if (stack.isEmpty()) {
+            player.setItemInHand(hand, addStack.copy());
+        } else if (ItemHandlerHelper.canItemStacksStack(stack, addStack) && (stack.getCount() + addStack.getCount() <= addStack.getMaxStackSize())) {
+            stack.setCount(stack.getCount() + addStack.getCount());
+            player.setItemInHand(hand, stack);
+        } else {
+            addPlayerItem(level, player, addStack);
+        }
+    }
+
+    public static void addPlayerItem(Level level, Player player, ItemStack addStack) {
+        if (player.getInventory().getSlotWithRemainingSpace(addStack) != -1 || player.getInventory().getFreeSlot() > -1) {
+            player.getInventory().add(addStack.copy());
+        } else {
+            level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), addStack.copy()));
+        }
     }
 }

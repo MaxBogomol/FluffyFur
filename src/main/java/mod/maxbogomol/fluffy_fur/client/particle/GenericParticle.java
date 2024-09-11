@@ -114,7 +114,7 @@ public class GenericParticle extends TextureSheetParticle {
     }
 
     public static float pickRandomRollValue(float value, float value1, float value2) {
-        if (value1 != 0 && value2 != 0) {
+        if (value1 != 0 || value2 != 0) {
             return (value1 != value2) ? random.nextFloat(Math.min(value1, value2), Math.max(value1, value2)) : value1;
         }
         return value;
