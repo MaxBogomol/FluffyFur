@@ -22,6 +22,10 @@ public class LeavesParticle extends GenericParticle {
         this.friction = 1.0F;
         this.roll = (float) (this.random.nextFloat() * Math.PI);
         this.oRoll = this.roll;
+
+        ss = pickRandomValue(scaleData.startingValue, scaleData.rs1, scaleData.rs2);
+        ms = pickRandomValue(scaleData.middleValue, scaleData.rm1, scaleData.rm2);
+        es = pickRandomValue(scaleData.endingValue, scaleData.re1, scaleData.re2);
     }
 
     @Override
