@@ -2,15 +2,13 @@ package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.SphereParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,7 +40,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 15);
+            nbt.putInt("mode", (mode + 1) % 16);
             mode = nbt.getInt("mode");
         }
 
@@ -320,6 +318,16 @@ public class TestShrimpItem extends Item {
                         .setLifetime(200, 100)
                         .randomVelocity(0.15f, 0, 0.15f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 15) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.CHERRY_LEAVES)
+                        .setParticleRenderType(ParticleRenderType.PARTICLE_SHEET_OPAQUE)
+                        .setLightData(LightParticleData.DEFAULT)
+                        .randomVelocity(0.1f)
+                        .setLifetime(59)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 100);
             }
         }
 

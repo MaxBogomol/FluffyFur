@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.SphereParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.options.SphereParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
@@ -22,9 +23,7 @@ public class SphereParticleType extends AbstractParticleType<SphereParticleOptio
 
         @Override
         public Particle createParticle(SphereParticleOptions options, ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
-            SphereParticle ret = new SphereParticle(level, options, x, y, z, mx, my, mz);
-            ret.pickSprite(sprite);
-            return ret;
+            return new SphereParticle(level, options, (ParticleEngine.MutableSpriteSet) sprite, x, y, z, mx, my, mz);
         }
     }
 }

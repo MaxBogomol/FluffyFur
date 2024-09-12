@@ -3,14 +3,12 @@ package mod.maxbogomol.fluffy_fur.client.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.ParticleBehaviorComponent;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.renderer.RenderType;
@@ -35,9 +33,12 @@ public class GenericParticle extends TextureSheetParticle {
     public GenericParticleData scaleData;
     public SpinParticleData spinData;
     public LightParticleData lightData;
+    public SpriteParticleData spriteData;
 
     public boolean shouldCull;
     public boolean shouldRenderTraits;
+
+    public ParticleEngine.MutableSpriteSet spriteSet;
 
     public float st;
     public float mt;
@@ -53,7 +54,7 @@ public class GenericParticle extends TextureSheetParticle {
 
     float[] hsv1 = new float[3], hsv2 = new float[3];
 
-    public GenericParticle(ClientLevel level, GenericParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
+    public GenericParticle(ClientLevel level, GenericParticleOptions options, ParticleEngine.MutableSpriteSet spriteSet, double x, double y, double z, double vx, double vy, double vz) {
         super(level, x, y, z, vx, vy, vz);
         this.setPos(x, y, z);
         this.renderType = options.renderType;
@@ -63,6 +64,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.scaleData = options.scaleData;
         this.spinData = options.spinData;
         this.lightData = options.lightData;
+        this.spriteData = options.spriteData;
         this.xd = vx;
         this.yd = vy;
         this.zd = vz;
@@ -74,6 +76,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.shouldCull = options.shouldCull;
         this.shouldRenderTraits = options.shouldRenderTraits;
         this.hasPhysics = options.hasPhysics;
+        this.spriteSet = spriteSet;
         this.roll = spinData.spinOffset + spinData.startingValue;
         this.randomSpin = (pickRandomValue(0, spinData.rsp1, spinData.rsp2));
         if (random.nextBoolean()) this.randomSpin = -this.randomSpin;
@@ -100,6 +103,8 @@ public class GenericParticle extends TextureSheetParticle {
 
         behavior = options.behavior;
         if (behavior != null) behavior.init(this);
+
+        spriteData.init(this);
 
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), hsv2);
@@ -144,6 +149,7 @@ public class GenericParticle extends TextureSheetParticle {
     @Override
     public void tick() {
         updateTraits();
+        spriteData.tick(this);
         super.tick();
     }
 
@@ -164,27 +170,34 @@ public class GenericParticle extends TextureSheetParticle {
 
     @Override
     public float getU0() {
-        return this.sprite.getU0();
+        return spriteData.getU0(this);
     }
 
     @Override
     public float getU1() {
-        return this.sprite.getU1();
+        return spriteData.getU1(this);
     }
 
     @Override
     public float getV0() {
-        return this.sprite.getV0();
+        return spriteData.getV0(this);
     }
 
     @Override
     public float getV1() {
-        return this.sprite.getV1();
+        return spriteData.getV1(this);
+    }
+
+    public void pickSprite(int spriteIndex) {
+        if (spriteIndex < spriteSet.sprites.size() && spriteIndex >= 0) {
+            setSprite(spriteSet.sprites.get(spriteIndex));
+        }
     }
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
         if (shouldRenderTraits) updateRenderTraits(partialTicks);
+        spriteData.renderTick(this, partialTicks);
         if (behavior == null) {
             super.render(renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
         } else {

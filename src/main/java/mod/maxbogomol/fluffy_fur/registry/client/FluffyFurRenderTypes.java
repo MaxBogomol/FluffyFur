@@ -122,7 +122,7 @@ public class FluffyFurRenderTypes {
             DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
             VertexFormat.Mode.QUADS, 256, true, false,
             RenderType.CompositeState.builder()
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
+                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, true))
                     .setLightmapState(new RenderStateShard.LightmapStateShard(true))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setTextureState(new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true))

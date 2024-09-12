@@ -2,10 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.particle.options;
 
 import mod.maxbogomol.fluffy_fur.client.particle.SpriteParticleRenderType;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.RenderType;
@@ -28,12 +25,14 @@ public class GenericParticleOptions implements ParticleOptions {
     public static final GenericParticleData DEFAULT_GENERIC = GenericParticleData.create(1, 0).build();
     public static final SpinParticleData DEFAULT_SPIN = SpinParticleData.create(0).build();
     public static final LightParticleData DEFAULT_LIGHT = LightParticleData.GLOW;
+    public static final SpriteParticleData DEFAULT_SPRITE = SpriteParticleData.RANDOM;
 
     public ColorParticleData colorData = DEFAULT_COLOR;
     public GenericParticleData transparencyData = DEFAULT_GENERIC;
     public GenericParticleData scaleData = DEFAULT_GENERIC;
     public SpinParticleData spinData = DEFAULT_SPIN;
     public LightParticleData lightData = DEFAULT_LIGHT;
+    public SpriteParticleData spriteData = DEFAULT_SPRITE;
 
     public int lifetime = 20;
     public int additionalLifetime = 0;

@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.CubeParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 
@@ -22,9 +23,7 @@ public class CubeParticleType extends AbstractParticleType<GenericParticleOption
 
         @Override
         public Particle createParticle(GenericParticleOptions options, ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
-            CubeParticle ret = new CubeParticle(level, options, x, y, z, mx, my, mz);
-            ret.pickSprite(sprite);
-            return ret;
+            return new CubeParticle(level, options, (ParticleEngine.MutableSpriteSet) sprite, x, y, z, mx, my, mz);
         }
     }
 }

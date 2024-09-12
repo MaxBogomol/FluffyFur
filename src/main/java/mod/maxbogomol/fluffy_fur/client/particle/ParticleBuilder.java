@@ -1,10 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -80,6 +77,12 @@ public class ParticleBuilder {
         options.lightData = lightData;
         return this;
     }
+
+    public ParticleBuilder setSpriteData(SpriteParticleData spriteData) {
+        options.spriteData = spriteData;
+        return this;
+    }
+
 
     public ParticleBuilder setLifetime(int lifetime) {
         options.lifetime = lifetime;

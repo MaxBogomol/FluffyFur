@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -18,8 +19,8 @@ import java.awt.*;
 
 public class SphereParticle extends GenericParticle implements ICustomRenderParticle {
 
-    public SphereParticle(ClientLevel level, SphereParticleOptions data, double x, double y, double z, double vx, double vy, double vz) {
-        super(level, data, x, y, z, vx, vy, vz);
+    public SphereParticle(ClientLevel level, SphereParticleOptions data, ParticleEngine.MutableSpriteSet spriteSet, double x, double y, double z, double vx, double vy, double vz) {
+        super(level, data, spriteSet, x, y, z, vx, vy, vz);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class ItemParticle extends GenericParticle {
     private final float vo;
 
     public ItemParticle(ClientLevel level, ItemParticleOptions data, double x, double y, double z, double vx, double vy, double vz) {
-        super(level, data, x, y, z, vx, vy, vz);
+        super(level, data, null, x, y, z, vx, vy, vz);
         var model = Minecraft.getInstance().getItemRenderer().getModel(data.stack, level, null, 0);
         this.setSprite(model.getOverrides().resolve(model, data.stack, level, null, 0).getParticleIcon(ModelData.EMPTY));
         this.quadSize /= 2.0F;

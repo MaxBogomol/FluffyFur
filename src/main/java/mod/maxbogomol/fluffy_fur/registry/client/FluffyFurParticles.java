@@ -2,10 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.*;
-import mod.maxbogomol.fluffy_fur.client.particle.type.CubeParticleType;
-import mod.maxbogomol.fluffy_fur.client.particle.type.GenericParticleType;
-import mod.maxbogomol.fluffy_fur.client.particle.type.ItemParticleType;
-import mod.maxbogomol.fluffy_fur.client.particle.type.SphereParticleType;
+import mod.maxbogomol.fluffy_fur.client.particle.type.*;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
@@ -39,6 +36,7 @@ public class FluffyFurParticles {
     public static RegistryObject<SphereParticleType> SPHERE = PARTICLES.register("sphere", SphereParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
+    public static RegistryObject<LeavesParticleType> CHERRY_LEAVES = PARTICLES.register("cherry_leaves", LeavesParticleType::new);
 
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
@@ -66,6 +64,7 @@ public class FluffyFurParticles {
             particleEngine.register(SPHERE.get(), SphereParticleType.Factory::new);
             particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
+            particleEngine.register(CHERRY_LEAVES.get(), LeavesParticleType.Factory::new);
         }
     }
 
