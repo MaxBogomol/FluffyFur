@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.particle.options.SphereParticleOptions;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
-import mod.maxbogomol.fluffy_fur.util.RenderUtils;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -49,7 +49,7 @@ public class SphereParticle extends GenericParticle implements ICustomRenderPart
             poseStack.translate((float) pos.x() + vec3.x(), (float) pos.y() + vec3.y(), (float) pos.z() + vec3.z());
             poseStack.mulPose(behavior.getRotate(this, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks));
         }
-        RenderUtils.renderSphere(poseStack, buffer.getBuffer(FluffyFurRenderTypes.GLOWING), size1, 8, 8, new Color(rCol, gCol, bCol), alpha);
+        RenderUtil.renderSphere(poseStack, buffer.getBuffer(FluffyFurRenderTypes.GLOWING), size1, 8, 8, new Color(rCol, gCol, bCol), alpha);
         poseStack.popPose();
     }
 }

@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.common.item;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.TestShrimpItem;
+import mod.maxbogomol.fluffy_fur.common.item.ThingItem;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +20,7 @@ public class FluffyFurItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FluffyFur.MOD_ID);
 
     public static final RegistryObject<Item> TEST_SHRIMP = ITEMS.register("test_shrimp", () -> new TestShrimpItem(new Item.Properties().rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> THING = ITEMS.register("thing", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> THING = ITEMS.register("thing", () -> new ThingItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> MAXBOGOMOL_PLUSH = ITEMS.register("maxbogomol_plush", () -> new BlockItem(FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ONIXTHECAT_PLUSH = ITEMS.register("onixthecat_plush", () -> new BlockItem(FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));

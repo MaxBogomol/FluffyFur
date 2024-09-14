@@ -28,14 +28,14 @@ public class LevelRenderHandler {
     public static void onLevelRender(RenderLevelStageEvent event) {
         PoseStack stack = event.getPoseStack();
         float partialTicks = event.getPartialTick();
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferSource = LevelRenderHandler.getDelayedRender();
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             stack.pushPose();
             Vec3 pos = event.getCamera().getPosition();
             stack.translate(-pos.x, -pos.y, -pos.z);
             for (ICustomRenderParticle particle : particleList) {
-                particle.render(stack, bufferDelayed, partialTicks);
+                particle.render(stack, bufferSource, partialTicks);
             }
             stack.popPose();
             particleList.clear();
@@ -87,9 +87,6 @@ public class LevelRenderHandler {
 
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_SPRITE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
-        }
-
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
             getDelayedRender().endBatch(FluffyFurRenderTypes.FLUID);
         }
     }

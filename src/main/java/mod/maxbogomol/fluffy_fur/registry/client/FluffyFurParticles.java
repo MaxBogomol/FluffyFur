@@ -34,7 +34,6 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> DEATH = PARTICLES.register("death", GenericParticleType::new);
     public static RegistryObject<CubeParticleType> CUBE = PARTICLES.register("cube", CubeParticleType::new);
     public static RegistryObject<SphereParticleType> SPHERE = PARTICLES.register("sphere", SphereParticleType::new);
-    public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
     public static RegistryObject<LeavesParticleType> CHERRY_LEAVES = PARTICLES.register("cherry_leaves", LeavesParticleType::new);
 
@@ -62,7 +61,6 @@ public class FluffyFurParticles {
             particleEngine.register(DEATH.get(), GenericParticleType.Factory::new);
             particleEngine.register(CUBE.get(), CubeParticleType.Factory::new);
             particleEngine.register(SPHERE.get(), SphereParticleType.Factory::new);
-            particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
             particleEngine.register(CHERRY_LEAVES.get(), LeavesParticleType.Factory::new);
         }

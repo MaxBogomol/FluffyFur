@@ -14,6 +14,7 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 import java.util.Random;
@@ -186,6 +187,94 @@ public class GenericParticle extends TextureSheetParticle {
     @Override
     public float getV1() {
         return spriteData.getV1(this);
+    }
+
+    public float getRoll() {
+        return roll;
+    }
+
+    public float getORoll() {
+        return oRoll;
+    }
+
+    public float getRed() {
+        return rCol;
+    }
+
+    public float getGreen() {
+        return gCol;
+    }
+
+    public float getBlue() {
+        return bCol;
+    }
+
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public float getSize() {
+        return quadSize;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public double getXOld() {
+        return xo;
+    }
+
+    public double getYOld() {
+        return yo;
+    }
+
+    public double getZOld() {
+        return zo;
+    }
+
+    public double getXMotion() {
+        return xd;
+    }
+
+    public double getYMotion() {
+        return yd;
+    }
+
+    public double getZMotion() {
+        return zd;
+    }
+
+    public Vec3 getPosition() {
+        return new Vec3(getX(), getY(), getZ());
+    }
+
+    public void setPosition(Vec3 pos) {
+        setPos(pos.x, pos.y, pos.z);
+    }
+
+    public Vec3 getSpeed() {
+        return new Vec3(getXMotion(), getYMotion(), getZMotion());
+    }
+
+    public void setSpeed(Vec3 speed) {
+        setParticleSpeed(speed.x, speed.y, speed.z);
+    }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public void pickSprite(int spriteIndex) {

@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.SphereParticleOptions;
@@ -40,7 +41,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 16);
+            nbt.putInt("mode", (mode + 1) % 18);
             mode = nbt.getInt("mode");
         }
 
@@ -328,6 +329,40 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(0.1f)
                         .setLifetime(59)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 100);
+            }
+
+            if (mode == 16) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.WISP)
+                        .setBehavior(SparkParticleBehavior.create().build())
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(20, 10)
+                        .randomVelocity(1f)
+                        .setFriction(0.9f)
+                        .enablePhysics()
+                        .setGravity(1f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 17) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.WISP)
+                        .setBehavior(SparkParticleBehavior.create()
+                                .enableSecondColor()
+                                .setColorData(ColorParticleData.create().setRandomColor().build())
+                                .setTransparencyData(GenericParticleData.create(0).build())
+                                .build())
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(20, 10)
+                        .randomVelocity(1f)
+                        .setFriction(0.9f)
+                        .enablePhysics()
+                        .setGravity(1f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
         }
 

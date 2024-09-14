@@ -54,6 +54,10 @@ public class ParticleBehavior {
         return new ParticleBehaviorBuilder((float) Math.toRadians(xOffset), (float) Math.toRadians(yOffset), (float) Math.toRadians(zOffset));
     }
 
+    public ParticleBehaviorComponent getComponent() {
+        return new ParticleBehaviorComponent();
+    }
+
     public void init(GenericParticle particle) {
         particle.behaviorComponent = getComponent();
         ParticleBehaviorComponent component = particle.behaviorComponent;
@@ -86,10 +90,6 @@ public class ParticleBehavior {
         component.erz = GenericParticle.pickRandomValue(zSpinData.endingValue, xSpinData.re1, xSpinData.re2);
     }
 
-    public ParticleBehaviorComponent getComponent() {
-        return new ParticleBehaviorComponent();
-    }
-
     public void updateTraits(GenericParticle particle) {
         ParticleBehaviorComponent component = particle.behaviorComponent;
 
@@ -107,13 +107,13 @@ public class ParticleBehavior {
 
     }
 
-    public void render(GenericParticle particle, VertexConsumer buffer, Camera renderInfo, float partialTicks) {
+    public void render(GenericParticle particle, VertexConsumer vertexConsumer, Camera renderInfo, float partialTicks) {
         if (particle.shouldRenderTraits) updateRenderTraits(particle, partialTicks);
 
         Vec3 pos = getPosition(particle, renderInfo, partialTicks);
         Quaternionf quaternionf = getRotate(particle, renderInfo, partialTicks);
 
-        Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+        Vector3f[] avector3f = getQuad(particle, renderInfo, partialTicks);
         float f3 = particle.getQuadSize(partialTicks);
 
         for(int i = 0; i < 4; ++i) {
@@ -128,24 +128,24 @@ public class ParticleBehavior {
         float v0 = particle.getV0();
         float v1 = particle.getV1();
         int light = particle.getLightColor(partialTicks);
-        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+        vertexConsumer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+        vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+        vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+        vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
 
         if (sideLayer) {
-            buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-            buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-            buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-            buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
         }
     }
 
     public Vec3 getPosition(GenericParticle particle, Camera renderInfo, float partialTicks) {
         Vec3 vec3 = renderInfo.getPosition();
-        float x = (float)(Mth.lerp(partialTicks, particle.xo, particle.x) - vec3.x());
-        float y = (float)(Mth.lerp(partialTicks, particle.yo, particle.y) - vec3.y());
-        float z = (float)(Mth.lerp(partialTicks, particle.zo, particle.z) - vec3.z());
+        float x = (float) (Mth.lerp(partialTicks, particle.xo, particle.x) - vec3.x());
+        float y = (float) (Mth.lerp(partialTicks, particle.yo, particle.y) - vec3.y());
+        float z = (float) (Mth.lerp(partialTicks, particle.zo, particle.z) - vec3.z());
         return new Vec3(x, y, z);
     }
 
@@ -167,5 +167,9 @@ public class ParticleBehavior {
         }
 
         return quaternionf;
+    }
+
+    public Vector3f[] getQuad(GenericParticle particle, Camera renderInfo, float partialTicks) {
+        return new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
     }
 }

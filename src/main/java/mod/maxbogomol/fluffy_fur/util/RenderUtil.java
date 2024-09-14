@@ -15,29 +15,38 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class RenderUtils {
-
-    public static float blitOffset = 0;
+public class RenderUtil {
 
     public static CustomItemRenderer customItemRenderer;
+    public static float blitOffset = 0;
+    private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
+
+    public static int FULL_BRIGHT = 15728880;
+
+    public static CustomItemRenderer getCustomItemRenderer() {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (customItemRenderer == null) customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
+        return customItemRenderer;
+    }
 
     public static void renderItemModelInGui(ItemStack stack, float x, float y, float xSize, float ySize, float zSize) {
         renderItemModelInGui(stack, x, y, xSize, ySize, zSize, 0, 0, 0);
@@ -46,13 +55,11 @@ public class RenderUtils {
     public static void renderItemModelInGui(ItemStack stack, float x, float y, float xSize, float ySize, float zSize, float xRot, float yRot, float zRot) {
         Minecraft minecraft = Minecraft.getInstance();
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
-        if (customItemRenderer == null) {
-            customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
-        }
+        CustomItemRenderer customItemRenderer = getCustomItemRenderer();
 
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
-        posestack.translate(x, y, (100.0F));
+        posestack.translate(x, y, 100.0F + blitOffset);
         posestack.translate((double) xSize / 2, (double) ySize / 2, 0.0D);
         posestack.scale(1.0F, -1.0F, 1.0F);
         posestack.scale(xSize, ySize, zSize);
@@ -63,60 +70,23 @@ public class RenderUtils {
         PoseStack posestack1 = new PoseStack();
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         boolean flag = !bakedmodel.usesBlockLight();
-        if (flag) {
-            Lighting.setupForFlatItems();
-        }
+        if (flag) Lighting.setupForFlatItems();
 
         customItemRenderer.render(stack, ItemDisplayContext.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         RenderSystem.disableDepthTest();
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
-
-        if (flag) {
-            Lighting.setupFor3DItems();
-        }
-
+        if (flag) Lighting.setupFor3DItems();
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
-    }
-
-    public static void renderBoxBlockOutline(PoseStack matrixStack, MultiBufferSource bufferIn, VoxelShape voxelShape, double originX, double originY, double originZ, Color color) {
-        VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
-        Matrix4f matrix4f = matrixStack.last().pose();
-
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-        int alpha = color.getAlpha();
-
-        voxelShape.forAllEdges((x0, y0, z0, x1, y1, z1) -> {
-            builder.vertex(matrix4f, (float)(x0 + originX), (float)(y0 + originY), (float)(z0 + originZ)).color(red, green, blue, alpha).endVertex();
-            builder.vertex(matrix4f, (float)(x1 + originX), (float)(y1 + originY), (float)(z1 + originZ)).color(red, green, blue, alpha).endVertex();
-        });
-    }
-
-    public static void renderLine(PoseStack matrixStack, MultiBufferSource bufferIn, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
-        VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
-        Matrix4f matrix4f = matrixStack.last().pose();
-
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-        int alpha = color.getAlpha();
-
-        builder.vertex(matrix4f, (float) (x1), (float) (y1), (float) (z1)).color(red, green, blue, alpha).endVertex();
-        builder.vertex(matrix4f, (float) (x2), (float) (y2), (float) (z2)).color(red, green, blue, alpha).endVertex();
     }
 
     public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, int x, int y, float ticks, float ticksUp) {
         Minecraft minecraft = Minecraft.getInstance();
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
-        if (customItemRenderer == null) {
-            customItemRenderer = new CustomItemRenderer(minecraft, minecraft.getTextureManager(), minecraft.getModelManager(), minecraft.getItemColors(), minecraft.getItemRenderer().getBlockEntityRenderer());
-        }
+        CustomItemRenderer customItemRenderer = getCustomItemRenderer();
 
-        blitOffset += 50.0F;
         float old = bakedmodel.getTransforms().gui.rotation.y;
 
         PoseStack posestack = gui.pose();
@@ -132,52 +102,47 @@ public class RenderUtils {
             posestack.mulPose(Axis.YP.rotationDegrees(ticks));
         }
         boolean flag = !bakedmodel.usesBlockLight();
-        if (flag) {
-            Lighting.setupForFlatItems();
-        }
+        if (flag) Lighting.setupForFlatItems();
 
         customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, posestack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         RenderSystem.disableDepthTest();
         Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
         RenderSystem.enableDepthTest();
-
-        if (flag) {
-            Lighting.setupFor3DItems();
-        }
-
+        if (flag) Lighting.setupFor3DItems();
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
 
         bakedmodel.getTransforms().gui.rotation.y = old;
-
-        blitOffset -= 50.0F;
     }
 
-    private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
+    public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
+        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
+    }
 
-    public static void dragon(PoseStack mStack, MultiBufferSource buf, double x, double y, double z, float radius, float partialTicks, float r, float g, float b, float randomF) {
+    public static void dragon(PoseStack stack, MultiBufferSource bufferSource, double x, double y, double z, float radius, float partialTicks, float r, float g, float b, float randomF) {
         float f5 = 0.5f;
         float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
         Random random = new Random((long) (432L + randomF));
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
-        mStack.pushPose();
-        mStack.translate(x, y, z);
+        VertexConsumer builder = bufferSource.getBuffer(FluffyFurRenderTypes.GLOWING);
+        stack.pushPose();
+        stack.translate(x, y, z);
 
         float rotation = (ClientTickHandler.ticksInGame + partialTicks) / 200;
 
         for(int i = 0; (float)i < (f5 + f5 * f5) / 2.0F * 60.0F; ++i) {
-            mStack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
-            mStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
-            mStack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F));
-            mStack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
-            mStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
-            mStack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F + rotation * 90.0F));
+            stack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
+            stack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
+            stack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F));
+            stack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
+            stack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
+            stack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F + rotation * 90.0F));
             float f3 = random.nextFloat() * 20.0F + 5.0F + f7 * 10.0F;
             float f4 = random.nextFloat() * 2.0F + 1.0F + f7 * 2.0F;
             f3 *= 0.05f * radius;
             f4 *= 0.05f * radius;
-            Matrix4f mat = mStack.last().pose();
+            Matrix4f mat = stack.last().pose();
             float alpha = 1 - f7;
 
             builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
@@ -194,7 +159,7 @@ public class RenderUtils {
             builder.vertex(mat, -ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
         }
 
-        mStack.popPose();
+        stack.popPose();
     }
 
     public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
@@ -339,50 +304,6 @@ public class RenderUtils {
         builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
     }
 
-    public static void spriteGlowQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x, y + height, 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y + height, 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y, 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x, y, 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
-    }
-
-    public static void spriteGlowQuadCenter(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x - (width / 2), y + (height / 2), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2), y + (height / 2), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2), y - (height / 2), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x - (width / 2), y - (height / 2), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
-    }
-
-    public static void spriteWaveQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float wave, float tick1, float tick2, float tick3, float tick4, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING_SPRITE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick1))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick1))), 0).uv(u0, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick2))), y + (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick2))), 0).uv(u1, v1).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick3))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick3))), 0).uv(u1, v0).uv2(0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x - (width / 2) + (wave * (float) Math.sin(Math.toRadians(tick4))), y - (height / 2) + (wave * (float) Math.cos(Math.toRadians(tick4))), 0).uv(u0, v0).uv2(0).color(r, g, b, a).endVertex();
-    }
-
-    public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext diplayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
-        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), diplayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
-    }
-
-    public static Color colorConnectFrom = new Color(165, 223, 108);
-    public static Color colorConnectTo = new Color(118, 184, 214);
-    public static Color colorArea = new Color(191, 201, 104);
-    public static Color colorMissing = new Color(214, 118, 132);
-    public static Color colorSelected = new Color(255, 255, 255);
-    public static Color colorFluidSide = new Color(59, 104, 153);
-    public static Color colorSteamSide = new Color(141, 156, 179);
-    public static Color colorEnergySide = new Color(24, 147, 25);
-
     public static void renderConnectLine(BlockPos posFrom, BlockPos posTo, Color color, float partialTicks, PoseStack ms) {
         renderConnectLine(posFrom.getCenter(), posTo.getCenter(), color, partialTicks, ms);
     }
@@ -405,7 +326,7 @@ public class RenderUtils {
         ms.pushPose();
         ms.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
         ms.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-        RenderUtils.ray(ms, bufferDelayed, 0.01f, (float) from.distanceTo(to) + 0.01f, 1f, r, g, b, 0.5f * a);
+        RenderUtil.ray(ms, bufferDelayed, 0.01f, (float) from.distanceTo(to) + 0.01f, 1f, r, g, b, 0.5f * a);
         ms.popPose();
     }
 
@@ -576,7 +497,7 @@ public class RenderUtils {
                 mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
                 mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
                 mStack.mulPose(Axis.YP.rotationDegrees(-90));
-                RenderUtils.renderSemiSphere(mStack, builder, width2, segments, segments / 2, color, alpha2);
+                RenderUtil.renderSemiSphere(mStack, builder, width2, segments, segments / 2, color, alpha2);
                 mStack.popPose();
             }
 
@@ -705,15 +626,23 @@ public class RenderUtils {
         builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
     }
 
-    public static void startGuiParticle() {
+    public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
+    }
+
+    public static TextureAtlasSprite getSprite(String modId, String sprite) {
+        return getSprite(new ResourceLocation(modId, sprite));
+    }
+
+    public static void startGlowGuiSprite() {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowing);
+        RenderSystem.setShader(FluffyFurShaders::getGlowingSprite);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
-    public static void endGuiParticle() {
+    public static void endGlowGuiSprite() {
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
