@@ -338,7 +338,7 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.TRANSPARENT_TEXTURE), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 
 
@@ -378,6 +378,6 @@ public class FluidRenderer {
         }
 
         // draw cuboid
-        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.FLUID), cube, still, flowing, from, to, color, light, isGas && flipGas);
+        renderCuboid(matrices, buffer.getBuffer(FluffyFurRenderTypes.TRANSPARENT_TEXTURE), cube, still, flowing, from, to, color, light, isGas && flipGas);
     }
 }

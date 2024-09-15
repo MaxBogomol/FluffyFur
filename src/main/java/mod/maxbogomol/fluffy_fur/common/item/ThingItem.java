@@ -26,12 +26,12 @@ public class ThingItem extends Item implements IGuiParticleItem {
         poseStack.pushPose();
         poseStack.translate(x + 8, y + 8, 100);
         poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
-        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.GLOWING_SPRITE);
+        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
         builder.setUV(RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star"));
         builder.setColorRaw(0, 0, 1).setAlpha(1f)
                 .renderCenteredQuad(poseStack, 10f);
         poseStack.mulPose(Axis.ZP.rotationDegrees(25.5f));
-        builder.setColorRaw(1, 0, 1).setAlpha(1f)
+        builder.setColorRaw(1, 0, 1).setAlpha(0.5f)
                 .renderCenteredQuad(poseStack, 10f)
                 .endBatch();
         poseStack.popPose();

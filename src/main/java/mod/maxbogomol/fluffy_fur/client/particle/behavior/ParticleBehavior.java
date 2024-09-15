@@ -24,26 +24,26 @@ public class ParticleBehavior {
     public float yOffset;
     public float zOffset;
 
-    public boolean sideLayer;
+    public boolean sided;
     public boolean camera;
     public boolean xRotCam;
     public boolean yRotCam;
 
-    public ParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean sideLayer, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public ParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean sided, boolean camera, boolean xRotCam, boolean yRotCam) {
         this.xSpinData = xSpinData;
         this.ySpinData = ySpinData;
         this.zSpinData = zSpinData;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.zOffset = zOffset;
-        this.sideLayer = sideLayer;
+        this.sided = sided;
         this.camera = camera;
         this.xRotCam = xRotCam;
         this.yRotCam = yRotCam;
     }
 
     public ParticleBehavior copy() {
-        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sideLayer, camera, xRotCam, yRotCam);
+        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
     }
 
     public static ParticleBehaviorBuilder create() {
@@ -133,7 +133,7 @@ public class ParticleBehavior {
         vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
         vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
 
-        if (sideLayer) {
+        if (sided) {
             vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
             vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
             vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
@@ -157,14 +157,14 @@ public class ParticleBehavior {
             quaternionf.rotationYXZ(-y * ((float)Math.PI / 180F), x * ((float)Math.PI / 180F), 0.0F);
         }
 
+        if (particle.roll != 0.0F) {
+            quaternionf.rotateY(Mth.lerp(partialTicks, particle.oRoll, particle.roll));
+        }
+
         ParticleBehaviorComponent component = particle.behaviorComponent;
         quaternionf.rotateX(Mth.lerp(partialTicks, component.xORoll, component.xRoll) + xOffset);
         quaternionf.rotateY(Mth.lerp(partialTicks, component.yORoll, component.yRoll) + yOffset);
         quaternionf.rotateZ(Mth.lerp(partialTicks, component.zORoll, component.zRoll) + zOffset);
-
-        if (particle.roll != 0.0F) {
-            quaternionf.rotateZ(Mth.lerp(partialTicks, particle.oRoll, particle.roll));
-        }
 
         return quaternionf;
     }

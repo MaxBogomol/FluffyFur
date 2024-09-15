@@ -1,11 +1,15 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.data.*;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SphereParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
-import mod.maxbogomol.fluffy_fur.client.particle.options.SphereParticleOptions;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -200,7 +204,8 @@ public class TestShrimpItem extends Item {
 
             if (mode == 6) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
-                ParticleBuilder.create(FluffyFurParticles.CUBE)
+                ParticleBuilder.create(FluffyFurParticles.DOT)
+                        .setBehavior(CubeParticleBehavior.create().build())
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -253,8 +258,8 @@ public class TestShrimpItem extends Item {
 
             if (mode == 10) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
-                SphereParticleOptions options = new SphereParticleOptions(FluffyFurParticles.SPHERE.get());
-                ParticleBuilder.create(options)
+                ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                        .setBehavior(SphereParticleBehavior.create().build())
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())

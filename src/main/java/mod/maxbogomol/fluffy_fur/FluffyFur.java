@@ -2,18 +2,16 @@ package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
-import mod.maxbogomol.fluffy_fur.common.config.Config;
-import mod.maxbogomol.fluffy_fur.common.config.ServerConfig;
 import mod.maxbogomol.fluffy_fur.common.event.Events;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
 import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -52,8 +50,6 @@ public class FluffyFur {
         FluffyFurLootModifier.register(eventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             FluffyFurClient.ClientOnly.clientInit();

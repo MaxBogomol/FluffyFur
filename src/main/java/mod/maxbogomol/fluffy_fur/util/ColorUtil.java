@@ -19,6 +19,10 @@ public class ColorUtil {
         return packedColor & 255;
     }
 
+    public static Color getColor(int color) {
+        return new Color(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
+    }
+
     public static int packColor(int alpha, int red, int green, int blue) {
         return alpha << 24 | red << 16 | green << 8 | blue;
     }

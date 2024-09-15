@@ -3,7 +3,9 @@ package mod.maxbogomol.fluffy_fur.client.render;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.client.particle.ICustomRenderParticle;
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
+import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +25,8 @@ public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
-    public static List<ICustomRenderParticle> particleList = new ArrayList<>();
+    public static List<ICustomParticleRender> particleList = new ArrayList<>();
+    public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
 
     public static void onLevelRender(RenderLevelStageEvent event) {
         PoseStack stack = event.getPoseStack();
@@ -31,14 +34,20 @@ public class LevelRenderHandler {
         MultiBufferSource bufferSource = LevelRenderHandler.getDelayedRender();
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
-            stack.pushPose();
             Vec3 pos = event.getCamera().getPosition();
+
+            stack.pushPose();
             stack.translate(-pos.x, -pos.y, -pos.z);
-            for (ICustomRenderParticle particle : particleList) {
+            for (ICustomParticleRender particle : particleList) {
                 particle.render(stack, bufferSource, partialTicks);
+            }
+            for (GenericParticle particle : behaviorParticleList.keySet()) {
+                behaviorParticleList.get(particle).render(particle, stack, bufferSource, partialTicks);
             }
             stack.popPose();
             particleList.clear();
+            behaviorParticleList.clear();
+
             if (!ShadersIntegration.isShadersEnabled()) MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
         }
 
@@ -54,9 +63,9 @@ public class LevelRenderHandler {
             Matrix4f last = new Matrix4f(RenderSystem.getModelViewMatrix());
             if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
 
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_SPRITE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.TRANSPARENT_TEXTURE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.FLUID);
 
             RenderSystem.getModelViewMatrix().set(last);
 
@@ -85,9 +94,8 @@ public class LevelRenderHandler {
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
 
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_SPRITE);
+            getDelayedRender().endBatch(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
             getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.FLUID);
         }
     }
 

@@ -33,6 +33,7 @@ public final class PacketHandler {
         PlayerSkinChangeEffectPacket.register(HANDLER, id++);
         PlayerSkinChangePacket.register(HANDLER, id++);
         PlushHeartsEffectsPacket.register(HANDLER, id++);
+        BloodEffectsPacket.register(HANDLER, id++);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(

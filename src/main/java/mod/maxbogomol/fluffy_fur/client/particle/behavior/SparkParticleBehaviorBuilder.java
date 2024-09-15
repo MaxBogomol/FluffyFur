@@ -30,16 +30,16 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
-    public SparkParticleBehaviorBuilder enableSideLayer() {
-        return setSideLayer(true);
+    public SparkParticleBehaviorBuilder enableSided() {
+        return setSided(true);
     }
 
-    public SparkParticleBehaviorBuilder disableSideLayer() {
-        return setSideLayer(false);
+    public SparkParticleBehaviorBuilder disableSided() {
+        return setSided(false);
     }
 
-    public SparkParticleBehaviorBuilder setSideLayer(boolean sideLayer) {
-        this.sideLayer = sideLayer;
+    public SparkParticleBehaviorBuilder setSided(boolean sided) {
+        this.sided = sided;
         return this;
     }
 
@@ -86,6 +86,6 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
     }
 
     public ParticleBehavior build() {
-        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sideLayer, camera, xRotCam, yRotCam);
+        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
     }
 }

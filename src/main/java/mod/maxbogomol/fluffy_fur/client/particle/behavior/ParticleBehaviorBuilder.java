@@ -12,7 +12,7 @@ public class ParticleBehaviorBuilder {
     public float yOffset;
     public float zOffset;
 
-    public boolean sideLayer = true;
+    public boolean sided = true;
     public boolean camera = false;
     public boolean xRotCam = true;
     public boolean yRotCam = true;
@@ -39,15 +39,15 @@ public class ParticleBehaviorBuilder {
     }
 
     public ParticleBehaviorBuilder enableSideLayer() {
-        return setSideLayer(true);
+        return setSided(true);
     }
 
     public ParticleBehaviorBuilder disableSideLayer() {
-        return setSideLayer(false);
+        return setSided(false);
     }
 
-    public ParticleBehaviorBuilder setSideLayer(boolean sideLayer) {
-        this.sideLayer = sideLayer;
+    public ParticleBehaviorBuilder setSided(boolean sideLayer) {
+        this.sided = sided;
         return this;
     }
 
@@ -71,6 +71,6 @@ public class ParticleBehaviorBuilder {
     }
 
     public ParticleBehavior build() {
-        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sideLayer, camera, xRotCam, yRotCam);
+        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
     }
 }

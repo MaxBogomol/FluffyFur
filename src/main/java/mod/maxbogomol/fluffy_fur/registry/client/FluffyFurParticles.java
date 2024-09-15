@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.*;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.type.*;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import net.minecraft.client.Minecraft;
@@ -32,8 +33,6 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> SMOKE = PARTICLES.register("smoke", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> PANCAKE = PARTICLES.register("pancake", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> DEATH = PARTICLES.register("death", GenericParticleType::new);
-    public static RegistryObject<CubeParticleType> CUBE = PARTICLES.register("cube", CubeParticleType::new);
-    public static RegistryObject<SphereParticleType> SPHERE = PARTICLES.register("sphere", SphereParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
     public static RegistryObject<LeavesParticleType> CHERRY_LEAVES = PARTICLES.register("cherry_leaves", LeavesParticleType::new);
 
@@ -59,14 +58,16 @@ public class FluffyFurParticles {
             particleEngine.register(SMOKE.get(), GenericParticleType.Factory::new);
             particleEngine.register(PANCAKE.get(), GenericParticleType.Factory::new);
             particleEngine.register(DEATH.get(), GenericParticleType.Factory::new);
-            particleEngine.register(CUBE.get(), CubeParticleType.Factory::new);
-            particleEngine.register(SPHERE.get(), SphereParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
             particleEngine.register(CHERRY_LEAVES.get(), LeavesParticleType.Factory::new);
         }
     }
 
-    public static void addParticleList(ICustomRenderParticle particle) {
+    public static void addParticleList(ICustomParticleRender particle) {
         LevelRenderHandler.particleList.add(particle);
+    }
+
+    public static void addBehaviorParticleList(GenericParticle particle, ICustomBehaviorParticleRender behavior) {
+        LevelRenderHandler.behaviorParticleList.put(particle, behavior);
     }
 }

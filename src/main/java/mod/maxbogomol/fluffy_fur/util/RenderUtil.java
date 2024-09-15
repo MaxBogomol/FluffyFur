@@ -6,8 +6,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.item.CustomItemRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurShaders;
@@ -27,12 +27,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Random;
+
+import static net.minecraft.util.Mth.sqrt;
 
 public class RenderUtil {
 
@@ -119,47 +125,6 @@ public class RenderUtil {
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
-    }
-
-    public static void dragon(PoseStack stack, MultiBufferSource bufferSource, double x, double y, double z, float radius, float partialTicks, float r, float g, float b, float randomF) {
-        float f5 = 0.5f;
-        float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
-        Random random = new Random((long) (432L + randomF));
-        VertexConsumer builder = bufferSource.getBuffer(FluffyFurRenderTypes.GLOWING);
-        stack.pushPose();
-        stack.translate(x, y, z);
-
-        float rotation = (ClientTickHandler.ticksInGame + partialTicks) / 200;
-
-        for(int i = 0; (float)i < (f5 + f5 * f5) / 2.0F * 60.0F; ++i) {
-            stack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
-            stack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
-            stack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F));
-            stack.mulPose(Axis.XP.rotationDegrees(random.nextFloat() * 360.0F));
-            stack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0F));
-            stack.mulPose(Axis.ZP.rotationDegrees(random.nextFloat() * 360.0F + rotation * 90.0F));
-            float f3 = random.nextFloat() * 20.0F + 5.0F + f7 * 10.0F;
-            float f4 = random.nextFloat() * 2.0F + 1.0F + f7 * 2.0F;
-            f3 *= 0.05f * radius;
-            f4 *= 0.05f * radius;
-            Matrix4f mat = stack.last().pose();
-            float alpha = 1 - f7;
-
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, -ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
-            builder.vertex(mat, ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
-            builder.vertex(mat, 0.0F, f3, f4).color(r, g, b, 0).endVertex();
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, 0.0F, 0.0F, 0.0F).color(r, g, b, alpha).endVertex();
-            builder.vertex(mat, 0.0F, f3, f4).color(r, g, b, 0).endVertex();
-            builder.vertex(mat, -ROOT_3 * f4, f3, -0.5F * f4).color(r, g, b, 0).endVertex();
-        }
-
-        stack.popPose();
     }
 
     public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
@@ -371,259 +336,8 @@ public class RenderUtil {
         ms.popPose();
     }
 
-    public static void renderTrail(PoseStack mStack, VertexConsumer builder, Vec3 center, List<Vec3> trailList, float startWidth, float endWidth, float startAlpha, float endAlpha, float scale, Color color, int segments, boolean renderSphere) {
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        float endU = Mth.PI * 2;
-        float stepU = (endU) / segments;
-
-        float size = trailList.size();
-
-        for (int ii = 0; ii < trailList.size() - 1; ii++) {
-            mStack.pushPose();
-            Vec3 pos = trailList.get(ii).vectorTo(center);
-            mStack.translate(-pos.x, -pos.y, -pos.z);
-
-            Vec3 position = trailList.get(ii);
-            Vec3 nextPosition = trailList.get(ii + 1);
-
-            double dX = position.x() - nextPosition.x();
-            double dY = position.y() - nextPosition.y();
-            double dZ = position.z() - nextPosition.z();
-
-            float oX = 0;
-            float oY = 0;
-            float oZ = 0;
-
-            float distance = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
-
-            double yaw = Math.atan2(dZ, dX);
-            double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Mth.PI;
-
-            double lYaw = yaw;
-            double lPitch = pitch;
-
-            if (ii > 0) {
-                Vec3 lastPosition = trailList.get(ii - 1);
-
-                double ldX = lastPosition.x() - position.x();
-                double ldY = lastPosition.y() - position.y();
-                double ldZ = lastPosition.z() - position.z();
-
-                lYaw = Math.atan2(ldZ, ldX);
-                lPitch = Math.atan2(Math.sqrt(ldZ * ldZ + ldX * ldX), ldY) + Mth.PI;
-            }
-
-            float width1 = Mth.lerp(ii / size, startWidth, endWidth) * scale;
-            float width2 = Mth.lerp((ii + 1) / size, startWidth, endWidth) * scale;
-            float alpha1 = Mth.lerp(ii / size, startAlpha, endAlpha) * scale;
-            float alpha2 = Mth.lerp((ii + 1) / size, startAlpha, endAlpha) * scale;
-
-            if (distance <= 0) {
-                width1 = 0;
-                width2 = 0;
-            }
-
-            if (ii == 0) {
-                oX = (float) (Math.sin(pitch) * Math.cos(yaw) * (1f - scale)) * distance;
-                oY = (float) (Math.cos(pitch) * (1f - scale)) * distance;
-                oZ = (float) (Math.sin(pitch) * Math.sin(yaw) * (1f - scale)) * distance;
-            }
-
-            if (ii == trailList.size() - 2) {
-                if (!renderSphere) width2 = 0;
-
-                oX = (float) -(Math.sin(pitch) * Math.cos(yaw) * (1f - scale)) * distance;
-                oY = (float) -(Math.cos(pitch) * (1f - scale)) * distance;
-                oZ = (float) -(Math.sin(pitch) * Math.sin(yaw) * (1f - scale)) * distance;
-            }
-
-            for (int i = 0; i < segments; i++) {
-                float u = i * stepU;
-                float un = (i + 1 == segments) ? endU : (i + 1) * stepU;
-                Matrix4f mat = mStack.last().pose();
-
-                mStack.pushPose();
-                mStack.translate(-dX, -dY, -dZ);
-                mStack.translate(oX, oY, oZ);
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-                mStack.mulPose(Axis.ZP.rotationDegrees(90));
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(u)));
-                mStack.translate(width2, 0, 0);
-                mat = mStack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha2).endVertex();
-                mStack.popPose();
-
-                mStack.pushPose();
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-lYaw)));
-                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-lPitch) - 90f));
-                mStack.mulPose(Axis.ZP.rotationDegrees(90));
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(u)));
-                mStack.translate(width1, 0, 0);
-                mat = mStack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha1).endVertex();
-                mStack.popPose();
-
-                mStack.pushPose();
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-lYaw)));
-                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-lPitch) - 90f));
-                mStack.mulPose(Axis.ZP.rotationDegrees(90));
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
-                mStack.translate(width1, 0, 0);
-                mat = mStack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha1).endVertex();
-                mStack.popPose();
-
-                mStack.pushPose();
-                mStack.translate(-dX, -dY, -dZ);
-                mStack.translate(oX, oY, oZ);
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-                mStack.mulPose(Axis.ZP.rotationDegrees(90));
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(un)));
-                mStack.translate(width2, 0, 0);
-                mat = mStack.last().pose();
-                builder.vertex(mat, 0, 0, 0).color(r, g, b, alpha2).endVertex();
-                mStack.popPose();
-            }
-
-            if (renderSphere && ii == trailList.size() - 2 && distance > 0 && width2 > 0) {
-                mStack.pushPose();
-                mStack.translate(-dX, -dY, -dZ);
-                mStack.translate(oX, oY, oZ);
-                mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-                mStack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-                mStack.mulPose(Axis.YP.rotationDegrees(-90));
-                RenderUtil.renderSemiSphere(mStack, builder, width2, segments, segments / 2, color, alpha2);
-                mStack.popPose();
-            }
-
-            mStack.popPose();
-        }
-    }
-
-    public static void renderSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha, float endU) {
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-
-        Matrix4f last = mStack.last().pose();
-        float startU = 0;
-        float startV = 0;
-        float endV = Mth.PI;
-        float stepU = (endU - startU) / longs;
-        float stepV = (endV - startV) / lats;
-        for (int i = 0; i < longs; ++i) {
-            for (int j = 0; j < lats; ++j) {
-                float u = i * stepU + startU;
-                float v = j * stepV + startV;
-                float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
-                float vn = (j + 1 == lats) ? endV : (j + 1) * stepV + startV;
-                Vec3 p0 = parametricSphere(u, v, radius);
-                Vec3 p1 = parametricSphere(u, vn, radius);
-                Vec3 p2 = parametricSphere(un, v, radius);
-                Vec3 p3 = parametricSphere(un, vn, radius);
-
-                builder.vertex(last, (float) p1.x(), (float) p1.y(), (float) p1.z()).color(r, g, b, alpha).endVertex();
-                builder.vertex(last, (float) p0.x(), (float) p0.y(), (float) p0.z()).color(r, g, b, alpha).endVertex();
-                builder.vertex(last, (float) p2.x(), (float) p2.y(), (float) p2.z()).color(r, g, b, alpha).endVertex();
-                builder.vertex(last, (float) p3.x(), (float) p3.y(), (float) p3.z()).color(r, g, b, alpha).endVertex();
-            }
-        }
-    }
-
-    public static void renderSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {
-        renderSphere(mStack, builder, radius, longs, lats, color, alpha, Mth.PI * 2);
-    }
-
-    public static void renderSemiSphere(PoseStack mStack, VertexConsumer builder, float radius, int longs, int lats, Color color, float alpha) {
-        renderSphere(mStack, builder, radius, longs, lats, color, alpha, Mth.PI);
-    }
-
-    public static Vec3 parametricSphere(float u, float v, float r) {
-        return new Vec3(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
-    }
-
-    public static void renderAura(PoseStack mStack, VertexConsumer builder, float radius, float size, int longs, Color color1, Color color2, float alpha1, float alpha2, boolean renderSide, boolean renderFloor) {
-        float r1 = color1.getRed() / 255f;
-        float g1 = color1.getGreen() / 255f;
-        float b1 = color1.getBlue() / 255f;
-
-        float r2 = color2.getRed() / 255f;
-        float g2 = color2.getGreen() / 255f;
-        float b2 = color2.getBlue() / 255f;
-
-        float startU = 0;
-        float endU = Mth.PI * 2;
-        float stepU = (endU - startU) / longs;
-        for (int i = 0; i < longs; ++i) {
-            float u = i * stepU + startU;
-            float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
-
-            auraPiece(mStack, builder, radius, size, u, r2, g2, b2, alpha2);
-            auraPiece(mStack, builder, radius, 0, u, r1, g2, b1, alpha1);
-            auraPiece(mStack, builder, radius, 0, un, r1, g2, b1, alpha1);
-            auraPiece(mStack, builder, radius, size, un, r2, g2, b2, alpha2);
-
-            if (renderSide) {
-                auraPiece(mStack, builder, radius, 0, u, r1, g2, b1, alpha1);
-                auraPiece(mStack, builder, radius, size, u, r2, g2, b2, alpha2);
-                auraPiece(mStack, builder, radius, size, un, r2, g2, b2, alpha2);
-                auraPiece(mStack, builder, radius, 0, un, r1, g2, b1, alpha1);
-            }
-
-            if (renderFloor) {
-                auraPiece(mStack, builder, 0, 0, u,r2, g2, b2, alpha2);
-                auraPiece(mStack, builder, 0, 0, un, r2, g2, b2, alpha2);
-                auraPiece(mStack, builder, radius, 0, u, r1, g1, b1, alpha1);
-                auraPiece(mStack, builder, radius, 0, un, r1, g1, b1, alpha1);
-
-                if (renderSide) {
-                    auraPiece(mStack, builder, 0, 0, un, r2, g2, b2, alpha2);
-                    auraPiece(mStack, builder, 0, 0, u,r2, g2, b2, alpha2);
-                    auraPiece(mStack, builder, radius, 0, un, r1, g1, b1, alpha1);
-                    auraPiece(mStack, builder, radius, 0, u, r1, g1, b1, alpha1);
-                }
-            }
-        }
-    }
-
-    public static void auraPiece(PoseStack mStack, VertexConsumer builder, float radius, float size, float angle, float r, float g, float b, float alpha) {
-        mStack.pushPose();
-        mStack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(angle)));
-        mStack.translate(radius, 0, 0);
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, 0, size, 0).color(r, g, b, alpha).endVertex();
-        mStack.popPose();
-    }
-
-    public static void scytheTrail(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
-
-        Matrix4f mat = mStack.last().pose();
-
-        builder.vertex(mat, 0, 0, width * endOffset).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, height, 0, width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, 0, 0, width  * endOffset).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, 0, 0, -width * endOffset).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, 0, -width).color(r2, g2, b2, 0).endVertex();
-        builder.vertex(mat, height, 0, 0).color(r2, g2, b2, a2 / 10f).endVertex();
-        builder.vertex(mat, 0, 0, 0).color(r1, g1, b1, a1).endVertex();
+    public static Vector3f parametricSphere(float u, float v, float r) {
+        return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
     }
 
     public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
@@ -648,5 +362,68 @@ public class RenderUtil {
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float strength, float time) {
+        renderWavyFluid(stack, fluidStack, size, size, size, strength, time);
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float strength, float time) {
+        if (!fluidStack.isEmpty()) {
+            FluidType type = fluidStack.getFluid().getFluidType();
+            IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
+            TextureAtlasSprite still = RenderUtil.getSprite(clientType.getStillTexture(fluidStack));
+
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSPARENT_TEXTURE)
+                    .setUV(still.getU0(), still.getV0(), still.getU1(), still.getV1())
+                    .setColor(ColorUtil.getColor(clientType.getTintColor(fluidStack)))
+                    .setAlpha(ColorUtil.getColor(clientType.getTintColor(fluidStack)).getAlpha() / 255f)
+                    .renderWavyCube(stack, width, strength, time);
+        }
+    }
+
+    public static Vec2 perpendicularTrailPoints(Vector4f start, Vector4f end, float width) {
+        float x = -start.x();
+        float y = -start.y();
+        if (Math.abs(start.z()) > 0) {
+            float ratio = end.z() / start.z();
+            x = end.x() + x * ratio;
+            y = end.y() + y * ratio;
+        } else if (Math.abs(end.z()) <= 0) {
+            x += end.x();
+            y += end.y();
+        }
+        if (start.z() > 0) {
+            x = -x;
+            y = -y;
+        }
+        if (x * x + y * y > 0F) {
+            float normalize = width * 0.5F / distance(x, y);
+            x *= normalize;
+            y *= normalize;
+        }
+        return new Vec2(-y, x);
+    }
+
+    public static float distance(float... a) {
+        return sqrt(distSqr(a));
+    }
+
+    public static float distSqr(float... a) {
+        float d = 0.0F;
+        for (float f : a) {
+            d += f * f;
+        }
+        return d;
+    }
+
+    public static void applyWobble(Vector3f[] offsets, float strength, float gameTime) {
+        float offset = 0;
+        for (Vector3f vector3f : offsets) {
+            double time = ((gameTime / 40.0F) % Math.PI * 2);
+            float sine = Mth.sin((float) (time + (offset * Math.PI * 2))) * strength;
+            vector3f.add(sine, -sine, 0);
+            offset += 0.25f;
+        }
     }
 }

@@ -14,9 +14,9 @@ in float vertexDistance;
 out vec4 fragColor;
 
 void main() {
-    vec4 color = vertexColor;
+    vec4 color = vertexColor * ColorModulator;
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = linear_fog(color * ColorModulator, vertexDistance, FogStart, FogEnd, FogColor);
+    fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
 }

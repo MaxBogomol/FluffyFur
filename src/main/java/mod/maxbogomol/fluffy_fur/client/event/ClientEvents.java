@@ -5,18 +5,25 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.common.network.BloodEffectsPacket;
+import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
@@ -89,6 +96,16 @@ public class ClientEvents {
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
             Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingDamage(LivingHurtEvent event) {
+        LivingEntity entity = event.getEntity();
+        Level level = entity.level();
+        if (!level.isClientSide()) {
+            Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2f, 0);
+            PacketHandler.sendToTracking(level, BlockPos.containing(pos), new BloodEffectsPacket(pos, event.getAmount()));
         }
     }
 }
