@@ -205,7 +205,8 @@ public class TestShrimpItem extends Item {
             if (mode == 6) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.DOT)
-                        .setBehavior(CubeParticleBehavior.create().build())
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setBehavior(CubeParticleBehavior.create().enableSided().build())
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -259,7 +260,8 @@ public class TestShrimpItem extends Item {
             if (mode == 10) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                        .setBehavior(SphereParticleBehavior.create().build())
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setBehavior(SphereParticleBehavior.create().disableSided().build())
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())

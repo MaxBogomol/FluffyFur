@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.integration.client;
 
 import net.irisshaders.iris.Iris;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.ModList;
 
 public class ShadersIntegration {
@@ -25,5 +26,9 @@ public class ShadersIntegration {
             return LoadedOnly.isShadersEnabled();
         }
         return false;
+    }
+
+    public static boolean shouldApply() {
+        return isShadersEnabled() || Minecraft.useShaderTransparency();
     }
 }

@@ -23,7 +23,6 @@ import java.util.Map;
 public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
-    public static PoseStack STACK = new PoseStack();
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
@@ -48,11 +47,10 @@ public class LevelRenderHandler {
             particleList.clear();
             behaviorParticleList.clear();
 
-            if (!ShadersIntegration.isShadersEnabled()) MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
-            STACK = RenderSystem.getModelViewStack();
+            if (!ShadersIntegration.shouldApply()) MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
         }
 
-        if (!ShadersIntegration.isShadersEnabled()) {
+        if (!ShadersIntegration.shouldApply()) {
             standardDelayedRender(event);
         } else {
             shadersDelayedRender(event);
