@@ -12,19 +12,19 @@ import net.minecraftforge.fml.common.Mod;
 import java.io.IOException;
 
 public class FluffyFurShaders {
-    public static ShaderInstance ADDITIVE, ADDITIVE_TEXTURE, TRANSPARENT_PARTICLE, FLUID;
+    public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE;
 
-    public static ShaderInstance getGlowing() { return ADDITIVE; }
-    public static ShaderInstance getGlowingSprite() { return ADDITIVE_TEXTURE; }
-    public static ShaderInstance getSpriteParticle() { return TRANSPARENT_PARTICLE; }
+    public static ShaderInstance getAdditiveTexture() { return ADDITIVE_TEXTURE; }
+    public static ShaderInstance getAdditive() { return ADDITIVE; }
+    public static ShaderInstance getTranslucentTexture() { return TRANSLUCENT_TEXTURE; }
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> { ADDITIVE = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> { ADDITIVE_TEXTURE = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "transparent_particle"), DefaultVertexFormat.PARTICLE), shader -> { TRANSPARENT_PARTICLE = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> { ADDITIVE = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR), shader -> { TRANSLUCENT_TEXTURE = shader; });
         }
     }
 }

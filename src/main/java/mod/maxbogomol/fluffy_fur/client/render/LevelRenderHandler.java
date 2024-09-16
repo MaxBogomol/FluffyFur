@@ -14,7 +14,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.fml.ModList;
 import org.joml.Matrix4f;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +23,7 @@ import java.util.Map;
 public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
+    public static PoseStack STACK = new PoseStack();
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
@@ -49,6 +49,7 @@ public class LevelRenderHandler {
             behaviorParticleList.clear();
 
             if (!ShadersIntegration.isShadersEnabled()) MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
+            STACK = RenderSystem.getModelViewStack();
         }
 
         if (!ShadersIntegration.isShadersEnabled()) {
@@ -62,20 +63,13 @@ public class LevelRenderHandler {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
             Matrix4f last = new Matrix4f(RenderSystem.getModelViewMatrix());
             if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
-
-            getDelayedRender().endBatch(FluffyFurRenderTypes.TRANSPARENT_TEXTURE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
-
+            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) getDelayedRender().endBatch(renderType);
             RenderSystem.getModelViewMatrix().set(last);
-
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_PARTICLE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE);
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_PARTICLE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_TERRAIN_PARTICLE);
-            RenderSystem.defaultBlendFunc();
+            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
+            RenderSystem.getModelViewMatrix().set(last);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) getDelayedRender().endBatch(renderType);
         }
     }
 
@@ -85,17 +79,18 @@ public class LevelRenderHandler {
             RenderSystem.getModelViewStack().setIdentity();
             if (MATRIX4F != null) RenderSystem.getModelViewStack().mulPoseMatrix(MATRIX4F);
             RenderSystem.applyModelViewMatrix();
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_PARTICLE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE);
-            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_PARTICLE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING_TERRAIN_PARTICLE);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) getDelayedRender().endBatch(renderType);
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
-
-            getDelayedRender().endBatch(FluffyFurRenderTypes.ADDITIVE_TEXTURE);
-            getDelayedRender().endBatch(FluffyFurRenderTypes.GLOWING);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) getDelayedRender().endBatch(renderType);
+            RenderSystem.getModelViewStack().pushPose();
+            RenderSystem.getModelViewStack().setIdentity();
+            if (MATRIX4F != null) RenderSystem.getModelViewStack().mulPoseMatrix(MATRIX4F);
+            RenderSystem.applyModelViewMatrix();
+            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            RenderSystem.getModelViewStack().popPose();
+            RenderSystem.applyModelViewMatrix();
+            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
         }
     }
 

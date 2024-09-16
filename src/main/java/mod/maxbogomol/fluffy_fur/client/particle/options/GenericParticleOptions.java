@@ -16,7 +16,7 @@ public class GenericParticleOptions implements ParticleOptions {
 
     ParticleType<?> type;
 
-    public RenderType renderType = FluffyFurRenderTypes.GLOWING_PARTICLE;
+    public RenderType renderType = FluffyFurRenderTypes.ADDITIVE_PARTICLE;
     public ParticleRenderType particleRenderType = SpriteParticleRenderType.INSTANCE;
 
     public ParticleBehavior behavior = null;

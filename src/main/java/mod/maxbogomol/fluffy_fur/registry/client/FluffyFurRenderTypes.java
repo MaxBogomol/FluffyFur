@@ -21,6 +21,10 @@ import java.util.List;
 public class FluffyFurRenderTypes {
 
     public static List<RenderType> renderTypes = new ArrayList<>();
+    public static List<RenderType> additiveParticleRenderTypes = new ArrayList<>();
+    public static List<RenderType> additiveRenderTypes = new ArrayList<>();
+    public static List<RenderType> translucentParticleRenderTypes = new ArrayList<>();
+    public static List<RenderType> translucentRenderTypes = new ArrayList<>();
 
     public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("additive_transparency", () -> {
         RenderSystem.enableBlend();
@@ -33,14 +37,6 @@ public class FluffyFurRenderTypes {
     public static final RenderStateShard.TransparencyStateShard NORMAL_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("normal_transparency", () -> {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
-
-    public static final RenderStateShard.TransparencyStateShard TRANSLUCENT_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("translucent_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     }, () -> {
         RenderSystem.disableBlend();
         RenderSystem.defaultBlendFunc();
@@ -60,79 +56,85 @@ public class FluffyFurRenderTypes {
     public static final RenderStateShard.TextureStateShard PARTICLE_SHEET = new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, false);
     public static final RenderStateShard.TextureStateShard PARTICLE_SHEET_MIPPED = new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_PARTICLES, false, true);
 
-    public static final RenderStateShard.ShaderStateShard GLOWING_SPRITE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingSprite);
+    public static final RenderStateShard.ShaderStateShard ADDITIVE_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditiveTexture);
+    public static final RenderStateShard.ShaderStateShard ADDITIVE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditive);
+    public static final RenderStateShard.ShaderStateShard TRANSLUCENT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucentTexture);
 
-    public static final RenderType ADDITIVE_TEXTURE = RenderType.create(
-            FluffyFur.MOD_ID + ":additive_texture",
-            DefaultVertexFormat.POSITION_TEX_COLOR,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
+    public static RenderType ADDITIVE_PARTICLE = RenderType.create(FluffyFur.MOD_ID + ":additive_particle",
+            DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(PARTICLE_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(false));
+
+    public static RenderType ADDITIVE_BLOCK_PARTICLE = RenderType.create(FluffyFur.MOD_ID + ":glowing_terrain_particle",
+            DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(BLOCK_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(false));
+
+    public static final RenderType ADDITIVE_TEXTURE = RenderType.create(FluffyFur.MOD_ID + ":additive_texture",
+            DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
-                    .setTextureState(BLOCK_SHEET).setShaderState(GLOWING_SPRITE_SHADER).createCompositeState(false));
+                    .setTextureState(BLOCK_SHEET).setShaderState(ADDITIVE_TEXTURE_SHADER).createCompositeState(false));
 
-    public static final RenderType GLOWING = RenderType.create(
-            FluffyFur.MOD_ID + ":additive",
-            DefaultVertexFormat.POSITION_COLOR,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
+    public static final RenderType ADDITIVE = RenderType.create(FluffyFur.MOD_ID + ":additive",
+            DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowing)).createCompositeState(false));
+                    .setShaderState(ADDITIVE_SHADER).createCompositeState(false));
 
-    public static RenderType GLOWING_PARTICLE = RenderType.create(
-            FluffyFur.MOD_ID + ":additive_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setTextureState(PARTICLE_SHEET).setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingSprite)).createCompositeState(false));
-
-    public static RenderType GLOWING_TERRAIN_PARTICLE = RenderType.create(
-            FluffyFur.MOD_ID + ":glowing_terrain_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setTextureState(BLOCK_SHEET).setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getGlowingSprite)).createCompositeState(false));
-
-    public static RenderType DELAYED_PARTICLE = RenderType.create(
-            FluffyFur.MOD_ID + ":transparent_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
+    public static RenderType TRANSLUCENT_PARTICLE = RenderType.create(FluffyFur.MOD_ID + ":transparent_particle",
+            DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
-                    .setTextureState(PARTICLE_SHEET).setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle)).createCompositeState(false));
+                    .setTextureState(PARTICLE_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(false));
 
-    public static RenderType DELAYED_TERRAIN_PARTICLE = RenderType.create(
-            FluffyFur.MOD_ID + ":delayed_terrain_particle",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
+    public static RenderType TRANSLUCENT_BLOCK_PARTICLE = RenderType.create(FluffyFur.MOD_ID + ":delayed_terrain_particle",
+            DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
-                    .setTextureState(BLOCK_SHEET).setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle)).createCompositeState(false));
+                    .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(false));
 
-    public static final RenderType TRANSPARENT_TEXTURE = RenderType.create(
-            FluffyFur.MOD_ID + ":transparent_texture",
-            DefaultVertexFormat.PARTICLE,
-            VertexFormat.Mode.QUADS, 256, true, false,
-            RenderType.CompositeState.builder()
-                    .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
-                    .setTextureState(BLOCK_SHEET).setShaderState(new RenderStateShard.ShaderStateShard(FluffyFurShaders::getSpriteParticle)).createCompositeState(false));
+    public static RenderType TRANSLUCENT_TEXTURE = RenderType.create(FluffyFur.MOD_ID + ":translucent_texture",
+            DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_DEPTH_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(false));
+
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerRenderTypes(FMLClientSetupEvent event) {
-            renderTypes.add(DELAYED_PARTICLE);
-            renderTypes.add(DELAYED_TERRAIN_PARTICLE);
-            renderTypes.add(GLOWING_PARTICLE);
-            renderTypes.add(GLOWING_TERRAIN_PARTICLE);
-            renderTypes.add(ADDITIVE_TEXTURE);
-            renderTypes.add(GLOWING);
-            renderTypes.add(TRANSPARENT_TEXTURE);
+            addAdditiveParticleRenderType(ADDITIVE_PARTICLE);
+            addAdditiveParticleRenderType(ADDITIVE_BLOCK_PARTICLE);
+            addAdditiveRenderType(ADDITIVE_TEXTURE);
+            addAdditiveRenderType(ADDITIVE);
+            addTranslucentParticleRenderType(TRANSLUCENT_PARTICLE);
+            addTranslucentParticleRenderType(TRANSLUCENT_BLOCK_PARTICLE);
+            addTranslucentRenderType(TRANSLUCENT_TEXTURE);
         }
     }
 
     public static MultiBufferSource.BufferSource getDelayedRender() {
         return LevelRenderHandler.getDelayedRender();
+    }
+
+    public static void addRenderType(RenderType renderType) {
+        renderTypes.add(renderType);
+    }
+
+    public static void addAdditiveParticleRenderType(RenderType renderType) {
+        additiveParticleRenderTypes.add(renderType);
+        addRenderType(renderType);
+    }
+
+    public static void addAdditiveRenderType(RenderType renderType) {
+        additiveRenderTypes.add(renderType);
+        addRenderType(renderType);
+    }
+
+    public static void addTranslucentParticleRenderType(RenderType renderType) {
+        translucentParticleRenderTypes.add(renderType);
+        addRenderType(renderType);
+    }
+
+    public static void addTranslucentRenderType(RenderType renderType) {
+        translucentRenderTypes.add(renderType);
+        addRenderType(renderType);
     }
 }

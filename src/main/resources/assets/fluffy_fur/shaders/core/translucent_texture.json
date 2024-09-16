@@ -4,12 +4,11 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "fluffy_fur:transparent_particle",
-    "fragment": "fluffy_fur:transparent_particle",
+    "vertex": "fluffy_fur:translucent_texture",
+    "fragment": "fluffy_fur:translucent_texture",
     "attributes": [
         "Position",
         "UV0",
-        "UV1",
         "UV2",
         "Color"
     ],

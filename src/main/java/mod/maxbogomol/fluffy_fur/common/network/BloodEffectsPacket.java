@@ -52,7 +52,7 @@ public class BloodEffectsPacket extends PositionEffectPacket {
                 .enablePhysics()
                 .setGravity(1f)
                 .repeat(level, x, y, z, (int) size / 2, 0.4f);
-        builder.setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+        builder.setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                 .repeat(level, x, y, z, (int) size, 0.6f);
     }
 

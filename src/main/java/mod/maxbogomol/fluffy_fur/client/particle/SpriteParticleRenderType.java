@@ -22,7 +22,7 @@ public class SpriteParticleRenderType implements ParticleRenderType {
     public void begin(BufferBuilder bufferBuilder, TextureManager textureManager) {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShader(FluffyFurShaders::getSpriteParticle);
+        RenderSystem.setShader(FluffyFurShaders::getTranslucentTexture);
         RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
         if (ShadersIntegration.isShadersEnabled()) LevelRenderHandler.MATRIX4F = RenderSystem.getModelViewMatrix();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);

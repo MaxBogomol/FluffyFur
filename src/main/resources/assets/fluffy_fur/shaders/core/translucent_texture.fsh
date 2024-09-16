@@ -11,7 +11,6 @@ uniform vec4 FogColor;
 
 in float vertexDistance;
 in vec2 texCoord0;
-in vec2 texCoord2;
 in vec4 vertexColor;
 in vec4 lightMapColor;
 

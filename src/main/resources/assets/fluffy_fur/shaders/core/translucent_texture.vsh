@@ -5,7 +5,6 @@
 
 in vec3 Position;
 in vec2 UV0;
-in ivec2 UV1;
 in ivec2 UV2;
 in vec4 Color;
 

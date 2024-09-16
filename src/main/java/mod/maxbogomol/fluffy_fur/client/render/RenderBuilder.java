@@ -416,14 +416,25 @@ public class RenderBuilder {
     public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width) {
         Minecraft minecraft = Minecraft.getInstance();
         Vec3 cameraPosition = minecraft.getBlockEntityRenderDispatcher().camera.getPosition();
-        return renderBeam(last, start, end, width, cameraPosition);
+        return renderBeam(last, start, end, width, width, cameraPosition);
+    }
+
+    public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width1, float width2) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Vec3 cameraPosition = minecraft.getBlockEntityRenderDispatcher().camera.getPosition();
+        return renderBeam(last, start, end, width1, width2, cameraPosition);
     }
 
     public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width, Vec3 cameraPosition) {
-        Vec3 delta = end.subtract(start);
-        Vec3 normal = start.subtract(cameraPosition).cross(delta).normalize().multiply(width / 2f, width / 2f, width / 2f);
+        return renderBeam(last, start, end, width, width, cameraPosition);
+    }
 
-        Vec3[] positions = new Vec3[]{start.subtract(normal), start.add(normal), end.add(normal), end.subtract(normal)};
+    public RenderBuilder renderBeam(@Nullable Matrix4f last, Vec3 start, Vec3 end, float width1, float width2, Vec3 cameraPosition) {
+        Vec3 delta = end.subtract(start);
+        Vec3 normalStart = start.subtract(cameraPosition).cross(delta).normalize().multiply(width1 / 2f, width1 / 2f, width1 / 2f);
+        Vec3 normalEnd = start.subtract(cameraPosition).cross(delta).normalize().multiply(width2 / 2f, width2 / 2f, width2 / 2f);
+
+        Vec3[] positions = new Vec3[]{start.subtract(normalStart), start.add(normalStart), end.add(normalEnd), end.subtract(normalEnd)};
 
         supplier.placeVertex(getVertexConsumer(), last, this, (float) positions[0].x, (float) positions[0].y, (float) positions[0].z, r1, g1, b1, a1, u0, v1, l1);
         supplier.placeVertex(getVertexConsumer(), last, this, (float) positions[1].x, (float) positions[1].y, (float) positions[1].z, r1, g1, b1, a1, u1, v1, l1);

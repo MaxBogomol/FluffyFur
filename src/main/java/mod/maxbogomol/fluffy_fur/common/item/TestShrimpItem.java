@@ -99,7 +99,7 @@ public class TestShrimpItem extends Item {
             if (mode == 4) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
                 ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(0, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).build())
                         .setScaleData(GenericParticleData.create(0.3f, 0).build())
@@ -233,7 +233,7 @@ public class TestShrimpItem extends Item {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(0.75f));
                 ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), stack);
                 ParticleBuilder.create(options)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_TERRAIN_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_BLOCK_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -246,7 +246,7 @@ public class TestShrimpItem extends Item {
             if (mode == 9) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.WISP)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -272,7 +272,7 @@ public class TestShrimpItem extends Item {
             if (mode == 11) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
                 ParticleBuilder.create(FluffyFurParticles.PANCAKE)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -286,7 +286,7 @@ public class TestShrimpItem extends Item {
             if (mode == 12) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(3f));
                 ParticleBuilder.create(FluffyFurParticles.DEATH)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setColorData(ColorParticleData.create(Color.WHITE).build())
                         .setTransparencyData(GenericParticleData.create(1f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -311,7 +311,7 @@ public class TestShrimpItem extends Item {
             if (mode == 14) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.WISP)
-                        .setRenderType(FluffyFurRenderTypes.DELAYED_PARTICLE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                         .setBehavior(ParticleBehavior.create(90, 0, 0)
                                 .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
                                 .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())

@@ -145,7 +145,7 @@ public class RenderUtil {
     }
 
     public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -198,7 +198,7 @@ public class RenderUtil {
     }
 
     public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -224,7 +224,7 @@ public class RenderUtil {
     }
 
     public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
         builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
@@ -234,7 +234,7 @@ public class RenderUtil {
     }
 
     public static void litQuadCube(PoseStack mStack, MultiBufferSource buf, float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.GLOWING);
+        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
 
         Matrix4f mat = mStack.last().pose();
 
@@ -352,7 +352,7 @@ public class RenderUtil {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(FluffyFurShaders::getGlowingSprite);
+        RenderSystem.setShader(FluffyFurShaders::getAdditiveTexture);
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
@@ -374,10 +374,10 @@ public class RenderUtil {
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
             TextureAtlasSprite still = RenderUtil.getSprite(clientType.getStillTexture(fluidStack));
 
-            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSPARENT_TEXTURE)
+            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
                     .setUV(still.getU0(), still.getV0(), still.getU1(), still.getV1())
                     .setColor(ColorUtil.getColor(clientType.getTintColor(fluidStack)))
-                    .setAlpha(ColorUtil.getColor(clientType.getTintColor(fluidStack)).getAlpha() / 255f)
+                    //.setAlpha(ColorUtil.getColor(clientType.getTintColor(fluidStack)).getAlpha() / 255f)
                     .renderWavyCube(stack, width, strength, time);
         }
     }
