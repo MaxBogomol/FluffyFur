@@ -28,9 +28,13 @@ import java.util.function.Function;
 public class RenderBuilder {
     protected float r1 = 1, g1 = 1, b1 = 1, a1 = 1;
     protected float r2 = 1, g2 = 1, b2 = 1, a2 = 1;
+    protected float r3 = 1, g3 = 1, b3 = 1, a3 = 1;
     protected int l1 = RenderUtil.FULL_BRIGHT;
     protected int l2 = RenderUtil.FULL_BRIGHT;
+    protected int l3 = RenderUtil.FULL_BRIGHT;
     protected float u0 = 0, v0 = 0, u1 = 1, v1 = 1;
+    protected float u2 = 0, v2 = 0, u3 = 1, v3 = 1;
+    protected float u4 = 0, v4 = 0, u5 = 1, v5 = 1;
     protected boolean sided;
 
     protected MultiBufferSource bufferSource = LevelRenderHandler.DELAYED_RENDER;
@@ -127,24 +131,24 @@ public class RenderBuilder {
     }
 
     public RenderBuilder setColor(Color color, float a) {
-        return setFirstColor(color).setFirstAlpha(a).setSecondColor(color).setSecondAlpha(a);
+        return setFirstColor(color).setFirstAlpha(a).setSecondColor(color).setSecondAlpha(a).setThirdColor(color).setThirdAlpha(a);
     }
 
     public RenderBuilder setColor(float r, float g, float b, float a) {
-        return setFirstColor(r, g, b).setFirstAlpha(a).setSecondColor(r, g, b).setSecondAlpha(a);
+        return setFirstColor(r, g, b).setFirstAlpha(a).setSecondColor(r, g, b).setSecondAlpha(a).setThirdColor(r, g, b).setThirdAlpha(a);
     }
 
     public RenderBuilder setColor(float r, float g, float b) {
-        setFirstColor(r, g, b).setSecondColor(r, g, b);
+        setFirstColor(r, g, b).setSecondColor(r, g, b).setThirdColor(r, g, b);
         return this;
     }
 
     public RenderBuilder setColorRaw(float r, float g, float b) {
-        return setFirstColorRaw(r, g, b).setSecondColorRaw(r, g, b);
+        return setFirstColorRaw(r, g, b).setSecondColorRaw(r, g, b).setThirdColorRaw(r, g, b);
     }
 
     public RenderBuilder setAlpha(float a) {
-        return setFirstAlpha(a).setSecondAlpha(a);
+        return setFirstAlpha(a).setSecondAlpha(a).setThirdAlpha(a);
     }
 
     public RenderBuilder setLight(int light) {
@@ -223,7 +227,51 @@ public class RenderBuilder {
         return this;
     }
 
+    public RenderBuilder setThirdColor(Color color) {
+        return setThirdColor(color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    public RenderBuilder setThirdColor(Color color, float a) {
+        return setThirdColor(color).setThirdAlpha(a);
+    }
+
+    public RenderBuilder setThirdColor(float r, float g, float b, float a) {
+        return setThirdColor(r, g, b).setThirdAlpha(a);
+    }
+
+    public RenderBuilder setThirdColor(float r, float g, float b) {
+        this.r3 = r / 255f;
+        this.g3 = g / 255f;
+        this.b3 = b / 255f;
+        return this;
+    }
+
+    public RenderBuilder setThirdColorRaw(float r, float g, float b) {
+        this.r3 = r;
+        this.g3 = g;
+        this.b3 = b;
+        return this;
+    }
+
+    public RenderBuilder setThirdAlpha(float a) {
+        this.a3 = a;
+        return this;
+    }
+
+    public RenderBuilder setThirdLight(int light) {
+        this.l3 = light;
+        return this;
+    }
+
     public RenderBuilder setUV(float u0, float v0, float u1, float v1) {
+        return setFirstUV(u0, v0, u1, v1).setSecondUV(u0, v0, u1, v1).setThirdUV(u0, v0, u1, v1);
+    }
+
+    public RenderBuilder setUV(TextureAtlasSprite sprite) {
+        return setUV(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+    }
+
+    public RenderBuilder setFirstUV(float u0, float v0, float u1, float v1) {
         this.u0 = u0;
         this.v0 = v0;
         this.u1 = u1;
@@ -231,9 +279,32 @@ public class RenderBuilder {
         return this;
     }
 
-    public RenderBuilder setUV(TextureAtlasSprite sprite) {
-        setUV(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+    public RenderBuilder setFirstUV(TextureAtlasSprite sprite) {
+        return setFirstUV(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+    }
+
+    public RenderBuilder setSecondUV(float u0, float v0, float u1, float v1) {
+        this.u2 = u0;
+        this.v2 = v0;
+        this.u3 = u1;
+        this.v3 = v1;
         return this;
+    }
+
+    public RenderBuilder setSecondUV(TextureAtlasSprite sprite) {
+        return setSecondUV(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+    }
+
+    public RenderBuilder setThirdUV(float u0, float v0, float u1, float v1) {
+        this.u4 = u0;
+        this.v4 = v0;
+        this.u5 = u1;
+        this.v5 = v1;
+        return this;
+    }
+
+    public RenderBuilder setThirdUV(TextureAtlasSprite sprite) {
+        return setThirdUV(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
     }
 
     public RenderBuilder enableSided() {
@@ -336,22 +407,22 @@ public class RenderBuilder {
         supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v0, l1);
         supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u1, v1, l1);
         supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u0, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u0, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u1, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u0, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u0, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u1, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u1, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u0, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u0, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u1, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u0, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u0, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u1, v0, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u1, v1, l1);
-        supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u0, v1, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u2, v2, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u3, v2, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u3, v3, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u2, v3, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u2, v2, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u3, v2, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u3, v3, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u2, v3, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u4, v4, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u5, v4, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u5, v5, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u4, v5, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u4, v4, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u5, v4, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u5, v5, l1);
+        supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u4, v5, l1);
 
         if (sided) {
             supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u0, v1, l1);
@@ -362,22 +433,22 @@ public class RenderBuilder {
             supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u1, v1, l1);
             supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v0, l1);
             supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u0, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u0, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u1, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u0, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u0, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u1, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u1, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u0, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u0, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u1, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u1, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u0, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u0, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u1, v1, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u1, v0, l1);
-            supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u0, v0, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u2, v3, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u3, v3, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u3, v2, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u2, v2, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u2, v3, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u3, v3, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u3, v2, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u2, v2, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[4].x(), positions[4].y(), positions[4].z(), r1, g1, b1, a1, u4, v5, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[5].x(), positions[5].y(), positions[5].z(), r1, g1, b1, a1, u5, v5, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[2].x(), positions[2].y(), positions[2].z(), r1, g1, b1, a1, u5, v4, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[3].x(), positions[3].y(), positions[3].z(), r1, g1, b1, a1, u4, v4, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[0].x(), positions[0].y(), positions[0].z(), r1, g1, b1, a1, u4, v5, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[1].x(), positions[1].y(), positions[1].z(), r1, g1, b1, a1, u5, v5, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[6].x(), positions[6].y(), positions[6].z(), r1, g1, b1, a1, u5, v4, l1);
+            supplier.placeVertex(getVertexConsumer(), last, this, positions[7].x(), positions[7].y(), positions[7].z(), r1, g1, b1, a1, u4, v4, l1);
         }
 
         return this;

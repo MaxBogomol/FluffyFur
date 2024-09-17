@@ -364,22 +364,87 @@ public class RenderUtil {
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     }
 
-    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float strength, float time) {
-        renderWavyFluid(stack, fluidStack, size, size, size, strength, time);
+    public static void renderFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, boolean flowing, int light) {
+        renderFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light);
     }
 
-    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float strength, float time) {
+    public static void renderFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Color color, boolean flowing, int light) {
+        renderFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light);
+    }
+
+    public static void renderFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, boolean flowing, int light) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.renderCube(stack, width, height, length);
+        }
+    }
+
+    public static void renderFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Color color, boolean flowing, int light) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.setColor(color).renderCube(stack, width, height, length);
+        }
+    }
+
+    public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, boolean flowing, int light) {
+        renderCenteredFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light);
+    }
+
+    public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Color color, boolean flowing, int light) {
+        renderCenteredFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light);
+    }
+
+    public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, boolean flowing, int light) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.renderCenteredCube(stack, width, height, length);
+        }
+    }
+
+    public static void renderCenteredFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Color color, boolean flowing, int light) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.setColor(color).renderCenteredCube(stack, width, height, length);
+        }
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, boolean flowing, int light, float strength, float time) {
+        renderWavyFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, flowing, light, strength, time);
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, Color color, boolean flowing, int light, float strength, float time) {
+        renderWavyFluid(stack, fluidStack, size, size, size, texSize, texSize, texSize, color, flowing, light, strength, time);
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, boolean flowing, int light, float strength, float time) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.renderWavyCube(stack, width, height, length, strength, time);
+        }
+    }
+
+    public static void renderWavyFluid(PoseStack stack, FluidStack fluidStack, float width, float height, float length, float texWidth, float texHeight, float texLength, Color color, boolean flowing, int light, float strength, float time) {
+        if (!fluidStack.isEmpty()) {
+            RenderBuilder builder = getFluidRenderBuilder(fluidStack, texWidth, texHeight, texLength, flowing, light);
+            builder.setColor(color).renderWavyCube(stack, width, height, length, strength, time);
+        }
+    }
+
+    public static RenderBuilder getFluidRenderBuilder(FluidStack fluidStack, float texWidth, float texHeight, float texLength, boolean flowing, int light) {
+        RenderBuilder builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE);
         if (!fluidStack.isEmpty()) {
             FluidType type = fluidStack.getFluid().getFluidType();
             IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-            TextureAtlasSprite still = RenderUtil.getSprite(clientType.getStillTexture(fluidStack));
+            TextureAtlasSprite sprite = RenderUtil.getSprite(clientType.getStillTexture(fluidStack));
+            if (flowing) sprite = RenderUtil.getSprite(clientType.getFlowingTexture(fluidStack));
 
-            RenderBuilder.create().setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
-                    .setUV(still.getU0(), still.getV0(), still.getU1(), still.getV1())
+            builder.setFirstUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texWidth))
+                    .setSecondUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texWidth), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
+                    .setThirdUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
                     .setColor(ColorUtil.getColor(clientType.getTintColor(fluidStack)))
-                    //.setAlpha(ColorUtil.getColor(clientType.getTintColor(fluidStack)).getAlpha() / 255f)
-                    .renderWavyCube(stack, width, strength, time);
+                    .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light & 0xFFFF));
         }
+        return builder;
     }
 
     public static Vec2 perpendicularTrailPoints(Vector4f start, Vector4f end, float width) {
