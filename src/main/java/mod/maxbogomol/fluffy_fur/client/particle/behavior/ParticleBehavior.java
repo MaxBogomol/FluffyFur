@@ -24,26 +24,28 @@ public class ParticleBehavior {
     public float yOffset;
     public float zOffset;
 
-    public boolean sided;
+    public boolean firstSide;
+    public boolean secondSide;
     public boolean camera;
     public boolean xRotCam;
     public boolean yRotCam;
 
-    public ParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean sided, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public ParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
         this.xSpinData = xSpinData;
         this.ySpinData = ySpinData;
         this.zSpinData = zSpinData;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.zOffset = zOffset;
-        this.sided = sided;
+        this.firstSide = firstSide;
+        this.secondSide = secondSide;
         this.camera = camera;
         this.xRotCam = xRotCam;
         this.yRotCam = yRotCam;
     }
 
     public ParticleBehavior copy() {
-        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static ParticleBehaviorBuilder create() {
@@ -128,12 +130,15 @@ public class ParticleBehavior {
         float v0 = particle.getV0();
         float v1 = particle.getV1();
         int light = particle.getLightColor(partialTicks);
-        vertexConsumer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
-        vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
 
-        if (sided) {
+        if (firstSide) {
+            vertexConsumer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+            vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u0, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
+        }
+
+        if (secondSide) {
             vertexConsumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(u1, v1).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
             vertexConsumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(u1, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();
             vertexConsumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(u0, v0).color(particle.rCol, particle.gCol, particle.bCol, particle.alpha).uv2(light).endVertex();

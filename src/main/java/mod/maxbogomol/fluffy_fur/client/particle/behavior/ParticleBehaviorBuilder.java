@@ -12,7 +12,8 @@ public class ParticleBehaviorBuilder {
     public float yOffset;
     public float zOffset;
 
-    public boolean sided = true;
+    public boolean firstSide = true;
+    public boolean secondSide = false;
     public boolean camera = false;
     public boolean xRotCam = true;
     public boolean yRotCam = true;
@@ -38,17 +39,46 @@ public class ParticleBehaviorBuilder {
         return this;
     }
 
-    public ParticleBehaviorBuilder enableSideLayer() {
+    public ParticleBehaviorBuilder enableSided() {
         return setSided(true);
     }
 
-    public ParticleBehaviorBuilder disableSideLayer() {
+    public ParticleBehaviorBuilder disableSided() {
         return setSided(false);
     }
 
-    public ParticleBehaviorBuilder setSided(boolean sideLayer) {
-        this.sided = sided;
+    public ParticleBehaviorBuilder setSided(boolean side) {
+        return setFirstSide(side).setSecondSide(side);
+    }
+
+    public ParticleBehaviorBuilder enableFirstSide() {
+        return setFirstSide(true);
+    }
+
+    public ParticleBehaviorBuilder disableFirstSSide() {
+        return setFirstSide(false);
+    }
+
+    public ParticleBehaviorBuilder setFirstSide(boolean side) {
+        this.firstSide = side;
         return this;
+    }
+
+    public ParticleBehaviorBuilder enableSecondSide() {
+        return setSecondSide(true);
+    }
+
+    public ParticleBehaviorBuilder disableSecondSSide() {
+        return setSecondSide(false);
+    }
+
+    public ParticleBehaviorBuilder setSecondSide(boolean side) {
+        this.secondSide = side;
+        return this;
+    }
+
+    public ParticleBehaviorBuilder setSide(boolean firstSide, boolean secondSide) {
+        return setFirstSide(firstSide).setSecondSide(secondSide);
     }
 
     public ParticleBehaviorBuilder enableCamera() {
@@ -71,6 +101,6 @@ public class ParticleBehaviorBuilder {
     }
 
     public ParticleBehavior build() {
-        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new ParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }

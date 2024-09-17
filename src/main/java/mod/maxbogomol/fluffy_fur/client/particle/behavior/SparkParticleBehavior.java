@@ -23,15 +23,15 @@ public class SparkParticleBehavior extends ParticleBehavior {
 
     float[] hsv1 = new float[3], hsv2 = new float[3];
 
-    public SparkParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean sided, boolean camera, boolean xRotCam, boolean yRotCam) {
-        super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+    public SparkParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+        super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.colorData = colorData;
         this.transparencyData = transparencyData;
         this.secondColor = secondColor;
     }
 
     public SparkParticleBehavior copy() {
-        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static SparkParticleBehaviorBuilder create() {

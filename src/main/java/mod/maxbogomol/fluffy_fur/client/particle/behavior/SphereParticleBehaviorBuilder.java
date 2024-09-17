@@ -34,9 +34,38 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSided(false);
     }
 
-    public SphereParticleBehaviorBuilder setSided(boolean sided) {
-        this.sided = sided;
+    public SphereParticleBehaviorBuilder setSided(boolean side) {
+        return setFirstSide(side).setSecondSide(side);
+    }
+
+    public SphereParticleBehaviorBuilder enableFirstSide() {
+        return setFirstSide(true);
+    }
+
+    public SphereParticleBehaviorBuilder disableFirstSSide() {
+        return setFirstSide(false);
+    }
+
+    public SphereParticleBehaviorBuilder setFirstSide(boolean side) {
+        this.firstSide = side;
         return this;
+    }
+
+    public SphereParticleBehaviorBuilder enableSecondSide() {
+        return setSecondSide(true);
+    }
+
+    public SphereParticleBehaviorBuilder disableSecondSSide() {
+        return setSecondSide(false);
+    }
+
+    public SphereParticleBehaviorBuilder setSecondSide(boolean side) {
+        this.secondSide = side;
+        return this;
+    }
+
+    public SphereParticleBehaviorBuilder setSide(boolean firstSide, boolean secondSide) {
+        return setFirstSide(firstSide).setSecondSide(secondSide);
     }
 
     public SphereParticleBehaviorBuilder enableCamera() {
@@ -71,6 +100,6 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
     }
 
     public ParticleBehavior build() {
-        return new SphereParticleBehavior(longs, lats, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new SphereParticleBehavior(longs, lats, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }

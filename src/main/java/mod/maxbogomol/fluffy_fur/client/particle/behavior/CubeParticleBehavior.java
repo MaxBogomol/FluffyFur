@@ -13,12 +13,12 @@ import net.minecraft.world.phys.Vec3;
 
 public class CubeParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender {
 
-    public CubeParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean sided, boolean camera, boolean xRotCam, boolean yRotCam) {
-        super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+    public CubeParticleBehavior(SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+        super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public CubeParticleBehavior copy() {
-        return new CubeParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new CubeParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static CubeParticleBehaviorBuilder create() {
@@ -44,7 +44,7 @@ public class CubeParticleBehavior extends ParticleBehavior implements ICustomBeh
         poseStack.translate((float) pos.x() + vec3.x(), (float) pos.y() + vec3.y(), (float) pos.z() + vec3.z());
         poseStack.mulPose(getRotate(particle, Minecraft.getInstance().gameRenderer.getMainCamera(), partialTicks));
 
-        RenderBuilder.create().setRenderType(particle.renderType).setSided(sided)
+        RenderBuilder.create().setRenderType(particle.renderType).setSided(firstSide, secondSide)
                 .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())

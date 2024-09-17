@@ -31,9 +31,38 @@ public class CubeParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSided(false);
     }
 
-    public CubeParticleBehaviorBuilder setSided(boolean sided) {
-        this.sided = sided;
+    public CubeParticleBehaviorBuilder setSided(boolean side) {
+        return setFirstSide(side).setSecondSide(side);
+    }
+
+    public CubeParticleBehaviorBuilder enableFirstSide() {
+        return setFirstSide(true);
+    }
+
+    public CubeParticleBehaviorBuilder disableFirstSSide() {
+        return setFirstSide(false);
+    }
+
+    public CubeParticleBehaviorBuilder setFirstSide(boolean side) {
+        this.firstSide = side;
         return this;
+    }
+
+    public CubeParticleBehaviorBuilder enableSecondSide() {
+        return setSecondSide(true);
+    }
+
+    public CubeParticleBehaviorBuilder disableSecondSSide() {
+        return setSecondSide(false);
+    }
+
+    public CubeParticleBehaviorBuilder setSecondSide(boolean side) {
+        this.secondSide = side;
+        return this;
+    }
+
+    public CubeParticleBehaviorBuilder setSide(boolean firstSide, boolean secondSide) {
+        return setFirstSide(firstSide).setSecondSide(secondSide);
     }
 
     public CubeParticleBehaviorBuilder enableCamera() {
@@ -56,6 +85,6 @@ public class CubeParticleBehaviorBuilder extends ParticleBehaviorBuilder {
     }
 
     public ParticleBehavior build() {
-        return new CubeParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, sided, camera, xRotCam, yRotCam);
+        return new CubeParticleBehavior(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }
