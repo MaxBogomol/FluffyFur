@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class ParticleBuilder {
 
@@ -83,6 +84,39 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder addTickActor(Consumer<GenericParticle> particleActor) {
+        getParticleOptions().tickActors.add(particleActor);
+        return this;
+    }
+
+    public ParticleBuilder addSpawnActor(Consumer<GenericParticle> particleActor) {
+        getParticleOptions().spawnActors.add(particleActor);
+        return this;
+    }
+
+    public ParticleBuilder addRenderActor(Consumer<GenericParticle> particleActor) {
+        getParticleOptions().renderActors.add(particleActor);
+        return this;
+    }
+
+    public ParticleBuilder clearActors() {
+        return clearTickActor().clearSpawnActors().clearRenderActors();
+    }
+
+    public ParticleBuilder clearTickActor() {
+        getParticleOptions().tickActors.clear();
+        return this;
+    }
+
+    public ParticleBuilder clearSpawnActors() {
+        getParticleOptions().spawnActors.clear();
+        return this;
+    }
+
+    public ParticleBuilder clearRenderActors() {
+        getParticleOptions().renderActors.clear();
+        return this;
+    }
 
     public ParticleBuilder setLifetime(int lifetime) {
         options.lifetime = lifetime;

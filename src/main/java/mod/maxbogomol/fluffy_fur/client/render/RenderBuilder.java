@@ -611,10 +611,15 @@ public class RenderBuilder {
         for (int i = 1; i < count; i++) {
             float current = Mth.lerp(i * increment, v0, v1);
             vfxOperator.accept(current);
-            points[i].renderMid(getVertexConsumer(), this, u0, current, u1, current, r1, g1, b1, a1, l1);
+            float r = Mth.lerp(i * increment, r1, r2);
+            float g = Mth.lerp(i * increment, g1, g2);
+            float b = Mth.lerp(i * increment, b1, b2);
+            float a = Mth.lerp(i * increment, a1, a2);
+            int l = (int) Mth.lerp(i * increment, l1, l2);
+            points[i].renderMid(getVertexConsumer(), this, u0, current, u1, current, r, g, b, a, l);
         }
         vfxOperator.accept(1f);
-        points[count].renderEnd(getVertexConsumer(), this, u0, Mth.lerp((count) * increment, v0, v1), u1, v1, r1, g1, b1, a1, l1);
+        points[count].renderEnd(getVertexConsumer(), this, u0, Mth.lerp((count) * increment, v0, v1), u1, v1, r2, g2, b2, a2, l2);
         return this;
     }
 

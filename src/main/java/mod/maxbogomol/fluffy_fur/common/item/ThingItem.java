@@ -22,7 +22,6 @@ public class ThingItem extends Item implements IGuiParticleItem {
     public void renderParticle(PoseStack poseStack, LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         float ticks = ClientTickHandler.getTotal() * 0.5f;
 
-        RenderUtil.startGlowGuiSprite();
         poseStack.pushPose();
         poseStack.translate(x + 8, y + 8, 100);
         poseStack.mulPose(Axis.ZP.rotationDegrees(ticks));
@@ -35,6 +34,5 @@ public class ThingItem extends Item implements IGuiParticleItem {
                 .renderCenteredQuad(poseStack, 10f)
                 .endBatch();
         poseStack.popPose();
-        RenderUtil.endGlowGuiSprite();
     }
 }

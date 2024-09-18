@@ -17,7 +17,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class GenericParticle extends TextureSheetParticle {
 
@@ -35,6 +37,9 @@ public class GenericParticle extends TextureSheetParticle {
     public SpinParticleData spinData;
     public LightParticleData lightData;
     public SpriteParticleData spriteData;
+
+    public Collection<Consumer<GenericParticle>> tickActors;
+    public Collection<Consumer<GenericParticle>> renderActors;
 
     public boolean shouldCull;
     public boolean shouldRenderTraits;
@@ -66,6 +71,8 @@ public class GenericParticle extends TextureSheetParticle {
         this.spinData = options.spinData;
         this.lightData = options.lightData;
         this.spriteData = options.spriteData;
+        this.tickActors = options.tickActors;
+        this.renderActors = options.renderActors;
         this.xd = vx;
         this.yd = vy;
         this.zd = vz;
@@ -109,6 +116,7 @@ public class GenericParticle extends TextureSheetParticle {
 
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r2)), (int)(255 * Math.min(1.0f, g2)), (int)(255 * Math.min(1.0f, b2)), hsv2);
+        options.spawnActors.forEach(actor -> actor.accept(this));
         updateTraits();
     }
 
@@ -152,6 +160,26 @@ public class GenericParticle extends TextureSheetParticle {
         updateTraits();
         spriteData.tick(this);
         super.tick();
+        tickActors.forEach(a -> a.accept(this));
+    }
+
+    @Override
+    public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
+        if (shouldRenderTraits) updateRenderTraits(partialTicks);
+        spriteData.renderTick(this, partialTicks);
+        renderActors.forEach(actor -> actor.accept(this));
+        if (behavior == null) {
+            super.render(renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
+        } else {
+            behavior.render(this, renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
+        }
+    }
+
+    public void updateRenderTraits(float partialTicks) {
+        float time = age + partialTicks;
+        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(time, lifetime), 0, 1, 1));
+        quadSize = scaleData.getValue(time, lifetime, ss, ms, es);
+        alpha = transparencyData.getValue(time, lifetime, st, mt, et);
     }
 
     @Override
@@ -281,23 +309,5 @@ public class GenericParticle extends TextureSheetParticle {
         if (spriteIndex < spriteSet.sprites.size() && spriteIndex >= 0) {
             setSprite(spriteSet.sprites.get(spriteIndex));
         }
-    }
-
-    @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float partialTicks) {
-        if (shouldRenderTraits) updateRenderTraits(partialTicks);
-        spriteData.renderTick(this, partialTicks);
-        if (behavior == null) {
-            super.render(renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
-        } else {
-            behavior.render(this, renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
-        }
-    }
-
-    public void updateRenderTraits(float partialTicks) {
-        float time = age + partialTicks;
-        pickColor(colorData.colorCurveEasing.ease(colorData.getProgress(time, lifetime), 0, 1, 1));
-        quadSize = scaleData.getValue(time, lifetime, ss, ms, es);
-        alpha = transparencyData.getValue(time, lifetime, st, mt, et);
     }
 }

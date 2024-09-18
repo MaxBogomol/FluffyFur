@@ -53,6 +53,7 @@ public class SphereParticleBehavior extends ParticleBehavior implements ICustomB
                 .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())
+                .setLight(particle.getLightColor(partialTicks))
                 .renderSphere(poseStack, particle.getSize() / 2f, longs, lats);
         poseStack.popPose();
     }

@@ -1,10 +1,7 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.CubeParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.SphereParticleBehavior;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.*;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
@@ -45,7 +42,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 18);
+            nbt.putInt("mode", (mode + 1) % 19);
             mode = nbt.getInt("mode");
         }
 
@@ -347,9 +344,8 @@ public class TestShrimpItem extends Item {
                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
                         .setLifetime(20, 10)
                         .randomVelocity(1f)
-                        .setFriction(0.9f)
-                        .enablePhysics()
                         .setGravity(1f)
+                        .setFriction(0.9f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
 
@@ -366,8 +362,25 @@ public class TestShrimpItem extends Item {
                         .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
                         .setLifetime(20, 10)
                         .randomVelocity(1f)
+                        .setGravity(1f)
                         .setFriction(0.9f)
-                        .enablePhysics()
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 18) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.TRAIL)
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setBehavior(TrailParticleBehavior.create()
+                                .enableSecondColor()
+                                .setColorData(ColorParticleData.create().setRandomColor().build())
+                                .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .build())
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.5f).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(200, 100)
+                        .randomVelocity(1f)
                         .setGravity(1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }

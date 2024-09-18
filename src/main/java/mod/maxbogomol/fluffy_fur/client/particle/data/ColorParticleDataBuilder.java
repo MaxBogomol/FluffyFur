@@ -67,12 +67,12 @@ public class ColorParticleDataBuilder {
         return this;
     }
 
-    public ColorParticleDataBuilder setRandomColorFlat() {
+    public ColorParticleDataBuilder setRandomColor() {
         setRandomColor(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1);
         return this;
     }
 
-    public ColorParticleDataBuilder setRandomColor() {
+    public ColorParticleDataBuilder setRandomColorFlat() {
         setRandomColor(0, 1, 0, 1, 0, 1);
         return this;
     }

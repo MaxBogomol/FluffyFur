@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.particle.options;
 
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.SpriteParticleRenderType;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
@@ -11,6 +12,9 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Consumer;
 
 public class GenericParticleOptions implements ParticleOptions {
 
@@ -33,6 +37,10 @@ public class GenericParticleOptions implements ParticleOptions {
     public SpinParticleData spinData = DEFAULT_SPIN;
     public LightParticleData lightData = DEFAULT_LIGHT;
     public SpriteParticleData spriteData = DEFAULT_SPRITE;
+
+    public final Collection<Consumer<GenericParticle>> tickActors = new ArrayList<>();
+    public final Collection<Consumer<GenericParticle>> spawnActors = new ArrayList<>();
+    public final Collection<Consumer<GenericParticle>> renderActors = new ArrayList<>();
 
     public int lifetime = 20;
     public int additionalLifetime = 0;

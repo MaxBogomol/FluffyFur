@@ -1,57 +1,64 @@
 package mod.maxbogomol.fluffy_fur.client.particle.behavior;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
-import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.SparkParticleBehaviorComponent;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.TrailParticleBehaviorComponent;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SparkParticleBehavior extends ParticleBehavior {
+public class TrailParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender {
 
     public ColorParticleData colorData;
     public GenericParticleData transparencyData;
     public boolean secondColor;
 
-    public SparkParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.colorData = colorData;
         this.transparencyData = transparencyData;
         this.secondColor = secondColor;
     }
 
-    public SparkParticleBehavior copy() {
-        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+    public TrailParticleBehavior copy() {
+        return new TrailParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
-    public static SparkParticleBehaviorBuilder create() {
-        return new SparkParticleBehaviorBuilder(0, 0, 0);
+    public static TrailParticleBehaviorBuilder create() {
+        return new TrailParticleBehaviorBuilder(0, 0, 0);
     }
 
-    public static SparkParticleBehaviorBuilder create(float xOffset, float yOffset, float zOffset) {
-        return new SparkParticleBehaviorBuilder((float) Math.toRadians(xOffset), (float) Math.toRadians(yOffset), (float) Math.toRadians(zOffset));
+    public static TrailParticleBehaviorBuilder create(float xOffset, float yOffset, float zOffset) {
+        return new TrailParticleBehaviorBuilder((float) Math.toRadians(xOffset), (float) Math.toRadians(yOffset), (float) Math.toRadians(zOffset));
     }
 
-    public SparkParticleBehaviorComponent getComponent() {
-        return new SparkParticleBehaviorComponent();
+    public TrailParticleBehaviorComponent getComponent() {
+        return new TrailParticleBehaviorComponent();
     }
 
-    public SparkParticleBehaviorComponent getSparkComponent(GenericParticle particle) {
-        return (SparkParticleBehaviorComponent) particle.behaviorComponent;
+    public TrailParticleBehaviorComponent getTrailComponent(GenericParticle particle) {
+        return (TrailParticleBehaviorComponent) particle.behaviorComponent;
     }
 
     @Override
     public void init(GenericParticle particle) {
         super.init(particle);
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
+        component.trailPointBuilder = TrailPointBuilder.create(10);
 
         float r1 = GenericParticle.pickRandomValue(colorData.r1, colorData.rr11, colorData.rr12);
         float g1 = GenericParticle.pickRandomValue(colorData.g1, colorData.rg11, colorData.rg12);
@@ -69,7 +76,7 @@ public class SparkParticleBehavior extends ParticleBehavior {
     }
 
     public void pickColor(GenericParticle particle, float coeff) {
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
         float h = Mth.rotLerp(coeff, 360 * component.hsv1[0], 360 * component.hsv2[0]) / 360;
         float s = Mth.lerp(coeff, component.hsv1[1], component.hsv2[1]);
         float v = Mth.lerp(coeff, component.hsv1[2], component.hsv2[2]);
@@ -81,7 +88,7 @@ public class SparkParticleBehavior extends ParticleBehavior {
     }
 
     public void setColor(GenericParticle particle, float r, float g, float b) {
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
         component.r = r;
         component.g = g;
         component.b = b;
@@ -89,38 +96,43 @@ public class SparkParticleBehavior extends ParticleBehavior {
 
     @Override
     public void updateTraits(GenericParticle particle) {
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
-        component.xd = particle.xd;
-        component.yd = particle.yd;
-        component.zd = particle.zd;
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
+        component.trailPointBuilder.addTrailPoint(particle.getPosition());
+        component.trailPointBuilder.tickTrailPoints();
+
         pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(particle.age, particle.lifetime), 0, 1, 1));
         component.a = transparencyData.getValue(particle.age, particle.lifetime, particle.st, particle.mt, particle.et);
     }
 
     @Override
-    public void updateRenderTraits(GenericParticle particle, float partialTicks) {
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
-        float time = particle.age + partialTicks;
-        pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(time, particle.lifetime), 0, 1, 1));
-        component.a = transparencyData.getValue(time, particle.lifetime, particle.st, particle.mt, particle.et);
+    public void render(GenericParticle particle, VertexConsumer vertexConsumer, Camera renderInfo, float partialTicks) {
+        if (particle.shouldRenderTraits) updateRenderTraits(particle, partialTicks);
+        FluffyFurParticles.addBehaviorParticleList(particle, this);
     }
 
     @Override
-    public void render(GenericParticle particle, VertexConsumer vertexConsumer, Camera renderInfo, float partialTicks) {
-        if (particle.shouldRenderTraits) updateRenderTraits(particle, partialTicks);
+    public void render(GenericParticle particle, PoseStack poseStack, MultiBufferSource buffer, float partialTicks) {
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
 
-        Vec3 pos = getPosition(particle, renderInfo, partialTicks);
+        List<TrailPoint> trail = new ArrayList<>(component.trailPointBuilder.getTrailPoints());
+        if (trail.size() > 2 && particle.getAge() > component.trailPointBuilder.trailLength.get()) {
+            TrailPoint position = trail.get(0);
+            TrailPoint nextPosition = trail.get(1);
+            float x = (float) Mth.lerp(partialTicks, position.getPosition().x, nextPosition.getPosition().x);
+            float y = (float) Mth.lerp(partialTicks, position.getPosition().y, nextPosition.getPosition().y);
+            float z = (float) Mth.lerp(partialTicks, position.getPosition().z, nextPosition.getPosition().z);
+            trail.set(0, new TrailPoint(new Vec3(x, y, z)));
+        }
 
-        SparkParticleBehaviorComponent component = getSparkComponent(particle);
-        float x = (float) ((Mth.lerp(partialTicks, component.xd, particle.xd)));
-        float y = (float) ((Mth.lerp(partialTicks, component.yd, particle.yd)));
-        float z = (float) ((Mth.lerp(partialTicks, component.zd, particle.zd)));
+        float x = (float) (Mth.lerp(partialTicks, particle.xo, particle.x));
+        float y = (float) (Mth.lerp(partialTicks, particle.yo, particle.y));
+        float z = (float) (Mth.lerp(partialTicks, particle.zo, particle.z));
 
-        float width = particle.getQuadSize(partialTicks);
+        if (trail.size() > 0) {
+            trail.set(trail.size() - 1, new TrailPoint(new Vec3(x, y, z)));
+        }
 
-        Vec3 from = new Vec3(-x, -y, -z).add(pos);
-        Vec3 to = new Vec3(x, y, z).add(pos);
-        RenderBuilder builder = RenderBuilder.create().setFormat(DefaultVertexFormat.PARTICLE).setVertexConsumer(vertexConsumer)
+        RenderBuilder builder = RenderBuilder.create().setRenderType(particle.renderType).setSided(firstSide, secondSide)
                 .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())
@@ -129,6 +141,6 @@ public class SparkParticleBehavior extends ParticleBehavior {
             builder.setSecondColorRaw(component.r, component.g, component.b)
                     .setSecondAlpha(component.a);
         }
-        builder.renderBeam(null, from, to, width, Vec3.ZERO);
+        builder.renderTrail(poseStack, trail, (f) -> {return f * (particle.getSize() / 2f);});
     }
 }

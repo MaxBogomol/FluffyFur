@@ -48,6 +48,7 @@ public class CubeParticleBehavior extends ParticleBehavior implements ICustomBeh
                 .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())
+                .setLight(particle.getLightColor(partialTicks))
                 .renderCenteredCube(poseStack, particle.getSize() / 2f);
         poseStack.popPose();
     }

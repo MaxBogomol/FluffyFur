@@ -1,9 +1,9 @@
 package mod.maxbogomol.fluffy_fur.client.particle.behavior.component;
 
-public class SparkParticleBehaviorComponent extends ParticleBehaviorComponent {
-    public double xd;
-    public double yd;
-    public double zd;
+import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPointBuilder;
+
+public class TrailParticleBehaviorComponent extends ParticleBehaviorComponent {
+    public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(10);
 
     public float st;
     public float mt;
