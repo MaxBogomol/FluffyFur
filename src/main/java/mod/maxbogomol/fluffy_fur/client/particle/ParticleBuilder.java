@@ -118,6 +118,11 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder setDiscardFunction(GenericParticleOptions.DiscardFunctionType discardFunctionType) {
+        options.discardFunctionType = discardFunctionType;
+        return this;
+    }
+
     public ParticleBuilder setLifetime(int lifetime) {
         options.lifetime = lifetime;
         return this;

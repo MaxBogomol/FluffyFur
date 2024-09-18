@@ -42,6 +42,12 @@ public class GenericParticleOptions implements ParticleOptions {
     public final Collection<Consumer<GenericParticle>> spawnActors = new ArrayList<>();
     public final Collection<Consumer<GenericParticle>> renderActors = new ArrayList<>();
 
+    public enum DiscardFunctionType {
+        NONE, INVISIBLE, ENDING_CURVE_INVISIBLE
+    }
+
+    public DiscardFunctionType discardFunctionType = DiscardFunctionType.INVISIBLE;
+
     public int lifetime = 20;
     public int additionalLifetime = 0;
     public float gravity = 0;

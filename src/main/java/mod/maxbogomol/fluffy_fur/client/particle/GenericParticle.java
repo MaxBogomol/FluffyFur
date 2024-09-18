@@ -41,6 +41,10 @@ public class GenericParticle extends TextureSheetParticle {
     public Collection<Consumer<GenericParticle>> tickActors;
     public Collection<Consumer<GenericParticle>> renderActors;
 
+    public GenericParticleOptions.DiscardFunctionType discardFunctionType;
+    public boolean reachedPositiveAlpha;
+    public boolean reachedPositiveScale;
+
     public boolean shouldCull;
     public boolean shouldRenderTraits;
 
@@ -73,6 +77,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.spriteData = options.spriteData;
         this.tickActors = options.tickActors;
         this.renderActors = options.renderActors;
+        this.discardFunctionType = options.discardFunctionType;
         this.xd = vx;
         this.yd = vy;
         this.zd = vz;
@@ -153,6 +158,26 @@ public class GenericParticle extends TextureSheetParticle {
         roll = roll + spinData.getValue(age, lifetime, sr, mr, er) + randomSpin;
 
         if (behavior != null) behavior.updateTraits(this);
+
+        boolean shouldAttemptRemoval = discardFunctionType == GenericParticleOptions.DiscardFunctionType.INVISIBLE;
+        if (discardFunctionType == GenericParticleOptions.DiscardFunctionType.ENDING_CURVE_INVISIBLE) {
+            if (scaleData.getProgress(age, lifetime) > 0.5f || transparencyData.getProgress(age, lifetime) > 0.5f) {
+                shouldAttemptRemoval = true;
+            }
+        }
+        if (shouldAttemptRemoval) {
+            if ((reachedPositiveAlpha && alpha <= 0) || (reachedPositiveScale && quadSize <= 0)) {
+                remove();
+                return;
+            }
+        }
+
+        if (!reachedPositiveAlpha && alpha > 0) {
+            reachedPositiveAlpha = true;
+        }
+        if (!reachedPositiveScale && quadSize > 0) {
+            reachedPositiveScale = true;
+        }
     }
 
     @Override

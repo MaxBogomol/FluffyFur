@@ -26,16 +26,18 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public ColorParticleData colorData;
     public GenericParticleData transparencyData;
     public boolean secondColor;
+    public int trailSize;
 
-    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.colorData = colorData;
         this.transparencyData = transparencyData;
         this.secondColor = secondColor;
+        this.trailSize = trailSize;
     }
 
     public TrailParticleBehavior copy() {
-        return new TrailParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static TrailParticleBehaviorBuilder create() {
@@ -58,7 +60,7 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public void init(GenericParticle particle) {
         super.init(particle);
         TrailParticleBehaviorComponent component = getTrailComponent(particle);
-        component.trailPointBuilder = TrailPointBuilder.create(10);
+        component.trailPointBuilder = TrailPointBuilder.create(trailSize);
 
         float r1 = GenericParticle.pickRandomValue(colorData.r1, colorData.rr11, colorData.rr12);
         float g1 = GenericParticle.pickRandomValue(colorData.g1, colorData.rg11, colorData.rg12);

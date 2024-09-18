@@ -10,6 +10,7 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
     public ColorParticleData colorData = GenericParticleOptions.DEFAULT_COLOR;
     public GenericParticleData transparencyData = GenericParticleOptions.DEFAULT_GENERIC;
     public boolean secondColor = false;
+    public int trailSize = 10;
 
     protected TrailParticleBehaviorBuilder(float xOffset, float yOffset, float zOffset) {
         super(xOffset, yOffset, zOffset);
@@ -114,7 +115,12 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
+    public TrailParticleBehaviorBuilder setTrailSize(int trailSize) {
+        this.trailSize = trailSize;
+        return this;
+    }
+
     public ParticleBehavior build() {
-        return new TrailParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }
