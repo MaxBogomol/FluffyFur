@@ -11,6 +11,8 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -29,6 +31,8 @@ public class ParticleBuilder {
     boolean force = true;
     boolean distanceSpawn = true;
     double distance = 100;
+
+    public Collection<ParticleBuilder> additionalBuilders = new ArrayList<>();
 
     protected ParticleBuilder(GenericParticleOptions options) {
         this.options = options;
@@ -288,6 +292,16 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder addAdditionalBuilder(ParticleBuilder builder) {
+        additionalBuilders.add(builder);
+        return this;
+    }
+
+    public ParticleBuilder clearAdditionalBuilders() {
+        additionalBuilders.clear();
+        return this;
+    }
+
     public ParticleBuilder spawn(Level world, double x, double y, double z) {
         double yaw = random.nextFloat() * Math.PI * 2, pitch = random.nextFloat() * Math.PI - Math.PI / 2,
                 xSpeed = random.nextFloat() * maxXSpeed, ySpeed = random.nextFloat() * maxYSpeed, zSpeed = random.nextFloat() * maxZSpeed;
@@ -309,6 +323,9 @@ public class ParticleBuilder {
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
         if (!distanceSpawn || Math.sqrt(camera.getPosition().distanceToSqr(x + dx + fdx, y + dy + fdy, z + dz + fdz)) <= distance) {
             world.addParticle(options, force, x + dx + fdx, y + dy + fdy, z + dz + fdz, vx + fvx, vy + fvy, vz + fvz);
+            for (ParticleBuilder builder : additionalBuilders) {
+                world.addParticle(builder.getParticleOptions(), builder.force, x + dx + fdx, y + dy + fdy, z + dz + fdz, vx + fvx, vy + fvy, vz + fvz);
+            }
         }
 
         return this;

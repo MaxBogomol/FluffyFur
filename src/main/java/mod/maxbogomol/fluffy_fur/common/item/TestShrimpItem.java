@@ -42,7 +42,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 19);
+            nbt.putInt("mode", (mode + 1) % 20);
             mode = nbt.getInt("mode");
         }
 
@@ -382,6 +382,32 @@ public class TestShrimpItem extends Item {
                         .setLifetime(200, 100)
                         .randomVelocity(1f)
                         .setGravity(1f)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 19) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.5f).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(200, 100)
+                        .randomVelocity(1f)
+                        .setGravity(1f);
+                ParticleBuilder.create(FluffyFurParticles.TRAIL)
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setBehavior(TrailParticleBehavior.create()
+                                .setColorData(ColorParticleData.create().setRandomColor().build())
+                                .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                                .enableSecondColor()
+                                .build())
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.5f).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(200, 100)
+                        .randomVelocity(1f)
+                        .setGravity(1f)
+                        .addAdditionalBuilder(builder)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
         }

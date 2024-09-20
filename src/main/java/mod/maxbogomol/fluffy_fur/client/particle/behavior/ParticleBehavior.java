@@ -162,14 +162,14 @@ public class ParticleBehavior {
             quaternionf.rotationYXZ(-y * ((float)Math.PI / 180F), x * ((float)Math.PI / 180F), 0.0F);
         }
 
-        if (particle.roll != 0.0F) {
-            quaternionf.rotateY(Mth.lerp(partialTicks, particle.oRoll, particle.roll));
-        }
-
         ParticleBehaviorComponent component = particle.behaviorComponent;
         quaternionf.rotateX(Mth.lerp(partialTicks, component.xORoll, component.xRoll) + xOffset);
         quaternionf.rotateY(Mth.lerp(partialTicks, component.yORoll, component.yRoll) + yOffset);
         quaternionf.rotateZ(Mth.lerp(partialTicks, component.zORoll, component.zRoll) + zOffset);
+
+        if (particle.roll != 0.0F) {
+            quaternionf.rotateY(Mth.lerp(partialTicks, particle.oRoll, particle.roll));
+        }
 
         return quaternionf;
     }
