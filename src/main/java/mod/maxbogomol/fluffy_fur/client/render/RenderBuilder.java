@@ -623,6 +623,10 @@ public class RenderBuilder {
         return this;
     }
 
+    public RenderBuilder renderDragon(PoseStack stack, float radius, float partialTicks, float randomF) {
+        return renderDragon(stack, 0, 0, 0, radius, partialTicks, randomF);
+    }
+
     public RenderBuilder renderDragon(PoseStack stack, double x, double y, double z, float radius, float partialTicks, float randomF) {
         float f5 = 0.5f;
         float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);

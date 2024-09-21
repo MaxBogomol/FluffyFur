@@ -1,5 +1,5 @@
 [![](https://img.shields.io/badge/%20-LICENSE%20GPL--2.0-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE)
-[![Discord](https://img.shields.io/discord/1252898892882903082?style=for-the-badge&color=6aa84f&logo=discord&label=DISCORD)](https://discord.gg/cKf55qNugw)
+[![Discord](https://img.shields.io/discord/1155188824360624148?style=for-the-badge&color=6aa84f&logo=discord&label=DISCORD)](https://discord.gg/cKf55qNugw)
 
 > [!IMPORTANT]
 > Status: **Alpha**

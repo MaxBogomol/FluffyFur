@@ -31,6 +31,7 @@ public class LeavesParticle extends GenericParticle {
 
     @Override
     public void tick() {
+        updateTraits();
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
