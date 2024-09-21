@@ -15,8 +15,8 @@
 > }
 >
 > dependencies {
-> // your code here...
-> implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
+>    // your code here...
+>    implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
 > }
 > ```
 >
