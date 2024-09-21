@@ -7,7 +7,7 @@
 > ### INSTALATION
 > Duplicate the project, run it in IDE and publish to local maven using
 >
-> _Running:_ `gradlew publishToMavelLocal`
+> _Running:_ `gradlew publishToMavenLocal`
 >
 > ```java
 > repositories {
