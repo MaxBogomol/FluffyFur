@@ -24,7 +24,7 @@ public class FluffyFurShaders {
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> { ADDITIVE_TEXTURE = shader; });
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> { ADDITIVE = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR), shader -> { TRANSLUCENT_TEXTURE = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> { TRANSLUCENT_TEXTURE = shader; });
         }
     }
 }

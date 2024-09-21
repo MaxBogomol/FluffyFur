@@ -13,7 +13,7 @@ public class ParticleBehaviorBuilder {
     public float zOffset;
 
     public boolean firstSide = true;
-    public boolean secondSide = false;
+    public boolean secondSide = true;
     public boolean camera = false;
     public boolean xRotCam = true;
     public boolean yRotCam = true;
