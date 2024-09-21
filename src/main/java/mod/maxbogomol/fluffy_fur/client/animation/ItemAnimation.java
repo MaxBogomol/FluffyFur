@@ -40,10 +40,18 @@ public class ItemAnimation {
 
     }
 
+    public boolean isOnlyItemUse() {
+        return true;
+    }
+
     public static boolean isRightHand(Player player, InteractionHand hand) {
         if (player.getMainArm() == HumanoidArm.LEFT) {
             return hand != InteractionHand.MAIN_HAND;
         }
         return hand == InteractionHand.MAIN_HAND;
+    }
+
+    public static boolean isItemUse(LivingEntity player) {
+        return (player.isUsingItem() && player.getUseItemRemainingTicks() > 0);
     }
 }

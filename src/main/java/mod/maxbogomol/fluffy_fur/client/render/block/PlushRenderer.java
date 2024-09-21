@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PlushRenderer implements BlockEntityRenderer<PlushBlockEntity> {
 
     @Override
-    public void render(PlushBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int light, int overlay) {
+    public void render(PlushBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Minecraft minecraft = Minecraft.getInstance();
 
         int rotate = 0;
@@ -26,8 +26,7 @@ public class PlushRenderer implements BlockEntityRenderer<PlushBlockEntity> {
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) rotate * -22.5f + 180f));
-        minecraft.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, buffers, blockEntity.getLevel(), 0);
-
+        minecraft.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
     }
 }
