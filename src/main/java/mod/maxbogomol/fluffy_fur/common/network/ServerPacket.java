@@ -3,9 +3,11 @@ package mod.maxbogomol.fluffy_fur.common.network;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 public abstract class ServerPacket {
+    public static final Random random = new Random();
 
     public void encode(FriendlyByteBuf buf) {}
 

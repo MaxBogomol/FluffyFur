@@ -6,7 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
-import mod.maxbogomol.fluffy_fur.common.network.PositionEffectPacket;
+import mod.maxbogomol.fluffy_fur.common.network.PositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,13 +20,13 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class PlushHeartsEffectsPacket extends PositionEffectPacket {
+public class PlushHeartsPacket extends PositionClientPacket {
 
-    public PlushHeartsEffectsPacket(double x, double y, double z) {
+    public PlushHeartsPacket(double x, double y, double z) {
         super(x, y, z);
     }
 
-    public PlushHeartsEffectsPacket(BlockPos pos) {
+    public PlushHeartsPacket(BlockPos pos) {
         super(pos.getCenter());
     }
 
@@ -47,10 +47,10 @@ public class PlushHeartsEffectsPacket extends PositionEffectPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, PlushHeartsEffectsPacket.class, PlushHeartsEffectsPacket::encode, PlushHeartsEffectsPacket::decode, PlushHeartsEffectsPacket::handle);
+        instance.registerMessage(index, PlushHeartsPacket.class, PlushHeartsPacket::encode, PlushHeartsPacket::decode, PlushHeartsPacket::handle);
     }
 
-    public static PlushHeartsEffectsPacket decode(FriendlyByteBuf buf) {
-        return decode(PlushHeartsEffectsPacket::new, buf);
+    public static PlushHeartsPacket decode(FriendlyByteBuf buf) {
+        return decode(PlushHeartsPacket::new, buf);
     }
 }

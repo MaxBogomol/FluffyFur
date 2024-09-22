@@ -257,6 +257,14 @@ public class RenderUtil {
         renderConnectLineOffset(stack, new Vec3(size.x(), size.y(), 0), new Vec3(size.x() , size.y(), size.z()), color, alpha);
         renderConnectLineOffset(stack, new Vec3(size.x(), size.y(), size.z()), new Vec3(0, size.y(), size.z()), color, alpha);
         renderConnectLineOffset(stack, new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, alpha);
+        stack.pushPose();
+        stack.translate(0.01f, 0.01f, 0.01f);
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setAlpha(alpha / 8f)
+                .enableSided()
+                .renderCube(stack, (float) size.x() - 0.02f, (float) size.y() - 0.02f, (float) size.z() - 0.02f);
+        stack.popPose();
     }
 
     public static void renderConnectSideLines(PoseStack stack, Vec3 size, Color color, float alpha) {
@@ -264,6 +272,14 @@ public class RenderUtil {
         renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, alpha);
         renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, alpha);
         renderConnectLineOffset(stack, new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, alpha);
+        stack.pushPose();
+        stack.mulPose(Axis.XP.rotationDegrees(90f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setAlpha(alpha / 8f)
+                .enableSided()
+                .renderQuad(stack, (float) size.x(), (float) size.y());
+        stack.popPose();
     }
 
     public static void renderConnectSide(PoseStack stack, Direction side, Color color, float alpha) {
@@ -271,6 +287,7 @@ public class RenderUtil {
         stack.pushPose();
         stack.translate(0.5f, 0.5f, 0.5f);
         stack.mulPose(side.getOpposite().getRotation());
+        stack.translate(0, -0.001f, 0);
         stack.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
         renderConnectSideLines(stack, size, color, alpha);
         stack.popPose();

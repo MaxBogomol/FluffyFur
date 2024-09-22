@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.playerskin;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
-import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinEffectSetPacket;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetEffectPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
 import net.minecraft.world.entity.player.Player;
 
@@ -133,10 +133,10 @@ public class PlayerSkinHandler {
     }
 
     public static void setSkinEffectPacket(PlayerSkinEffect effect) {
-        PacketHandler.sendToServer(new PlayerSkinEffectSetPacket(effect.getId()));
+        PacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect.getId()));
     }
 
     public static void setSkinEffectPacket(String effect) {
-        PacketHandler.sendToServer(new PlayerSkinEffectSetPacket(effect));
+        PacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect));
     }
 }

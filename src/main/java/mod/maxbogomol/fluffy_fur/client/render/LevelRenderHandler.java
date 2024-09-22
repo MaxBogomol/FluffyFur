@@ -11,8 +11,12 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
 
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
@@ -27,6 +32,7 @@ public class LevelRenderHandler {
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
 
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
         PoseStack stack = event.getPoseStack();
         float partialTicks = event.getPartialTick();

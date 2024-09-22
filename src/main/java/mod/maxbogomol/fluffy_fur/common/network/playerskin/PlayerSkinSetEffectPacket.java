@@ -11,14 +11,14 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class PlayerSkinEffectSetPacket extends ServerPacket {
+public class PlayerSkinSetEffectPacket extends ServerPacket {
     private final Component effect;
 
-    public PlayerSkinEffectSetPacket(String effectId) {
+    public PlayerSkinSetEffectPacket(String effectId) {
         this.effect = Component.literal(effectId);
     }
 
-    public PlayerSkinEffectSetPacket(Component effectId) {
+    public PlayerSkinSetEffectPacket(Component effectId) {
         this.effect = effectId;
     }
 
@@ -32,14 +32,14 @@ public class PlayerSkinEffectSetPacket extends ServerPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, PlayerSkinEffectSetPacket.class, PlayerSkinEffectSetPacket::encode, PlayerSkinEffectSetPacket::decode, PlayerSkinEffectSetPacket::handle);
+        instance.registerMessage(index, PlayerSkinSetEffectPacket.class, PlayerSkinSetEffectPacket::encode, PlayerSkinSetEffectPacket::decode, PlayerSkinSetEffectPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeComponent(effect);
     }
 
-    public static PlayerSkinEffectSetPacket decode(FriendlyByteBuf buf) {
-        return new PlayerSkinEffectSetPacket(buf.readComponent());
+    public static PlayerSkinSetEffectPacket decode(FriendlyByteBuf buf) {
+        return new PlayerSkinSetEffectPacket(buf.readComponent());
     }
 }

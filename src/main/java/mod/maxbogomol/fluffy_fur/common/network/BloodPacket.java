@@ -19,15 +19,15 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class BloodEffectsPacket extends PositionEffectPacket {
+public class BloodPacket extends PositionClientPacket {
     protected final double size;
 
-    public BloodEffectsPacket(double x, double y, double z, double size) {
+    public BloodPacket(double x, double y, double z, double size) {
         super(x, y, z);
         this.size = size;
     }
 
-    public BloodEffectsPacket(Vec3 vec, double size) {
+    public BloodPacket(Vec3 vec, double size) {
         super(vec);
         this.size = size;
     }
@@ -57,7 +57,7 @@ public class BloodEffectsPacket extends PositionEffectPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, BloodEffectsPacket.class, BloodEffectsPacket::encode, BloodEffectsPacket::decode, BloodEffectsPacket::handle);
+        instance.registerMessage(index, BloodPacket.class, BloodPacket::encode, BloodPacket::decode, BloodPacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -67,7 +67,7 @@ public class BloodEffectsPacket extends PositionEffectPacket {
         buf.writeDouble(size);
     }
 
-    public static BloodEffectsPacket decode(FriendlyByteBuf buf) {
-        return new BloodEffectsPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble());
+    public static BloodPacket decode(FriendlyByteBuf buf) {
+        return new BloodPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble());
     }
 }

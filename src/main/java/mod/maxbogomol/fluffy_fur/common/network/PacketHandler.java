@@ -2,7 +2,7 @@ package mod.maxbogomol.fluffy_fur.common.network;
 
 import com.mojang.datafixers.util.Pair;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsEffectsPacket;
+import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -29,11 +29,11 @@ public final class PacketHandler {
         int id = 0;
         PlayerSkinUpdatePacket.register(HANDLER, id++);
         PlayerSkinSetPacket.register(HANDLER, id++);
-        PlayerSkinEffectSetPacket.register(HANDLER, id++);
+        PlayerSkinSetEffectPacket.register(HANDLER, id++);
         PlayerSkinChangeEffectPacket.register(HANDLER, id++);
         PlayerSkinChangePacket.register(HANDLER, id++);
-        PlushHeartsEffectsPacket.register(HANDLER, id++);
-        BloodEffectsPacket.register(HANDLER, id++);
+        PlushHeartsPacket.register(HANDLER, id++);
+        BloodPacket.register(HANDLER, id++);
     }
 
     private static final PacketDistributor<Pair<Level, BlockPos>> TRACKING_CHUNK_AND_NEAR = new PacketDistributor<>(
