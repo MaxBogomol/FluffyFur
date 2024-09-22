@@ -3,9 +3,7 @@ package mod.maxbogomol.fluffy_fur.util;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.item.CustomItemRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -124,219 +122,6 @@ public class RenderUtil {
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
     }
 
-    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
-        ray(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
-    }
-
-    public static void raySided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
-        raySided(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
-    }
-
-    public static void raySided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        ray(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
-        mStack.pushPose();
-        mStack.scale(-1, -1, -1);
-        mStack.mulPose(Axis.ZP.rotationDegrees(180f));
-        ray(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
-        mStack.popPose();
-    }
-
-    public static void ray(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-
-        Matrix4f mat = mStack.last().pose();
-
-        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-
-        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-
-        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, -width, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, -width, width, -width).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, -width, -width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, -width, -width, width).color(r1, g1, b1, a1).endVertex();
-    }
-
-    public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
-        beam(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
-    }
-
-    public static void beamSided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r, float g, float b, float a) {
-        beamSided(mStack, buf, width, height, endOffset, r, g, b, a, r, g, b, a);
-    }
-
-    public static void beamSided(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        beam(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
-        mStack.pushPose();
-        mStack.scale(-1, -1, -1);
-        mStack.mulPose(Axis.ZP.rotationDegrees(180f));
-        beam(mStack, buf, width, height, endOffset, r1, g1, b1, a1, r2, g2, b2, a2);
-        mStack.popPose();
-    }
-
-    public static void beam(PoseStack mStack, MultiBufferSource buf, float width, float height, float endOffset, float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-
-        Matrix4f mat = mStack.last().pose();
-
-        builder.vertex(mat, 0, width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, 0, -width, -width).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, 0, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, 0, -width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-
-        builder.vertex(mat, 0, width, width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, 0, width, -width).color(r1, g1, b1, a1).endVertex();
-
-        builder.vertex(mat, 0, -width, -width).color(r1, g1, b1, a1).endVertex();
-        builder.vertex(mat, height, -width * endOffset, -width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, height, -width * endOffset, width * endOffset).color(r2, g2, b2, a2).endVertex();
-        builder.vertex(mat, 0, -width, width).color(r1, g1, b1, a1).endVertex();
-    }
-
-    public static void litQuad(PoseStack mStack, MultiBufferSource buf, float x, float y, float width, float height, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-
-        Matrix4f mat = mStack.last().pose();
-        builder.vertex(mat, x, y + height, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y + height, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x + width, y, 0).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x, y, 0).color(r, g, b, a).endVertex();
-    }
-
-    public static void litQuadCube(PoseStack mStack, MultiBufferSource buf, float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b, float a) {
-        VertexConsumer builder = buf.getBuffer(FluffyFurRenderTypes.ADDITIVE);
-
-        Matrix4f mat = mStack.last().pose();
-
-        builder.vertex(mat, x1, y1 + y2, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1 + y2, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1, z1).color(r, g, b, a).endVertex();
-
-        builder.vertex(mat, x1 + x2, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1, z1 + z2).color(r, g, b, a).endVertex();
-
-        builder.vertex(mat, x1 + x2, y1, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1 + y2, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-
-        builder.vertex(mat, x1, y1, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1 + y2, z1).color(r, g, b, a).endVertex();
-
-        builder.vertex(mat, x1, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1 + y2, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1 + y2, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1 + y2, z1).color(r, g, b, a).endVertex();
-
-        builder.vertex(mat, x1, y1, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1, z1).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1 + x2, y1, z1 + z2).color(r, g, b, a).endVertex();
-        builder.vertex(mat, x1, y1, z1 + z2).color(r, g, b, a).endVertex();
-    }
-
-    public static void renderConnectLine(BlockPos posFrom, BlockPos posTo, Color color, float partialTicks, PoseStack ms) {
-        renderConnectLine(posFrom.getCenter(), posTo.getCenter(), color, partialTicks, ms);
-    }
-
-    public static void renderConnectLine(Vec3 from, Vec3 to, Color color, float partialTicks, PoseStack ms) {
-        MultiBufferSource bufferDelayed = LevelRenderHandler.getDelayedRender();
-
-        double dX = to.x() - from.x();
-        double dY = to.y() - from.y();
-        double dZ = to.z() - from.z();
-
-        double yaw = Math.atan2(dZ, dX);
-        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
-
-        float r = color.getRed() / 255f;
-        float g = color.getGreen() / 255f;
-        float b = color.getBlue() / 255f;
-        float a = color.getAlpha() / 255f;
-
-        ms.pushPose();
-        ms.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
-        ms.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 90f));
-        RenderUtil.ray(ms, bufferDelayed, 0.01f, (float) from.distanceTo(to) + 0.01f, 1f, r, g, b, 0.5f * a);
-        ms.popPose();
-    }
-
-    public static void renderConnectLineOffset(Vec3 from, Vec3 to, Color color, float partialTicks, PoseStack ms) {
-        ms.pushPose();
-        ms.translate(from.x(), from.y(), from.z());
-        renderConnectLine(from, to, color, partialTicks, ms);
-        ms.popPose();
-    }
-
-    public static void renderBoxLines(Vec3 size, Color color, float partialTicks, PoseStack ms) {
-        renderConnectLineOffset(new Vec3(0, 0, 0), new Vec3(size.x() , 0, 0), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, partialTicks, ms);
-
-        renderConnectLineOffset(new Vec3(0, 0, 0), new Vec3(0, size.y(), 0), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, 0), new Vec3(size.x(), size.y(), 0), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, size.z()), new Vec3(size.x(), size.y(), size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(0, 0, size.z()), new Vec3(0, size.y(), size.z()), color, partialTicks, ms);
-
-        renderConnectLineOffset(new Vec3(0, size.y(), 0), new Vec3(size.x(), size.y(), 0), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), size.y(), 0), new Vec3(size.x() , size.y(), size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), size.y(), size.z()), new Vec3(0, size.y(), size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, partialTicks, ms);
-    }
-
-    public static void renderSideLines(Vec3 size, Color color, float partialTicks, PoseStack ms) {
-        renderConnectLineOffset(new Vec3(0, 0, 0), new Vec3(size.x() , 0, 0), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, partialTicks, ms);
-        renderConnectLineOffset(new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, partialTicks, ms);
-    }
-
-    public static void renderSide(Direction side, Color color, float partialTicks, PoseStack ms) {
-        Vec3 size = new Vec3(1, 1, 1);
-        ms.pushPose();
-        ms.translate(0.5f, 0.5f, 0.5f);
-        ms.mulPose(side.getOpposite().getRotation());
-        ms.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
-        renderSideLines(size, color, partialTicks, ms);
-        ms.popPose();
-    }
-
-    public static Vector3f parametricSphere(float u, float v, float r) {
-        return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
-    }
-
     public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
         return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
     }
@@ -426,6 +211,73 @@ public class RenderUtil {
                     .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light & 0xFFFF));
         }
         return builder;
+    }
+
+    public static void renderConnectLine(PoseStack stack, Vec3 from, Vec3 to, Color color, float alpha) {
+        double dX = to.x() - from.x();
+        double dY = to.y() - from.y();
+        double dZ = to.z() - from.z();
+
+        double yaw = Math.atan2(dZ, dX);
+        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+        stack.pushPose();
+        stack.mulPose(Axis.YP.rotationDegrees((float) Math.toDegrees(-yaw)));
+        stack.mulPose(Axis.ZP.rotationDegrees((float) Math.toDegrees(-pitch) - 180f));
+        RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE)
+                .setColor(color)
+                .setAlpha(alpha)
+                .renderRay(stack, 0.01f, (float) from.distanceTo(to) + 0.01f);
+        stack.popPose();
+    }
+
+    public static void renderConnectLine(PoseStack stack, BlockPos posFrom, BlockPos posTo, Color color, float alpha) {
+        renderConnectLine(stack, posFrom.getCenter(), posTo.getCenter(), color, alpha);
+    }
+
+    public static void renderConnectLineOffset(PoseStack stack, Vec3 from, Vec3 to, Color color, float alpha) {
+        stack.pushPose();
+        stack.translate(from.x(), from.y(), from.z());
+        renderConnectLine(stack, from, to, color, alpha);
+        stack.popPose();
+    }
+
+    public static void renderConnectBoxLines(PoseStack stack, Vec3 size, Color color, float alpha) {
+        renderConnectLineOffset(stack, new Vec3(0, 0, 0), new Vec3(size.x() , 0, 0), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, alpha);
+
+        renderConnectLineOffset(stack, new Vec3(0, 0, 0), new Vec3(0, size.y(), 0), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), size.y(), 0), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(size.x(), size.y(), size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(0, 0, size.z()), new Vec3(0, size.y(), size.z()), color, alpha);
+
+        renderConnectLineOffset(stack, new Vec3(0, size.y(), 0), new Vec3(size.x(), size.y(), 0), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), size.y(), 0), new Vec3(size.x() , size.y(), size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), size.y(), size.z()), new Vec3(0, size.y(), size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(0, size.y(), size.z()), new Vec3(0, size.y(), 0), color, alpha);
+    }
+
+    public static void renderConnectSideLines(PoseStack stack, Vec3 size, Color color, float alpha) {
+        renderConnectLineOffset(stack, new Vec3(0, 0, 0), new Vec3(size.x() , 0, 0), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, 0), new Vec3(size.x(), 0, size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(size.x(), 0, size.z()), new Vec3(0, 0, size.z()), color, alpha);
+        renderConnectLineOffset(stack, new Vec3(0, 0, size.z()), new Vec3(0, 0, 0), color, alpha);
+    }
+
+    public static void renderConnectSide(PoseStack stack, Direction side, Color color, float alpha) {
+        Vec3 size = new Vec3(1, 1, 1);
+        stack.pushPose();
+        stack.translate(0.5f, 0.5f, 0.5f);
+        stack.mulPose(side.getOpposite().getRotation());
+        stack.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
+        renderConnectSideLines(stack, size, color, alpha);
+        stack.popPose();
+    }
+
+    public static Vector3f parametricSphere(float u, float v, float r) {
+        return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
     }
 
     public static Vec2 perpendicularTrailPoints(Vector4f start, Vector4f end, float width) {

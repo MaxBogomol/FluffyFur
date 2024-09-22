@@ -118,7 +118,7 @@ public class ParticleBehavior {
         Vector3f[] avector3f = getQuad(particle, renderInfo, partialTicks);
         float f3 = particle.getQuadSize(partialTicks);
 
-        for(int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; ++i) {
             Vector3f vector3f = avector3f[i];
             vector3f.rotate(quaternionf);
             vector3f.mul(f3);
