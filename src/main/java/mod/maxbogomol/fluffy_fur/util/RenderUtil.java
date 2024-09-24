@@ -58,15 +58,15 @@ public class RenderUtil {
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
         CustomItemRenderer customItemRenderer = getCustomItemRenderer();
 
-        PoseStack posestack = RenderSystem.getModelViewStack();
-        posestack.pushPose();
-        posestack.translate(x, y, 100.0F + blitOffset);
-        posestack.translate((double) xSize / 2, (double) ySize / 2, 0.0D);
-        posestack.scale(1.0F, -1.0F, 1.0F);
-        posestack.scale(xSize, ySize, zSize);
-        posestack.mulPose(Axis.XP.rotationDegrees(xRot));
-        posestack.mulPose(Axis.YP.rotationDegrees(yRot));
-        posestack.mulPose(Axis.ZP.rotationDegrees(zRot));
+        PoseStack poseStack = RenderSystem.getModelViewStack();
+        poseStack.pushPose();
+        poseStack.translate(x, y, 100.0F + blitOffset);
+        poseStack.translate((double) xSize / 2, (double) ySize / 2, 0.0D);
+        poseStack.scale(1.0F, -1.0F, 1.0F);
+        poseStack.scale(xSize, ySize, zSize);
+        poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
+        poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -79,42 +79,44 @@ public class RenderUtil {
         multibuffersource$buffersource.endBatch();
         RenderSystem.enableDepthTest();
         if (flag) Lighting.setupFor3DItems();
-        posestack.popPose();
+        poseStack.popPose();
         RenderSystem.applyModelViewMatrix();
     }
 
-    public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, int x, int y, float ticks, float ticksUp) {
+    public static void renderFloatingItemModelIntoGUI(GuiGraphics gui, ItemStack stack, float x, float y, float ticks, float ticksUp) {
         Minecraft minecraft = Minecraft.getInstance();
         BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
         CustomItemRenderer customItemRenderer = getCustomItemRenderer();
 
         float old = bakedmodel.getTransforms().gui.rotation.y;
+        blitOffset += 50.0F;
 
-        PoseStack posestack = gui.pose();
+        PoseStack poseStack = gui.pose();
 
-        posestack.pushPose();
-        posestack.translate((float)(x + 8), (float)(y + 8), 100 + blitOffset);
-        posestack.mulPoseMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
-        posestack.scale(16.0F, 16.0F, 16.0F);
-        posestack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
+        poseStack.pushPose();
+        poseStack.translate(x + 8, y + 8, 100 + blitOffset);
+        poseStack.mulPoseMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
+        poseStack.scale(16.0F, 16.0F, 16.0F);
+        poseStack.translate(0.0D, Math.sin(Math.toRadians(ticksUp)) * 0.03125F, 0.0D);
         if (bakedmodel.usesBlockLight()) {
             bakedmodel.getTransforms().gui.rotation.y = ticks;
         } else {
-            posestack.mulPose(Axis.YP.rotationDegrees(ticks));
+            poseStack.mulPose(Axis.YP.rotationDegrees(ticks));
         }
         boolean flag = !bakedmodel.usesBlockLight();
         if (flag) Lighting.setupForFlatItems();
 
-        customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, posestack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+        customItemRenderer.renderItem(stack, ItemDisplayContext.GUI, false, poseStack, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         RenderSystem.disableDepthTest();
         Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
         RenderSystem.enableDepthTest();
         if (flag) Lighting.setupFor3DItems();
-        posestack.popPose();
+        poseStack.popPose();
         RenderSystem.applyModelViewMatrix();
 
         bakedmodel.getTransforms().gui.rotation.y = old;
+        blitOffset -= 50.0F;
     }
 
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
