@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomFinalisedModel implements BakedModel {
-    private final BakedModel parentModel;
-    private final BakedModel subModel;
+    public final BakedModel parentModel;
+    public final BakedModel subModel;
 
     public CustomFinalisedModel(BakedModel parentModel, BakedModel subModel) {
         this.parentModel = parentModel;

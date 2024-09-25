@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 public class CustomModel implements BakedModel {
-    private final BakedModel baseModel;
-    private final CustomItemOverrides itemOverrides;
+    public final BakedModel baseModel;
+    public final CustomItemOverrides itemOverrides;
 
     public CustomModel(BakedModel baseModel, CustomItemOverrides itemOverrides) {
         this.baseModel = baseModel;

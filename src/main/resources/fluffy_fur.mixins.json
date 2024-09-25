@@ -13,6 +13,7 @@
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.CurioTooltipMixin",
+    "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",
     "client.ItemInHandLayerMixin",

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -25,6 +26,9 @@ public class FluffyFurRenderTypes {
     public static List<RenderType> additiveRenderTypes = new ArrayList<>();
     public static List<RenderType> translucentParticleRenderTypes = new ArrayList<>();
     public static List<RenderType> translucentRenderTypes = new ArrayList<>();
+
+    public static List<RenderBuilder> customItemRenderBuilderGui = new ArrayList<>();
+    public static List<RenderBuilder> customItemRenderBuilderFirst = new ArrayList<>();
 
     public static final RenderStateShard.TransparencyStateShard ADDITIVE_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("additive_transparency", () -> {
         RenderSystem.enableBlend();
@@ -148,5 +152,13 @@ public class FluffyFurRenderTypes {
     public static void addTranslucentRenderType(RenderType renderType) {
         translucentRenderTypes.add(renderType);
         addRenderType(renderType);
+    }
+
+    public static void addCustomItemRenderBuilderGui(RenderBuilder renderBuilder) {
+        customItemRenderBuilderGui.add(renderBuilder);
+    }
+
+    public static void addCustomItemRenderBuilderFirst(RenderBuilder renderBuilder) {
+        customItemRenderBuilderFirst.add(renderBuilder);
     }
 }
