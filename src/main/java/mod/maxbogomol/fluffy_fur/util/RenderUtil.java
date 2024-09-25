@@ -215,7 +215,7 @@ public class RenderUtil {
                     .setSecondUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texWidth), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
                     .setThirdUV(sprite.getU0(), sprite.getV0(), sprite.getU0() + ((sprite.getU1() - sprite.getU0()) * texLength), sprite.getV0() + ((sprite.getV1() - sprite.getV0()) * texHeight))
                     .setColor(ColorUtil.getColor(clientType.getTintColor(fluidStack)))
-                    .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light & 0xFFFF));
+                    .setLight(Math.max(type.getLightLevel(fluidStack) << 4, light));
         }
         return builder;
     }

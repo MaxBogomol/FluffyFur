@@ -1,10 +1,14 @@
-package mod.maxbogomol.fluffy_fur.client.event;
+package mod.maxbogomol.fluffy_fur.client.screenshake;
 
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
+import java.util.ArrayList;
+
 public class ScreenshakeHandler {
+
+    public static final ArrayList<ScreenshakeInstance> INSTANCES = new ArrayList<>();
     public static float intensity;
     public static float yawOffset;
     public static float pitchOffset;
@@ -18,18 +22,14 @@ public class ScreenshakeHandler {
     }
 
     public static void clientTick(Camera camera, RandomSource random) {
-        if (intensity > 0) {
-            intensity = intensity - 0.05f;
-            if (intensity < 0) {
-                intensity = 0;
-            }
-        }
+        double sum = Math.min(INSTANCES.stream().mapToDouble(i1 -> i1.updateIntensity(camera, random)).sum(), 1); //add intensity config
+
+        intensity = (float) Math.pow(sum, 3);
+        INSTANCES.removeIf(i -> i.progress >= i.duration);
     }
 
-    public static void addScreenshake(float newIntensity) {
-        if (newIntensity > intensity) {
-            intensity = newIntensity;
-        }
+    public static void addScreenshake(ScreenshakeInstance instance) {
+        INSTANCES.add(instance);
     }
 
     public static float randomizeOffset(RandomSource random) {
