@@ -16,4 +16,7 @@ public interface IPlayerSkin {
 
     void setSkinEffect(String id);
     String getSkinEffect();
+
+    void setSkinCape(String id);
+    String getSkinCape();
 }

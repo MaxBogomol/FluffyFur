@@ -29,7 +29,14 @@
   "gui.fluffy_fur.menu.mod": "Mod:",
 
   "gui.fluffy_fur.skin_menu.skins": "Skins",
+  "gui.fluffy_fur.skin_menu.capes": "Capes",
   "gui.fluffy_fur.skin_menu.skin_effects": "Skin Effects",
+
+  "gui.fluffy_fur.skin_menu.standard": "Standard",
+  "gui.fluffy_fur.skin_menu.empty": "Empty",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "Nanachi",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "Fluffy",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Pink Hearts",
 
   "_comment_4": "Key binds",
   "key.category.fluffy_fur.general": "Fluffy Fur",

@@ -10,31 +10,31 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class PlayerSkinSetPacket extends ServerPacket {
-    private final String skin;
+public class PlayerSkinSetCapePacket extends ServerPacket {
+    private final String cape;
 
-    public PlayerSkinSetPacket(String skin) {
-        this.skin = skin;
+    public PlayerSkinSetCapePacket(String capeId) {
+        this.cape = capeId;
     }
 
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();
-        PlayerSkinHandler.setSkin(player, skin);
+        PlayerSkinHandler.setSkinCape(player, cape);
         for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
             PacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
         }
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, PlayerSkinSetPacket.class, PlayerSkinSetPacket::encode, PlayerSkinSetPacket::decode, PlayerSkinSetPacket::handle);
+        instance.registerMessage(index, PlayerSkinSetCapePacket.class, PlayerSkinSetCapePacket::encode, PlayerSkinSetCapePacket::decode, PlayerSkinSetCapePacket::handle);
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeUtf(skin);
+        buf.writeUtf(cape);
     }
 
-    public static PlayerSkinSetPacket decode(FriendlyByteBuf buf) {
-        return new PlayerSkinSetPacket(buf.readUtf());
+    public static PlayerSkinSetCapePacket decode(FriendlyByteBuf buf) {
+        return new PlayerSkinSetCapePacket(buf.readUtf());
     }
 }

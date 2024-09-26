@@ -8,6 +8,7 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     PlayerSkinData data;
     String skinId = "";
     String skinEffectId = "";
+    String skinCapeId = "";
 
     @Override
     public void setSkinData(PlayerSkinData data) {
@@ -40,10 +41,21 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     }
 
     @Override
+    public void setSkinCape(String id) {
+        this.skinCapeId = id;
+    }
+
+    @Override
+    public String getSkinCape() {
+        return skinCapeId;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag wrapper = new CompoundTag();
         wrapper.putString("skin", skinId);
         wrapper.putString("skinEffect", skinEffectId);
+        wrapper.putString("skinCape", skinCapeId);
 
         return wrapper;
     }
@@ -55,6 +67,9 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
         }
         if (nbt.contains("skinEffect")) {
             skinEffectId = nbt.getString("skinEffect");
+        }
+        if (nbt.contains("skinCape")) {
+            skinCapeId = nbt.getString("skinCape");
         }
     }
 }

@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinCape;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinEffect;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PlayerSkinMenuScreen extends Screen {
 
     public List<SkinEntry> skins = new ArrayList<>();
+    public List<SkinCapeEntry> skinCapes = new ArrayList<>();
     public List<SkinEffectEntry> skinEffects = new ArrayList<>();
 
     public PlayerSkinMenuScreen() {
@@ -27,13 +29,16 @@ public class PlayerSkinMenuScreen extends Screen {
     }
 
     public void initSkins() {
-        skins.add(new SkinEntry(null, Component.literal("Standard")));
+        skins.add(new SkinEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.MAXBOGOMOL, Component.literal("MaxBogomol")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.ONIXTHECAT, Component.literal("OnixTheCat")));
-        skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI, Component.literal("Nanachi")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI, Component.translatable("gui.fluffy_fur.skin_menu.skin.nanachi")));
 
-        skinEffects.add(new SkinEffectEntry(null, Component.literal("Empty")));
-        skinEffects.add(new SkinEffectEntry(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT, Component.literal("Pink Hearts")));
+        skinCapes.add(new SkinCapeEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
+        skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.FLUFFY_CAPE, Component.translatable("gui.fluffy_fur.skin_menu.cape.fluffy")));
+
+        skinEffects.add(new SkinEffectEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.empty")));
+        skinEffects.add(new SkinEffectEntry(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT, Component.translatable("gui.fluffy_fur.skin_menu.effect.pink_hearts")));
     }
 
     @Override
@@ -80,6 +85,47 @@ public class PlayerSkinMenuScreen extends Screen {
             gui.drawCenteredString(font, skin.getName(), x - (rowOffset / 2) + (size / 2), y + offset + 1 - (selected ? 1 : 0), 16777215);
 
             skinRows.set(ii, rowOffset - (size * 2 + 8));
+
+            i++;
+            if (i >= rowSize) {
+                offset = offset + 12;
+                i = 0;
+                ii++;
+            }
+        }
+
+        offset = offset + 18;
+
+        component = Component.translatable("gui.fluffy_fur.skin_menu.capes");
+        FluffyFurMenuScreen.drawBlackBackground(gui, x, y + offset, font.width(component) + 8, mouseX, mouseY, partialTicks);
+        gui.drawCenteredString(font, component, x, y + offset + 1, 16777215);
+
+        offset = offset + 12;
+
+        i = 0;
+        List<Integer> capeRows = new ArrayList<>();
+        capeRows.add(0);
+        for (SkinCapeEntry cape : skinCapes) {
+            capeRows.set(capeRows.size() - 1, capeRows.get(capeRows.size() - 1) + font.width(cape.getName()) + 10);
+            i++;
+            if (i >= rowSize) {
+                capeRows.add(0);
+                i = 0;
+            }
+        }
+
+        i = 0;
+        ii = 0;
+        for (SkinCapeEntry cape : skinCapes) {
+            int rowOffset = capeRows.get(ii);
+            int size = font.width(cape.getName()) + 8;
+
+            boolean selected = mouseX >= x - (rowOffset / 2) && mouseY >= y + offset && mouseX <= x - (rowOffset / 2) + size && mouseY < y + offset + 10;
+
+            FluffyFurMenuScreen.drawBlackBackground(gui, x - (rowOffset / 2) + (size / 2), y + offset - (selected ? 1 : 0), size, selected ? 0.75f: 0.5f, mouseX, mouseY, partialTicks);
+            gui.drawCenteredString(font, cape.getName(), x - (rowOffset / 2) + (size / 2), y + offset + 1 - (selected ? 1 : 0), 16777215);
+
+            capeRows.set(ii, rowOffset - (size * 2 + 8));
 
             i++;
             if (i >= rowSize) {
@@ -188,6 +234,47 @@ public class PlayerSkinMenuScreen extends Screen {
         offset = offset + 30;
 
         i = 0;
+        List<Integer> capeRows = new ArrayList<>();
+        capeRows.add(0);
+        for (SkinCapeEntry cape : skinCapes) {
+            capeRows.set(capeRows.size() - 1, capeRows.get(capeRows.size() - 1) + font.width(cape.getName()) + 10);
+            i++;
+            if (i >= rowSize) {
+                capeRows.add(0);
+                i = 0;
+            }
+        }
+
+        i = 0;
+        ii = 0;
+        for (SkinCapeEntry cape : skinCapes) {
+            int rowOffset = capeRows.get(ii);
+            int size = font.width(cape.getName()) + 8;
+
+            boolean selected = mouseX >= x - (rowOffset / 2f) && mouseY >= y + offset && mouseX <= x - (rowOffset / 2f) + size && mouseY < y + offset + 10;
+            if (selected) {
+                if (cape.getCape() != null) {
+                    PlayerSkinHandler.setSkinCapePacket(cape.getCape());
+                } else {
+                    PlayerSkinHandler.setSkinCapePacket("");
+                }
+                this.onClose();
+                return true;
+            }
+
+            capeRows.set(ii, rowOffset - (size * 2 + 8));
+
+            i++;
+            if (i >= rowSize) {
+                offset = offset + 12;
+                i = 0;
+                ii++;
+            }
+        }
+
+        offset = offset + 30;
+
+        i = 0;
         List<Integer> effectRows = new ArrayList<>();
         effectRows.add(0);
         for (SkinEffectEntry effect : skinEffects) {
@@ -264,12 +351,30 @@ public class PlayerSkinMenuScreen extends Screen {
         }
     }
 
+    public static class SkinCapeEntry {
+        public PlayerSkinCape cape;
+        public Component name;
+
+        public SkinCapeEntry(PlayerSkinCape cape, Component name) {
+            this.cape = cape;
+            this.name = name;
+        }
+
+        public PlayerSkinCape getCape() {
+            return cape;
+        }
+
+        public Component getName() {
+            return name;
+        }
+    }
+
     public static class SkinEffectEntry {
         public PlayerSkinEffect effect;
         public Component name;
 
-        public SkinEffectEntry(PlayerSkinEffect skin, Component name) {
-            this.effect = skin;
+        public SkinEffectEntry(PlayerSkinEffect effect, Component name) {
+            this.effect = effect;
             this.name = name;
         }
 

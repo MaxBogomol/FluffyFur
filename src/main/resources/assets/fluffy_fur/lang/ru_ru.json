@@ -29,7 +29,14 @@
   "gui.fluffy_fur.menu.mod": "Мод:",
 
   "gui.fluffy_fur.skin_menu.skins": "Облики",
+  "gui.fluffy_fur.skin_menu.capes": "Плащи",
   "gui.fluffy_fur.skin_menu.skin_effects": "Эффекты обликов",
+
+  "gui.fluffy_fur.skin_menu.standard": "Стандартный",
+  "gui.fluffy_fur.skin_menu.empty": "Пустой",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначи",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердчеки",
 
   "_comment_4": "Привязка клавиш",
   "key.category.fluffy_fur.general": "Fluffy Fur",

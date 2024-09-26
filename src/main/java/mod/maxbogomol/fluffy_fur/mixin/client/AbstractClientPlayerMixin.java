@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinCape;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +22,19 @@ public abstract class AbstractClientPlayerMixin {
             ResourceLocation skinTexture = skin.getSkin(self);
             if (skinTexture != null) {
                 cir.setReturnValue(skinTexture);
+            }
+        }
+    }
+
+    @Inject(at = @At("RETURN"), method = "getCloakTextureLocation", cancellable = true)
+    private void fluffy_fur$getCloakTextureLocation(CallbackInfoReturnable<ResourceLocation> cir) {
+        AbstractClientPlayer self = (AbstractClientPlayer) ((Object) this);
+        PlayerSkinCape cape = PlayerSkinHandler.getSkinCape(self);
+
+        if (cape != null) {
+            ResourceLocation capeTexture = cape.getSkin(self);
+            if (capeTexture != null) {
+                cir.setReturnValue(capeTexture);
             }
         }
     }

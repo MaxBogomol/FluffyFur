@@ -25,6 +25,9 @@ public class FluffyFurPlayerSkins {
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/tail"))
             .setSlim(true);
 
+    public static PlayerSkinCape FLUFFY_CAPE = new PlayerSkinCape(FluffyFur.MOD_ID + ":fluffy")
+            .setTexture(PlayerSkinCape.getCapeLocation(FluffyFur.MOD_ID, "fluffy"));
+
     public static PlayerSkinEffect PINK_HEARTS_EFFECT = new PinkHeartsPlayerSkinEffect(FluffyFur.MOD_ID + ":pink_hearts");
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -34,6 +37,8 @@ public class FluffyFurPlayerSkins {
             PlayerSkinHandler.register(MAXBOGOMOL);
             PlayerSkinHandler.register(ONIXTHECAT);
             PlayerSkinHandler.register(NANACHI);
+
+            PlayerSkinHandler.register(FLUFFY_CAPE);
 
             PlayerSkinHandler.register(PINK_HEARTS_EFFECT);
         }

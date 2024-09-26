@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.playerskin;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetCapePacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetEffectPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PlayerSkinHandler {
     public static Map<String, PlayerSkin> skins = new HashMap<>();
     public static Map<String, PlayerSkinEffect> skinEffects = new HashMap<>();
+    public static Map<String, PlayerSkinCape> skinCapes = new HashMap<>();
 
     public static void register(PlayerSkin skin) {
         skins.put(skin.getId(), skin);
@@ -138,5 +140,54 @@ public class PlayerSkinHandler {
 
     public static void setSkinEffectPacket(String effect) {
         PacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect));
+    }
+
+    public static PlayerSkinCape getSkinCape(Player player) {
+        AtomicReference<String> id  = new AtomicReference<>();
+        player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+            id.set(s.getSkinCape());
+        });
+        if (skinCapes.containsKey(id.get())) {
+            return skinCapes.get(id.get());
+        }
+
+        return null;
+    }
+
+    public static List<PlayerSkinCape> getSkinCapes() {
+        return skinCapes.values().stream().toList();
+    }
+
+    public static void setSkinCape(Player player, String cape) {
+        if (cape != null) {
+            player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+                s.setSkinCape(cape);
+            });
+            setSkinData(player, new PlayerSkinData());
+        } else {
+            player.getCapability(IPlayerSkin.INSTANCE, null).ifPresent((s) -> {
+                s.setSkinCape("");
+            });
+        }
+    }
+
+    public static void setSkinCape(Player player, PlayerSkinCape cape) {
+        if (cape != null) {
+            setSkinCape(player, cape.getId());
+        } else {
+            setSkinCape(player, "");
+        }
+    }
+
+    public static void setSkinCapePacket(PlayerSkinCape cape) {
+        PacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape.getId()));
+    }
+
+    public static void setSkinCapePacket(String cape) {
+        PacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape));
+    }
+
+    public static void register(PlayerSkinCape cape) {
+        skinCapes.put(cape.getId(), cape);
     }
 }

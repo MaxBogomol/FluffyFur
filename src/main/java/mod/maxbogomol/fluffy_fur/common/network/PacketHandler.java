@@ -30,6 +30,7 @@ public final class PacketHandler {
         PlayerSkinUpdatePacket.register(HANDLER, id++);
         PlayerSkinSetPacket.register(HANDLER, id++);
         PlayerSkinSetEffectPacket.register(HANDLER, id++);
+        PlayerSkinSetCapePacket.register(HANDLER, id++);
         PlayerSkinChangeEffectPacket.register(HANDLER, id++);
         PlayerSkinChangePacket.register(HANDLER, id++);
         PlushHeartsPacket.register(HANDLER, id++);
