@@ -26,17 +26,17 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class RenderBuilder {
-    protected float r1 = 1, g1 = 1, b1 = 1, a1 = 1;
-    protected float r2 = 1, g2 = 1, b2 = 1, a2 = 1;
-    protected float r3 = 1, g3 = 1, b3 = 1, a3 = 1;
-    protected int l1 = RenderUtil.FULL_BRIGHT;
-    protected int l2 = RenderUtil.FULL_BRIGHT;
-    protected int l3 = RenderUtil.FULL_BRIGHT;
-    protected float u0 = 0, v0 = 0, u1 = 1, v1 = 1;
-    protected float u2 = 0, v2 = 0, u3 = 1, v3 = 1;
-    protected float u4 = 0, v4 = 0, u5 = 1, v5 = 1;
-    protected boolean firstSide = true;
-    protected boolean secondSide = false;
+    public float r1 = 1, g1 = 1, b1 = 1, a1 = 1;
+    public float r2 = 1, g2 = 1, b2 = 1, a2 = 1;
+    public float r3 = 1, g3 = 1, b3 = 1, a3 = 1;
+    public int l1 = RenderUtil.FULL_BRIGHT;
+    public int l2 = RenderUtil.FULL_BRIGHT;
+    public int l3 = RenderUtil.FULL_BRIGHT;
+    public float u0 = 0, v0 = 0, u1 = 1, v1 = 1;
+    public float u2 = 0, v2 = 0, u3 = 1, v3 = 1;
+    public float u4 = 0, v4 = 0, u5 = 1, v5 = 1;
+    public boolean firstSide = true;
+    public boolean secondSide = false;
 
     protected MultiBufferSource bufferSource = LevelRenderHandler.DELAYED_RENDER;
     protected RenderType renderType;
