@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
@@ -34,7 +34,7 @@ public class ClientEvents {
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {
         if (event.getScreen() instanceof TitleScreen titleScreen) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(ClientConfig.CUSTOM_PANORAMA.get());
+            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
             if (panorama != null) {
                 boolean setPanorama = false;
                 if (!TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture())) {

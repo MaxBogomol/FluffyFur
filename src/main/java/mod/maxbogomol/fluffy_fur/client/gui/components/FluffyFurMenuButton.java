@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.gui.components;
 
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMenuScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -77,17 +77,17 @@ public class FluffyFurMenuButton extends Button {
     public static class OpenConfigButtonHandler {
         @SubscribeEvent
         public static void onGuiInit(ScreenEvent.Init event) {
-            if (ClientConfig.PANORAMA_BUTTON.get()) {
+            if (FluffyFurClientConfig.PANORAMA_BUTTON.get()) {
                 Screen gui = event.getScreen();
 
                 MenuRows menu = null;
                 int rowIdx = 0, offsetX = 0, offsetFreeX = 0, offsetFreeY = 0;
                 if (gui instanceof TitleScreen) {
                     menu = MenuRows.MAIN_MENU;
-                    rowIdx = ClientConfig.PANORAMA_BUTTON_ROW.get();
-                    offsetX = ClientConfig.PANORAMA_BUTTON_ROW_X_OFFSET.get();
-                    offsetFreeX = ClientConfig.PANORAMA_BUTTON_X_OFFSET.get();
-                    offsetFreeY = ClientConfig.PANORAMA_BUTTON_Y_OFFSET.get();
+                    rowIdx = FluffyFurClientConfig.PANORAMA_BUTTON_ROW.get();
+                    offsetX = FluffyFurClientConfig.PANORAMA_BUTTON_ROW_X_OFFSET.get();
+                    offsetFreeX = FluffyFurClientConfig.PANORAMA_BUTTON_X_OFFSET.get();
+                    offsetFreeY = FluffyFurClientConfig.PANORAMA_BUTTON_Y_OFFSET.get();
                 }
 
                 if (rowIdx != 0 && menu != null) {

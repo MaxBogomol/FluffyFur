@@ -1,9 +1,9 @@
-package mod.maxbogomol.fluffy_fur.client.config;
+package mod.maxbogomol.fluffy_fur.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class ClientConfig {
+public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             ITEM_PARTICLE, ITEM_GUI_PARTICLE,
             PANORAMA_BUTTON;
@@ -12,7 +12,7 @@ public class ClientConfig {
     public static ForgeConfigSpec.ConfigValue<String>
             CUSTOM_PANORAMA;
 
-    public ClientConfig(ForgeConfigSpec.Builder builder) {
+    public FluffyFurClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.")
                 .define("itemParticle", true);
@@ -36,11 +36,11 @@ public class ClientConfig {
         builder.pop();
     }
 
-    public static final ClientConfig INSTANCE;
+    public static final FluffyFurClientConfig INSTANCE;
     public static final ForgeConfigSpec SPEC;
 
     static {
-        final Pair<ClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
+        final Pair<FluffyFurClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(FluffyFurClientConfig::new);
         SPEC = specPair.getRight();
         INSTANCE = specPair.getLeft();
     }

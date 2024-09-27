@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur.mixin.common;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.common.item.IParticleItem;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ public abstract class ItemEntityMixin {
     public void fluffy_fur$addParticles(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) ((Object) this);
         if (self.level().isClientSide) {
-            if (ClientConfig.ITEM_PARTICLE.get()) {
+            if (FluffyFurClientConfig.ITEM_PARTICLE.get()) {
                 if (self.getItem().getItem() instanceof IParticleItem) {
                     IParticleItem item = (IParticleItem) self.getItem().getItem();
                     item.addParticles(FluffyFur.proxy.getLevel(), self);

@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
@@ -62,7 +62,7 @@ public class FluffyFurMenuScreen extends Screen {
         mods = FluffyFurModsHandler.getSortedMods();
         panoramas = FluffyFurModsHandler.getSortedPanoramas();
 
-        FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(ClientConfig.CUSTOM_PANORAMA.get());
+        FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
         if (panorama != null) {
             if (panoramas.contains(panorama)) {
                 selectedPanorama = panoramas.indexOf(panorama);

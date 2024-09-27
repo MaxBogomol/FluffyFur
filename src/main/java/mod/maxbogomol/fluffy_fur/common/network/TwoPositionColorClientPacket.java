@@ -38,9 +38,9 @@ public abstract class TwoPositionColorClientPacket extends ClientPacket {
         this.x2 = vec.x();
         this.y2 = vec.y();
         this.z2 = vec.z();
-        this.r = color.getRed();
-        this.g = color.getGreen();
-        this.b = color.getBlue();
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
         this.a = 1;
     }
 
@@ -51,9 +51,9 @@ public abstract class TwoPositionColorClientPacket extends ClientPacket {
         this.x2 = vec2.x();
         this.y2 = vec2.y();
         this.z2 = vec2.z();
-        this.r = color.getRed();
-        this.g = color.getGreen();
-        this.b = color.getBlue();
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
         this.a = 1;
     }
 

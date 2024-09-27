@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -107,11 +107,11 @@ public class FluffyFurModsHandler {
     }
 
     public static FluffyFurPanorama getPanorama() {
-        return getPanorama(ClientConfig.CUSTOM_PANORAMA.get());
+        return getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
     }
 
     public static void setPanorama(FluffyFurPanorama panorama) {
-        ClientConfig.CUSTOM_PANORAMA.set(panorama.getId());
+        FluffyFurClientConfig.CUSTOM_PANORAMA.set(panorama.getId());
     }
 
     public static void setOpenPanorama(TitleScreen titleScreen, FluffyFurPanorama panorama) {

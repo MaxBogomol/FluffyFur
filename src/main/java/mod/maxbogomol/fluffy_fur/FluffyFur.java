@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur;
 
-import mod.maxbogomol.fluffy_fur.client.config.ClientConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.event.Events;
 import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
@@ -49,7 +49,7 @@ public class FluffyFur {
         FluffyFurParticles.register(eventBus);
         FluffyFurLootModifier.register(eventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FluffyFurClientConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             FluffyFurClient.ClientOnly.clientInit();
