@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ import java.awt.*;
 public class FluffyFurClient {
 
     public static boolean optifinePresent = false;
+    public static boolean piracyPresent = false;
 
     public static class ClientOnly {
         public static void clientInit() {
@@ -33,6 +35,7 @@ public class FluffyFurClient {
         } catch (ClassNotFoundException e) {
             optifinePresent = false;
         }
+        piracyPresent = ModList.get().isLoaded("tlskincape");
 
         setupMenu();
 

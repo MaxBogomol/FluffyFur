@@ -26,10 +26,10 @@ public abstract class TitleScreenMixin {
 
     @Inject(at = @At("RETURN"), method = "render")
     public void fluffy_fur$render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        TitleScreen self = (TitleScreen) ((Object) this);
+        Font font = Minecraft.getInstance().font;
+        PoseStack poseStack = guiGraphics.pose();
         if (FluffyFurClient.optifinePresent) {
-            TitleScreen self = (TitleScreen) ((Object) this);
-            Font font = Minecraft.getInstance().font;
-            PoseStack poseStack = guiGraphics.pose();
             for (int i = 0; i < 26; i++) {
                 float ticks = fluffy_fur$ticks + partialTick + i;
                 float y = (float) (Math.sin(Math.toRadians(ticks)) * (self.height / 3f));
@@ -51,6 +51,17 @@ public abstract class TitleScreenMixin {
                 poseStack.popPose();
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
+        }
+        if (FluffyFurClient.piracyPresent) {
+            float ticks = fluffy_fur$ticks + partialTick * 0.1f;
+            float size = 2f + (float) Math.sin(Math.toRadians(ticks));
+            poseStack.pushPose();
+            poseStack.translate(self.width / 2f, self.height / 4f, 0);
+            poseStack.scale(size, size, size);
+            poseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.sin(Math.toRadians(ticks * 1.3f)) * 30f)));
+            String string = Component.translatable("gui.fluffy_fur.menu.piracy").getString();
+            guiGraphics.drawString(font, string, -font.width(string) / 2, -font.lineHeight - 1, 16777215);
+            poseStack.popPose();
         }
     }
 
