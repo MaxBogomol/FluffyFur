@@ -26,7 +26,7 @@ public abstract class ItemInHandRendererMixin {
             ItemAnimation animation = item.getAnimation(stack);
             if (animation != null) {
                 boolean use = true;
-                if (animation.isOnlyItemUse()) use = ItemAnimation.isItemUse(player);
+                if (animation.isOnlyItemUse()) use = ItemAnimation.isItemUse(player) && player.getUsedItemHand() == hand;
                 if (use) item.getAnimation(stack).renderArmWithItem(player, partialTicks, pitch, hand, swingProgress, stack, equippedProgress, poseStack, buffer, combinedLight);
             }
         }

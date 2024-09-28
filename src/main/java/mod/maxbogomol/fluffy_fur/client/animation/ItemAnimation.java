@@ -51,6 +51,13 @@ public class ItemAnimation {
         return hand == InteractionHand.MAIN_HAND;
     }
 
+    public static boolean isSameHand(HumanoidArm mainArm, HumanoidArm arm, InteractionHand hand) {
+        if (mainArm == arm) {
+            return hand == InteractionHand.MAIN_HAND;
+        }
+        return hand == InteractionHand.OFF_HAND;
+    }
+
     public static boolean isItemUse(LivingEntity player) {
         return (player.isUsingItem() && player.getUseItemRemainingTicks() > 0);
     }

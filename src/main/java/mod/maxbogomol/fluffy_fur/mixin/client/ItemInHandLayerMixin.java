@@ -23,7 +23,7 @@ public abstract class ItemInHandLayerMixin {
             ItemAnimation animation = item.getAnimation(itemStack);
             if (animation != null) {
                 boolean use = true;
-                if (animation.isOnlyItemUse()) use = ItemAnimation.isItemUse(livingEntity);
+                if (animation.isOnlyItemUse()) use = ItemAnimation.isItemUse(livingEntity) && ItemAnimation.isSameHand(livingEntity.getMainArm(), arm, livingEntity.getUsedItemHand());
                 if (use) item.getAnimation(itemStack).renderArmWithItem(livingEntity, itemStack, displayContext, arm, poseStack, buffer, packedLight);
             }
         }
