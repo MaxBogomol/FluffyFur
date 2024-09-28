@@ -5,19 +5,28 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            ITEM_PARTICLE, ITEM_GUI_PARTICLE,
+            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE,
             PANORAMA_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             PANORAMA_BUTTON_ROW, PANORAMA_BUTTON_ROW_X_OFFSET, PANORAMA_BUTTON_X_OFFSET, PANORAMA_BUTTON_Y_OFFSET;
+    public static ForgeConfigSpec.ConfigValue<Double>
+            SCREENSHAKE_INTENSITY;
     public static ForgeConfigSpec.ConfigValue<String>
             CUSTOM_PANORAMA;
 
     public FluffyFurClientConfig(ForgeConfigSpec.Builder builder) {
+        builder.comment("Graphics").push("graphics");
+        SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.")
+                .defineInRange("screenshakeIntensity", 1d, 0, 10d);
+
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.")
                 .define("itemParticle", true);
         ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.")
                 .define("itemGuiParticle", true);
+        BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.")
+                .define("bloodParticle", false);
+        builder.pop();
         builder.pop();
 
         builder.comment("Menu").push("menu");

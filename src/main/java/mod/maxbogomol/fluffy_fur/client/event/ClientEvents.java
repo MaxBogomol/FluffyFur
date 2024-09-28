@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
@@ -96,7 +97,9 @@ public class ClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
+            if (FluffyFur.proxy.getPlayer().getGameProfile().getName().equals("Dev")) {
+                Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
+            }
         }
     }
 
