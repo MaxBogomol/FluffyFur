@@ -97,7 +97,8 @@ public class ClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            if (FluffyFur.proxy.getPlayer().getGameProfile().getName().equals("Dev")) {
+            String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
+            if (name.equals("Dev") || name.equals("MaxBogomol")) {
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
         }
