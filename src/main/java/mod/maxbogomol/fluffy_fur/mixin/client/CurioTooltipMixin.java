@@ -28,7 +28,7 @@ public abstract class CurioTooltipMixin implements IMixinConfigPlugin {
     }
 
     @ModifyVariable(method = "onTooltip", at = @At("STORE"), remap = false)
-    public Multimap<Attribute, AttributeModifier> wizards_reborn$getTooltip(Multimap<Attribute, AttributeModifier> multimap, ItemTooltipEvent event) {
+    public Multimap<Attribute, AttributeModifier> fluffy_fur$getTooltip(Multimap<Attribute, AttributeModifier> multimap, ItemTooltipEvent event) {
         if (event != null && multimap != null) {
             Multimap<Attribute, AttributeModifier> copied = LinkedHashMultimap.create();
             for (Map.Entry<Attribute, AttributeModifier> entry : multimap.entries()) {
