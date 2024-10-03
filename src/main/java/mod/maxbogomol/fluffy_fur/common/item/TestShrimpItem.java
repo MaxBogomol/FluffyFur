@@ -7,6 +7,8 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
+import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
+import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -42,7 +44,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 20);
+            nbt.putInt("mode", (mode + 1) % 22);
             mode = nbt.getInt("mode");
         }
 
@@ -408,6 +410,21 @@ public class TestShrimpItem extends Item {
                         .randomVelocity(1f)
                         .setGravity(1f)
                         .addAdditionalBuilder(builder)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 20) {
+                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT));
+            }
+
+            if (mode == 21) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
+                ParticleBuilder.create(FluffyFurParticles.SKULL)
+                        .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                        .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                        .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setLifetime(20, 10)
+                        .randomVelocity(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
             }
         }

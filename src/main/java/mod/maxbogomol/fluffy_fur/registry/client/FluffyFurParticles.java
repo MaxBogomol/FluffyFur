@@ -30,6 +30,7 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> CIRCLE = PARTICLES.register("circle", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TINY_CIRCLE = PARTICLES.register("tiny_circle", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> HEART = PARTICLES.register("heart", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> SKULL = PARTICLES.register("skull", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SMOKE = PARTICLES.register("smoke", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> PANCAKE = PARTICLES.register("pancake", GenericParticleType::new);
@@ -56,6 +57,7 @@ public class FluffyFurParticles {
             particleEngine.register(CIRCLE.get(), GenericParticleType.Factory::new);
             particleEngine.register(TINY_CIRCLE.get(), GenericParticleType.Factory::new);
             particleEngine.register(HEART.get(), GenericParticleType.Factory::new);
+            particleEngine.register(SKULL.get(), GenericParticleType.Factory::new);
             particleEngine.register(SMOKE.get(), GenericParticleType.Factory::new);
             particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
             particleEngine.register(PANCAKE.get(), GenericParticleType.Factory::new);
