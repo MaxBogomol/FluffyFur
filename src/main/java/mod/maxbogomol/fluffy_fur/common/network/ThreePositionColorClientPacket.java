@@ -92,13 +92,13 @@ public abstract class ThreePositionColorClientPacket extends ClientPacket {
         double x2 = buf.readDouble();
         double y2 = buf.readDouble();
         double z2 = buf.readDouble();
+        double x3 = buf.readDouble();
+        double y3 = buf.readDouble();
+        double z3 = buf.readDouble();
         float r = buf.readFloat();
         float g = buf.readFloat();
         float b = buf.readFloat();
         float a = buf.readFloat();
-        double x3 = buf.readDouble();
-        double y3 = buf.readDouble();
-        double z3 = buf.readDouble();
         return provider.getPacket(x1, y1, z1, x2, y2, z2, x3, y3, z3, r, g, b, a);
     }
 
