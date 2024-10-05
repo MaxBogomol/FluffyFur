@@ -28,7 +28,7 @@ repositories {
     maven { url = "https://modmaven.k-4u.nl"}
     maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.blamejared.com" }
-    maven { url = 'https://maven.saps.dev/releases' }
+    mavenLocal()
 }
 
 version = "${minecraft_version}-${mod_version}"
@@ -114,19 +114,6 @@ java {
 }
 
 publishing {
-    repositories {
-        def token = providers.environmentVariable("SAPS_TOKEN") // This is exposed from your github secrets & workflows env: section
-        if (token.isPresent()) {
-            maven {
-                url "https://maven.saps.dev/releases" // Use snapshots if you ever start working with snapshots
-                credentials {
-                    username = "maxbogomol"
-                    password = token.get()
-                }
-            }
-        }
-    }
-
     publications {
         maven(MavenPublication) {
             artifactId = archivesBaseName
