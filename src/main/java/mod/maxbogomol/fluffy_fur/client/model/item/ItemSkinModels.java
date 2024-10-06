@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemSkinsModels {
-    public static Map<String, BakedModel> modelsSkins = new HashMap<String, BakedModel>();
-    public static ArrayList<String> skins = new ArrayList<String>();
+public class ItemSkinModels {
+    public static Map<String, BakedModel> modelsSkins = new HashMap<>();
+    public static ArrayList<String> skins = new ArrayList<>();
 
     public static void addModelSkins(String id, BakedModel model) {
         modelsSkins.put(id, model);
@@ -41,5 +41,12 @@ public class ItemSkinsModels {
         String modId = id.substring(0, i);
         String skinId = id.substring(i + 1);
         return new ModelResourceLocation(new ResourceLocation(modId, "skin/" + skinId), "inventory");
+    }
+
+    public static void addBowSkin(String id) {
+        skins.add(id);
+        skins.add(id + "_pulling_0");
+        skins.add(id + "_pulling_1");
+        skins.add(id + "_pulling_2");
     }
 }

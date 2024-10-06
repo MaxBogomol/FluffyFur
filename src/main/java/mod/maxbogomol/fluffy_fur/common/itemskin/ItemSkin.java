@@ -96,7 +96,7 @@ public class ItemSkin {
     public static ItemSkin getSkinFromItem(ItemStack itemStack) {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.contains("skin")) {
-            return ItemSkinsHandler.getSkin(nbt.getString("skin"));
+            return ItemSkinHandler.getSkin(nbt.getString("skin"));
         }
         return null;
     }

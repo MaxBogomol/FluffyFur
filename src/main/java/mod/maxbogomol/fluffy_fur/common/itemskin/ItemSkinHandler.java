@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemSkinsHandler {
+public class ItemSkinHandler {
     public static Map<String, ItemSkin> skins = new HashMap<>();
     public static ArrayList<ItemSkin> skinList = new ArrayList<>();
 

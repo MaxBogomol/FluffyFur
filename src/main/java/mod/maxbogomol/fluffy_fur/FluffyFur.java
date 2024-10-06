@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
-import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinsHandler;
+import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.event.Events;
@@ -69,7 +69,7 @@ public class FluffyFur {
         hi();
         FluffyFurBlocks.setFireBlock();
         PacketHandler.init();
-        for (ItemSkin skin : ItemSkinsHandler.getSkins()) {
+        for (ItemSkin skin : ItemSkinHandler.getSkins()) {
             skin.setupSkinEntries();
         }
     }

@@ -9,12 +9,13 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nullable;
 
 public class ItemSkinItemOverrides extends CustomItemOverrides {
+
     @Override
     public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
         ItemSkin skin = ItemSkin.getSkinFromItem(stack);
         if (skin != null) {
             String skinStr = skin.getItemModelName(stack);
-            if (skinStr != null) return ItemSkinsModels.getModelSkins(skinStr);
+            if (skinStr != null) return ItemSkinModels.getModelSkins(skinStr);
         }
         return originalModel;
     }

@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.registry.common.item;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinItemOverrides;
-import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinsModels;
+import mod.maxbogomol.fluffy_fur.client.model.item.ItemSkinModels;
 import mod.maxbogomol.fluffy_fur.client.render.item.LargeItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -22,8 +22,8 @@ public class FluffyFurItemSkins {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void modelRegistrySkins(ModelEvent.RegisterAdditional event) {
-            for (String skin : ItemSkinsModels.getSkins()) {
-                event.register(ItemSkinsModels.getModelLocationSkin(skin));
+            for (String skin : ItemSkinModels.getSkins()) {
+                event.register(ItemSkinModels.getModelLocationSkin(skin));
             }
         }
 
@@ -31,9 +31,9 @@ public class FluffyFurItemSkins {
         public static void modelBakeSkins(ModelEvent.ModifyBakingResult event) {
             Map<ResourceLocation, BakedModel> map = event.getModels();
 
-            for (String skin : ItemSkinsModels.getSkins()) {
-                BakedModel model = map.get(ItemSkinsModels.getModelLocationSkin(skin));
-                ItemSkinsModels.addModelSkins(skin, model);
+            for (String skin : ItemSkinModels.getSkins()) {
+                BakedModel model = map.get(ItemSkinModels.getModelLocationSkin(skin));
+                ItemSkinModels.addModelSkins(skin, model);
             }
         }
     }
@@ -48,6 +48,6 @@ public class FluffyFurItemSkins {
     @OnlyIn(Dist.CLIENT)
     public static void addLargeModel(Map<ResourceLocation, BakedModel> map, String modId, String skin) {
         LargeItemRenderer.bakeModel(map, modId, "skin/"+skin);
-        ItemSkinsModels.addModelSkins(modId+":"+skin, map.get(ItemSkinsModels.getModelLocationSkin(modId+":"+skin)));
+        ItemSkinModels.addModelSkins(modId+":"+skin, map.get(ItemSkinModels.getModelLocationSkin(modId+":"+skin)));
     }
 }

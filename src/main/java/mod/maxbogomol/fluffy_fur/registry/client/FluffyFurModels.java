@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
+import mod.maxbogomol.fluffy_fur.client.model.item.BowItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomRenderModel;
@@ -15,9 +16,11 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class FluffyFurModels {
@@ -70,5 +73,36 @@ public class FluffyFurModels {
         BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
         CustomModel customModel = new CustomRenderModel(model, new CustomItemOverrides());
         map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addBowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, BowItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        for (int i = 0; i < 3; i++) {
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item.toString() + "_pulling_" + String.valueOf(i)), "inventory"));
+            itemOverrides.models.add(pullModel);
+        }
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addBowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addBowItemModel(map, item, new BowItemOverrides());
+    }
+
+    public static ArrayList<ModelResourceLocation> getBowModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_0"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_1"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_2"), "inventory"));
+        return models;
+    }
+
+    public static void addBowItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getBowModels(modId, item)) {
+            event.register(model);
+        }
     }
 }
