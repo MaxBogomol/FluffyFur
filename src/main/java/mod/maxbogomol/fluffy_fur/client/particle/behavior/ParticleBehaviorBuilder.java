@@ -55,7 +55,7 @@ public class ParticleBehaviorBuilder {
         return setFirstSide(true);
     }
 
-    public ParticleBehaviorBuilder disableFirstSSide() {
+    public ParticleBehaviorBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -68,7 +68,7 @@ public class ParticleBehaviorBuilder {
         return setSecondSide(true);
     }
 
-    public ParticleBehaviorBuilder disableSecondSSide() {
+    public ParticleBehaviorBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 

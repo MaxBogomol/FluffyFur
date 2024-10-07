@@ -46,7 +46,7 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setFirstSide(true);
     }
 
-    public SparkParticleBehaviorBuilder disableFirstSSide() {
+    public SparkParticleBehaviorBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -59,7 +59,7 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSecondSide(true);
     }
 
-    public SparkParticleBehaviorBuilder disableSecondSSide() {
+    public SparkParticleBehaviorBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 

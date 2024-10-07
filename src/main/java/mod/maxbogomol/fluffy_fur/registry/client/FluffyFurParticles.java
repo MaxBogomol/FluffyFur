@@ -35,6 +35,8 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> TRAIL = PARTICLES.register("trail", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> PANCAKE = PARTICLES.register("pancake", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> DEATH = PARTICLES.register("death", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> EARTH = PARTICLES.register("earth", GenericParticleType::new);
+    public static RegistryObject<GenericParticleType> SUN = PARTICLES.register("sun", GenericParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
     public static RegistryObject<LeavesParticleType> CHERRY_LEAVES = PARTICLES.register("cherry_leaves", LeavesParticleType::new);
 
@@ -62,6 +64,8 @@ public class FluffyFurParticles {
             particleEngine.register(TRAIL.get(), GenericParticleType.Factory::new);
             particleEngine.register(PANCAKE.get(), GenericParticleType.Factory::new);
             particleEngine.register(DEATH.get(), GenericParticleType.Factory::new);
+            particleEngine.register(EARTH.get(), GenericParticleType.Factory::new);
+            particleEngine.register(SUN.get(), GenericParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
             particleEngine.register(CHERRY_LEAVES.get(), LeavesParticleType.Factory::new);
         }

@@ -39,7 +39,7 @@ public class CubeParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setFirstSide(true);
     }
 
-    public CubeParticleBehaviorBuilder disableFirstSSide() {
+    public CubeParticleBehaviorBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -52,7 +52,7 @@ public class CubeParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSecondSide(true);
     }
 
-    public CubeParticleBehaviorBuilder disableSecondSSide() {
+    public CubeParticleBehaviorBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 

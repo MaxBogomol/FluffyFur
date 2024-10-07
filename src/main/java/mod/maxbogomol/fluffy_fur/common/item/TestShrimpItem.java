@@ -44,7 +44,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 22);
+            nbt.putInt("mode", (mode + 1) % 24);
             mode = nbt.getInt("mode");
         }
 
@@ -260,7 +260,7 @@ public class TestShrimpItem extends Item {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.SQUARE)
                         .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                        .setBehavior(SphereParticleBehavior.create().disableSided().build())
+                        .setBehavior(SphereParticleBehavior.create().build())
                         .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                         .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                         .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
@@ -426,6 +426,32 @@ public class TestShrimpItem extends Item {
                         .setLifetime(20, 10)
                         .randomVelocity(0.1f)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 50);
+            }
+
+            if (mode == 22) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(10f));
+                ParticleBuilder.create(FluffyFurParticles.EARTH)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
+                        .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(64, 32).build())
+                        .setColorData(ColorParticleData.create(Color.WHITE).build())
+                        .setTransparencyData(GenericParticleData.create(1).build())
+                        .setScaleData(GenericParticleData.create(0.1f, 10, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                        .setLifetime(200)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 1);
+            }
+
+            if (mode == 23) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(10f));
+                ParticleBuilder.create(FluffyFurParticles.SUN)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
+                        .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(64, 32).build())
+                        .setColorData(ColorParticleData.create(Color.WHITE).build())
+                        .setTransparencyData(GenericParticleData.create(1).build())
+                        .setScaleData(GenericParticleData.create(0.1f, 10, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                        .setLifetime(200)
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 1);
             }
         }
 

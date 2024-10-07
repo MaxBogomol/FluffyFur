@@ -324,7 +324,7 @@ public class RenderBuilder {
         return setFirstSide(true);
     }
 
-    public RenderBuilder disableFirstSSide() {
+    public RenderBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -337,7 +337,7 @@ public class RenderBuilder {
         return setSecondSide(true);
     }
 
-    public RenderBuilder disableSecondSSide() {
+    public RenderBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 
@@ -820,20 +820,34 @@ public class RenderBuilder {
                 Vector3f p2 = RenderUtil.parametricSphere(un, v, radius);
                 Vector3f p3 = RenderUtil.parametricSphere(un, vn, radius);
 
-                float textureU = (u / endU * radius) * u0;
-                float textureV = (v / endV * radius) * v0;
-                float textureUN = (un / endU * radius) * u1;
-                float textureVN = (vn / endV * radius) * v1;
+                float textureU = u1 - ((u / endU) * (u1 - u0));
+                float textureV = v0 + ((v / endV) * (v1 - v0));
+                float textureUN = u1 - ((un / endU) * (u1 - u0));
+                float textureVN = v0 + ((vn / endV) * (v1 - v0));
 
-                supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
+                if (firstSide) {
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
 
-                supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
-                supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                }
+
+                if (secondSide) {
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
+
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
+                }
             }
         }
         return this;

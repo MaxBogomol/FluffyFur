@@ -47,7 +47,7 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setFirstSide(true);
     }
 
-    public TrailParticleBehaviorBuilder disableFirstSSide() {
+    public TrailParticleBehaviorBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -60,7 +60,7 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSecondSide(true);
     }
 
-    public TrailParticleBehaviorBuilder disableSecondSSide() {
+    public TrailParticleBehaviorBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 

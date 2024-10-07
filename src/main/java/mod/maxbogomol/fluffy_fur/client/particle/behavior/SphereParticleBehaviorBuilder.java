@@ -42,7 +42,7 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setFirstSide(true);
     }
 
-    public SphereParticleBehaviorBuilder disableFirstSSide() {
+    public SphereParticleBehaviorBuilder disableFirstSide() {
         return setFirstSide(false);
     }
 
@@ -55,7 +55,7 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return setSecondSide(true);
     }
 
-    public SphereParticleBehaviorBuilder disableSecondSSide() {
+    public SphereParticleBehaviorBuilder disableSecondSide() {
         return setSecondSide(false);
     }
 
