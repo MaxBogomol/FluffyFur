@@ -31,14 +31,13 @@ Adds various things for rendering and simplifying development
 # Features:
 Shaders support  
 Flexible particle and rendering system  
-Items particles  
-Items animations  
+Items particles and animations  
 Custom items models  
 Screenshake  
 Custom panoramas and menu  
 Attribute name modifiers  
 Music modifiers  
-Custom skins system  
+Custom player and items skin system  
 ...and many other features to simplify development
 
 > [!NOTE]
