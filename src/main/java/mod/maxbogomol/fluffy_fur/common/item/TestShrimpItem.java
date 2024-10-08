@@ -44,7 +44,7 @@ public class TestShrimpItem extends Item {
         int mode = nbt.getInt("mode");
 
         if (player.isShiftKeyDown()) {
-            nbt.putInt("mode", (mode + 1) % 24);
+            nbt.putInt("mode", (mode + 1) % 25);
             mode = nbt.getInt("mode");
         }
 
@@ -452,6 +452,21 @@ public class TestShrimpItem extends Item {
                         .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                         .setLifetime(200)
                         .repeat(level, pos.x(), pos.y(), pos.z(), 1);
+            }
+
+            if (mode == 24) {
+                Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(100f));
+                ParticleBuilder.create(FluffyFurParticles.SUN)
+                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setBehavior(SphereParticleBehavior.create().setSphereSize(64, 32).build())
+                        .setColorData(ColorParticleData.create(Color.WHITE).build())
+                        .setTransparencyData(GenericParticleData.create(1).build())
+                        .setScaleData(GenericParticleData.create(0.1f, 100, 0).setEasing(Easing.ELASTIC_OUT).build())
+                        .setSpinData(SpinParticleData.create().randomOffset().randomSpin(1f).build())
+                        .setLifetime(200)
+                        .disableDistanceSpawn()
+                        .repeat(level, pos.x(), pos.y(), pos.z(), 1);
+                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(200).setIntensity(1f, 0).setEasing(Easing.QUINTIC_IN_OUT));
             }
         }
 
