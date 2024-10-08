@@ -6,6 +6,7 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
 
     public int longs = 16;
     public int lats = 8;
+    public boolean stretch = true;
 
     protected SphereParticleBehaviorBuilder(float xOffset, float yOffset, float zOffset) {
         super(xOffset, yOffset, zOffset);
@@ -99,7 +100,20 @@ public class SphereParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
+    public SphereParticleBehaviorBuilder enableStretch() {
+        return setStretch(true);
+    }
+
+    public SphereParticleBehaviorBuilder disableStretch() {
+        return setStretch(false);
+    }
+
+    public SphereParticleBehaviorBuilder setStretch(boolean stretch) {
+        this.stretch = stretch;
+        return this;
+    }
+
     public ParticleBehavior build() {
-        return new SphereParticleBehavior(longs, lats, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new SphereParticleBehavior(longs, lats, stretch, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }

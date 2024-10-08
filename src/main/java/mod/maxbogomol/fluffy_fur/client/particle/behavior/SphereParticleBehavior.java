@@ -15,15 +15,17 @@ public class SphereParticleBehavior extends ParticleBehavior implements ICustomB
 
     public int longs;
     public int lats;
+    public boolean stretch;
 
-    public SphereParticleBehavior(int longs, int lats, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public SphereParticleBehavior(int longs, int lats, boolean stretch, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.longs = longs;
         this.lats = lats;
+        this.stretch = stretch;
     }
 
     public SphereParticleBehavior copy() {
-        return new SphereParticleBehavior(longs, lats, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new SphereParticleBehavior(longs, lats, stretch, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static SphereParticleBehaviorBuilder create() {
@@ -54,7 +56,7 @@ public class SphereParticleBehavior extends ParticleBehavior implements ICustomB
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())
                 .setLight(particle.getLightColor(partialTicks))
-                .renderSphere(poseStack, particle.getSize() / 2f, longs, lats);
+                .renderSphere(poseStack, particle.getSize() / 2f, longs, lats, stretch);
         poseStack.popPose();
     }
 }

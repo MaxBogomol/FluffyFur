@@ -802,7 +802,7 @@ public class RenderBuilder {
         return this;
     }
 
-    public RenderBuilder renderSphere(PoseStack stack, float radius, int longs, int lats, float endU) {
+    public RenderBuilder renderSphere(PoseStack stack, float radius, int longs, int lats, float endU, boolean stretch) {
         Matrix4f last = stack.last().pose();
         float startU = 0;
         float startV = 0;
@@ -820,45 +820,60 @@ public class RenderBuilder {
                 Vector3f p2 = RenderUtil.parametricSphere(un, v, radius);
                 Vector3f p3 = RenderUtil.parametricSphere(un, vn, radius);
 
-                float textureU = u1 - ((u / endU) * (u1 - u0));
-                float textureV = v0 + ((v / endV) * (v1 - v0));
-                float textureUN = u1 - ((un / endU) * (u1 - u0));
-                float textureVN = v0 + ((vn / endV) * (v1 - v0));
+                float textureU = u0;
+                float textureV = v0;
+                float textureUN = u1;
+                float textureVN = v1;
+
+                if (stretch) {
+                    textureU = u1 - ((u / endU) * (u1 - u0));
+                    textureV = v0 + ((v / endV) * (v1 - v0));
+                    textureUN = u1 - ((un / endU) * (u1 - u0));
+                    textureVN = v0 + ((vn / endV) * (v1 - v0));
+                }
 
                 if (firstSide) {
-                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, a1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, a1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, a1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, a1, textureU, textureVN, l1);
 
-                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, a1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, a1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, a1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, a1, textureUN, textureV, l1);
                 }
 
                 if (secondSide) {
-                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, r1, textureU, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, a1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p1.x(), p1.y(), p1.z(), r1, g1, b1, a1, textureU, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, a1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, a1, textureU, textureV, l1);
 
-                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, r1, textureUN, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, r1, textureU, textureV, l1);
-                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, r1, textureUN, textureVN, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, a1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p2.x(), p2.y(), p2.z(), r1, g1, b1, a1, textureUN, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p0.x(), p0.y(), p0.z(), r1, g1, b1, a1, textureU, textureV, l1);
+                    supplier.placeVertex(getVertexConsumer(), last, this, p3.x(), p3.y(), p3.z(), r1, g1, b1, a1, textureUN, textureVN, l1);
                 }
             }
         }
         return this;
     }
 
+    public RenderBuilder renderSphere(PoseStack stack, float radius, int longs, int lats, boolean stretch) {
+        return renderSphere(stack, radius, longs, lats, Mth.PI * 2, stretch);
+    }
+
+    public RenderBuilder renderSemiSphere(PoseStack stack, float radius, int longs, int lats, boolean stretch) {
+        return renderSphere(stack, radius, longs, lats, Mth.PI, stretch);
+    }
+
     public RenderBuilder renderSphere(PoseStack stack, float radius, int longs, int lats) {
-        return renderSphere(stack, radius, longs, lats, Mth.PI * 2);
+        return renderSphere(stack, radius, longs, lats, true);
     }
 
     public RenderBuilder renderSemiSphere(PoseStack stack, float radius, int longs, int lats) {
-        return renderSphere(stack, radius, longs, lats, Mth.PI);
+        return renderSemiSphere(stack, radius, longs, lats, true);
     }
 
     public interface VertexConsumerActor {
