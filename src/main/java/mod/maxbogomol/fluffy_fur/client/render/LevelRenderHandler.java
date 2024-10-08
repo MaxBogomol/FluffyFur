@@ -66,6 +66,7 @@ public class LevelRenderHandler {
     public static void standardDelayedRender(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
             Matrix4f last = new Matrix4f(RenderSystem.getModelViewMatrix());
+            RenderSystem.depthMask(true);
             if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
             for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) getDelayedRender().endBatch(renderType);
             RenderSystem.getModelViewMatrix().set(last);
@@ -74,6 +75,7 @@ public class LevelRenderHandler {
             for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
             RenderSystem.getModelViewMatrix().set(last);
             for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            RenderSystem.depthMask(false);
         }
     }
 
