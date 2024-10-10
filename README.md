@@ -6,7 +6,7 @@
 > [!IMPORTANT]
 > Status: **Alpha**
 >
-> #### INSTALATION STABLE
+> #### INSTALLATION STABLE
 > ```java
 > // Modrinth Way
 > repositories {
@@ -31,7 +31,7 @@
 >    implementation fg.deobf("curse.maven:fluffy_fur-${fluffy_fur_version}:1097456")
 > }
 > ```
-> #### INSTALATION DEV
+> #### INSTALLATION DEV
 > Duplicate the project, run it in IDE and publish to local maven using
 > _Running:_ `gradlew publishToMavenLocal`
 > ```java
