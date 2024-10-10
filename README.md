@@ -7,8 +7,6 @@
 > Status: **Alpha**
 >
 > #### INSTALATION STABLE
-> Duplicate the project, run it in IDE and publish to local maven using
->
 > ```java
 > // Modrinth Way
 > repositories {
@@ -34,6 +32,7 @@
 > }
 > ```
 > #### INSTALATION DEV
+> Duplicate the project, run it in IDE and publish to local maven using
 > _Running:_ `gradlew publishToMavenLocal`
 > ```java
 >
