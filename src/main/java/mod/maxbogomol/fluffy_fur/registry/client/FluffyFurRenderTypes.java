@@ -101,12 +101,12 @@ public class FluffyFurRenderTypes {
 
     public static RenderType TRANSLUCENT_PARTICLE_TEXTURE = RenderType.create(FluffyFur.MOD_ID + ":translucent_particle_texture",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
-                    .setWriteMaskState(COLOR_DEPTH_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(PARTICLE_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
     public static RenderType TRANSLUCENT_TEXTURE = RenderType.create(FluffyFur.MOD_ID + ":translucent_texture",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, true, true, RenderType.CompositeState.builder()
-                    .setWriteMaskState(COLOR_DEPTH_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

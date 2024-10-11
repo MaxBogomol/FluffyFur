@@ -372,7 +372,7 @@ public class TestShrimpItem extends Item {
             if (mode == 18) {
                 Vec3 pos = player.getEyePosition().add(player.getLookAngle().scale(5f));
                 ParticleBuilder.create(FluffyFurParticles.TRAIL)
-                        .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                        .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
                         .setBehavior(TrailParticleBehavior.create()
                                 .setColorData(ColorParticleData.create().setRandomColor().build())
                                 .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
