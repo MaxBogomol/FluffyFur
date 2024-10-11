@@ -25,16 +25,6 @@ public abstract class PositionColorClientPacket extends ClientPacket {
         this.a = a;
     }
 
-    public PositionColorClientPacket(double x, double y, double z, Color color, float a) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.r = color.getRed() / 255f;
-        this.g = color.getGreen() / 255f;
-        this.b = color.getBlue() / 255f;
-        this.a = a;
-    }
-
     public PositionColorClientPacket(double x, double y, double z, Color color) {
         this.x = x;
         this.y = y;
@@ -63,6 +53,36 @@ public abstract class PositionColorClientPacket extends ClientPacket {
         this.g = color.getGreen() / 255f;
         this.b = color.getBlue() / 255f;
         this.a = 1;
+    }
+
+    public PositionColorClientPacket(double x, double y, double z, Color color, float a) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
+        this.a = a;
+    }
+
+    public PositionColorClientPacket(BlockPos pos, Color color, float a) {
+        this.x = pos.getX();
+        this.y = pos.getY();
+        this.z = pos.getZ();
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
+        this.a = a;
+    }
+
+    public PositionColorClientPacket(Vec3 vec, Color color, float a) {
+        this.x = vec.x();
+        this.y = vec.y();
+        this.z = vec.z();
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
+        this.a = a;
     }
 
     public void encode(FriendlyByteBuf buf) {

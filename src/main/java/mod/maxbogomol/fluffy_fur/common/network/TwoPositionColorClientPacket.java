@@ -57,6 +57,19 @@ public abstract class TwoPositionColorClientPacket extends ClientPacket {
         this.a = 1;
     }
 
+    public TwoPositionColorClientPacket(Vec3 vec1, Vec3 vec2, Color color, float a) {
+        this.x1 = vec1.x();
+        this.y1 = vec1.y();
+        this.z1 = vec1.z();
+        this.x2 = vec2.x();
+        this.y2 = vec2.y();
+        this.z2 = vec2.z();
+        this.r = color.getRed() / 255f;
+        this.g = color.getGreen() / 255f;
+        this.b = color.getBlue() / 255f;
+        this.a = a;
+    }
+
     public void encode(FriendlyByteBuf buf) {
         buf.writeDouble(x1);
         buf.writeDouble(y1);
