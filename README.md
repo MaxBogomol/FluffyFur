@@ -1,4 +1,4 @@
-[![Curseforge](https://img.shields.io/curseforge/dt/1097456?style=for-the-badge&color=6aa84f&logo=curseforge&label=FLUFFY%20FUR)](https://www.curseforge.com/minecraft/mc-mods/fluffy-fur-reborn)
+[![Curseforge](https://img.shields.io/curseforge/dt/1097456?style=for-the-badge&color=6aa84f&logo=curseforge&label=FLUFFY%20FUR)](https://www.curseforge.com/minecraft/mc-mods/fluffy-fur)
 [![Modrinth](https://img.shields.io/modrinth/dt/fluffy-fur?style=for-the-badge&color=6aa84f&logo=modrinth&label=FLUFFY%20FUR)](https://modrinth.com/mod/fluffy-fur)
 [![](https://img.shields.io/badge/%20-LICENSE%20GPL--2.0-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/1155188824360624148?style=for-the-badge&color=6aa84f&logo=discord&label=DISCORD)](https://discord.gg/cKf55qNugw)
