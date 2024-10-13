@@ -5,6 +5,7 @@ license="GPL-2.0"
 [[mods]]
     modId="fluffy_fur"
     version="${file.jarVersion}"
+    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/FluffyFur/refs/heads/main/update.json"
     displayName="Fluffy Fur"
     logoFile="fluffy_fur.png"
     authors="MaxBogomol"
