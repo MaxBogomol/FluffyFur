@@ -7,6 +7,12 @@
 > Status: **Alpha**
 >
 > #### INSTALLATION STABLE
+>
+> ```properties
+> gradle.properties:
+> minecraft_version = version here
+> fluffy_fur_version = version here
+> ```
 > ```java
 > // Modrinth Way
 > repositories {
@@ -18,7 +24,7 @@
 >
 > dependencies {
 >    // your code here...
->    implementation fg.deobf("maven.modrinth:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
+>    implementation fg.deobf("maven.modrinth:fluffy-fur:${minecraft_version}-${fluffy_fur_version}")
 > }
 > 
 > // Curseforge Way
@@ -28,7 +34,7 @@
 >
 > dependencies {
 >    // your code here...
->    implementation fg.deobf("curse.maven:fluffy_fur-${fluffy_fur_version}:1097456")
+>    implementation fg.deobf("curse.maven:fluffy-fur-${fluffy_fur_version}:1097456")
 > }
 > ```
 > #### INSTALLATION DEV
