@@ -53,7 +53,10 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     }
 
     public TrailParticleBehaviorComponent getTrailComponent(GenericParticle particle) {
-        return (TrailParticleBehaviorComponent) particle.behaviorComponent;
+        if (particle.behaviorComponent instanceof TrailParticleBehaviorComponent behaviorComponent) {
+            return behaviorComponent;
+        }
+        return getComponent();
     }
 
     @Override

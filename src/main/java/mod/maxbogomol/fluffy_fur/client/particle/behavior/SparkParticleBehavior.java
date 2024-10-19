@@ -45,7 +45,10 @@ public class SparkParticleBehavior extends ParticleBehavior {
     }
 
     public SparkParticleBehaviorComponent getSparkComponent(GenericParticle particle) {
-        return (SparkParticleBehaviorComponent) particle.behaviorComponent;
+        if (particle.behaviorComponent instanceof SparkParticleBehaviorComponent behaviorComponent) {
+            return behaviorComponent;
+        }
+        return getComponent();
     }
 
     @Override
