@@ -228,6 +228,9 @@ public class FluffyFurMenuScreen extends Screen {
             if (mod.getId().equals("valoria")) {
                 name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 253, 145, 195)));
             }
+            if (mod.getId().equals("implosion")) {
+                name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 132, 190, 224)));
+            }
             if (selectedMod == index) {
                 name.withStyle(ChatFormatting.UNDERLINE);
             }
