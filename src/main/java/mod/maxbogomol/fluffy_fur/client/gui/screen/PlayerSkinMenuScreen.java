@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinCape;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinEffect;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinChangePacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurPlayerSkins;
 import net.minecraft.client.Minecraft;
@@ -216,7 +216,7 @@ public class PlayerSkinMenuScreen extends Screen {
                 } else {
                     PlayerSkinHandler.setSkinPacket("");
                 }
-                PacketHandler.sendToServer(new PlayerSkinChangePacket(minecraft.player.position().add(0, minecraft.player.getBbHeight(), 0)));
+                FluffyFurPacketHandler.sendToServer(new PlayerSkinChangePacket(minecraft.player.position().add(0, minecraft.player.getBbHeight(), 0)));
                 this.onClose();
                 return true;
             }

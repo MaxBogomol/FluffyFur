@@ -8,7 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.common.network.BloodPacket;
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -110,7 +110,7 @@ public class ClientEvents {
         Level level = entity.level();
         if (!level.isClientSide()) {
             Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2f, 0);
-            PacketHandler.sendToTracking(level, BlockPos.containing(pos), new BloodPacket(pos, event.getAmount()));
+            FluffyFurPacketHandler.sendToTracking(level, BlockPos.containing(pos), new BloodPacket(pos, event.getAmount()));
         }
     }
 }

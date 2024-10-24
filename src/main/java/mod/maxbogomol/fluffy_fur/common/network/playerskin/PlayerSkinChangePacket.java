@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.network.playerskin;
 
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +34,7 @@ public class PlayerSkinChangePacket extends ServerPacket {
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();
-        PacketHandler.sendToTracking(player.level(), BlockPos.containing(x, y, z), new PlayerSkinChangeEffectPacket(x, y, z));
+        FluffyFurPacketHandler.sendToTracking(player.level(), BlockPos.containing(x, y, z), new PlayerSkinChangeEffectPacket(x, y, z));
     }
 
     public static void register(SimpleChannel instance, int index) {

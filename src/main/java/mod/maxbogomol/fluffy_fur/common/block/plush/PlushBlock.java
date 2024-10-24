@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.block.plush;
 
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.core.BlockPos;
@@ -76,7 +76,7 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
             if (state.getBlock().equals(FluffyFurBlocks.ONIXTHECAT_PLUSH.get())) {
                 level.playSound(null, pos, SoundEvents.GOAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
-            PacketHandler.sendToTracking(level, pos, new PlushHeartsPacket(pos));
+            FluffyFurPacketHandler.sendToTracking(level, pos, new PlushHeartsPacket(pos));
         }
 
         return InteractionResult.SUCCESS;

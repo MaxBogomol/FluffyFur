@@ -5,7 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.event.Events;
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.proxy.ClientProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
@@ -68,7 +68,7 @@ public class FluffyFur {
     private void setup(final FMLCommonSetupEvent event) {
         hi();
         FluffyFurBlocks.setFireBlock();
-        PacketHandler.init();
+        FluffyFurPacketHandler.init();
         for (ItemSkin skin : ItemSkinHandler.getSkins()) {
             skin.setupSkinEntries();
         }

@@ -2,7 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.playerskin;
 
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetCapePacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetEffectPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
@@ -86,11 +86,11 @@ public class PlayerSkinHandler {
     }
 
     public static void setSkinPacket(PlayerSkin skin) {
-        PacketHandler.sendToServer(new PlayerSkinSetPacket(skin.getId()));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetPacket(skin.getId()));
     }
 
     public static void setSkinPacket(String skin) {
-        PacketHandler.sendToServer(new PlayerSkinSetPacket(skin));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetPacket(skin));
     }
 
     public static void register(PlayerSkinEffect effect) {
@@ -135,11 +135,11 @@ public class PlayerSkinHandler {
     }
 
     public static void setSkinEffectPacket(PlayerSkinEffect effect) {
-        PacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect.getId()));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect.getId()));
     }
 
     public static void setSkinEffectPacket(String effect) {
-        PacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetEffectPacket(effect));
     }
 
     public static PlayerSkinCape getSkinCape(Player player) {
@@ -180,11 +180,11 @@ public class PlayerSkinHandler {
     }
 
     public static void setSkinCapePacket(PlayerSkinCape cape) {
-        PacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape.getId()));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape.getId()));
     }
 
     public static void setSkinCapePacket(String cape) {
-        PacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape));
+        FluffyFurPacketHandler.sendToServer(new PlayerSkinSetCapePacket(cape));
     }
 
     public static void register(PlayerSkinCape cape) {

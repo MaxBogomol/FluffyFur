@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.common.event;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.capability.PlayerSkinProvider;
-import mod.maxbogomol.fluffy_fur.common.network.PacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinUpdatePacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -37,14 +37,14 @@ public class Events {
         event.getEntity().getCapability(KNOWLEDGE).ifPresent((k) -> event.getOriginal().getCapability(KNOWLEDGE).ifPresent((o) ->
                 ((INBTSerializable<CompoundTag>) k).deserializeNBT(((INBTSerializable<CompoundTag>) o).serializeNBT())));
         if (!event.getEntity().level().isClientSide) {
-            PacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(event.getEntity()));
+            FluffyFurPacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(event.getEntity()));
         }
     }
 
     @SubscribeEvent
     public void onJoin(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Player player && !event.getLevel().isClientSide()) {
-            PacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(player));
+            FluffyFurPacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(player));
             playerSkinUpdate.add(player);
         }
     }
@@ -54,9 +54,9 @@ public class Events {
         if (!event.player.level().isClientSide) {
             for (Player player : playerSkinUpdate) {
                 for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
-                    PacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
+                    FluffyFurPacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
                     if (player != serverPlayer) {
-                        PacketHandler.sendTo(player, new PlayerSkinUpdatePacket(serverPlayer));
+                        FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(serverPlayer));
                     }
                 }
             }
