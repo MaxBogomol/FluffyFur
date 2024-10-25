@@ -19,7 +19,7 @@ public class ScreenshakeHandler {
             float pitchOffset = randomizeOffset(random, intensityRotation);
             camera.setRotation(camera.getYRot() + yawOffset, camera.getXRot() + pitchOffset);
         }
-        if (intensityRotation >= 0) {
+        if (intensityPosition >= 0) {
             Vec3 pos = camera.getPosition();
             Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(random, intensityPosition), pos.y() + randomizeOffset(random, intensityPosition), pos.z() + randomizeOffset(random, intensityPosition));
             camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
