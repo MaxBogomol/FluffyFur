@@ -2,6 +2,8 @@
   "_comment_1": "Предметы и блоки",
   "block.fluffy_fur.potted_pink_petals": "Розовые лепестки в горшке",
 
+  "item.fluffy_fur.music_disc_fluffy": "Пушистая пластинка",
+
   "item.fluffy_fur.test_shrimp": "Тестовая креветка",
   "item.fluffy_fur.thing": "Штуковина",
 
@@ -11,13 +13,16 @@
   "_comment_2": "Лор предметов",
   "lore.fluffy_fur.skin": "Облик:",
 
-  "_comment_3": "Меню",
+  "_comment_3": "Описания предметов",
+  "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "Меню",
   "mod_description.fluffy_fur": "Fluffy Fur - мод библиотека от MaxBogomol. \n Добавляет различные штуки для рендеринга и упрощения разработки. \n \n Мяу :3",
 
   "panorama.minecraft.vanilla": "Ванилла",
   "panorama.fluffy_fur.fluffy_zone": "Пушистое место",
 
-  "_comment_4": "Интерфейс",
+  "_comment_5": "Интерфейс",
   "gui.fluffy_fur.menu.optifine.0": "ВНИМАНИЕ! Кажется, у вас установлен Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine ломает Fluffy Fur и другие моды",
   "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
@@ -42,7 +47,7 @@
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердчеки",
 
-  "_comment_5": "Привязка клавиш",
+  "_comment_6": "Привязка клавиш",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню обликов"
 }

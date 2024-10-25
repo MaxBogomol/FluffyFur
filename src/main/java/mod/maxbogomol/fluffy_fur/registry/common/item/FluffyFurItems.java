@@ -3,12 +3,14 @@ package mod.maxbogomol.fluffy_fur.registry.common.item;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.item.TestShrimpItem;
 import mod.maxbogomol.fluffy_fur.common.item.ThingItem;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,6 +20,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class FluffyFurItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FluffyFur.MOD_ID);
+
+    public static final RegistryObject<Item> MUSIC_DISC_FLUFFY = ITEMS.register("music_disc_fluffy", () -> new RecordItem(15, FluffyFurSounds.MUSIC_DISC_FLUFFY.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 176));
 
     public static final RegistryObject<Item> TEST_SHRIMP = ITEMS.register("test_shrimp", () -> new TestShrimpItem(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> THING = ITEMS.register("thing", () -> new ThingItem(new Item.Properties().rarity(Rarity.EPIC)));

@@ -22,7 +22,7 @@ import java.util.Random;
 public abstract class MinecraftMixin {
 
     @Unique
-    Random random = new Random();
+    Random fluffy_fur$random = new Random();
 
     @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
     private void fluffy_fur$getSituationalMusic(final CallbackInfoReturnable<Music> cir) {
@@ -51,13 +51,13 @@ public abstract class MinecraftMixin {
         if (menuMusic.size() > 0) {
             if (minecraft.screen instanceof TitleScreen || defaultMusic == Musics.MENU) {
                 if (!menuMusic.contains(defaultMusic)) {
-                    cir.setReturnValue(menuMusic.get(random.nextInt(0, menuMusic.size())));
+                    cir.setReturnValue(menuMusic.get(fluffy_fur$random.nextInt(0, menuMusic.size())));
                 }
             }
         }
 
         if (possibleMusic.size() > 0) {
-            cir.setReturnValue(possibleMusic.get(random.nextInt(0, possibleMusic.size())));
+            cir.setReturnValue(possibleMusic.get(fluffy_fur$random.nextInt(0, possibleMusic.size())));
         }
     }
 

@@ -1,7 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
@@ -9,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.common.network.BloodPacket;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -37,10 +37,7 @@ public class ClientEvents {
         if (event.getScreen() instanceof TitleScreen titleScreen) {
             FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
             if (panorama != null) {
-                boolean setPanorama = false;
-                if (!TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture())) {
-                    setPanorama = true;
-                }
+                boolean setPanorama = !TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture());
                 if (setPanorama) {
                     FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
                 }

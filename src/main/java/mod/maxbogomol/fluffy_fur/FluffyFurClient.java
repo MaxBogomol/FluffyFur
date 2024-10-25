@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
+import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.awt.*;
 
@@ -23,8 +25,11 @@ public class FluffyFurClient {
 
     public static class ClientOnly {
         public static void clientInit() {
+            IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;
             forgeBus.register(new ClientEvents());
+
+            eventBus.addListener(FluffyFurCreativeTabs::addCreativeTabContent);
         }
     }
 
