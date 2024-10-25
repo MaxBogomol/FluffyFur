@@ -11,6 +11,9 @@ public class ScreenshakeInstance {
     public float intensity1, intensity2, intensity3;
     public Easing intensityCurveStartEasing = Easing.LINEAR, intensityCurveEndEasing = Easing.LINEAR;
 
+    public boolean isRotation = true;
+    public boolean isPosition = false;
+
     public ScreenshakeInstance(int duration) {
         this.duration = duration;
     }
@@ -37,6 +40,32 @@ public class ScreenshakeInstance {
     public ScreenshakeInstance setEasing(Easing intensityCurveStartEasing, Easing intensityCurveEndEasing) {
         this.intensityCurveStartEasing = intensityCurveStartEasing;
         this.intensityCurveEndEasing = intensityCurveEndEasing;
+        return this;
+    }
+
+    public ScreenshakeInstance enableRotation() {
+        return setRotation(true);
+    }
+
+    public ScreenshakeInstance disableRotation() {
+        return setRotation(false);
+    }
+
+    public ScreenshakeInstance setRotation(boolean rotation) {
+        this.isRotation = rotation;
+        return this;
+    }
+
+    public ScreenshakeInstance enablePosition() {
+        return setPosition(true);
+    }
+
+    public ScreenshakeInstance disablePosition() {
+        return setPosition(false);
+    }
+
+    public ScreenshakeInstance setPosition(boolean position) {
+        this.isPosition = position;
         return this;
     }
 

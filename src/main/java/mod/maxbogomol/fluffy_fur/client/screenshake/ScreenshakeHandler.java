@@ -4,28 +4,41 @@ import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 
 public class ScreenshakeHandler {
-
     public static final ArrayList<ScreenshakeInstance> INSTANCES = new ArrayList<>();
-    public static float intensity;
-    public static float yawOffset;
-    public static float pitchOffset;
+    public static float intensityRotation;
+    public static float intensityPosition;
 
     public static void cameraTick(Camera camera, RandomSource random) {
-        if (intensity >= 0) {
-            yawOffset = randomizeOffset(random);
-            pitchOffset = randomizeOffset(random);
+        if (intensityRotation >= 0) {
+            float yawOffset = randomizeOffset(random, intensityRotation);
+            float pitchOffset = randomizeOffset(random, intensityRotation);
             camera.setRotation(camera.getYRot() + yawOffset, camera.getXRot() + pitchOffset);
+        }
+        if (intensityRotation >= 0) {
+            Vec3 pos = camera.getPosition();
+            Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(random, intensityPosition), pos.y() + randomizeOffset(random, intensityPosition), pos.z() + randomizeOffset(random, intensityPosition));
+            camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
         }
     }
 
     public static void clientTick(Camera camera, RandomSource random) {
-        double sum = Math.min(INSTANCES.stream().mapToDouble(i1 -> i1.updateIntensity(camera, random)).sum(), FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get());
+        double rotation = 0;
+        double position = 0;
+        for (ScreenshakeInstance instance : INSTANCES) {
+            double update = instance.updateIntensity(camera, random);
+            if (instance.isRotation) rotation = rotation + update;
+            if (instance.isPosition) position = position + update;
+        }
+        double rotationSum = Math.min(rotation, FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get());
+        double positionSum = Math.min(position, FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get());
 
-        intensity = (float) Math.pow(sum, 3);
+        intensityRotation = (float) Math.pow(rotationSum, 3);
+        intensityPosition = (float) Math.pow(positionSum / 2, 3);
         INSTANCES.removeIf(i -> i.progress >= i.duration);
     }
 
@@ -33,7 +46,7 @@ public class ScreenshakeHandler {
         INSTANCES.add(instance);
     }
 
-    public static float randomizeOffset(RandomSource random) {
-        return Mth.nextFloat(random, -intensity * 2, intensity * 2);
+    public static float randomizeOffset(RandomSource random, float offset) {
+        return Mth.nextFloat(random, -offset * 2, offset * 2);
     }
 }
