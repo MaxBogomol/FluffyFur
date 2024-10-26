@@ -1,11 +1,15 @@
 package mod.maxbogomol.fluffy_fur.client.screenshake;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 
@@ -22,24 +26,51 @@ public class ScreenshakeHandler {
     public static Vec3 intensityVectorOld = Vec3.ZERO;
 
     public static void cameraTick(Camera camera) {
-        if (intensityRotation >= 0) {
+        if (intensityRotation > 0) {
             float yawOffset = randomizeOffset(intensityRotation);
             float pitchOffset = randomizeOffset(intensityRotation);
             camera.setRotation(camera.getYRot() + yawOffset, camera.getXRot() + pitchOffset);
         }
-        if (intensityPosition >= 0) {
-            Vec3 pos = camera.getPosition();
-            Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(intensityPosition), pos.y() + randomizeOffset(intensityPosition), pos.z() + randomizeOffset(intensityPosition));
-            camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
+        boolean cameraUpdate = false;
+        Vec3 pos = camera.getPosition();
+        Vec3 cameraPos = pos;
+        if (intensityPosition > 0) {
+            double angleA = RANDOM.nextDouble() * Math.PI * 2;
+            double angleB = RANDOM.nextDouble() * Math.PI * 2;
+            float x = (float) (Math.cos(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
+            float y = (float) (Math.sin(angleA) * Math.cos(angleB)) * randomizeOffset(intensityPosition);
+            float z = (float) Math.sin(angleB) * randomizeOffset(intensityPosition);
+            Vec3 posOffset = new Vec3(pos.x() + x, pos.y() + y, pos.z() + z);
+            pos = new Vec3(posOffset.x(), posOffset.y(), posOffset.z());
+            cameraUpdate = true;
         }
-        if (!intensityVector.equals(Vec3.ZERO)) {
-            Vec3 pos = camera.getPosition();
+        if (!intensityVector.equals(Vec3.ZERO) && !intensityVectorOld.equals(Vec3.ZERO)) {
             float partialTicks = ClientTickHandler.partialTicks;
             double lx = Mth.lerp(partialTicks, intensityVectorOld.x(), intensityVector.x());
             double ly = Mth.lerp(partialTicks, intensityVectorOld.y(), intensityVector.y());
             double lz = Mth.lerp(partialTicks, intensityVectorOld.z(), intensityVector.z());
             Vec3 posOffset = new Vec3(pos.x() + lx, pos.y() + ly, pos.z() + lz);
-            camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
+            pos = new Vec3(posOffset.x(), posOffset.y(), posOffset.z());
+            cameraUpdate = true;
+        }
+        if (cameraUpdate) {
+            Level level = FluffyFur.proxy.getLevel();
+            if (level != null) {
+                RayHitResult hitResult = RayCast.getHit(level, cameraPos, pos);
+                double distance = Math.sqrt(Math.pow(cameraPos.x() - hitResult.getPos().x(), 2) + Math.pow(cameraPos.y() - hitResult.getPos().y(), 2) + Math.pow(cameraPos.z() - hitResult.getPos().z(), 2));
+                distance = distance - 0.1f;
+                if (distance < 0) distance = 0;
+                double dX = cameraPos.x() - hitResult.getPos().x();
+                double dY = cameraPos.y() - hitResult.getPos().y();
+                double dZ = cameraPos.z() - hitResult.getPos().z();
+                double yaw = Math.atan2(dZ, dX);
+                double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+                double x = Math.sin(pitch) * Math.cos(yaw) * distance;
+                double y = Math.cos(pitch) * distance;
+                double z = Math.sin(pitch) * Math.sin(yaw) * distance;
+                pos = new Vec3(cameraPos.x() + x, cameraPos.y() + y, cameraPos.z() + z);
+            }
+            camera.setPosition(pos.x(), pos.y(), pos.z());
         }
     }
 
@@ -102,13 +133,13 @@ public class ScreenshakeHandler {
             }
             if (instance.isVector) {
                 if (instance.isNormalize) {
-                    Vec3 newVec = instance.vector.scale(update);
+                    Vec3 newVec = instance.vector.scale(update * intensity);
                     double dX = newVec.x() - vector.x();
                     double dY = newVec.y() - vector.y();
                     double dZ = newVec.z() - vector.z();
                     vector = new Vec3(dX, dY, dZ);
                 } else {
-                    vector = vector.add(instance.vector.scale(update));
+                    vector = vector.add(instance.vector.scale(update * intensity));
                 }
             }
         }
