@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.screenshake;
 
+import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,8 @@ public class ScreenshakeHandler {
     public static float intensityPosition;
     public static float intensityFov;
     public static float intensityFovNormalize;
+    public static Vec3 intensityVector = Vec3.ZERO;
+    public static Vec3 intensityVectorOld = Vec3.ZERO;
 
     public static void cameraTick(Camera camera) {
         if (intensityRotation >= 0) {
@@ -27,6 +30,15 @@ public class ScreenshakeHandler {
         if (intensityPosition >= 0) {
             Vec3 pos = camera.getPosition();
             Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(intensityPosition), pos.y() + randomizeOffset(intensityPosition), pos.z() + randomizeOffset(intensityPosition));
+            camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
+        }
+        if (!intensityVector.equals(Vec3.ZERO)) {
+            Vec3 pos = camera.getPosition();
+            float partialTicks = ClientTickHandler.partialTicks;
+            double lx = Mth.lerp(partialTicks, intensityVectorOld.x(), intensityVector.x());
+            double ly = Mth.lerp(partialTicks, intensityVectorOld.y(), intensityVector.y());
+            double lz = Mth.lerp(partialTicks, intensityVectorOld.z(), intensityVector.z());
+            Vec3 posOffset = new Vec3(pos.x() + lx, pos.y() + ly, pos.z() + lz);
             camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
         }
     }
@@ -56,6 +68,7 @@ public class ScreenshakeHandler {
         double rotation = 0;
         double position = 0;
         double fov = 0;
+        Vec3 vector = Vec3.ZERO;
         for (ScreenshakeInstance instance : INSTANCES) {
             double update = instance.updateIntensity(camera);
             if (instance.isRotation) {
@@ -87,6 +100,17 @@ public class ScreenshakeHandler {
                     }
                 }
             }
+            if (instance.isVector) {
+                if (instance.isNormalize) {
+                    Vec3 newVec = instance.vector.scale(update);
+                    double dX = newVec.x() - vector.x();
+                    double dY = newVec.y() - vector.y();
+                    double dZ = newVec.z() - vector.z();
+                    vector = new Vec3(dX, dY, dZ);
+                } else {
+                    vector = vector.add(instance.vector.scale(update));
+                }
+            }
         }
         rotationNormalize = Math.min(rotationNormalize, intensity);
         positionNormalize = Math.min(positionNormalize, intensity);
@@ -99,6 +123,8 @@ public class ScreenshakeHandler {
         intensityPosition = (float) Math.max(Math.pow(positionNormalize / 2, 3), position);
         intensityFov = (float) Math.max(fovNorm, fov);
         intensityFovNormalize = (float) fovNormalize;
+        intensityVectorOld = intensityVector;
+        intensityVector = vector;
         INSTANCES.removeIf(i -> i.progress >= i.duration);
     }
 

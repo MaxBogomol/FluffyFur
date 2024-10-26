@@ -414,9 +414,11 @@ public class TestShrimpItem extends Item {
             }
 
             if (mode == 20) {
-                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT));
-                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enablePosition());
-                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enableFov());
+                //ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT));
+                //ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enablePosition());
+                //ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enableFov());
+
+                ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0, 0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enableVector().setRandomVector());
             }
 
             if (mode == 21) {

@@ -3,6 +3,9 @@ package mod.maxbogomol.fluffy_fur.client.screenshake;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.Random;
 
 public class ScreenshakeInstance {
     public int progress;
@@ -13,8 +16,13 @@ public class ScreenshakeInstance {
     public boolean isNormalize = true;
     public boolean isRotation = true;
     public boolean isPosition = false;
+    public boolean isVector = false;
     public boolean isFov = false;
     public boolean isFovNormalize = false;
+
+    public Vec3 vector = Vec3.ZERO;
+
+    public static final Random random = new Random();
 
     public ScreenshakeInstance(int duration) {
         this.duration = duration;
@@ -81,6 +89,34 @@ public class ScreenshakeInstance {
 
     public ScreenshakeInstance setPosition(boolean position) {
         this.isPosition = position;
+        return this;
+    }
+
+    public ScreenshakeInstance enableVector() {
+        return setVector(true);
+    }
+
+    public ScreenshakeInstance disableVector() {
+        return setVector(false);
+    }
+
+    public ScreenshakeInstance setVector(boolean vector) {
+        this.isVector = vector;
+        return this;
+    }
+
+    public ScreenshakeInstance setVector(Vec3 vector) {
+        this.vector = vector;
+        return this;
+    }
+
+    public ScreenshakeInstance setRandomVector() {
+        double angleA = random.nextDouble() * Math.PI * 2;
+        double angleB = random.nextDouble() * Math.PI * 2;
+        float x = (float) (Math.cos(angleA) * Math.cos(angleB));
+        float y = (float) (Math.sin(angleA) * Math.cos(angleB));
+        float z = (float) Math.sin(angleB);
+        this.vector = new Vec3(x, y, z);
         return this;
     }
 
