@@ -27,18 +27,35 @@ public class ScreenshakeHandler {
     }
 
     public static void clientTick(Camera camera, RandomSource random) {
+        double intensity = FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get();
+        double rotationNormalize = 0;
+        double positionNormalize = 0;
         double rotation = 0;
         double position = 0;
         for (ScreenshakeInstance instance : INSTANCES) {
             double update = instance.updateIntensity(camera, random);
-            if (instance.isRotation) rotation = rotation + update;
-            if (instance.isPosition) position = position + update;
+            if (instance.isRotation) {
+                if (instance.isNormalize) {
+                    rotationNormalize = rotationNormalize + update;
+                } else {
+                    if (rotation < update) rotation = update;
+                }
+            }
+            if (instance.isPosition) {
+                if (instance.isNormalize) {
+                    positionNormalize = positionNormalize + update;
+                } else {
+                    if (position < update) position = update;
+                }
+            }
         }
-        double rotationSum = Math.min(rotation, FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get());
-        double positionSum = Math.min(position, FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get());
+        double rotationSum = Math.min(rotationNormalize, intensity);
+        double positionSum = Math.min(positionNormalize, intensity);
+        rotation = rotation * intensity;
+        position = position * intensity;
 
-        intensityRotation = (float) Math.pow(rotationSum, 3);
-        intensityPosition = (float) Math.pow(positionSum / 2, 3);
+        intensityRotation = (float) Math.max(Math.pow(rotationSum, 3), rotation);
+        intensityPosition = (float) Math.max(Math.pow(positionSum / 2, 3), position);
         INSTANCES.removeIf(i -> i.progress >= i.duration);
     }
 

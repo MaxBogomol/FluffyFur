@@ -11,6 +11,7 @@ public class ScreenshakeInstance {
     public float intensity1, intensity2, intensity3;
     public Easing intensityCurveStartEasing = Easing.LINEAR, intensityCurveEndEasing = Easing.LINEAR;
 
+    public boolean isNormalize = true;
     public boolean isRotation = true;
     public boolean isPosition = false;
 
@@ -40,6 +41,19 @@ public class ScreenshakeInstance {
     public ScreenshakeInstance setEasing(Easing intensityCurveStartEasing, Easing intensityCurveEndEasing) {
         this.intensityCurveStartEasing = intensityCurveStartEasing;
         this.intensityCurveEndEasing = intensityCurveEndEasing;
+        return this;
+    }
+
+    public ScreenshakeInstance enableNormalize() {
+        return setNormalize(true);
+    }
+
+    public ScreenshakeInstance disableNormalize() {
+        return setNormalize(false);
+    }
+
+    public ScreenshakeInstance setNormalize(boolean normalize) {
+        this.isNormalize = normalize;
         return this;
     }
 
