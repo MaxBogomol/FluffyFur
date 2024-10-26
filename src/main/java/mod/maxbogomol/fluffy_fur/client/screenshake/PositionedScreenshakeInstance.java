@@ -2,7 +2,6 @@ package mod.maxbogomol.fluffy_fur.client.screenshake;
 
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import net.minecraft.client.Camera;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -25,8 +24,8 @@ public class PositionedScreenshakeInstance extends ScreenshakeInstance {
     }
 
     @Override
-    public float updateIntensity(Camera camera, RandomSource random) {
-        float intensity = super.updateIntensity(camera, random);
+    public float updateIntensity(Camera camera) {
+        float intensity = super.updateIntensity(camera);
         float distance = (float) position.distanceTo(camera.getPosition());
         if (distance > maxDistance) {
             return 0;

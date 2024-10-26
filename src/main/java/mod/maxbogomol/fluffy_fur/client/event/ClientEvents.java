@@ -14,7 +14,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -29,8 +29,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
-
-    private static final RandomSource RANDOM = RandomSource.create();
 
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {
@@ -59,7 +57,7 @@ public class ClientEvents {
                 return;
             }
             Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-            ScreenshakeHandler.clientTick(camera, RANDOM);
+            ScreenshakeHandler.clientTick(camera);
         }
     }
 
@@ -76,6 +74,7 @@ public class ClientEvents {
             for (Item item : BowHandler.getBows()) {
                 if (itemStack.is(item)) {
                     float f = event.getFovModifier();
+                    if (f != event.getNewFovModifier()) f = event.getNewFovModifier();
                     int i = player.getTicksUsingItem();
                     float f1 = (float) i / 20.0F;
                     if (f1 > 1.0F) {
@@ -85,10 +84,11 @@ public class ClientEvents {
                     }
 
                     f *= 1.0F - f1 * 0.15F;
-                    event.setNewFovModifier(f);
+                    event.setNewFovModifier((float) Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get(), 1.0F, f));
                 }
             }
         }
+        ScreenshakeHandler.fovTick(event);
     }
 
     @SubscribeEvent

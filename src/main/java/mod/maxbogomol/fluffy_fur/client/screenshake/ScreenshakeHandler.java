@@ -2,38 +2,62 @@ package mod.maxbogomol.fluffy_fur.client.screenshake;
 
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.ComputeFovModifierEvent;
 
 import java.util.ArrayList;
 
 public class ScreenshakeHandler {
     public static final ArrayList<ScreenshakeInstance> INSTANCES = new ArrayList<>();
+    private static final RandomSource RANDOM = RandomSource.create();
     public static float intensityRotation;
     public static float intensityPosition;
+    public static float intensityFov;
+    public static float intensityFovNormalize;
 
-    public static void cameraTick(Camera camera, RandomSource random) {
+    public static void cameraTick(Camera camera) {
         if (intensityRotation >= 0) {
-            float yawOffset = randomizeOffset(random, intensityRotation);
-            float pitchOffset = randomizeOffset(random, intensityRotation);
+            float yawOffset = randomizeOffset(intensityRotation);
+            float pitchOffset = randomizeOffset(intensityRotation);
             camera.setRotation(camera.getYRot() + yawOffset, camera.getXRot() + pitchOffset);
         }
         if (intensityPosition >= 0) {
             Vec3 pos = camera.getPosition();
-            Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(random, intensityPosition), pos.y() + randomizeOffset(random, intensityPosition), pos.z() + randomizeOffset(random, intensityPosition));
+            Vec3 posOffset = new Vec3(pos.x() + randomizeOffset(intensityPosition), pos.y() + randomizeOffset(intensityPosition), pos.z() + randomizeOffset(intensityPosition));
             camera.setPosition(posOffset.x(), posOffset.y(), posOffset.z());
         }
     }
 
-    public static void clientTick(Camera camera, RandomSource random) {
+    public static void fovTick(ComputeFovModifierEvent event) {
+        float fovModifier = event.getFovModifier();
+        if (fovModifier != event.getNewFovModifier()) fovModifier = event.getNewFovModifier();
+        boolean update = false;
+        if (intensityFov >= 0) {
+            float offset = randomizeOffset(intensityFov);
+            fovModifier = fovModifier + offset;
+            update = true;
+        }
+        if (intensityFovNormalize != 0) {
+            fovModifier = fovModifier + intensityFovNormalize;
+            update = true;
+        }
+        if (update) event.setNewFovModifier((float) Mth.lerp(Minecraft.getInstance().options.fovEffectScale().get(), 1.0F, fovModifier));
+    }
+
+    public static void clientTick(Camera camera) {
         double intensity = FluffyFurClientConfig.SCREENSHAKE_INTENSITY.get();
         double rotationNormalize = 0;
         double positionNormalize = 0;
+        double fovNormalize = 0;
+        double fovNorm = 0;
         double rotation = 0;
         double position = 0;
+        double fov = 0;
         for (ScreenshakeInstance instance : INSTANCES) {
-            double update = instance.updateIntensity(camera, random);
+            double update = instance.updateIntensity(camera);
             if (instance.isRotation) {
                 if (instance.isNormalize) {
                     rotationNormalize = rotationNormalize + update;
@@ -48,14 +72,33 @@ public class ScreenshakeHandler {
                     if (position < update) position = update;
                 }
             }
+            if (instance.isFov) {
+                if (instance.isNormalize) {
+                    if (instance.isFovNormalize) {
+                        if (fovNormalize < update) fovNormalize = fovNormalize + update;
+                    } else {
+                        fovNormalize = fovNormalize + update;
+                    }
+                } else {
+                    if (instance.isFovNormalize) {
+                        fovNorm = fovNorm + update;
+                    } else {
+                        fov = fov + update;
+                    }
+                }
+            }
         }
-        double rotationSum = Math.min(rotationNormalize, intensity);
-        double positionSum = Math.min(positionNormalize, intensity);
+        rotationNormalize = Math.min(rotationNormalize, intensity);
+        positionNormalize = Math.min(positionNormalize, intensity);
+        fovNorm = Math.min(fovNorm, intensity);
         rotation = rotation * intensity;
         position = position * intensity;
+        fov = fov * intensity;
 
-        intensityRotation = (float) Math.max(Math.pow(rotationSum, 3), rotation);
-        intensityPosition = (float) Math.max(Math.pow(positionSum / 2, 3), position);
+        intensityRotation = (float) Math.max(Math.pow(rotationNormalize, 3), rotation);
+        intensityPosition = (float) Math.max(Math.pow(positionNormalize / 2, 3), position);
+        intensityFov = (float) Math.max(fovNorm, fov);
+        intensityFovNormalize = (float) fovNormalize;
         INSTANCES.removeIf(i -> i.progress >= i.duration);
     }
 
@@ -63,7 +106,7 @@ public class ScreenshakeHandler {
         INSTANCES.add(instance);
     }
 
-    public static float randomizeOffset(RandomSource random, float offset) {
-        return Mth.nextFloat(random, -offset * 2, offset * 2);
+    public static float randomizeOffset(float offset) {
+        return Mth.nextFloat(RANDOM, -offset * 2, offset * 2);
     }
 }

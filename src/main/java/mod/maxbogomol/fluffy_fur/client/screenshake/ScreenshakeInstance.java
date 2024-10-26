@@ -3,7 +3,6 @@ package mod.maxbogomol.fluffy_fur.client.screenshake;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 
 public class ScreenshakeInstance {
     public int progress;
@@ -14,6 +13,8 @@ public class ScreenshakeInstance {
     public boolean isNormalize = true;
     public boolean isRotation = true;
     public boolean isPosition = false;
+    public boolean isFov = false;
+    public boolean isFovNormalize = false;
 
     public ScreenshakeInstance(int duration) {
         this.duration = duration;
@@ -83,7 +84,33 @@ public class ScreenshakeInstance {
         return this;
     }
 
-    public float updateIntensity(Camera camera, RandomSource random) {
+    public ScreenshakeInstance enableFov() {
+        return setFov(true);
+    }
+
+    public ScreenshakeInstance disableFov() {
+        return setFov(false);
+    }
+
+    public ScreenshakeInstance setFov(boolean fov) {
+        this.isFov = fov;
+        return this;
+    }
+
+    public ScreenshakeInstance enableFovNormalize() {
+        return setFovNormalize(true);
+    }
+
+    public ScreenshakeInstance disableFovNormalize() {
+        return setFovNormalize(false);
+    }
+
+    public ScreenshakeInstance setFovNormalize(boolean fovNormalize) {
+        this.isFovNormalize = fovNormalize;
+        return this;
+    }
+
+    public float updateIntensity(Camera camera) {
         progress++;
         float percentage = progress / (float) duration;
         if (intensity2 != intensity3) {
