@@ -42,14 +42,15 @@ public abstract class BlockSimpleInventory extends BlockEntityBase {
 
     @Override
     public void load(CompoundTag tag) {
+        super.load(tag);
         NonNullList<ItemStack> tmp = NonNullList.withSize(inventorySize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, tmp);
         copyToInv(tmp, itemHandler);
-        super.load(tag);
     }
 
     @Override
     public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         ContainerHelper.saveAllItems(tag, copyFromInv(itemHandler));
     }
 

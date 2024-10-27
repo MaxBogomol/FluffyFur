@@ -22,7 +22,7 @@ public abstract class BlockEntityBase extends BlockEntity {
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this, (e) -> e.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class BlockEntityBase extends BlockEntity {
     @NotNull
     @Override
     public CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
+        CompoundTag tag = new CompoundTag();
         saveAdditional(tag);
         return tag;
     }

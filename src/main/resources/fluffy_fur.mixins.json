@@ -13,6 +13,7 @@
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.CurioTooltipMixin",
+    "client.FoxRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",
@@ -20,6 +21,7 @@
     "client.ItemInHandRendererMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
+    "client.RabbitRendererMixin",
     "client.TitleScreenMixin"
   ],
   "minVersion": "0.8",

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:pink_petals"
+  },
+  "base": {
+    "tag": "minecraft:music_discs"
+  },
+  "result": {
+    "item": "fluffy_fur:music_disc_fluffy"
+  },
+  "template": {
+    "item": "minecraft:pink_petals"
+  }
+}

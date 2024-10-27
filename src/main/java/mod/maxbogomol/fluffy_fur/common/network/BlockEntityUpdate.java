@@ -8,6 +8,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class BlockEntityUpdate {
+
     public static void packet(BlockEntity blockEntity) {
         if (blockEntity != null && blockEntity.getLevel() instanceof ServerLevel) {
             Packet<?> packet = blockEntity.getUpdatePacket();
