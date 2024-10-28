@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.mixin.common;
+package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;

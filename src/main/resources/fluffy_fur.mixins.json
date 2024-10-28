@@ -5,9 +5,7 @@
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
     "common.BlockItemMixin",
-    "common.BlocksMixin",
-    "common.ItemEntityMixin",
-    "common.ItemStackMixin"
+    "common.BlocksMixin"
   ],
   "client": [
     "client.AbstractClientPlayerMixin",
@@ -17,8 +15,10 @@
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
     "client.HumanoidModelMixin",
+    "client.ItemEntityMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
+    "client.ItemStackMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",
