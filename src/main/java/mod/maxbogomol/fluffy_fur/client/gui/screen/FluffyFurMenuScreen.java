@@ -62,7 +62,7 @@ public class FluffyFurMenuScreen extends Screen {
         mods = FluffyFurModsHandler.getSortedMods();
         panoramas = FluffyFurModsHandler.getSortedPanoramas();
 
-        FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
+        FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
         if (panorama != null) {
             if (panoramas.contains(panorama)) {
                 selectedPanorama = panoramas.indexOf(panorama);

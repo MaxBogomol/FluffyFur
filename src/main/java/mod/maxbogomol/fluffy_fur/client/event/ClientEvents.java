@@ -33,7 +33,7 @@ public class ClientEvents {
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {
         if (event.getScreen() instanceof TitleScreen titleScreen) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
+            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
             if (panorama != null) {
                 boolean setPanorama = !TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture());
                 if (setPanorama) {

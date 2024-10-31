@@ -107,11 +107,11 @@ public class FluffyFurModsHandler {
     }
 
     public static FluffyFurPanorama getPanorama() {
-        return getPanorama(FluffyFurClientConfig.CUSTOM_PANORAMA.get());
+        return getPanorama(FluffyFurClientConfig.PANORAMA.get());
     }
 
     public static void setPanorama(FluffyFurPanorama panorama) {
-        FluffyFurClientConfig.CUSTOM_PANORAMA.set(panorama.getId());
+        FluffyFurClientConfig.PANORAMA.set(panorama.getId());
     }
 
     public static void setOpenPanorama(TitleScreen titleScreen, FluffyFurPanorama panorama) {

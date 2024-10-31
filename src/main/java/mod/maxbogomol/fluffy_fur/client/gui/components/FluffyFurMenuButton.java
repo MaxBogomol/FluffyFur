@@ -77,17 +77,17 @@ public class FluffyFurMenuButton extends Button {
     public static class OpenConfigButtonHandler {
         @SubscribeEvent
         public static void onGuiInit(ScreenEvent.Init event) {
-            if (FluffyFurClientConfig.PANORAMA_BUTTON.get()) {
+            if (FluffyFurClientConfig.MENU_BUTTON.get()) {
                 Screen gui = event.getScreen();
 
                 MenuRows menu = null;
                 int rowIdx = 0, offsetX = 0, offsetFreeX = 0, offsetFreeY = 0;
                 if (gui instanceof TitleScreen) {
                     menu = MenuRows.MAIN_MENU;
-                    rowIdx = FluffyFurClientConfig.PANORAMA_BUTTON_ROW.get();
-                    offsetX = FluffyFurClientConfig.PANORAMA_BUTTON_ROW_X_OFFSET.get();
-                    offsetFreeX = FluffyFurClientConfig.PANORAMA_BUTTON_X_OFFSET.get();
-                    offsetFreeY = FluffyFurClientConfig.PANORAMA_BUTTON_Y_OFFSET.get();
+                    rowIdx = FluffyFurClientConfig.MENU_BUTTON_ROW.get();
+                    offsetX = FluffyFurClientConfig.MENU_BUTTON_ROW_X_OFFSET.get();
+                    offsetFreeX = FluffyFurClientConfig.MENU_BUTTON_X_OFFSET.get();
+                    offsetFreeY = FluffyFurClientConfig.MENU_BUTTON_Y_OFFSET.get();
                 }
 
                 if (rowIdx != 0 && menu != null) {

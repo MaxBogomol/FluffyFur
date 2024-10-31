@@ -50,5 +50,27 @@
 
   "_comment_6": "Привязка клавиш",
   "key.category.fluffy_fur.general": "Fluffy Fur",
-  "key.fluffy_fur.skin_menu": "Меню обликов"
+  "key.fluffy_fur.skin_menu": "Меню обликов",
+
+  "_comment_7": "Конфиги",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность скриншейка",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность скриншейка",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "Частицы предметов",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Включает частицы брошенных предметов.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "GUI частицы предметов",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "Включает частицы предметов в GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "Частицы крови",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "Включает частицы крови при получении урона.",
+  "config.client.fluffy_fur.menu.panorama": "Панорама Fluffy Fur",
+  "config.client.fluffy_fur.menu.panorama.desc": "Панорама Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButton": "Кнопка меню",
+  "config.client.fluffy_fur.menu.menuButton.desc": "Включает кнопку меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Ряд кнопки меню",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "Ряд кнопки меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "X Offset ряда кнопки меню",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "X Offset ряда кнопки меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "X Offset кнопки меню",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "X Offset кнопки меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Y Offset кнопки меню",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Y Offset кнопки меню Fluffy Fur."
 }

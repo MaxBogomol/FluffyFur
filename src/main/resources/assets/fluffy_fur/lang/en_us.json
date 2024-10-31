@@ -50,5 +50,27 @@
 
   "_comment_6": "Key binds",
   "key.category.fluffy_fur.general": "Fluffy Fur",
-  "key.fluffy_fur.skin_menu": "Skin Menu"
+  "key.fluffy_fur.skin_menu": "Skin Menu",
+
+  "_comment_7": "Config",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Screenshake Intensity",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Intensity of screenshake.",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "Item Particle",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Enable dropping items particles.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "Item Gui Particle",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "Enable items particles in GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "Blood Particle",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "Enable blood particles when receiving damage.",
+  "config.client.fluffy_fur.menu.panorama": "Panorama",
+  "config.client.fluffy_fur.menu.panorama.desc": "Fluffy Fur Panorama.",
+  "config.client.fluffy_fur.menu.menuButton": "Menu Button",
+  "config.client.fluffy_fur.menu.menuButton.desc": "Enable Fluffy Fur menu button.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Menu Button Row",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "Fluffy Fur menu button row.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "Menu Button Row X Offset",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "Fluffy Fur menu button X offset with row.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "Menu Button X Offset",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "Fluffy Fur menu button X offset.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Menu Button Y Offset",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Fluffy Fur menu button Y offset."
 }
