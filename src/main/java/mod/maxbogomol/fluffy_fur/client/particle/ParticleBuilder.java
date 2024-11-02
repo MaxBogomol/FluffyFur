@@ -9,7 +9,10 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.RegistryObject;
+import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -302,7 +305,7 @@ public class ParticleBuilder {
         return this;
     }
 
-    public ParticleBuilder spawn(Level world, double x, double y, double z) {
+    public ParticleBuilder spawn(Level level, Vec3 pos) {
         double yaw = random.nextFloat() * Math.PI * 2, pitch = random.nextFloat() * Math.PI - Math.PI / 2,
                 xSpeed = random.nextFloat() * maxXSpeed, ySpeed = random.nextFloat() * maxYSpeed, zSpeed = random.nextFloat() * maxZSpeed;
         double vx = this.vx + Math.sin(yaw) * Math.cos(pitch) * xSpeed;
@@ -321,26 +324,102 @@ public class ParticleBuilder {
         double fvz = (random.nextFloat() * 2 - 1f) * this.fvz;
 
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-        if (!distanceSpawn || Math.sqrt(camera.getPosition().distanceToSqr(x + dx + fdx, y + dy + fdy, z + dz + fdz)) <= distance) {
-            world.addParticle(options, force, x + dx + fdx, y + dy + fdy, z + dz + fdz, vx + fvx, vy + fvy, vz + fvz);
+        double xx = pos.x() + dx + fdx;
+        double yy = pos.y() + dy + fdy;
+        double zz = pos.z() + dz + fdz;
+        if (!distanceSpawn || Math.sqrt(camera.getPosition().distanceToSqr(xx, yy, zz)) <= distance) {
+            level.addParticle(options, force, xx, yy, zz, vx + fvx, vy + fvy, vz + fvz);
             for (ParticleBuilder builder : additionalBuilders) {
-                world.addParticle(builder.getParticleOptions(), builder.force, x + dx + fdx, y + dy + fdy, z + dz + fdz, vx + fvx, vy + fvy, vz + fvz);
+                level.addParticle(builder.getParticleOptions(), builder.force, xx, yy, zz, vx + fvx, vy + fvy, vz + fvz);
             }
         }
 
         return this;
     }
 
-    public ParticleBuilder repeat(Level world, double x, double y, double z, int n) {
-        for (int i = 0; i < n; i ++) spawn(world, x, y, z);
+    public ParticleBuilder repeat(Level level, Vec3 pos, int n) {
+        for (int i = 0; i < n; i ++) spawn(level, pos);
         return this;
     }
 
-    public ParticleBuilder repeat(Level world, double x, double y, double z, int n, float chance) {
+    public ParticleBuilder repeat(Level level, Vec3 pos, int n, float chance) {
         for (int i = 0; i < n; i ++) {
-            if (random.nextFloat() < chance) spawn(world, x, y, z);
+            if (random.nextFloat() < chance) spawn(level, pos);
         }
         return this;
+    }
+
+    public ParticleBuilder spawn(Level level, double x, double y, double z) {
+        return spawn(level, new Vec3(x, y, z));
+    }
+
+    public ParticleBuilder repeat(Level level, double x, double y, double z, int n) {
+        return repeat(level, new Vec3(x, y, z), n);
+    }
+
+    public ParticleBuilder repeat(Level level, double x, double y, double z, int n, float chance) {
+        return repeat(level, new Vec3(x, y, z), n, chance);
+    }
+
+    public ParticleBuilder spawnLine(Level level, Vec3 from, Vec3 to) {
+        Vec3 pos = from.lerp(to, random.nextFloat());
+        spawn(level, pos);
+        return this;
+    }
+
+    public ParticleBuilder repeatLine(Level level, Vec3 from, Vec3 to, int n) {
+        for (int i = 0; i < n; i ++) spawnLine(level, from, to);
+        return this;
+    }
+
+    public ParticleBuilder repeatLine(Level level, Vec3 from, Vec3 to, int n, float chance) {
+        for (int i = 0; i < n; i ++) {
+            if (random.nextFloat() < chance) spawnLine(level, from, to);
+        }
+        return this;
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, Vec3 pos, VoxelShape voxelShape, int n, float chance) {
+        voxelShape.forAllBoxes(
+                (x1, y1, z1, x2, y2, z2) -> {
+                    Vec3 v = pos;
+                    Vec3 b = pos.add(x1, y1, z1);
+                    Vec3 e = pos.add(x2, y2, z2);
+                    repeatLine(level, b, v.add(x2, y1, z1), n, chance);
+                    repeatLine(level, b, v.add(x1, y2, z1), n, chance);
+                    repeatLine(level, b, v.add(x1, y1, z2), n, chance);
+                    repeatLine(level, v.add(x1, y2, z1), v.add(x2, y2, z1), n, chance);
+                    repeatLine(level, v.add(x1, y2, z1), v.add(x1, y2, z2), n, chance);
+                    repeatLine(level, e, v.add(x2, y2, z1), n, chance);
+                    repeatLine(level, e, v.add(x1, y2, z2), n, chance);
+                    repeatLine(level, e, v.add(x2, y1, z2), n, chance);
+                    repeatLine(level, v.add(x2, y1, z1), v.add(x2, y1, z2), n, chance);
+                    repeatLine(level, v.add(x1, y1, z2), v.add(x2, y1, z2), n, chance);
+                    repeatLine(level, v.add(x2, y1, z1), v.add(x2, y2, z1), n, chance);
+                    repeatLine(level, v.add(x1, y1, z2), v.add(x1, y2, z2), n, chance);
+                }
+        );
+        return this;
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, Vec3 pos, VoxelShape voxelShape, int n) {
+        return spawnVoxelShape(level, pos, voxelShape, n, 1);
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, Vec3 pos, VoxelShape voxelShape) {
+        return spawnVoxelShape(level, pos, voxelShape, 5, 1);
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, double x, double y, double z, VoxelShape voxelShape, int n, float chance) {
+        return spawnVoxelShape(level, new Vec3(x, y, z), voxelShape, n, chance);
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, double x, double y, double z, VoxelShape voxelShape, int n) {
+        return spawnVoxelShape(level, new Vec3(x, y, z), voxelShape, n, 1);
+    }
+
+    public ParticleBuilder spawnVoxelShape(Level level, double x, double y, double z, VoxelShape voxelShape) {
+        return spawnVoxelShape(level, new Vec3(x, y, z), voxelShape, 5, 1);
     }
 
     public static ParticleBuilder create(ParticleType<?> type) {
