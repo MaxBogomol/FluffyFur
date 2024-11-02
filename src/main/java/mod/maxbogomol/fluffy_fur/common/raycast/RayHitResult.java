@@ -1,22 +1,38 @@
 package mod.maxbogomol.fluffy_fur.common.raycast;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RayHitResult {
-    public Vec3 pos;
-    public boolean block;
-    public List<Entity> entities;
+    public Vec3 pos = Vec3.ZERO;
+    public BlockPos blockPos = BlockPos.ZERO;
+    public boolean block = false;
+    public List<Entity> entities = new ArrayList<>();
 
     public RayHitResult(Vec3 pos, boolean block) {
         this.pos = pos;
         this.block = block;
     }
 
+    public RayHitResult(Vec3 pos, BlockPos blockPos, boolean block) {
+        this.pos = pos;
+        this.blockPos = blockPos;
+        this.block = block;
+    }
+
     public RayHitResult(Vec3 pos, boolean block, List<Entity> entities) {
         this.pos = pos;
+        this.block = block;
+        this.entities = entities;
+    }
+
+    public RayHitResult(Vec3 pos, BlockPos blockPos, boolean block, List<Entity> entities) {
+        this.pos = pos;
+        this.blockPos = blockPos;
         this.block = block;
         this.entities = entities;
     }

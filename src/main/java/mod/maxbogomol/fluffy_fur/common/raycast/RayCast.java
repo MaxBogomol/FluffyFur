@@ -62,7 +62,7 @@ public class RayCast {
             BlockHitResult blockHitResult = level.getBlockState(blockPos).getVisualShape(level, blockPos, CollisionContext.empty()).clip(start, endPos, blockPos);
             if (blockHitResult != null) {
                 boolean isBlock = !level.getBlockState(blockHitResult.getBlockPos()).isAir();
-                return new RayHitResult(new Vec3(oldX, oldY, oldZ), isBlock, entities);
+                return new RayHitResult(new Vec3(oldX, oldY, oldZ), blockHitResult.getBlockPos(), isBlock, entities);
             }
 
             oldX = X;
