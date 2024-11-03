@@ -25,6 +25,7 @@ public class FluffyFurPacketHandler extends PacketHandler {
         PlayerSkinChangePacket.register(HANDLER, id++);
         PlushHeartsPacket.register(HANDLER, id++);
         BloodPacket.register(HANDLER, id++);
+        TestShrimpPacket.register(HANDLER, id++);
     }
 
     public static SimpleChannel getHandler() {

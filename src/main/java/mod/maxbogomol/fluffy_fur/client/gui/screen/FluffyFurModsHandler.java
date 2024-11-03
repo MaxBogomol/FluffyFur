@@ -36,7 +36,7 @@ public class FluffyFurModsHandler {
     }
 
     public static List<FluffyFurPanorama> getPanoramas() {
-        return panoramas.values().stream().toList();
+        return new ArrayList<>(panoramas.values());
     }
 
     public static List<FluffyFurMod> getSortedMods() {

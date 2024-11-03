@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetEffectPa
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class PlayerSkinHandler {
     }
 
     public static List<PlayerSkin> getSkins() {
-        return skins.values().stream().toList();
+        return new ArrayList<>(skins.values());
     }
 
     public static PlayerSkinData getSkinData(Player player) {
@@ -110,7 +111,7 @@ public class PlayerSkinHandler {
     }
 
     public static List<PlayerSkinEffect> getSkinEffects() {
-        return skinEffects.values().stream().toList();
+        return new ArrayList<>(skinEffects.values());
     }
 
     public static void setSkinEffect(Player player, String effect) {
@@ -155,7 +156,7 @@ public class PlayerSkinHandler {
     }
 
     public static List<PlayerSkinCape> getSkinCapes() {
-        return skinCapes.values().stream().toList();
+        return new ArrayList<>(skinCapes.values());
     }
 
     public static void setSkinCape(Player player, String cape) {
