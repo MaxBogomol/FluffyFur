@@ -13,7 +13,6 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
-import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockStateProviderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import net.minecraftforge.api.distmarker.Dist;
@@ -53,7 +52,6 @@ public class FluffyFur {
         FluffyFurParticles.register(eventBus);
         FluffyFurLootModifier.register(eventBus);
         FluffyFurSounds.register(eventBus);
-        FluffyFurBlockStateProviderTypes.register(eventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FluffyFurClientConfig.SPEC);
 
