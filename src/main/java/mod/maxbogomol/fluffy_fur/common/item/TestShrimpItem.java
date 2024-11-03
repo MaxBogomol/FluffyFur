@@ -33,7 +33,6 @@ public class TestShrimpItem extends Item {
                 mode = nbt.getInt("mode");
             }
             FluffyFurPacketHandler.sendToTracking(level, player.blockPosition(), new TestShrimpPacket(player.getEyePosition(), player.getLookAngle(), mode));
-
         }
 
         return InteractionResultHolder.success(stack);
