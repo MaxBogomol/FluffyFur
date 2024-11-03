@@ -32,8 +32,8 @@ public class PlayerSkinUpdatePacket extends ClientPacket {
         });
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = FluffyFur.proxy.getLevel();
         Player player = level.getPlayerByUUID(uuid);

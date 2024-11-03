@@ -25,8 +25,8 @@ public class PlayerSkinChangeEffectPacket extends PositionClientPacket {
         super(x, y, z);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = FluffyFur.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.WISP)

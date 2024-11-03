@@ -30,8 +30,8 @@ public class PlushHeartsPacket extends PositionClientPacket {
         super(pos.getCenter());
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         Level level = FluffyFur.proxy.getLevel();
         ParticleBuilder.create(FluffyFurParticles.HEART)

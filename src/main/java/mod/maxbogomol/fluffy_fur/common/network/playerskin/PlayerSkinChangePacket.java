@@ -6,8 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -30,7 +28,6 @@ public class PlayerSkinChangePacket extends ServerPacket {
         this.z = vec.z();
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();

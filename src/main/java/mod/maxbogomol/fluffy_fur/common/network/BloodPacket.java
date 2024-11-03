@@ -32,8 +32,8 @@ public class BloodPacket extends PositionClientPacket {
         this.size = size;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
         if (FluffyFurClientConfig.BLOOD_PARTICLE.get()) {
             Level level = FluffyFur.proxy.getLevel();
