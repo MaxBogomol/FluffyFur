@@ -1,0 +1,76 @@
+{
+  "_comment_1": "Прадметы і блокі",
+  "block.fluffy_fur.potted_pink_petals": "Ружовыя пялёсткі ў гаршчку",
+
+  "item.fluffy_fur.music_disc_fluffy": "Пухка грампласцінка",
+
+  "item.fluffy_fur.test_shrimp": "Тэставая крэветка",
+  "item.fluffy_fur.thing": "Штосьці",
+
+  "block.fluffy_fur.maxbogomol_plush": "Плюшавы MaxBogomol",
+  "block.fluffy_fur.onixthecat_plush": "Плюшавы OnixTheCat",
+  "block.fluffy_fur.sammysemicolon_plush": "Плюшавы SammySemicolon",
+
+  "_comment_2": "Гісторыі прадметаў",
+  "lore.fluffy_fur.skin": "Скін:",
+
+  "_comment_3": "Апісанні прадметаў",
+  "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "Меню",
+  "mod_description.fluffy_fur": "Fluffy Fur - мод-бібліятэка ад MaxBogomol. \n Дадае розныя рэчы для рэндэрінга і спрашчэння распрацоўкі. \n \n Мяў :3",
+
+  "panorama.minecraft.vanilla": "Ваніла",
+  "panorama.fluffy_fur.fluffy_zone": "Пушыстая зона",
+
+  "_comment_5": "GUI",
+  "gui.fluffy_fur.menu.optifine.0": "УВАГА! Здаецца, вы ўсталявалі Optifine",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine ламае Fluffy Fur і іншыя моды",
+  "gui.fluffy_fur.menu.optifine.2": "Выдаліце Optifine :3",
+  "gui.fluffy_fur.menu.piracy": "ПІРАЦТВА ГЭТА КЕПСКА!!!",
+
+  "gui.fluffy_fur.menu.panoramas": "Панарамы",
+  "gui.fluffy_fur.menu.mods": "Моды",
+  "gui.fluffy_fur.menu.id": "ID:",
+  "gui.fluffy_fur.menu.version": "Версія:",
+  "gui.fluffy_fur.menu.edition": "Эдыцыя:",
+  "gui.fluffy_fur.menu.autor": "Аўтар:",
+  "gui.fluffy_fur.menu.links": "Спасылкі:",
+  "gui.fluffy_fur.menu.mod": "Мод:",
+
+  "gui.fluffy_fur.skin_menu.skins": "Скіны",
+  "gui.fluffy_fur.skin_menu.capes": "Плашчы",
+  "gui.fluffy_fur.skin_menu.skin_effects": "Эфекты скіна",
+
+  "gui.fluffy_fur.skin_menu.standard": "Звычайны",
+  "gui.fluffy_fur.skin_menu.empty": "Пусты",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначы",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "Пухнаткі",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ружовыя сардэчкі",
+
+  "_comment_6": "Прывязка клавішаў",
+  "key.category.fluffy_fur.general": "Fluffy Fur",
+  "key.fluffy_fur.skin_menu": "Меню скіноў",
+
+  "_comment_7": "Конфіг",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Моц траскі экрана",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Моц траскі экрана.",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "Часцінкі прадметаў",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Уключыць часцінкі кінутых прадметаў.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "Часцінкі прадметаў у GUI",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "Уключыць часцінкі прадметаў у GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "Кроў",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "Уключыць часцінкі крыві ад палучэння шкоды.",
+  "config.client.fluffy_fur.menu.panorama": "Панарама",
+  "config.client.fluffy_fur.menu.panorama.desc": "Панарама Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButton": "Кнопка меню",
+  "config.client.fluffy_fur.menu.menuButton.desc": "Уключыць кнопкую меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Радок конпкі меню",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "Радок кнопкі меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "Зрух радка кнопкі меню па X",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "Зрух радка кнопкі меню Fluffy Fur па X.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "Зрух кнопкі меню па X",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "Зрух кнопкі меню Fluffy Fur па X.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Зрух кнопкі меню па Y",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Зрух кнопкі меню Fluffy Fur па Y."
+}
