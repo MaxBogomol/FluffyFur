@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.screenshake;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayCast;
+import mod.maxbogomol.fluffy_fur.common.raycast.RayCastContext;
 import mod.maxbogomol.fluffy_fur.common.raycast.RayHitResult;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Camera;
@@ -56,7 +57,7 @@ public class ScreenshakeHandler {
         if (cameraUpdate) {
             Level level = FluffyFur.proxy.getLevel();
             if (level != null) {
-                RayHitResult hitResult = RayCast.getHit(level, cameraPos, pos);
+                RayHitResult hitResult = RayCast.getHit(level, new RayCastContext(cameraPos, pos).setBlockShape(RayCastContext.Block.VISUAL));
                 double distance = Math.sqrt(Math.pow(cameraPos.x() - hitResult.getPos().x(), 2) + Math.pow(cameraPos.y() - hitResult.getPos().y(), 2) + Math.pow(cameraPos.z() - hitResult.getPos().z(), 2));
                 distance = distance - 0.1f;
                 if (distance < 0) distance = 0;
