@@ -14,7 +14,7 @@
 > fluffy_fur_version = version here
 > ```
 > ```java
-> // Modrinth Way
+> // Modrinth way
 > repositories {
 >   maven {
 >        name = "Modrinth"
@@ -27,7 +27,7 @@
 >    implementation fg.deobf("maven.modrinth:fluffy-fur:${minecraft_version}-${fluffy_fur_version}")
 > }
 > 
-> // Curseforge Way
+> // CurseForge way
 > repositories {
 >    maven { url "https://cursemaven.com"}
 > }
