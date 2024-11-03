@@ -6,26 +6,19 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
-import mod.maxbogomol.fluffy_fur.common.network.BloodPacket;
-import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEvents {
@@ -98,16 +91,6 @@ public class ClientEvents {
             if (name.equals("Dev") || name.equals("MaxBogomol")) {
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
-        }
-    }
-
-    @SubscribeEvent
-    public void onLivingDamage(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntity();
-        Level level = entity.level();
-        if (!level.isClientSide()) {
-            Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2f, 0);
-            FluffyFurPacketHandler.sendToTracking(level, BlockPos.containing(pos), new BloodPacket(pos, event.getAmount()));
         }
     }
 }
