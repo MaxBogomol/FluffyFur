@@ -34,7 +34,7 @@
 >
 > dependencies {
 >    // your code here...
->    implementation fg.deobf("curse.maven:fluffy-fur-${fluffy_fur_version}:1097456") // <-- version from CurseForge here
+>    implementation fg.deobf("curse.maven:fluffy-fur-1097456:${fluffy_fur_version}") // <-- version from CurseForge here
 > }
 > ```
 > #### INSTALLATION DEV
