@@ -5,51 +5,6 @@
 
 > [!IMPORTANT]
 > Status: **Alpha**
->
-> #### INSTALLATION STABLE
->
-> ```properties
-> gradle.properties:
-> minecraft_version = version here
-> fluffy_fur_version = version here
-> ```
-> ```java
-> // Modrinth way
-> repositories {
->   maven {
->        name = "Modrinth"
->        url = "https://api.modrinth.com/maven"
->    }
-> }
->
-> dependencies {
->    // your code here...
->    implementation fg.deobf("maven.modrinth:fluffy-fur:${minecraft_version}-${fluffy_fur_version}")
-> }
-> 
-> // CurseForge way
-> repositories {
->    maven { url "https://cursemaven.com"}
-> }
->
-> dependencies {
->    // your code here...
->    implementation fg.deobf("curse.maven:fluffy-fur-1097456:${fluffy_fur_version}") // <-- version from CurseForge here
-> }
-> ```
-> #### INSTALLATION DEV
-> Duplicate the project, run it in IDE and publish to local maven using
-> _Running:_ `gradlew publishToMavenLocal`
-> ```java
->
-> repositories {
->    mavenLocal();
-> }
->
-> dependencies {
->    // your code here...
->    implementation fg.deobf("mod.maxbogomol.fluffy_fur:fluffy_fur:${minecraft_version}-${fluffy_fur_version}")
-> }
 
 # About:
 
