@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.common.network;
+package mod.maxbogomol.fluffy_fur.common.network.item;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
@@ -11,6 +11,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.common.network.TwoPositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;

@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.common.network;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
+import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

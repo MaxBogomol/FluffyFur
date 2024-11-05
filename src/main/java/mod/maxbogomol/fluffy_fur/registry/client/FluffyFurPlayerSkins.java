@@ -14,9 +14,11 @@ public class FluffyFurPlayerSkins {
             .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/ears"))
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/tail"))
             .setSlim(true);
-    public static PlayerSkin BOYKISSER = new PlayerSkin(FluffyFur.MOD_ID + ":boykisser")
-            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin"))
-            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin_blink"))
+    public static PlayerSkin BOYKISSER = new CatPlayerSkin(FluffyFur.MOD_ID + ":boykisser")
+            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/skin"))
+            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/skin_blink"))
+            .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/ears"))
+            .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/tail"))
             .setSlim(true);
     public static PlayerSkin NANACHI = new NanachiPlayerSkin(FluffyFur.MOD_ID + ":nanachi")
             .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "nanachi/skin"))

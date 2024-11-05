@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
-import mod.maxbogomol.fluffy_fur.common.network.TestShrimpPacket;
+import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

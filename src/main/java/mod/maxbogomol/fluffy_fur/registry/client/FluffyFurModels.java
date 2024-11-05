@@ -6,10 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.model.item.BowItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomRenderModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxEarsModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.FoxTailModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.NanachiTailModel;
-import mod.maxbogomol.fluffy_fur.client.model.playerskin.RabbitEarsModel;
+import mod.maxbogomol.fluffy_fur.client.model.playerskin.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -24,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class FluffyFurModels {
+    public static final ModelLayerLocation CAT_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "cat_ears");
+    public static final ModelLayerLocation CAT_TAIL_LAYER = addLayer(FluffyFur.MOD_ID, "cat_tail");
     public static final ModelLayerLocation FOX_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "fox_ears");
     public static final ModelLayerLocation FOX_TAIL_LAYER = addLayer(FluffyFur.MOD_ID, "fox_tail");
     public static final ModelLayerLocation RABBIT_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "rabbit_ears");
@@ -31,6 +30,8 @@ public class FluffyFurModels {
 
     public static final ModelLayerLocation EMPTY_ARMOR_LAYER = addLayer(FluffyFur.MOD_ID, "empty_armor");
 
+    public static CatEarsModel CAT_EARS = null;
+    public static CatTailModel CAT_TAIL = null;
     public static FoxEarsModel FOX_EARS = null;
     public static FoxTailModel FOX_TAIL = null;
     public static RabbitEarsModel RABBIT_EARS = null;
@@ -42,6 +43,8 @@ public class FluffyFurModels {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(CAT_EARS_LAYER, CatEarsModel::createBodyLayer);
+            event.registerLayerDefinition(CAT_TAIL_LAYER, CatTailModel::createBodyLayer);
             event.registerLayerDefinition(FOX_EARS_LAYER, FoxEarsModel::createBodyLayer);
             event.registerLayerDefinition(FOX_TAIL_LAYER, FoxTailModel::createBodyLayer);
             event.registerLayerDefinition(RABBIT_EARS_LAYER, RabbitEarsModel::createBodyLayer);
@@ -52,6 +55,8 @@ public class FluffyFurModels {
 
         @SubscribeEvent
         public static void addLayers(EntityRenderersEvent.AddLayers event) {
+            CAT_EARS = new CatEarsModel(event.getEntityModels().bakeLayer(CAT_EARS_LAYER));
+            CAT_TAIL = new CatTailModel(event.getEntityModels().bakeLayer(CAT_TAIL_LAYER));
             FOX_EARS = new FoxEarsModel(event.getEntityModels().bakeLayer(FOX_EARS_LAYER));
             FOX_TAIL = new FoxTailModel(event.getEntityModels().bakeLayer(FOX_TAIL_LAYER));
             RABBIT_EARS = new RabbitEarsModel(event.getEntityModels().bakeLayer(RABBIT_EARS_LAYER));
