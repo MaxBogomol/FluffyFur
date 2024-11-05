@@ -14,7 +14,7 @@ public class FluffyFurPlayerSkins {
             .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/ears"))
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/tail"))
             .setSlim(true);
-    public static PlayerSkin ONIXTHECAT = new PlayerSkin(FluffyFur.MOD_ID + ":onixthecat")
+    public static PlayerSkin BOYKISSER = new PlayerSkin(FluffyFur.MOD_ID + ":boykisser")
             .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin"))
             .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "onixthecat/skin_blink"))
             .setSlim(true);
@@ -35,7 +35,7 @@ public class FluffyFurPlayerSkins {
         @SubscribeEvent
         public static void registerPlayerSkins(FMLClientSetupEvent event) {
             PlayerSkinHandler.register(MAXBOGOMOL);
-            PlayerSkinHandler.register(ONIXTHECAT);
+            PlayerSkinHandler.register(BOYKISSER);
             PlayerSkinHandler.register(NANACHI);
 
             PlayerSkinHandler.register(FLUFFY_CAPE);

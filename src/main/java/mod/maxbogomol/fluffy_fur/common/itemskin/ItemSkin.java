@@ -55,7 +55,7 @@ public class ItemSkin {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String monogramId = id.substring(i + 1);
-        return "skin."  + modId + "." + monogramId;
+        return "item_skin."  + modId + "." + monogramId;
     }
 
     public static String getTranslatedLoreName(String id) {

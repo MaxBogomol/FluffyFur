@@ -31,7 +31,7 @@ public class PlayerSkinMenuScreen extends Screen {
     public void initSkins() {
         skins.add(new SkinEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.MAXBOGOMOL, Component.literal("MaxBogomol")));
-        skins.add(new SkinEntry(FluffyFurPlayerSkins.ONIXTHECAT, Component.literal("OnixTheCat")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.BOYKISSER, Component.translatable("gui.fluffy_fur.skin_menu.skin.boykisser")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI, Component.translatable("gui.fluffy_fur.skin_menu.skin.nanachi")));
 
         skinCapes.add(new SkinCapeEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
