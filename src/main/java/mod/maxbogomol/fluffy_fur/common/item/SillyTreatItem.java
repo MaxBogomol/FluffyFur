@@ -28,6 +28,6 @@ public class SillyTreatItem extends Item {
                 FluffyFurPacketHandler.sendToServer(new PlayerSkinChangePacket(player.position().add(0, player.getBbHeight(), 0)));
             }
         }
-        return stack;
+        return super.finishUsingItem(stack, level, livingEntity);
     }
 }
