@@ -31,6 +31,8 @@ public class FluffyFurItems {
     public static final RegistryObject<Item> MAXBOGOMOL_PLUSH = ITEMS.register("maxbogomol_plush", () -> new BlockItem(FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ONIXTHECAT_PLUSH = ITEMS.register("onixthecat_plush", () -> new BlockItem(FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SAMMYSEMICOLON_PLUSH = ITEMS.register("sammysemicolon_plush", () -> new BlockItem(FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> BOYKISSER_PLUSH = ITEMS.register("boykisser_plush", () -> new BlockItem(FluffyFurBlocks.BOYKISSER_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> NANACHI_PLUSH = ITEMS.register("nanachi_plush", () -> new BlockItem(FluffyFurBlocks.NANACHI_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

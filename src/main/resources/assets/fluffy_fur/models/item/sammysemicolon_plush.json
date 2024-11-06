@@ -1,3 +1,6 @@
 {
-  "parent": "fluffy_fur:plush/sammysemicolon"
+  "parent": "fluffy_fur:plush/sammysemicolon",
+  "textures": {
+    "particle": "minecraft:block/gray_wool"
+  }
 }
