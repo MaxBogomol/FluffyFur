@@ -9,5 +9,17 @@ public class FluffyFurCreativeTabs {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(FluffyFurItems.MUSIC_DISC_FLUFFY);
         }
+
+        if (event.getTabKey() == CreativeModeTabs.OP_BLOCKS && event.hasPermissions()) {
+            event.accept(FluffyFurItems.TEST_SHRIMP);
+            event.accept(FluffyFurItems.THING);
+            event.accept(FluffyFurItems.SILLY_TREAT);
+
+            event.accept(FluffyFurItems.MAXBOGOMOL_PLUSH);
+            event.accept(FluffyFurItems.ONIXTHECAT_PLUSH);
+            event.accept(FluffyFurItems.SAMMYSEMICOLON_PLUSH);
+            event.accept(FluffyFurItems.BOYKISSER_PLUSH);
+            //event.accept(FluffyFurItems.NANACHI_PLUSH);
+        }
     }
 }
