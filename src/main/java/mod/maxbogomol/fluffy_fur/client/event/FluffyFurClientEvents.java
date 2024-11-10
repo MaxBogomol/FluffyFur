@@ -21,7 +21,7 @@ import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class ClientEvents {
+public class FluffyFurClientEvents {
 
     @SubscribeEvent
     public void openMainMenu(ScreenEvent.Opening event) {

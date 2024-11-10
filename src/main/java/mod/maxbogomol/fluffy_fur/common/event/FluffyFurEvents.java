@@ -27,7 +27,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Events {
+public class FluffyFurEvents {
 
     public List<Player> playerSkinUpdate = new ArrayList<>();
 

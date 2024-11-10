@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
-import mod.maxbogomol.fluffy_fur.common.event.Events;
+import mod.maxbogomol.fluffy_fur.common.event.FluffyFurEvents;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
@@ -37,8 +37,8 @@ import java.util.Random;
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
     public static final String NAME = "Fluffy Fur";
-    public static final String VERSION = "0.1.4";
-    public static final int VERSION_NUMBER = 5;
+    public static final String VERSION = "0.1.5";
+    public static final int VERSION_NUMBER = 6;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
@@ -64,7 +64,7 @@ public class FluffyFur {
         eventBus.addListener(FluffyFurClient::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new Events());
+        MinecraftForge.EVENT_BUS.register(new FluffyFurEvents());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
