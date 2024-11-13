@@ -30,6 +30,8 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
 
+    public static final RegistryObject<Block> YONKABLOCK = BLOCKS.register("yonkablock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)));
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
