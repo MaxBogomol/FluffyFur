@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.client.event.FluffyFurClientEvents;
+import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
@@ -43,6 +44,7 @@ public class FluffyFurClient {
         piracyPresent = ModList.get().isLoaded("tlskincape");
 
         setupMenu();
+        setupSplashes();
 
         ShadersIntegration.init();
     }
@@ -76,5 +78,10 @@ public class FluffyFurClient {
 
     public static void registerPanorama(FluffyFurPanorama panorama) {
         FluffyFurModsHandler.registerPanorama(panorama);
+    }
+
+    public static void setupSplashes() {
+        SplashHandler.addSplash("Made by Notch!");
+        SplashHandler.addSplash("Привет, Россия!");
     }
 }
