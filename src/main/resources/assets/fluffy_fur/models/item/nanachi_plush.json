@@ -1,6 +1,6 @@
 {
   "parent": "fluffy_fur:plush/nanachi",
   "textures": {
-    "particle": "minecraft:block/orange_wool"
+    "particle": "minecraft:block/white_wool"
   }
 }
