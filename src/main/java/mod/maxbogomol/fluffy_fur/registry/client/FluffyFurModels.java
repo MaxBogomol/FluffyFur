@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
+import mod.maxbogomol.fluffy_fur.client.model.book.CustomBookModel;
 import mod.maxbogomol.fluffy_fur.client.model.item.BowItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
 import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
@@ -21,14 +22,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class FluffyFurModels {
-    public static final ModelLayerLocation CAT_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "cat_ears");
-    public static final ModelLayerLocation CAT_TAIL_LAYER = addLayer(FluffyFur.MOD_ID, "cat_tail");
-    public static final ModelLayerLocation FOX_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "fox_ears");
-    public static final ModelLayerLocation FOX_TAIL_LAYER = addLayer(FluffyFur.MOD_ID, "fox_tail");
-    public static final ModelLayerLocation RABBIT_EARS_LAYER = addLayer(FluffyFur.MOD_ID, "rabbit_ears");
-    public static final ModelLayerLocation NANACHI_TAIL_LAYER = addLayer(FluffyFur.MOD_ID, "nanachi_tail");
+    public static final ModelLayerLocation CAT_EARS_LAYER = addLayer("cat_ears");
+    public static final ModelLayerLocation CAT_TAIL_LAYER = addLayer("cat_tail");
+    public static final ModelLayerLocation FOX_EARS_LAYER = addLayer("fox_ears");
+    public static final ModelLayerLocation FOX_TAIL_LAYER = addLayer("fox_tail");
+    public static final ModelLayerLocation RABBIT_EARS_LAYER = addLayer("rabbit_ears");
+    public static final ModelLayerLocation NANACHI_TAIL_LAYER = addLayer("nanachi_tail");
 
-    public static final ModelLayerLocation EMPTY_ARMOR_LAYER = addLayer(FluffyFur.MOD_ID, "empty_armor");
+    public static final ModelLayerLocation EMPTY_ARMOR_LAYER = addLayer("empty_armor");
+
+    public static final ModelLayerLocation BOOK_LAYER = addLayer("book");
 
     public static CatEarsModel CAT_EARS = null;
     public static CatTailModel CAT_TAIL = null;
@@ -38,6 +41,8 @@ public class FluffyFurModels {
     public static NanachiTailModel NANACHI_TAIL = null;
 
     public static EmptyArmorModel EMPTY_ARMOR = null;
+
+    public static CustomBookModel BOOK = null;
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
@@ -51,6 +56,8 @@ public class FluffyFurModels {
             event.registerLayerDefinition(NANACHI_TAIL_LAYER, NanachiTailModel::createBodyLayer);
 
             event.registerLayerDefinition(EMPTY_ARMOR_LAYER, EmptyArmorModel::createBodyLayer);
+
+            event.registerLayerDefinition(BOOK_LAYER, CustomBookModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -63,7 +70,13 @@ public class FluffyFurModels {
             NANACHI_TAIL = new NanachiTailModel(event.getEntityModels().bakeLayer(NANACHI_TAIL_LAYER));
 
             EMPTY_ARMOR = new EmptyArmorModel(event.getEntityModels().bakeLayer(EMPTY_ARMOR_LAYER));
+
+            BOOK = new CustomBookModel(event.getEntityModels().bakeLayer(BOOK_LAYER));
         }
+    }
+
+    public static ModelLayerLocation addLayer(String layer) {
+        return addLayer(FluffyFur.MOD_ID, layer);
     }
 
     public static ModelLayerLocation addLayer(String modId, String layer) {
