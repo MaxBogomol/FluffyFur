@@ -4,8 +4,12 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.item.CustomItemRenderer;
+import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,6 +26,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -298,6 +303,67 @@ public class RenderUtil {
         stack.translate(-size.x() / 2f, -size.y() / 2f, -size.z() / 2f);
         renderConnectSideLines(stack, size, color, alpha);
         stack.popPose();
+    }
+
+    public static void boykisser(Level level, Vec3 pos, int xSize, int ySize) {
+        ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
+                .setTransparencyData(GenericParticleData.create(1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.1f).build())
+                .setLifetime(20, 5);
+        for (int y = 0; y < ySize; y++) {
+            for (int x = 0; x < ySize; x++) {
+                if (isBoykisserPosition((float) x / xSize, (float) y / ySize)) {
+                    builder.spawn(level, pos.x() + (((xSize / 2f) - x) * 0.075f), pos.y() - (((ySize / 2f) - y) * 0.075f), pos.z());
+                }
+            }
+        }
+    }
+
+    public static boolean isBoykisserPosition(float x, float y) {
+        float c = 25f;
+        float l = 3f;
+        float X = (x - 0.5f) * c;
+        float Y = (y - 0.5f) * c;
+
+        if (isFormulaLine(Math.pow(X - 2.1f, 2) + Math.pow(Y - 6.3f, 2), Math.pow(11, 2), Y < 10.8f && Y > 1.1f && X < 0, l)) return true;
+        if (isFormulaLine(Math.pow(X + 2.1f, 2) + Math.pow(Y - 6.3f, 2), Math.pow(11, 2), Y < 10.8f && Y > 0.7f && X > 0, l)) return true;
+        if (isFormulaLine(Math.pow(X + 12f, 2) + Math.pow(Y - 0.6f, 2), Math.pow(11, 2), Y < 10.8f && Y > 7.3f && X > -10f, l)) return true;
+        if (isFormulaLine(Math.pow(X - 12f, 2) + Math.pow(Y - 0.6f, 2), Math.pow(11, 2), Y < 10.8f && Y > 6f && X < 10f, l)) return true;
+        if (isFormulaLine(Math.pow(1.2f * X + 1.8f, 2) + Math.pow(Y - 0.5f, 2), Math.pow(7, 2), X > -3.6f && X < 2.5f && Y > 2f, l)) return true;
+        if (isFormulaLine(Math.pow(X + 3.8f, 2) + Math.pow(0.9f * Y - 5.7f, 2), 0.5f, X > -3.6f && Y > 6f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(1.2f * X + 3f, 2) + Math.pow(Y + 2f, 2), Math.pow(8, 2), X > -3.8f && X < 0 && Y > 2f, l)) return true;
+        if (isFormulaLine(Math.pow(X + 10, 2) + Math.pow(Y + 4.5f, 2), Math.pow(12, 2), X > -3.8f && Y > 4f, l)) return true;
+        if (isFormulaLine(0.6f * X + 5.6, Y, X > -11f && X < -7.6f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(X + 4.2f, 2) + Math.pow(Y - 7.5f, 2), Math.pow(11, 2), Y < -1.1f && X < -8.5f, l)) return true;
+        if (isFormulaLine(2.5f * X + 18.5f, Y, Y > -5f && Y < -1.5f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(X + 10f, 2) + Math.pow(Y - 7f, 2), Math.pow(12, 2), X < -5.8f && X > -9.4f && Y < 0, l)) return true;
+        if (isFormulaLine(-0.25f * X + 2.5f, Y, X > 7.4f && X < 10.85f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(X - 2.6f, 2) + Math.pow(Y - 5.4f, 2), Math.pow(10, 2), Y < -0.24f && X > 8.8f, l)) return true;
+        if (isFormulaLine(-1.2f * X + 8.1f, Y, Y < -1.45f && Y > -4f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(1.6f * X - 12, 2) + Math.pow(1.4f * Y - 3.5f, 2), Math.pow(10, 2), X < 10 && X > 5.8f && Y < 0, l)) return true;
+        if (isFormulaLine(Math.pow(X, 2) + Math.pow(3.5f * Y + 13.2f, 2), Math.pow(6, 2), Y < -4.3f, l)) return true;
+        if (Math.pow((1.5f * X) + 5.2f, 2) + Math.pow(Y + 0.1f, 2) < Math.pow(2, 2)) return true;
+        if (Math.pow((1.5f * X) - 5f, 2) + Math.pow(Y + 0.1f, 2) < Math.pow(2, 2)) return true;
+        if (Math.pow((1.3f * X) + 0.1f, 2) + Math.pow((2.3f * Y) + 4.5f, 2) < 1f) return true;
+        if (isFormulaLine(Math.pow(X - 0.7f, 2) + Math.pow(Y + 2.8f, 2), 1, X > 0 && X < 1.5f && Y < -2.5f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(X + 0.7f, 2) + Math.pow(Y + 2.8f, 2), 1, X < 0 && X > -1.5f && Y < -2.5f, l * 0.05f)) return true;
+        if (isFormulaLine(Math.pow(X + 3.8f, 2) + Math.pow(0.7f * Y + 0.1f, 2), 4, Y > -0.5f, l * 0.1f)) return true;
+        if (isFormulaLine(Math.pow(X - 3.7f, 2) + Math.pow(0.7f * Y + 0.1f, 2), 4, Y > -0.5f, l * 0.1f)) return true;
+        if (isFormulaLine(X + 2.6f, Y, Y > -3.5f && Y < -2.8f, l * 0.05f)) return true;
+        if (isFormulaLine(X + 1.6f, Y, Y > -3.3f && Y < -2.8f, l * 0.05f)) return true;
+        if (isFormulaLine(-1.2f * X - 9.3f, Y, Y < -2.8f && Y > -3.3f, l * 0.05f)) return true;
+        if (isFormulaLine(X - 8.6f, Y, Y > -3.5f && Y < -2.8f, l * 0.05f)) return true;
+        if (isFormulaLine(X - 9.7f, Y, Y > -3.3f && Y < -2.8f, l * 0.05f)) return true;
+        if (isFormulaLine(-1.2f * X + 4.3f, Y, Y < -2.8f && Y > -3.3f, l * 0.05f)) return true;
+
+        return false;
+    }
+
+    public static boolean isFormulaLine(double f, double j, boolean limit, double l) {
+        if (limit) {
+            return f >= j - l && f <= j + l;
+        }
+        return false;
     }
 
     public static Vector3f parametricSphere(float u, float v, float r) {

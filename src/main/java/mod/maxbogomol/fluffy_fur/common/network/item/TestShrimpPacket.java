@@ -15,6 +15,7 @@ import mod.maxbogomol.fluffy_fur.common.network.TwoPositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
@@ -470,6 +471,11 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .disableDistanceSpawn()
                     .repeat(level, pos.x(), pos.y(), pos.z(), 1);
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(200).setIntensity(1f, 0).setEasing(Easing.QUINTIC_IN_OUT));
+        }
+
+        if (mode == 25) {
+            Vec3 pos = startPos.add(lookPos.scale(15f));
+            RenderUtil.boykisser(level, pos,256, 256);
         }
     }
 

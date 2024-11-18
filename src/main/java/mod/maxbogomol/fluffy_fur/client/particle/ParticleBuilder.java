@@ -146,7 +146,7 @@ public class ParticleBuilder {
         return this;
     }
 
-    public ParticleBuilder setGravity(int gravity, int additionalGravity) {
+    public ParticleBuilder setGravity(float gravity, float additionalGravity) {
         options.gravity = gravity;
         options.additionalGravity = additionalGravity;
         return this;
@@ -157,7 +157,7 @@ public class ParticleBuilder {
         return this;
     }
 
-    public ParticleBuilder setFriction(int friction, int additionalFriction) {
+    public ParticleBuilder setFriction(float friction, float additionalFriction) {
         options.friction = friction;
         options.additionalFriction = additionalFriction;
         return this;
