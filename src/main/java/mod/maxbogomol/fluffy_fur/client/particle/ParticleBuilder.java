@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.particle;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -420,6 +421,31 @@ public class ParticleBuilder {
 
     public ParticleBuilder spawnVoxelShape(Level level, double x, double y, double z, VoxelShape voxelShape) {
         return spawnVoxelShape(level, new Vec3(x, y, z), voxelShape, 5, 1);
+    }
+
+    public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize) {
+        for (int y = 0; y < ySize; y++) {
+            for (int x = 0; x < ySize; x++) {
+                if (RenderUtil.boykisserPos((float) x / xSize, (float) y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize, blushLineSize)) {
+                    spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
+                }
+            }
+        }
+        return this;
+    }
+
+    public ParticleBuilder spawnBoykisser(Level level, Vec3 pos, int xSize, int ySize, float size, ParticleBuilder blushBuilder, float lineSize, float smallLineSize, float eyebrowsLineSize, float mouthLineSize, float blushLineSize) {
+        for (int y = 0; y < ySize; y++) {
+            for (int x = 0; x < ySize; x++) {
+                if (RenderUtil.boykisserBlushlessPos((float) x / xSize, (float) y / ySize, lineSize, smallLineSize, eyebrowsLineSize, mouthLineSize)) {
+                    spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
+                }
+                if (RenderUtil.boykisserBlushPos((float) x / xSize, (float) y / ySize, blushLineSize)) {
+                    blushBuilder.spawn(level, pos.x() + (((xSize / 2f) - x) * size), pos.y() - (((ySize / 2f) - y) * size), pos.z());
+                }
+            }
+        }
+        return this;
     }
 
     public static ParticleBuilder create(ParticleType<?> type) {

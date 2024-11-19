@@ -15,7 +15,6 @@ import mod.maxbogomol.fluffy_fur.common.network.TwoPositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
-import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
@@ -475,7 +474,17 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
 
         if (mode == 25) {
             Vec3 pos = startPos.add(lookPos.scale(15f));
-            RenderUtil.boykisser(level, pos,256, 256);
+            ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
+                    .setColorData(ColorParticleData.create(Color.WHITE).build())
+                    .setTransparencyData(GenericParticleData.create(1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.1f).build())
+                    .setLifetime(20, 5);
+            ParticleBuilder blushBuilder = ParticleBuilder.create(FluffyFurParticles.WISP)
+                    .setColorData(ColorParticleData.create(Color.RED).build())
+                    .setTransparencyData(GenericParticleData.create(1, 0).setEasing(Easing.QUARTIC_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.1f).build())
+                    .setLifetime(20, 5);
+            builder.spawnBoykisser(level, pos, 256, 256, 0.075f, blushBuilder, 3, 0.15f, 0.3f, 0.15f, 0.15f);
         }
     }
 
