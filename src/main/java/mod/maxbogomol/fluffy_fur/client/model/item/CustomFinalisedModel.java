@@ -64,6 +64,6 @@ public class CustomFinalisedModel implements BakedModel {
 
     @Override
     public ItemOverrides getOverrides() {
-        throw new UnsupportedOperationException("The finalised model does not have an override list.");
+        return new CustomItemOverrides();
     }
 }
