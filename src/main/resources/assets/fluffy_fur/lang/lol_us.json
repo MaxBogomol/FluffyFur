@@ -1,0 +1,83 @@
+{
+  "_comment_1": "Hey therre!! owo,,, hiiii!:3:3 please call me im free tonight",
+  "block.fluffy_fur.potted_pink_petals": "pink petals. pot.",
+
+  "item.fluffy_fur.music_disc_fluffy": "pink fox loud music",
+
+  "item.fluffy_fur.test_shrimp": "optifin Shrimplet",
+  "item.fluffy_fur.thing": "§kt h i n g",
+  "item.fluffy_fur.silly_treat": "silly fishy cat fud",
+
+  "block.fluffy_fur.maxbogomol_plush": "Pink fox plush meow >w<",
+  "block.fluffy_fur.onixthecat_plush": "goated boy plush",
+  "block.fluffy_fur.sammysemicolon_plush": "la creatura",
+  "block.fluffy_fur.boykisser_plush": "gay cat.",
+  "block.fluffy_fur.nanachi_plush": "bnuyyyy plus",
+
+  "block.fluffy_fur.yonkablock": "fish",
+
+  "_comment_2": ":3",
+  "lore.fluffy_fur.skin": "katt fur:",
+
+  "_comment_3": "itemz",
+  "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+  "_comment_disc": "he learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "menyiuu",
+  "mod_description.fluffy_fur": "Fluf fur ^･ω･^ - silly fox mod librari. \n adds cul things (shrimps and fishz) and also cul visualz an and shrimple devlpment and. \n \n Meow mew meow mewow :3 \n plz don use optifine.",
+
+  "panorama.minecraft.vanilla": "vanillian",
+  "panorama.fluffy_fur.fluffy_zone": "furry zone",
+
+  "_comment_5": "guiyuiy",
+  "gui.fluffy_fur.menu.optifine.0": "atenshion kitteh! it seems you have Optifine installed",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine is BREAKING the render of the whole Universe itself very very BAD",
+  "gui.fluffy_fur.menu.optifine.2": "(ples delet it :3)",
+  "gui.fluffy_fur.menu.piracy": "PIRACY IS BAD!!!",
+
+  "gui.fluffy_fur.menu.panoramas": "panamas",
+  "gui.fluffy_fur.menu.mods": "kats",
+  "gui.fluffy_fur.menu.id": "IDE:",
+  "gui.fluffy_fur.menu.version": "vershun:",
+  "gui.fluffy_fur.menu.edition": "pocket edition:",
+  "gui.fluffy_fur.menu.autor": "kats:",
+  "gui.fluffy_fur.menu.links": "hyperlinkg:",
+  "gui.fluffy_fur.menu.mod": "cod:",
+
+  "gui.fluffy_fur.skin_menu.skins": "kat furs",
+  "gui.fluffy_fur.skin_menu.capes": "kat cloths",
+  "gui.fluffy_fur.skin_menu.skin_effects": "✨kat cool looking✨",
+
+  "gui.fluffy_fur.skin_menu.standard": "kat standard",
+  "gui.fluffy_fur.skin_menu.empty": "emty",
+  "gui.fluffy_fur.skin_menu.skin.boykisser": "cat kisser",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "bnuy",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "flufff",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "hearts <3",
+
+  "_comment_6": "beykinds",
+  "key.category.fluffy_fur.general": "fufy flur",
+  "key.fluffy_fur.skin_menu": "kat meownu",
+
+  "_comment_7": "Config",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "kat shake insanity",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "insanity of shaek.",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "itum particel",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "enabal items confetti.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "itemz cool in menyu inventari",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "enabl items particles in GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "violoncello (blood ultrakill)",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "enabel blood ultrakill when kat is hurdt",
+  "config.client.fluffy_fur.menu.panorama": "panama",
+  "config.client.fluffy_fur.menu.panorama.desc": "fulfyflur panama.",
+  "config.client.fluffy_fur.menu.menuButton": "Menuy butonn",
+  "config.client.fluffy_fur.menu.menuButton.desc": "enbal fufyfur meownu buton.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Menuy Butonn rawr",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "sulphur menuy button row.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "Meownu buton Ror χ ofset",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "Fluffy Fur menu button Χ offset with row.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "Menuy Button Χ ofste",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "Fluffy Fur menu butonn χ offset.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Menuy buton υ oftste",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Fluffy Fur menu button Υ offset."
+}

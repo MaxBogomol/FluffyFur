@@ -16,32 +16,22 @@ public class FluffyFurClientConfig {
 
     public FluffyFurClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").push("graphics");
-        SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.")
-                .defineInRange("screenshakeIntensity", 1d, 0, 10d);
+        SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.").defineInRange("screenshakeIntensity", 1d, 0, 10d);
 
         builder.comment("Particles").push("particles");
-        ITEM_PARTICLE = builder.comment("Enable dropping items particles.")
-                .define("itemParticle", true);
-        ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.")
-                .define("itemGuiParticle", true);
-        BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.")
-                .define("bloodParticle", false);
+        ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);
+        ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.").define("itemGuiParticle", true);
+        BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").define("bloodParticle", false);
         builder.pop();
         builder.pop();
 
         builder.comment("Menu").push("menu");
-        PANORAMA = builder.comment("Fluffy Fur Panorama.")
-                .define("panorama", "minecraft:vanilla");
-        MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.")
-                .define("menuButton", true);
-        MENU_BUTTON_ROW = builder.comment("Fluffy Fur menu button row.")
-                .defineInRange("menuButtonRow", 3, 0, 4);
-        MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.")
-                .define("menuButtonRowXOffset", 4);
-        MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.")
-                .define("menuButtonXOffset", 0);
-        MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.")
-                .define("menuButtonYOffset", 0);
+        PANORAMA = builder.comment("Fluffy Fur Panorama.").define("panorama", "minecraft:vanilla");
+        MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.").define("menuButton", true);
+        MENU_BUTTON_ROW = builder.comment("Fluffy Fur menu button row.").defineInRange("menuButtonRow", 3, 0, 4);
+        MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").define("menuButtonRowXOffset", 4);
+        MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.").define("menuButtonXOffset", 0);
+        MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.").define("menuButtonYOffset", 0);
         builder.pop();
     }
 

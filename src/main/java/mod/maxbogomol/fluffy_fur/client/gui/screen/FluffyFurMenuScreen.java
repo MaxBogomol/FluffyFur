@@ -277,7 +277,7 @@ public class FluffyFurMenuScreen extends Screen {
 
     public static List<Component> getDescription(FluffyFurMod mod) {
         String text = mod.getDescription().getString();
-        int w = 146;
+        int w = 145;
 
         Font font = Minecraft.getInstance().font;
         List<Component> lines = new ArrayList<>();
