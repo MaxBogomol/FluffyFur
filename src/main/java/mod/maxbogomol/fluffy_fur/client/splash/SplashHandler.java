@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.event;
+package mod.maxbogomol.fluffy_fur.client.splash;
 
 import java.util.ArrayList;
 import java.util.List;

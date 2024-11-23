@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
-import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
+import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;

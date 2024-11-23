@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.client.event.FluffyFurClientEvents;
-import mod.maxbogomol.fluffy_fur.client.event.SplashHandler;
+import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;

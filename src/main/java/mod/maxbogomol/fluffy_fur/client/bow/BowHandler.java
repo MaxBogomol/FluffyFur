@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.event;
+package mod.maxbogomol.fluffy_fur.client.bow;
 
 import net.minecraft.world.item.Item;
 
