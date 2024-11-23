@@ -59,8 +59,8 @@
   "key.fluffy_fur.skin_menu": "Меню обликов",
 
   "_comment_7": "Конфиги",
-  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность скриншейка",
-  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность скриншейка",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Частицы предметов",
   "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Включает частицы брошенных предметов.",
   "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "GUI частицы предметов",
