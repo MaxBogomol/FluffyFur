@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.event.FluffyFurEvents;
+import mod.maxbogomol.fluffy_fur.common.furry.Fox;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkinHandler;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
@@ -42,6 +43,8 @@ public class FluffyFur {
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
+
+    public static final Fox SILLY_FOX = new Fox("The silly Pink Fox that got stuck in your modding Minecraft");
 
     public FluffyFur() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
