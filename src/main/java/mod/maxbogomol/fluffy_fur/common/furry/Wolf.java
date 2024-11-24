@@ -11,4 +11,8 @@ public class Wolf extends Furry {
     public String getFurryName() {
         return "Wolf";
     }
+
+    public String awoo() {
+        return "Awoo!";
+    }
 }
