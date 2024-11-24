@@ -5,7 +5,9 @@
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
     "common.BlockItemMixin",
-    "common.BlocksMixin"
+    "common.BlocksMixin",
+    "common.CreeperMixin",
+    "common.TntBlockMixin"
   ],
   "client": [
     "client.AbstractClientPlayerMixin",
