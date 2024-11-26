@@ -24,7 +24,7 @@ public abstract class MinecraftMixin {
     @Unique
     Random fluffy_fur$random = new Random();
 
-    @Inject(method = "getSituationalMusic", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getSituationalMusic", at = @At("TAIL"), cancellable = true)
     private void fluffy_fur$getSituationalMusic(final CallbackInfoReturnable<Music> cir) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof WinScreen) {

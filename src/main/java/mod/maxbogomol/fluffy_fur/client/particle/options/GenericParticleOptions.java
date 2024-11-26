@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.particle.options;
 
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
+import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleRenderType;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -20,7 +21,7 @@ public class GenericParticleOptions implements ParticleOptions {
     ParticleType<?> type;
 
     public RenderType renderType = FluffyFurRenderTypes.ADDITIVE_PARTICLE;
-    public ParticleRenderType particleRenderType = ParticleRenderType.CUSTOM;
+    public ParticleRenderType particleRenderType = GenericParticleRenderType.INSTANCE;
 
     public ParticleBehavior behavior = null;
 

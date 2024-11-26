@@ -22,7 +22,6 @@
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
     "client.MinecraftMixin",
-    "client.ParticleEngineMixin",
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",
     "client.SplashManagerMixin",
