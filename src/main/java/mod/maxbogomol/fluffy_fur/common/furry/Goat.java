@@ -12,6 +12,11 @@ public class Goat extends Furry {
         return "goat";
     }
 
+    @Override
+    public String sound() {
+        return bleh();
+    }
+
     public String bleh() {
         return "Bleh!";
     }

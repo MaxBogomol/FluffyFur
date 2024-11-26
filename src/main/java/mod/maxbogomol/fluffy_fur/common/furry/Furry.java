@@ -22,4 +22,8 @@ public abstract class Furry {
     public String pat() {
         return "You pat the " + name + " " + getFurryName() + "!";
     }
+
+    public String sound() {
+        return "Noise!";
+    }
 }

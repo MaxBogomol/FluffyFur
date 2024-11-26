@@ -12,6 +12,11 @@ public class Cat extends Furry {
         return "cat";
     }
 
+    @Override
+    public String sound() {
+        return meow();
+    }
+
     public String meow() {
         return "Meow!";
     }
