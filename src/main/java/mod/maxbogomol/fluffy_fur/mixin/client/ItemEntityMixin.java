@@ -14,12 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin {
 
-    @Shadow public abstract ItemStack getItem();
+    @Shadow
+    public abstract ItemStack getItem();
 
     @Inject(at = @At("RETURN"), method = "tick")
     public void fluffy_fur$addParticles(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) ((Object) this);
-        if (self.level().isClientSide) {
+        if (self.level().isClientSide()) {
             if (FluffyFurClientConfig.ITEM_PARTICLE.get()) {
                 if (self.getItem().getItem() instanceof IParticleItem) {
                     IParticleItem item = (IParticleItem) self.getItem().getItem();

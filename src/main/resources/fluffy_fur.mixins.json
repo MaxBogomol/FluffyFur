@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
+    "client.LightningBoltMixin",
     "common.BlockItemMixin",
     "common.BlocksMixin",
     "common.CreeperMixin",
@@ -21,6 +22,7 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
+    "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",

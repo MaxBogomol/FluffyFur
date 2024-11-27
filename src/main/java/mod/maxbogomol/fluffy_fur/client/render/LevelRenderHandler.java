@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
@@ -31,6 +32,7 @@ public class LevelRenderHandler {
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
+    public static float FOG_START = 0;
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
@@ -54,6 +56,7 @@ public class LevelRenderHandler {
             behaviorParticleList.clear();
 
             if (!ShadersIntegration.shouldApply()) MATRIX4F = new Matrix4f(RenderSystem.getModelViewMatrix());
+            FOG_START = RenderSystem.getShaderFogStart();
         }
 
         if (!ShadersIntegration.shouldApply()) {
@@ -79,6 +82,7 @@ public class LevelRenderHandler {
 
     public static void shadersDelayedRender(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+            RenderSystem.setShaderFogStart(FOG_START);
             RenderSystem.getModelViewStack().pushPose();
             RenderSystem.getModelViewStack().setIdentity();
             if (MATRIX4F != null) RenderSystem.getModelViewStack().mulPoseMatrix(MATRIX4F);
@@ -95,6 +99,7 @@ public class LevelRenderHandler {
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
             for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
+            FogRenderer.setupNoFog();
         }
     }
 

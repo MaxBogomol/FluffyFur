@@ -38,8 +38,8 @@ import java.util.Random;
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
     public static final String NAME = "Fluffy Fur";
-    public static final String VERSION = "0.1.5";
-    public static final int VERSION_NUMBER = 6;
+    public static final String VERSION = "0.1.6";
+    public static final int VERSION_NUMBER = 7;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
