@@ -10,6 +10,8 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcess;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcessInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.TwoPositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -26,6 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.function.Supplier;
@@ -485,6 +488,11 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setScaleData(GenericParticleData.create(0.1f).build())
                     .setLifetime(20, 5);
             builder.spawnBoykisser(level, pos, 256, 256, 0.075f, blushBuilder, 3, 0.15f, 0.3f, 0.15f, 0.15f);
+        }
+
+        if (mode == 26) {
+            Vec3 pos = startPos.add(lookPos.scale(15f));
+            GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 0, 1)).setRadius(25).setIntensity(5).setFadeTime(50));
         }
     }
 

@@ -9,6 +9,10 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.screenshake.PositionedScreenshakeInstance;
+import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcess;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcessInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -17,6 +21,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import java.awt.*;
 
@@ -29,7 +34,7 @@ public class FluffyFurEffects {
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(lightningBoltPurpleColor).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                .setScaleData(GenericParticleData.create(0.5f, 0.6f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                 .setLifetime(50, 10)
                 .randomVelocity(0.05f)
@@ -39,7 +44,7 @@ public class FluffyFurEffects {
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(lightningBoltPurpleColor).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                .setScaleData(GenericParticleData.create(0.4f, 0.5f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.5f, 0.75f, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                 .setLifetime(50, 10)
                 .randomVelocity(0.1f)
@@ -63,6 +68,8 @@ public class FluffyFurEffects {
                 .setLifetime(100)
                 .disableDistanceSpawn()
                 .spawn(level, pos);
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 1)).setRadius(10).setIntensity(2).setFadeTime(20));
     }
 
     public static void lightningBoltTickEffect(Level level, Vec3 pos) {

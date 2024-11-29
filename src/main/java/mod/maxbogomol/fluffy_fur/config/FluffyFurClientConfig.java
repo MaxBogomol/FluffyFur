@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE,
+            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT,
             MENU_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
@@ -21,7 +21,8 @@ public class FluffyFurClientConfig {
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);
         ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.").define("itemGuiParticle", true);
-        BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").define("bloodParticle", false);
+        BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").define("bloodParticle", true);
+        LIGHTNING_BOLT_EFFECT = builder.comment("Enable custom effect of lightning bolt.").define("lightningBoltEffect", true);
         builder.pop();
         builder.pop();
 

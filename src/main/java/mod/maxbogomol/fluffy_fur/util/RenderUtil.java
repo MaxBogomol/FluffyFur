@@ -4,12 +4,15 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import mod.maxbogomol.fluffy_fur.client.render.FluffyFurRenderType;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.render.item.CustomItemRenderer;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -32,6 +35,8 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.awt.*;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 import static net.minecraft.util.Mth.sqrt;
 
@@ -39,9 +44,18 @@ public class RenderUtil {
 
     public static CustomItemRenderer customItemRenderer;
     public static float blitOffset = 0;
-    private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
 
     public static int FULL_BRIGHT = 15728880;
+
+    public static ShaderInstance getShader(RenderType type) {
+        if (type instanceof FluffyFurRenderType renderType) {
+            Optional<Supplier<ShaderInstance>> shader = renderType.state.shaderState.shader;
+            if (shader.isPresent()) {
+                return shader.get().get();
+            }
+        }
+        return null;
+    }
 
     public static CustomItemRenderer getCustomItemRenderer() {
         Minecraft minecraft = Minecraft.getInstance();

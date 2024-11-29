@@ -1,13 +1,18 @@
 package mod.maxbogomol.fluffy_fur.client.render;
 
+import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.pipeline.TextureTarget;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,6 +24,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL30C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,9 +36,10 @@ public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
     static MultiBufferSource.BufferSource DELAYED_RENDER = null;
+    public static RenderTarget DEPTH_CACHE;
+    public static float FOG_START = 0;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
-    public static float FOG_START = 0;
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
@@ -64,7 +71,10 @@ public class LevelRenderHandler {
         } else {
             shadersDelayedRender(event);
         }
+
+        PostProcessHandler.onLevelRender(event);
     }
+
 
     public static void standardDelayedRender(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
@@ -100,6 +110,33 @@ public class LevelRenderHandler {
             RenderSystem.applyModelViewMatrix();
             for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
             FogRenderer.setupNoFog();
+        }
+    }
+
+    public static void copyDepthBuffer(RenderTarget tempRenderTarget) {
+        setupDepthBuffer();
+        enableStencil();
+        if (tempRenderTarget == null) return;
+        RenderTarget mainRenderTarget = Minecraft.getInstance().getMainRenderTarget();
+        tempRenderTarget.copyDepthFrom(mainRenderTarget);
+        GlStateManager._glBindFramebuffer(GL30C.GL_DRAW_FRAMEBUFFER, mainRenderTarget.frameBufferId);
+    }
+
+    public static void setupDepthBuffer() {
+        if (DEPTH_CACHE == null) {
+            DEPTH_CACHE = new TextureTarget(Minecraft.getInstance().getMainRenderTarget().width, Minecraft.getInstance().getMainRenderTarget().height, true, Minecraft.ON_OSX);
+        }
+    }
+
+    public static void enableStencil() {
+        if (Minecraft.getInstance().getMainRenderTarget().isStencilEnabled()) {
+            DEPTH_CACHE.enableStencil();
+        }
+    }
+
+    public static void resize(int width, int height) {
+        if (DEPTH_CACHE != null) {
+            DEPTH_CACHE.resize(width, height, Minecraft.ON_OSX);
         }
     }
 

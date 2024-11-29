@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import mod.maxbogomol.fluffy_fur.client.effect.FluffyFurEffects;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -21,11 +22,13 @@ public abstract class LightningBoltMixin {
         LightningBolt self = (LightningBolt) ((Object) this);
         Level level = self.level();
         if (level.isClientSide()) {
-            Vec3 pos = self.position();
-            if (life == 2) {
-                FluffyFurEffects.lightningBoltSpawnEffect(level, pos);
+            if (FluffyFurClientConfig.LIGHTNING_BOLT_EFFECT.get()) {
+                Vec3 pos = self.position();
+                if (life == 2) {
+                    FluffyFurEffects.lightningBoltSpawnEffect(level, pos);
+                }
+                FluffyFurEffects.lightningBoltTickEffect(level, pos);
             }
-            FluffyFurEffects.lightningBoltTickEffect(level, pos);
         }
     }
 }

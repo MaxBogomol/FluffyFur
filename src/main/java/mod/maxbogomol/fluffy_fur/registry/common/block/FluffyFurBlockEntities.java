@@ -24,7 +24,7 @@ public class FluffyFurBlockEntities {
     public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> HANGING_SIGN = BLOCK_ENTITIES.register("hanging_sign", () -> BlockEntityType.Builder.of(CustomHangingSignBlockEntity::new, FluffyFurBlocks.getBlocks(CustomCeilingHangingSignBlock.class, CustomWallHangingSignBlock.class)).build(null));
 
     public static final RegistryObject<BlockEntityType<PlushBlockEntity>> PLUSH = BLOCK_ENTITIES.register("plush", () -> BlockEntityType.Builder.of(PlushBlockEntity::new,
-            FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(), FluffyFurBlocks.BOYKISSER_PLUSH.get(), FluffyFurBlocks.NANACHI_PLUSH.get())
+            FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), FluffyFurBlocks.UNOLOGICALSAMSAR_PLUSH.get(), FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(), FluffyFurBlocks.BOYKISSER_PLUSH.get(), FluffyFurBlocks.NANACHI_PLUSH.get())
             .build(null));
 
     public static void register(IEventBus eventBus) {

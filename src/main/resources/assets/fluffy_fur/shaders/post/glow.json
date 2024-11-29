@@ -1,0 +1,24 @@
+{
+    "targets": [
+        "final",
+        "depthMain"
+    ],
+    "passes": [
+        {
+            "name": "fluffy_fur:glow",
+            "intarget": "minecraft:main",
+            "outtarget": "final",
+            "auxtargets": [
+                {
+                    "name": "MainDepthSampler",
+                    "id":  "depthMain:depth"
+                }
+            ]
+        },
+        {
+            "name": "blit",
+            "intarget": "final",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
