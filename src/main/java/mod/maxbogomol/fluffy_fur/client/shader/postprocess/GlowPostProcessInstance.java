@@ -57,9 +57,7 @@ public class GlowPostProcessInstance extends PostProcessInstance {
         return this;
     }
 
-    @Override
-    public void update(double deltaTime) {
-        super.update(deltaTime);
+    public void fadeUpdate(double deltaTime) {
         if (isFade) {
             tickTime = ClientTickHandler.getTotal() - startTick;
             fade = 1f - (tickTime / fadeTime);
@@ -68,6 +66,12 @@ public class GlowPostProcessInstance extends PostProcessInstance {
                 remove();
             }
         }
+    }
+
+    @Override
+    public void update(double deltaTime) {
+        super.update(deltaTime);
+        fadeUpdate(deltaTime);
     }
 
     @Override

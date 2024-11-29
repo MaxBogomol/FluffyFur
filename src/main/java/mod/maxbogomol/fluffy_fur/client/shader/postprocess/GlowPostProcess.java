@@ -50,7 +50,7 @@ public class GlowPostProcess extends PostProcess {
 
         @Override
         public int getMaxInstances() {
-            return 160;
+            return 1024;
         }
 
         @Override

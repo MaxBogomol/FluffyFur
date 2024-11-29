@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.effect;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
+import mod.maxbogomol.fluffy_fur.client.particle.behavior.SparkParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.SphereParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.TrailParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -29,6 +30,8 @@ public class FluffyFurEffects {
 
     public static Color lightningBoltBlueColor = new Color(159, 250, 255);
     public static Color lightningBoltPurpleColor = new Color(247, 78, 255);
+    public static Color explosionRedColor = new Color(196, 46, 34);
+    public static Color explosionYellowColor = new Color(239, 180, 81);
 
     public static void lightningBoltSpawnEffect(Level level, Vec3 pos) {
         ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -169,5 +172,59 @@ public class FluffyFurEffects {
                 poseStack.popPose();
             }
         }
+    }
+
+    public static void explosionEffect(Level level, Vec3 pos) {
+        ParticleBuilder.create(FluffyFurParticles.WISP)
+                .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
+                .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
+                .setLifetime(40, 15)
+                .randomVelocity(0.1f)
+                .setFriction(0.9f)
+                .repeat(level, pos, 10);
+        ParticleBuilder.create(FluffyFurParticles.WISP)
+                .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
+                .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                .setScaleData(GenericParticleData.create(0.5f, 1.5f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.8f).build())
+                .setLifetime(60, 20)
+                .randomVelocity(0.2f)
+                .repeat(level, pos, 25);
+        ParticleBuilder.create(FluffyFurParticles.SMOKE)
+                .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
+                .setColorData(ColorParticleData.create(Color.BLACK).build())
+                .setTransparencyData(GenericParticleData.create(0.7f, 0).build())
+                .setScaleData(GenericParticleData.create(0.25f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
+                .setLifetime(80, 30)
+                .randomVelocity(0.2f)
+                .addVelocity(0, 0.1, 0)
+                .setFriction(0.92f)
+                .repeat(level, pos, 30);
+        ParticleBuilder.create(FluffyFurParticles.WISP)
+                .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
+                .setColorData(ColorParticleData.create(Color.BLACK).build())
+                .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
+                .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
+                .setLifetime(80, 30)
+                .randomVelocity(0.1f)
+                .setFriction(0.9f)
+                .repeat(level, pos, 5);
+        ParticleBuilder.create(FluffyFurParticles.CIRCLE)
+                .setBehavior(SparkParticleBehavior.create().build())
+                .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
+                .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.25f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                .setLifetime(30)
+                .randomVelocity(1.5f)
+                .addVelocity(0, 0.2f, 0)
+                .randomOffset(0.25f)
+                .setFriction(0.88f)
+                .setGravity(1f)
+                .repeat(level, pos, 50, 0.7f);
+        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
     }
 }

@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
+    "client.ExplosionMixin",
     "client.LightningBoltMixin",
     "common.BlockItemMixin",
     "common.BlocksMixin",
