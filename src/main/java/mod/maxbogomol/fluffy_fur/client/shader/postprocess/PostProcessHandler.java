@@ -41,7 +41,7 @@ public class PostProcessHandler {
 
     public static void onScreenRender(GameRenderer gameRenderer, float partialTicks, long nanoTime, boolean renderLevel) {
         for (PostProcess postProcess : instances) {
-            if (postProcess.isScreen() && !postProcess.isScreen()) {
+            if (postProcess.isScreen() && !postProcess.isWindow()) {
                 postProcess.applyPostProcess();
             }
         }
@@ -49,9 +49,15 @@ public class PostProcessHandler {
 
     public static void onWindowRender(GameRenderer gameRenderer, float partialTicks, long nanoTime, boolean renderLevel) {
         for (PostProcess postProcess : instances) {
-            if (postProcess.isScreen() && postProcess.isScreen()) {
+            if (postProcess.isScreen() && postProcess.isWindow()) {
                 postProcess.applyPostProcess();
             }
+        }
+    }
+
+    public static void tick() {
+        for (PostProcess postProcess : instances) {
+            postProcess.tick();
         }
     }
 }

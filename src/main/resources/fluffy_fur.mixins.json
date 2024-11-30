@@ -15,6 +15,7 @@
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.CurioTooltipMixin",
+    "client.EffectProgramMixin",
     "client.FoxRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",

@@ -81,6 +81,10 @@ public abstract class PostProcess {
         initialized = true;
     }
 
+    public void tick() {
+
+    }
+
     public void loadPostChain() {
         if (postChain != null) {
             postChain.close();

@@ -180,7 +180,7 @@ public class FluffyFurEffects {
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                 .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
-                .setLifetime(40, 15)
+                .setLifetime(20, 5)
                 .randomVelocity(0.1f)
                 .setFriction(0.9f)
                 .repeat(level, pos, 10);
@@ -189,7 +189,7 @@ public class FluffyFurEffects {
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
                 .setScaleData(GenericParticleData.create(0.5f, 1.5f, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.8f).build())
-                .setLifetime(60, 20)
+                .setLifetime(40, 10)
                 .randomVelocity(0.2f)
                 .repeat(level, pos, 25);
         ParticleBuilder.create(FluffyFurParticles.SMOKE)
@@ -198,7 +198,7 @@ public class FluffyFurEffects {
                 .setTransparencyData(GenericParticleData.create(0.7f, 0).build())
                 .setScaleData(GenericParticleData.create(0.25f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
-                .setLifetime(80, 30)
+                .setLifetime(60, 10)
                 .randomVelocity(0.2f)
                 .addVelocity(0, 0.1, 0)
                 .setFriction(0.92f)

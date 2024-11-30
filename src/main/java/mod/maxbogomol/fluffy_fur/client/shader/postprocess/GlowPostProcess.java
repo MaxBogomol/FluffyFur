@@ -11,7 +11,7 @@ public class GlowPostProcess extends PostProcess {
     public EffectInstance effectInstance;
     public ResourceLocation shader = new ResourceLocation(FluffyFur.MOD_ID, "shaders/post/glow.json");
 
-    public PostProcess addInstance(GlowPostProcessInstance instance) {
+    public GlowPostProcess addInstance(GlowPostProcessInstance instance) {
         data.addInstance(instance);
         setActive(true);
         return this;

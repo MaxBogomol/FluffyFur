@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <fog.glsl>
+#moj_import <fluffy_fur:common.glsl>
 
 uniform vec4 ColorModulator;
 uniform float FogStart;
@@ -17,5 +17,5 @@ void main() {
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+    fragColor = applyFog(color, vertexDistance, FogStart, FogEnd, FogColor);
 }

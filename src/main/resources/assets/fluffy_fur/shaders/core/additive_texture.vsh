@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <fog.glsl>
+#moj_import <fluffy_fur:common.glsl>
 
 in vec3 Position;
 in vec2 UV0;
@@ -17,7 +17,7 @@ out vec4 vertexColor;
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
-    vertexDistance = fog_distance(ModelViewMat, Position, FogShape);
+    vertexDistance = fogDistance(ModelViewMat, Position, FogShape);
     texCoord0 = UV0;
     vertexColor = Color;
 }

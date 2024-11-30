@@ -1,7 +1,6 @@
 #version 150
 
-#moj_import <light.glsl>
-#moj_import <fog.glsl>
+#moj_import <fluffy_fur:common.glsl>
 
 in vec3 Position;
 in vec2 UV0;
@@ -22,8 +21,8 @@ out vec4 lightMapColor;
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
-    vertexDistance = fog_distance(ModelViewMat, Position, FogShape);
+    vertexDistance = fogDistance(ModelViewMat, Position, FogShape);
     texCoord0 = UV0;
     vertexColor = Color;
-    lightMapColor = texelFetch(Sampler2, UV2 / 16, 0);
+    lightMapColor = sampleLightmap(Sampler2, UV2);
 }

@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
@@ -52,6 +53,7 @@ public class FluffyFurClientEvents {
             }
             Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
             ScreenshakeHandler.clientTick(camera);
+            PostProcessHandler.tick();
         }
     }
 
