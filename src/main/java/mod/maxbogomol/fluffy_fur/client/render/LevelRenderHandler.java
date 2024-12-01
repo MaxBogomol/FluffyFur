@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Minecraft;
@@ -71,8 +70,6 @@ public class LevelRenderHandler {
         } else {
             shadersDelayedRender(event);
         }
-
-        PostProcessHandler.onLevelRender(event);
     }
 
 

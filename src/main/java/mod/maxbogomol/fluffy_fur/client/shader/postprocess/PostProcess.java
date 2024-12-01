@@ -164,4 +164,8 @@ public abstract class PostProcess {
     public boolean isWindow() {
         return false;
     }
+
+    public float getPriority() {
+        return 0;
+    }
 }

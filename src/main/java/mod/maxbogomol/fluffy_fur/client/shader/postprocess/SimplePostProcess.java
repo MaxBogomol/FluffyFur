@@ -7,6 +7,7 @@ public class SimplePostProcess extends PostProcess {
     public ResourceLocation resourceLocation;
     public boolean screen = false;
     public boolean window = false;
+    public float priority = 0;
 
     public SimplePostProcess(ResourceLocation resourceLocation) {
         this.resourceLocation = resourceLocation;
@@ -38,6 +39,11 @@ public class SimplePostProcess extends PostProcess {
         return this;
     }
 
+    public SimplePostProcess setPriority(float priority) {
+        this.priority = priority;
+        return this;
+    }
+
     @Override
     public ResourceLocation getPostChainLocation() {
         return resourceLocation;
@@ -61,5 +67,10 @@ public class SimplePostProcess extends PostProcess {
     @Override
     public boolean isWindow() {
         return window;
+    }
+
+    @Override
+    public float getPriority() {
+        return priority;
     }
 }
