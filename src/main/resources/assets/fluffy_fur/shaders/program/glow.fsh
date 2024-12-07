@@ -14,21 +14,6 @@ uniform vec3 cameraPos;
 in vec2 texCoord;
 out vec4 fragColor;
 
-float dst(vec3 start, vec3 end, vec3 pos, float maxDistance) {
-    vec3 a = start - end;
-    vec3 b = start - pos;
-    float d = length(cross(a, b)) / length(a);
-    vec3 m = mix(start, end, 0.5);
-    float s = length(start - end) / 2;
-    float t = length(m - pos);
-    if (t > s + (maxDistance / 4)) {
-        d = length(pos - start);
-        float d2 = length(pos - end);
-        if (d2 < d) d = d2;
-    }
-    return d;
-}
-
 void main() {
     vec4 diffuseColor = texture(DiffuseSampler, texCoord);
     vec3 worldPos = getWorldPos(MainDepthSampler, texCoord, invProjMat, invViewMat, cameraPos);

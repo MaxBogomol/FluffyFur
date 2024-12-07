@@ -58,5 +58,4 @@ public class GlowPostProcess extends PostProcess {
             return 11;
         }
     }
-
 }
