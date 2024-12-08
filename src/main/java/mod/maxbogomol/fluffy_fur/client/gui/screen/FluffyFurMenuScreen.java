@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
-import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -33,7 +33,7 @@ public class FluffyFurMenuScreen extends Screen {
     public Screen lastScreen;
     public CubeMap CUBE_MAP = new CubeMap(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama"));
     public PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
-    public CustomLogoRenderer logoRenderer;
+    public FluffyFurLogoRenderer logoRenderer;
     public long fadeInStart;
 
     private static final ResourceLocation LOGO = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/fluffy_fur.png");
@@ -53,7 +53,7 @@ public class FluffyFurMenuScreen extends Screen {
     public FluffyFurMenuScreen(Screen lastScreen) {
         super(Component.empty());
         this.lastScreen = lastScreen;
-        this.logoRenderer = new CustomLogoRenderer(LOGO, false);
+        this.logoRenderer = new FluffyFurLogoRenderer(LOGO, false);
         if (lastScreen instanceof TitleScreen titleScreen) {
             copyPanorama(titleScreen);
         }

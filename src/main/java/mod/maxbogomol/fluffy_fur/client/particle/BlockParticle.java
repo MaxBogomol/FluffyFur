@@ -1,19 +1,20 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
-import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
+import mod.maxbogomol.fluffy_fur.client.particle.options.BlockParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraftforge.client.model.data.ModelData;
 
-public class ItemParticle extends GenericParticle {
+public class BlockParticle extends GenericParticle {
 
     private final float uo;
     private final float vo;
 
-    public ItemParticle(ClientLevel level, ItemParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
+    public BlockParticle(ClientLevel level, BlockParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
         super(level, options, null, x, y, z, vx, vy, vz);
-        var model = Minecraft.getInstance().getItemRenderer().getModel(options.stack, level, null, 0);
-        this.setSprite(model.getOverrides().resolve(model, options.stack, level, null, 0).getParticleIcon(ModelData.EMPTY));
+        var model = Minecraft.getInstance().getBlockRenderer().getBlockModel(options.blockState);
+        this.setSprite(model.getParticleIcon(ModelData.EMPTY));
+        this.quadSize /= 2.0F;
         this.uo = this.random.nextFloat() * 3.0F;
         this.vo = this.random.nextFloat() * 3.0F;
     }

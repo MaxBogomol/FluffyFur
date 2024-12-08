@@ -2,7 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
-import mod.maxbogomol.fluffy_fur.client.gui.components.CustomLogoRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.CubeMap;
@@ -118,15 +118,17 @@ public class FluffyFurModsHandler {
         float spin = titleScreen.panorama.spin;
         float bob = titleScreen.panorama.bob;
         ResourceLocation base = new ResourceLocation("textures/gui/title/background/panorama");
+        ResourceLocation overlay = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
         if (panorama.getTexture() != null) {
             base = panorama.getTexture();
         }
         TitleScreen.CUBE_MAP = new CubeMap(base);
         titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
+        TitleScreen.PANORAMA_OVERLAY = overlay;
         if (panorama.getLogo() != null) {
-            titleScreen.logoRenderer = new CustomLogoRenderer(panorama.getLogo(), titleScreen.logoRenderer.keepLogoThroughFade);
+            titleScreen.logoRenderer = new FluffyFurLogoRenderer(panorama.getLogo(), titleScreen.logoRenderer.keepLogoThroughFade);
         } else {
-            if (titleScreen.logoRenderer instanceof CustomLogoRenderer) {
+            if (titleScreen.logoRenderer instanceof FluffyFurLogoRenderer) {
                 titleScreen.logoRenderer = new LogoRenderer(titleScreen.logoRenderer.keepLogoThroughFade);
             }
         }

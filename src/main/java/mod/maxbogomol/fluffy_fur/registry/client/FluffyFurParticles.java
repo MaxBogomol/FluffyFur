@@ -38,6 +38,9 @@ public class FluffyFurParticles {
     public static RegistryObject<GenericParticleType> EARTH = PARTICLES.register("earth", GenericParticleType::new);
     public static RegistryObject<GenericParticleType> SUN = PARTICLES.register("sun", GenericParticleType::new);
     public static RegistryObject<ItemParticleType> ITEM = PARTICLES.register("item", ItemParticleType::new);
+    public static RegistryObject<BlockParticleType> BLOCK = PARTICLES.register("block", BlockParticleType::new);
+    public static RegistryObject<FluidParticleType> FLUID = PARTICLES.register("fluid", FluidParticleType::new);
+    public static RegistryObject<SpriteParticleType> SPRITE = PARTICLES.register("sprite", SpriteParticleType::new);
     public static RegistryObject<LeavesParticleType> CHERRY_LEAVES = PARTICLES.register("cherry_leaves", LeavesParticleType::new);
 
     public static void register(IEventBus eventBus) {
@@ -67,6 +70,9 @@ public class FluffyFurParticles {
             particleEngine.register(EARTH.get(), GenericParticleType.Factory::new);
             particleEngine.register(SUN.get(), GenericParticleType.Factory::new);
             particleEngine.register(ITEM.get(), ItemParticleType.Factory::new);
+            particleEngine.register(BLOCK.get(), BlockParticleType.Factory::new);
+            particleEngine.register(FLUID.get(), FluidParticleType.Factory::new);
+            particleEngine.register(SPRITE.get(), SpriteParticleType.Factory::new);
             particleEngine.register(CHERRY_LEAVES.get(), LeavesParticleType.Factory::new);
         }
     }

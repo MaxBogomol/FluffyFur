@@ -29,7 +29,7 @@ public class TestShrimpItem extends Item {
             int mode = nbt.getInt("mode");
 
             if (player.isShiftKeyDown()) {
-                nbt.putInt("mode", (mode + 1) % 27);
+                nbt.putInt("mode", (mode + 1) % 29);
                 mode = nbt.getInt("mode");
             }
             FluffyFurPacketHandler.sendToTracking(level, player.blockPosition(), new TestShrimpPacket(player.getEyePosition(), player.getLookAngle(), mode));

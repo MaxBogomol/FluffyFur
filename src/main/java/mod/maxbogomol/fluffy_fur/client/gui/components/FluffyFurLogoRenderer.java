@@ -7,10 +7,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomLogoRenderer extends LogoRenderer {
+public class FluffyFurLogoRenderer extends LogoRenderer {
     public ResourceLocation logo;
 
-    public CustomLogoRenderer(ResourceLocation logo, boolean keepLogoThroughFade) {
+    public FluffyFurLogoRenderer(ResourceLocation logo, boolean keepLogoThroughFade) {
         super(keepLogoThroughFade);
         this.logo = logo;
     }
