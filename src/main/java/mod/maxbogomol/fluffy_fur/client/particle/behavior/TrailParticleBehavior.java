@@ -106,7 +106,14 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
         component.trailPointBuilder.tickTrailPoints();
 
         pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(particle.age, particle.lifetime), 0, 1, 1));
-        component.a = transparencyData.getValue(particle.age, particle.lifetime, particle.st, particle.mt, particle.et);
+        component.a = transparencyData.getValue(particle.age, particle.lifetime, component.st, component.mt, component.et);
+    }
+
+    @Override
+    public void updateRenderTraits(GenericParticle particle, float partialTicks) {
+        TrailParticleBehaviorComponent component = getTrailComponent(particle);
+        pickColor(particle, colorData.colorCurveEasing.ease(colorData.getProgress(particle.age, particle.lifetime), 0, 1, 1));
+        component.a = transparencyData.getValue(particle.age, particle.lifetime, component.st, component.mt, component.et);
     }
 
     @Override

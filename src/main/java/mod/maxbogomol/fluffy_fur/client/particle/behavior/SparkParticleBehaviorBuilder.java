@@ -4,12 +4,16 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
+import net.minecraft.world.phys.Vec3;
 
 public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
 
     public ColorParticleData colorData = GenericParticleOptions.DEFAULT_COLOR;
     public GenericParticleData transparencyData = GenericParticleOptions.DEFAULT_GENERIC;
+    public GenericParticleData scaleData =  GenericParticleData.create(1).build();
     public boolean secondColor = false;
+    public Vec3 startPos = null;
+    public Vec3 endPos = null;
 
     protected SparkParticleBehaviorBuilder(float xOffset, float yOffset, float zOffset) {
         super(xOffset, yOffset, zOffset);
@@ -101,6 +105,11 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
+    public SparkParticleBehaviorBuilder setScaleData(GenericParticleData transparencyData) {
+        this.scaleData = transparencyData;
+        return this;
+    }
+
     public SparkParticleBehaviorBuilder enableSecondColor() {
         return setSecondColor(true);
     }
@@ -114,7 +123,17 @@ public class SparkParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
+    public SparkParticleBehaviorBuilder setStartPosition(Vec3 position) {
+        this.startPos = position;
+        return this;
+    }
+
+    public SparkParticleBehaviorBuilder setEndPosition(Vec3 position) {
+        this.endPos = position;
+        return this;
+    }
+
     public ParticleBehavior build() {
-        return new SparkParticleBehavior(colorData, transparencyData, secondColor, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new SparkParticleBehavior(colorData, transparencyData, scaleData, secondColor, startPos, endPos, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }

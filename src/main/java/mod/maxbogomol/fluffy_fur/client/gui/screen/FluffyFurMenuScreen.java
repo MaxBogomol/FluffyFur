@@ -225,9 +225,6 @@ public class FluffyFurMenuScreen extends Screen {
             if (mod.getDev().equals("MaxBogomol")) {
                 name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(ColorUtil.rainbowColor((ticks + partialTicks) * 0.005f))));
             }
-            if (mod.getId().equals("valoria")) {
-                name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 253, 145, 195)));
-            }
             if (mod.getId().equals("implosion")) {
                 name = name.withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 132, 190, 224)));
             }

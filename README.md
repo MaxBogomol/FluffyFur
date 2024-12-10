@@ -23,8 +23,7 @@ Custom player and items skin system
 ...and many other features to simplify development
 
 # Used by:  
-[![Wizard's Reborn](https://img.shields.io/badge/%20-WIZARD'S%20REBORN-5800ff?style=for-the-badge&color=cc762f&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/WizardsReborn)  
-[![Purrfect](https://img.shields.io/badge/%20-PURRFECT-5800ff?style=for-the-badge&color=cc762f&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/Purrfect)  
-[![Valoria](https://img.shields.io/badge/%20-VALORIA-5800ff?style=for-the-badge&color=d77787&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/IriDark/Valoria)  
+[Wizard's Reborn](https://github.com/MaxBogomol/WizardsReborn)  
+[Purrfect](https://github.com/MaxBogomol/Purrfect)  
 
 if you want help to connect the library to your mod or learn about the development of my mods, you can join our **[Discord Server](https://discord.gg/cKf55qNugw)**

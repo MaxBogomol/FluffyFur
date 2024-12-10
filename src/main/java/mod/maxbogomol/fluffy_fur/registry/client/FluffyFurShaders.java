@@ -15,11 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import java.io.IOException;
 
 public class FluffyFurShaders {
-    public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE;
-
-    public static ShaderInstance getAdditiveTexture() { return ADDITIVE_TEXTURE; }
-    public static ShaderInstance getAdditive() { return ADDITIVE; }
-    public static ShaderInstance getTranslucentTexture() { return TRANSLUCENT_TEXTURE; }
+    public static ShaderInstance ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT;
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
@@ -30,9 +26,26 @@ public class FluffyFurShaders {
 
         @SubscribeEvent
         public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> { ADDITIVE_TEXTURE = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> { ADDITIVE = shader; });
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> { TRANSLUCENT_TEXTURE = shader; });
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> ADDITIVE_TEXTURE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> ADDITIVE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT_TEXTURE = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT = shader);
         }
+    }
+
+    public static ShaderInstance getAdditiveTexture() {
+        return ADDITIVE_TEXTURE;
+    }
+
+    public static ShaderInstance getAdditive() {
+        return ADDITIVE;
+    }
+
+    public static ShaderInstance getTranslucentTexture() {
+        return TRANSLUCENT_TEXTURE;
+    }
+
+    public static ShaderInstance getTranslucent() {
+        return TRANSLUCENT;
     }
 }

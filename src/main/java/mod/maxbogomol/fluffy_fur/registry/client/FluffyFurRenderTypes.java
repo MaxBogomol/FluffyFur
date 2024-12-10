@@ -64,6 +64,7 @@ public class FluffyFurRenderTypes {
     public static final RenderStateShard.ShaderStateShard ADDITIVE_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditiveTexture);
     public static final RenderStateShard.ShaderStateShard ADDITIVE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditive);
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucentTexture);
+    public static final RenderStateShard.ShaderStateShard TRANSLUCENT_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucent);
 
     public static RenderType ADDITIVE_PARTICLE = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":additive_particle",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
@@ -110,6 +111,11 @@ public class FluffyFurRenderTypes {
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_TEXTURE_SHADER).createCompositeState(true));
 
+    public static RenderType TRANSLUCENT = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":translucent",
+            DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setShaderState(TRANSLUCENT_SHADER).createCompositeState(true));
+
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
@@ -123,6 +129,7 @@ public class FluffyFurRenderTypes {
             addTranslucentParticleRenderType(TRANSLUCENT_BLOCK_PARTICLE);
             addTranslucentRenderType(TRANSLUCENT_PARTICLE_TEXTURE);
             addTranslucentRenderType(TRANSLUCENT_TEXTURE);
+            addTranslucentRenderType(TRANSLUCENT);
         }
     }
 
