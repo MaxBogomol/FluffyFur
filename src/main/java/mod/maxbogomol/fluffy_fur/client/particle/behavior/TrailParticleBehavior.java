@@ -20,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class TrailParticleBehavior extends ParticleBehavior implements ICustomBehaviorParticleRender {
 
@@ -27,17 +28,19 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
     public GenericParticleData transparencyData;
     public boolean secondColor;
     public int trailSize;
+    Function<Float, Float> widthFunc;
 
-    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
+    public TrailParticleBehavior(ColorParticleData colorData, GenericParticleData transparencyData, boolean secondColor, int trailSize, Function<Float, Float> widthFunc, SpinParticleData xSpinData, SpinParticleData ySpinData, SpinParticleData zSpinData, float xOffset, float yOffset, float zOffset, boolean firstSide, boolean secondSide, boolean camera, boolean xRotCam, boolean yRotCam) {
         super(xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
         this.colorData = colorData;
         this.transparencyData = transparencyData;
         this.secondColor = secondColor;
         this.trailSize = trailSize;
+        this.widthFunc = widthFunc;
     }
 
     public TrailParticleBehavior copy() {
-        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, widthFunc, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 
     public static TrailParticleBehaviorBuilder create() {
@@ -153,6 +156,6 @@ public class TrailParticleBehavior extends ParticleBehavior implements ICustomBe
             builder.setSecondColorRaw(component.r, component.g, component.b)
                     .setSecondAlpha(component.a);
         }
-        builder.renderTrail(poseStack, trail, (f) -> {return f * (particle.getSize() / 2f);});
+        builder.renderTrail(poseStack, trail, (f) -> widthFunc.apply(f) * (particle.getSize() / 2f));
     }
 }

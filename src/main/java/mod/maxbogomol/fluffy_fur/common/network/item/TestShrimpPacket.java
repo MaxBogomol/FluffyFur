@@ -20,6 +20,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
@@ -57,6 +58,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
         Level level = FluffyFur.proxy.getLevel();
         Vec3 startPos = new Vec3(x1, y1, z1);
         Vec3 lookPos = new Vec3(x2, y2, z2);
+
         if (mode == 0) {
             Vec3 pos = startPos.add(lookPos.scale(1.75f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
@@ -80,133 +82,34 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
         }
 
         if (mode == 2) {
-            Vec3 pos = startPos.add(lookPos.scale(3f));
+            Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                     .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.3f, 0).build())
+                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setLightData(LightParticleData.DEFAULT)
                     .setLifetime(200, 100)
-                    .flatRandomVelocity(0.05f, 0.05f, 0.05f)
-                    .flatRandomOffset(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 1);
+                    .randomVelocity(0.35f, 0.35f, 0.35f)
+                    .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
         if (mode == 3) {
-            Vec3 pos = startPos.add(lookPos.scale(3f));
-            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                    .setSpinData(SpinParticleData.create().randomOffset().randomSpin(0.1f).build())
-                    .setLifetime(100)
-                    .flatRandomOffset(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 10);
-        }
-
-        if (mode == 4) {
-            Vec3 pos = startPos.add(lookPos.scale(3f));
-            ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
-                    .setColorData(ColorParticleData.create(0, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0).build())
-                    .setScaleData(GenericParticleData.create(0.3f, 0).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLightData(LightParticleData.DEFAULT)
-                    .setLifetime(100)
-                    .flatRandomOffset(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 10);
-        }
-
-        if (mode == 5) {
-            Vec3 pos = startPos.add(lookPos.scale(10f));
+            Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
+                    .setBehavior(ParticleBehavior.create(90, 0, 0)
+                            .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
+                            .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
+                            .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
+                            .build())
                     .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.TINY_WISP)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.SPARKLE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.STAR)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.TINY_STAR)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.DOT)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.CIRCLE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.TINY_CIRCLE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.HEART)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-            ParticleBuilder.create(FluffyFurParticles.SMOKE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
+                    .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setLightData(LightParticleData.DEFAULT)
+                    .setLifetime(200, 100)
+                    .randomVelocity(0.15f, 0, 0.15f)
+                    .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
         if (mode == 6) {
@@ -219,7 +122,21 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
                     .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
                     .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
+                    .randomVelocity(0.35f)
+                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
+        }
+
+        if (mode == 7) {
+            Vec3 pos = startPos.add(lookPos.scale(5f));
+            ParticleBuilder.create(FluffyFurParticles.SQUARE)
+                    .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
+                    .setBehavior(SphereParticleBehavior.create().build())
+                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
+                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
+                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
+                    .setLifetime(200)
+                    .randomVelocity(0.35f)
                     .repeat(level, pos.x(), pos.y(), pos.z(), 5);
         }
 
@@ -279,33 +196,6 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
 
-        if (mode == 11) {
-            Vec3 pos = startPos.add(lookPos.scale(5f));
-            ParticleBuilder.create(FluffyFurParticles.WISP)
-                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setLightData(LightParticleData.DEFAULT)
-                    .setLifetime(200, 100)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 50);
-        }
-
-        if (mode == 12) {
-            Vec3 pos = startPos.add(lookPos.scale(5f));
-            ParticleBuilder.create(FluffyFurParticles.SQUARE)
-                    .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                    .setBehavior(SphereParticleBehavior.create().build())
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.1f, 1, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setSpinData(SpinParticleData.create().randomSpin(0.1f).build())
-                    .setLifetime(200)
-                    .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 5);
-        }
-
         if (mode == 13) {
             Vec3 pos = startPos.add(lookPos.scale(3f));
             ParticleBuilder.create(FluffyFurParticles.PANCAKE)
@@ -342,24 +232,6 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
                     .setLifetime(200, 100)
                     .randomVelocity(0.35f, 0.35f, 0.35f)
-                    .repeat(level, pos.x(), pos.y(), pos.z(), 50);
-        }
-
-        if (mode == 16) {
-            Vec3 pos = startPos.add(lookPos.scale(5f));
-            ParticleBuilder.create(FluffyFurParticles.WISP)
-                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
-                    .setBehavior(ParticleBehavior.create(90, 0, 0)
-                            .setXSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
-                            .setYSpinData(SpinParticleData.create().randomOffsetDegrees(-5, 5).build())
-                            .setZSpinData(SpinParticleData.create().randomOffset().randomSpin(0.5f).build())
-                            .build())
-                    .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
-                    .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
-                    .setScaleData(GenericParticleData.create(0.3f, 2, 0).setEasing(Easing.ELASTIC_OUT).build())
-                    .setLightData(LightParticleData.DEFAULT)
-                    .setLifetime(200, 100)
-                    .randomVelocity(0.15f, 0, 0.15f)
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
@@ -413,6 +285,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                             .setColorData(ColorParticleData.create().setRandomColor().build())
                             .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())
                             .enableSecondColor()
+                            .setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION)
                             .build())
                     .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
                     .setTransparencyData(GenericParticleData.create(1, 1, 0).setEasing(Easing.QUARTIC_OUT).build())

@@ -5,12 +5,15 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
 
+import java.util.function.Function;
+
 public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
 
     public ColorParticleData colorData = GenericParticleOptions.DEFAULT_COLOR;
     public GenericParticleData transparencyData = GenericParticleOptions.DEFAULT_GENERIC;
     public boolean secondColor = false;
     public int trailSize = 10;
+    public Function<Float, Float> widthFunc = (f) -> f;
 
     protected TrailParticleBehaviorBuilder(float xOffset, float yOffset, float zOffset) {
         super(xOffset, yOffset, zOffset);
@@ -120,7 +123,12 @@ public class TrailParticleBehaviorBuilder extends ParticleBehaviorBuilder {
         return this;
     }
 
+    public TrailParticleBehaviorBuilder setWidthFunction( Function<Float, Float> widthFunc) {
+        this.widthFunc = widthFunc;
+        return this;
+    }
+
     public ParticleBehavior build() {
-        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
+        return new TrailParticleBehavior(colorData, transparencyData, secondColor, trailSize, widthFunc, xSpinData, ySpinData, zSpinData, xOffset, yOffset, zOffset, firstSide, secondSide, camera, xRotCam, yRotCam);
     }
 }
