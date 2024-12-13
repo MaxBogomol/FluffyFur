@@ -3,10 +3,7 @@ package mod.maxbogomol.fluffy_fur.common.network.item;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.*;
-import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.LightParticleData;
-import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
+import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.BlockParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.FluidParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
@@ -162,6 +159,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                     .setLifetime(200)
                     .randomVelocity(0.035f, 0.035f, 0.035f)
                     .setLightData(LightParticleData.DEFAULT)
@@ -176,6 +174,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                     .setLifetime(200)
                     .randomVelocity(0.035f, 0.035f, 0.035f)
                     .setLightData(LightParticleData.DEFAULT)
@@ -190,6 +189,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                     .setScaleData(GenericParticleData.create(0.05f, 0.1f, 0).setEasing(Easing.ELASTIC_OUT).build())
+                    .setSpriteData(SpriteParticleData.CRUMBS_RANDOM)
                     .setLifetime(200)
                     .randomVelocity(0.035f, 0.035f, 0.035f)
                     .setLightData(LightParticleData.DEFAULT)

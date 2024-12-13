@@ -10,9 +10,6 @@ import net.minecraftforge.fluids.FluidType;
 
 public class FluidParticle extends GenericParticle {
 
-    private final float uo;
-    private final float vo;
-
     public FluidParticle(ClientLevel level, FluidParticleOptions options, double x, double y, double z, double vx, double vy, double vz) {
         super(level, options, null, x, y, z, vx, vy, vz);
         if (!options.fluidStack.isEmpty()) {
@@ -26,28 +23,5 @@ public class FluidParticle extends GenericParticle {
             TextureAtlasSprite sprite = RenderUtil.getSprite(clientType.getStillTexture());
             this.setSprite(sprite);
         }
-        this.quadSize /= 2.0F;
-        this.uo = this.random.nextFloat() * 3.0F;
-        this.vo = this.random.nextFloat() * 3.0F;
-    }
-
-    @Override
-    public float getU0() {
-        return this.sprite.getU(((this.uo + 1.0F) / 4.0F * 16.0F));
-    }
-
-    @Override
-    public float getU1() {
-        return this.sprite.getU((this.uo / 4.0F * 16.0F));
-    }
-
-    @Override
-    public float getV0() {
-        return this.sprite.getV((this.vo / 4.0F * 16.0F));
-    }
-
-    @Override
-    public float getV1() {
-        return this.sprite.getV(((this.vo + 1.0F) / 4.0F * 16.0F));
     }
 }

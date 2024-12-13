@@ -62,6 +62,9 @@ public class GenericParticle extends TextureSheetParticle {
 
     public float randomSpin;
 
+    public float uo;
+    public float vo;
+
     float[] hsv1 = new float[3], hsv2 = new float[3];
 
     public GenericParticle(ClientLevel level, GenericParticleOptions options, ParticleEngine.MutableSpriteSet spriteSet, double x, double y, double z, double vx, double vy, double vz) {
@@ -117,6 +120,8 @@ public class GenericParticle extends TextureSheetParticle {
         behavior = options.behavior;
         if (behavior != null) behavior.init(this);
 
+        this.uo = random.nextFloat();
+        this.vo = random.nextFloat();
         spriteData.init(this);
 
         Color.RGBtoHSB((int)(255 * Math.min(1.0f, r1)), (int)(255 * Math.min(1.0f, g1)), (int)(255 * Math.min(1.0f, b1)), hsv1);
