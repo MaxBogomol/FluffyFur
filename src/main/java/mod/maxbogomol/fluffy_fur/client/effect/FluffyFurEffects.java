@@ -17,6 +17,7 @@ import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcessInstan
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LightningBolt;
@@ -78,7 +79,7 @@ public class FluffyFurEffects {
     public static void lightningBoltTickEffect(Level level, Vec3 pos) {
         ParticleBuilder.create(FluffyFurParticles.SQUARE)
                 .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
-                .setBehavior(TrailParticleBehavior.create().setTrailSize(5).build())
+                .setBehavior(TrailParticleBehavior.create().setTrailSize(5).setWidthFunction(RenderUtil.LINEAR_IN_ROUND_WIDTH_FUNCTION).build())
                 .setColorData(ColorParticleData.create(Color.WHITE).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.15f, 0.3f,  0).setEasing(Easing.ELASTIC_OUT).build())

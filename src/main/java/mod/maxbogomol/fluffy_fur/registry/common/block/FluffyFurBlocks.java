@@ -3,6 +3,8 @@ package mod.maxbogomol.fluffy_fur.registry.common.block;
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.block.plush.PlushBlock;
+import mod.maxbogomol.fluffy_fur.common.fire.FireBlockHandler;
+import mod.maxbogomol.fluffy_fur.common.fire.FireBlockModifier;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,6 +40,7 @@ public class FluffyFurBlocks {
     }
 
     public static FireBlock fireblock;
+
     public static Block[] getBlocks(Class<?>... blockClasses) {
         IForgeRegistry<Block> blocks = ForgeRegistries.BLOCKS;
         ArrayList<Block> matchingBlocks = new ArrayList<>();
@@ -62,6 +65,7 @@ public class FluffyFurBlocks {
 
     public static void setFireBlock() {
         fireblock = (FireBlock) Blocks.FIRE;
+        FireBlockHandler.register(new FireBlockModifier());
     }
 
     public static void axeStrippables(Block block, Block result) {
