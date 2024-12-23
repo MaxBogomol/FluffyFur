@@ -15,12 +15,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.Collection;
 import java.util.Random;
 import java.util.function.Consumer;
 
+@OnlyIn(Dist.CLIENT)
 public class GenericParticle extends TextureSheetParticle {
 
     public static final Random random = new Random();
