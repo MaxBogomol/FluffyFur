@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -59,6 +60,8 @@ public class RenderBuilder {
         CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_COLOR, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.color(r, g, b, a));
         CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_UV0, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.uv(u, v));
         CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_UV2, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.uv2(l));
+        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_NORMAL, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.normal(0, 0, 0));
+        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_PADDING, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.overlayCoords(OverlayTexture.NO_OVERLAY));
     }
 
     public static RenderBuilder create() {

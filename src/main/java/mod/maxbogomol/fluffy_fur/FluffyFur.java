@@ -45,7 +45,7 @@ public class FluffyFur {
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final Fox SILLY_FOX = new Fox("The silly Pink Fox that got stuck in your modding Minecraft");
+    public static final Fox SILLY_FOX = new Fox("The silly Pink Fox that got stuck in your modded Minecraft");
 
     public FluffyFur() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

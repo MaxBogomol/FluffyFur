@@ -50,7 +50,7 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.WATERLOGGED).add(ROTATION);;
+        builder.add(BlockStateProperties.WATERLOGGED).add(ROTATION);
     }
 
     @Nullable

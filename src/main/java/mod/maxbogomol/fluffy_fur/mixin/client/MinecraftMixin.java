@@ -67,4 +67,9 @@ public abstract class MinecraftMixin {
             cir.setReturnValue(true);
         }
     }
+
+/*    @Inject(at = @At("RETURN"), method = "createTitle", cancellable = true)
+    public void fluffy_fur$createTitle(CallbackInfoReturnable<String> cir) {
+        cir.setReturnValue(cir.getReturnValue() + " DOWNLOAD IMPLOSION NOW");
+    }*/
 }

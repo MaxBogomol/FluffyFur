@@ -175,32 +175,35 @@ public class FluffyFurEffects {
         }
     }
 
-    public static void explosionEffect(Level level, Vec3 pos) {
+    public static void explosionEffect(Level level, Vec3 pos, float radius) {
+        System.out.println(radius);
+        float r = 0.5f + (radius / 4f);
+        float rr = 0.75f + (radius / 8f);
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                 .setLifetime(20, 5)
-                .randomVelocity(0.1f)
+                .randomVelocity(0.1f * rr)
                 .setFriction(0.9f)
                 .repeat(level, pos, 10);
         ParticleBuilder.create(FluffyFurParticles.WISP)
                 .setColorData(ColorParticleData.create(explosionRedColor, explosionYellowColor).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                .setScaleData(GenericParticleData.create(0.5f, 1.5f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.5f * r, 1.5f * r, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.8f).build())
                 .setLifetime(40, 10)
-                .randomVelocity(0.2f)
+                .randomVelocity(0.2f * rr)
                 .repeat(level, pos, 25);
         ParticleBuilder.create(FluffyFurParticles.SMOKE)
                 .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                 .setColorData(ColorParticleData.create(Color.BLACK).build())
                 .setTransparencyData(GenericParticleData.create(0.7f, 0).build())
-                .setScaleData(GenericParticleData.create(0.25f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.25f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.25f).build())
                 .setLifetime(60, 10)
-                .randomVelocity(0.2f)
+                .randomVelocity(0.2f * rr)
                 .addVelocity(0, 0.1, 0)
                 .setFriction(0.92f)
                 .repeat(level, pos, 30);
@@ -208,10 +211,10 @@ public class FluffyFurEffects {
                 .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
                 .setColorData(ColorParticleData.create(Color.BLACK).build())
                 .setTransparencyData(GenericParticleData.create(0.5f, 0).build())
-                .setScaleData(GenericParticleData.create(0.75f, 1f, 0f).setEasing(Easing.QUARTIC_OUT).build())
+                .setScaleData(GenericParticleData.create(0.75f * r, r, 0f).setEasing(Easing.QUARTIC_OUT).build())
                 .setSpinData(SpinParticleData.create().randomSpin(0.4f).build())
                 .setLifetime(80, 30)
-                .randomVelocity(0.1f)
+                .randomVelocity(0.1f * rr)
                 .setFriction(0.9f)
                 .repeat(level, pos, 5);
         ParticleBuilder.create(FluffyFurParticles.CIRCLE)
@@ -220,8 +223,8 @@ public class FluffyFurEffects {
                 .setTransparencyData(GenericParticleData.create(0.5f, 0.5f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setScaleData(GenericParticleData.create(0.25f, 0).setEasing(Easing.QUARTIC_OUT).build())
                 .setLifetime(30)
-                .randomVelocity(1.5f)
-                .addVelocity(0, 0.2f, 0)
+                .randomVelocity(1.5f * rr)
+                .addVelocity(0, 0.2f * rr, 0)
                 .randomOffset(0.25f)
                 .setFriction(0.88f)
                 .setGravity(1f)
