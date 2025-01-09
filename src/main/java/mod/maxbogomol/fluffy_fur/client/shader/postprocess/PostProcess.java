@@ -132,8 +132,8 @@ public abstract class PostProcess {
             if (!initialized) init();
             if (postChain != null) {
                 time += minecraft.getDeltaFrameTime() / 20.0;
-                applyDefaultUniforms();
                 beforeProcess(viewModelStack);
+                applyDefaultUniforms();
                 if (!isActive) return;
                 postChain.process(minecraft.getFrameTime());
                 GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, minecraft.getMainRenderTarget().frameBufferId);

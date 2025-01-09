@@ -23,8 +23,8 @@ public class AddItemLootModifier extends LootModifier {
     private final Item addedItem;
     private final int count;
 
-    protected AddItemLootModifier(LootItemCondition[] conditionsIn, Item addedItemIn, int count) {
-        super(conditionsIn);
+    protected AddItemLootModifier(LootItemCondition[] conditions, Item addedItemIn, int count) {
+        super(conditions);
         this.addedItem = addedItemIn;
         this.count = count;
     }

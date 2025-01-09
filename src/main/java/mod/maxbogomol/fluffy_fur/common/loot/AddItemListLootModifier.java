@@ -25,8 +25,8 @@ public class AddItemListLootModifier extends LootModifier {
 
     private final List<Item> items;
 
-    protected AddItemListLootModifier(LootItemCondition[] conditionsIn, List<Item> items) {
-        super(conditionsIn);
+    protected AddItemListLootModifier(LootItemCondition[] conditions, List<Item> items) {
+        super(conditions);
         this.items = items;
     }
 

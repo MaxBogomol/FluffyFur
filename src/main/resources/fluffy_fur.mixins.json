@@ -9,6 +9,7 @@
     "common.BlockItemMixin",
     "common.BlocksMixin",
     "common.CreeperMixin",
+    "common.ForgeHooksMixin",
     "common.ItemEntityMixin",
     "common.ThrownTridentMixin",
     "common.TntBlockMixin"

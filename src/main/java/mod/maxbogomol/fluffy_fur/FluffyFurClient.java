@@ -81,7 +81,6 @@ public class FluffyFurClient {
     }
 
     public static void setupSplashes() {
-        SplashHandler.addSplash("Made by Notch!");
         SplashHandler.addSplash("Привет, Россия!");
     }
 }
