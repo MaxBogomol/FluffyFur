@@ -3,8 +3,8 @@ package mod.maxbogomol.fluffy_fur.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -214,6 +214,20 @@ public class FluffyFurMenuScreen extends Screen {
         Component component = Component.translatable("gui.fluffy_fur.menu.mods");
         drawBlackBackground(gui, x + 60, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 60, y - 11, 16777215);
+
+        if (FluffyFur.mcreatorModsCount > 0) {
+            component = Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(" " + FluffyFur.mcreatorModsCount);
+            drawBlackBackground(gui, x + 60, y - 24, font.width(component) + 8, mouseX, mouseY, partialTicks);
+            gui.drawCenteredString(font, component, x + 60, y - 23, 16777215);
+
+            if (mouseX >= x + 60 - (font.width(component) / 2f) - 4 && mouseY >= y - 24 && mouseX <= x + 60 + (font.width(component) / 2f) + 4 && mouseY < y - 14) {
+                List<Component> list = new ArrayList<>();
+                for (String string : FluffyFur.mcreatorModsList) {
+                    list.add(Component.literal(string));
+                }
+                gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
+            }
+        }
 
         for (int i = 0; i < 5; i++) {
             int index = modsScroll + i;

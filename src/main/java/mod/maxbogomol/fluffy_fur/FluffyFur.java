@@ -32,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +47,9 @@ public class FluffyFur {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static final Fox SILLY_FOX = new Fox("The silly Pink Fox that got stuck in your modded Minecraft");
+
+    public static int mcreatorModsCount = 0;
+    public static List<String> mcreatorModsList = new ArrayList<>();
 
     public FluffyFur() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -78,6 +82,24 @@ public class FluffyFur {
         FluffyFurPacketHandler.init();
         for (ItemSkin skin : ItemSkinHandler.getSkins()) {
             skin.setupSkinEntries();
+        }
+
+        for (Package pack: Arrays.stream(Package.getPackages()).toList()) {
+            String string = pack.getName();
+            if (pack.getName().startsWith("net.mcreator")) {
+                int dots = 0;
+                for (char c : string.toCharArray()) {
+                    if (c == '.') dots++;
+                }
+                if (dots == 2) {
+                    mcreatorModsCount++;
+                    int i = string.indexOf(".");
+                    string = string.substring(i + 1, string.length() - 1);
+                    i = string.indexOf(".");
+                    string = string.substring(i + 1);
+                    mcreatorModsList.add(string);
+                }
+            }
         }
     }
 
