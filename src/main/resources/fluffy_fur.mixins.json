@@ -17,7 +17,7 @@
   "client": [
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
-    "client.CurioTooltipMixin",
+    "client.curios.CurioTooltipMixin",
     "client.EffectProgramMixin",
     "client.FoxRendererMixin",
     "client.GameRendererMixin",

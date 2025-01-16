@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.mixin.client;
+package mod.maxbogomol.fluffy_fur.mixin.client.curios;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;

@@ -1,15 +1,16 @@
 package mod.maxbogomol.fluffy_fur.registry.common.block;
 
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.block.plush.PlushBlock;
 import mod.maxbogomol.fluffy_fur.common.fire.FireBlockHandler;
 import mod.maxbogomol.fluffy_fur.common.fire.FireBlockModifier;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FireBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.item.HoneycombItem;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,8 +19,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Supplier;
 
 public class FluffyFurBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FluffyFur.MOD_ID);
@@ -74,5 +77,34 @@ public class FluffyFurBlocks {
 
     public static void fireBlock(Block block, int encouragement, int flammability) {
         fireblock.setFlammable(block, encouragement, flammability);
+    }
+
+    public static void weatheringCopper(Block block, Block result) {
+        try {
+            Field delegateField = WeatheringCopper.NEXT_BY_BLOCK.getClass().getDeclaredField("delegate");
+            delegateField.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Supplier<BiMap<Block, Block>> originalWeatheringMapDelegate = (Supplier<BiMap<Block, Block>>) delegateField.get(WeatheringCopper.NEXT_BY_BLOCK);
+            com.google.common.base.Supplier<BiMap<Block, Block>> weatheringMapDelegate = () -> {
+                ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
+                builder.putAll(originalWeatheringMapDelegate.get());
+                builder.put(block, result);
+                return builder.build();
+            };
+
+            delegateField.set(WeatheringCopper.NEXT_BY_BLOCK, weatheringMapDelegate);
+        } catch (Exception e) {
+            FluffyFur.LOGGER.error("Failed weathering copper", e);
+        }
+    }
+
+    public static void waxedCopper(Block block, Block result) {
+        Supplier<BiMap<Block, Block>> originalWaxableMapSupplier = HoneycombItem.WAXABLES;
+        HoneycombItem.WAXABLES = Suppliers.memoize(() -> {
+            ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
+            builder.putAll(originalWaxableMapSupplier.get());
+            builder.put(block, result);
+            return builder.build();
+        });
     }
 }
