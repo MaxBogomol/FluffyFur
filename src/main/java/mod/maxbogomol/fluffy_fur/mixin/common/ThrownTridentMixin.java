@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.mixin.common;
 
+import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import org.spongepowered.asm.mixin.Final;
@@ -21,10 +22,12 @@ public abstract class ThrownTridentMixin {
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void fluffy_fur$tick(CallbackInfo ci) {
-        ThrownTrident self = (ThrownTrident) ((Object) this);
-        int i = self.getEntityData().get(ID_LOYALTY);
-        if (i > 0 && self.position().y() < self.level().dimensionType().minY() - 32) {
-            dealtDamage = true;
+        if (FluffyFurConfig.TRIDENT_LOYALTY_VOID.get()) {
+            ThrownTrident self = (ThrownTrident) ((Object) this);
+            int i = self.getEntityData().get(ID_LOYALTY);
+            if (i > 0 && self.position().y() < self.level().dimensionType().minY() + FluffyFurConfig.VOID_HEIGHT.get()) {
+                dealtDamage = true;
+            }
         }
     }
 }

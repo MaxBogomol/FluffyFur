@@ -125,7 +125,7 @@ public class FluffyFurModsHandler {
         TitleScreen.CUBE_MAP = new CubeMap(base);
         titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
         TitleScreen.PANORAMA_OVERLAY = overlay;
-        if (panorama.getLogo() != null) {
+        if (panorama.getLogo() != null && FluffyFurClientConfig.PANORAMA_LOGO.get()) {
             titleScreen.logoRenderer = new FluffyFurLogoRenderer(panorama.getLogo(), titleScreen.logoRenderer.keepLogoThroughFade);
         } else {
             if (titleScreen.logoRenderer instanceof FluffyFurLogoRenderer) {

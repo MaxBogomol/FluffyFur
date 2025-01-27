@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT,
-            MENU_BUTTON;
+            MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
@@ -34,6 +34,8 @@ public class FluffyFurClientConfig {
         MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").define("menuButtonRowXOffset", 4);
         MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.").define("menuButtonXOffset", 0);
         MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.").define("menuButtonYOffset", 0);
+        PANORAMA_LOGO = builder.comment("Fluffy Fur Panorama.").define("panorama", true);
+        PANORAMA_MUSIC = builder.comment("Fluffy Fur Panorama.").define("panorama", true);
         builder.pop();
     }
 

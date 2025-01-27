@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.client.sound;
 
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
@@ -50,7 +51,7 @@ public class MusicModifier {
         @Override
         public boolean isCanPlay(Music defaultMisic, Minecraft minecraft) {
             FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama();
-            return panorama != null && panorama == this.panorama;
+            return panorama != null && panorama == this.panorama && FluffyFurClientConfig.PANORAMA_MUSIC.get();
         }
 
         @Override

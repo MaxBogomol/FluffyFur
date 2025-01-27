@@ -5,12 +5,13 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            ITEM_PARTICLE;
-    public static ForgeConfigSpec.ConfigValue<Integer>
-            MENU_BUTTON_ROW;
+            TRIDENT_LOYALTY_VOID;
+    public static ForgeConfigSpec.ConfigValue<Double>
+            VOID_HEIGHT;
 
     public FluffyFurConfig(ForgeConfigSpec.Builder builder) {
-
+        TRIDENT_LOYALTY_VOID = builder.comment("Intensity of screenshake.").define("tridentLoyalityVoid", true);
+        VOID_HEIGHT = builder.comment("Intensity of screenshake.").define("voidHeight", -32d);
     }
 
     public static final FluffyFurConfig INSTANCE;
