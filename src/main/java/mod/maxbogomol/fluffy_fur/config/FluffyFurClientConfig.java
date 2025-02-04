@@ -34,8 +34,8 @@ public class FluffyFurClientConfig {
         MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").define("menuButtonRowXOffset", 4);
         MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.").define("menuButtonXOffset", 0);
         MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.").define("menuButtonYOffset", 0);
-        PANORAMA_LOGO = builder.comment("Fluffy Fur Panorama.").define("panorama", true);
-        PANORAMA_MUSIC = builder.comment("Fluffy Fur Panorama.").define("panorama", true);
+        PANORAMA_LOGO = builder.comment("Enable logo in Fluffy Fur Panorama.").define("panoramaLogo", true);
+        PANORAMA_MUSIC = builder.comment("Enable music in Fluffy Fur Panorama.").define("panoramaMusic", true);
         builder.pop();
     }
 

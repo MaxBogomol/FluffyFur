@@ -86,17 +86,24 @@ public class FluffyFur {
 
         for (Package pack: Arrays.stream(Package.getPackages()).toList()) {
             String string = pack.getName();
-            if (pack.getName().startsWith("net.mcreator")) {
-                int dots = 0;
-                for (char c : string.toCharArray()) {
-                    if (c == '.') dots++;
-                }
-                if (dots == 2) {
+            int dots = 0;
+            for (char c : string.toCharArray()) {
+                if (c == '.') dots++;
+            }
+            if (dots == 2) {
+                if (pack.getName().startsWith("net.mcreator")) {
                     mcreatorModsCount++;
                     int i = string.indexOf(".");
                     string = string.substring(i + 1, string.length() - 1);
                     i = string.indexOf(".");
                     string = string.substring(i + 1);
+                    mcreatorModsList.add(string);
+                } else if (pack.getName().contains("procedures")) {
+                    mcreatorModsCount++;
+                    int i = string.indexOf(".");
+                    string = string.substring(i + 1, string.length() - 1);
+                    i = string.indexOf(".");
+                    string = string.substring(0, i);
                     mcreatorModsList.add(string);
                 }
             }
