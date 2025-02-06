@@ -297,6 +297,9 @@
 			"rotation": [45, 135, 0],
 			"translation": [0, 1.5, 0],
 			"scale": [0.8, 0.8, 0.8]
+		},
+		"head": {
+			"translation": [0, 14, -1.5]
 		}
 	},
 	"groups": [

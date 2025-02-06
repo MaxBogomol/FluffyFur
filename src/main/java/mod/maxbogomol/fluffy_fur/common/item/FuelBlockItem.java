@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 public class FuelBlockItem extends BlockItem {
     public int fuel;
 
-    public FuelBlockItem(Block blockIn, Properties properties, int fuel) {
-        super(blockIn, properties);
+    public FuelBlockItem(Block block, Properties properties, int fuel) {
+        super(block, properties);
         this.fuel = fuel;
     }
 
