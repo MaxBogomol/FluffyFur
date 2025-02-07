@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class TrailPointBuilder {
 
-    private final List<TrailPoint> trailPoints = new ArrayList<>();
+    public final List<TrailPoint> trailPoints = new ArrayList<>();
     public final Supplier<Integer> trailLength;
 
     public TrailPointBuilder(Supplier<Integer> trailLength) {

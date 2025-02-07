@@ -4,8 +4,8 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector4f;
 
 public class TrailPoint {
-    private final Vec3 position;
-    private int timeActive;
+    public Vec3 position;
+    public int timeActive;
 
     public TrailPoint(Vec3 position, int timeActive) {
         this.position = position;
@@ -36,5 +36,13 @@ public class TrailPoint {
 
     public void tick() {
         timeActive++;
+    }
+
+    public void setPosition(Vec3 position) {
+        this.position = position;
+    }
+
+    public void setTimeActive(int timeActive) {
+        this.timeActive = timeActive;
     }
 }
