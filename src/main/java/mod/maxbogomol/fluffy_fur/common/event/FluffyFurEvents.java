@@ -23,12 +23,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FluffyFurEvents {
-
-    public List<Player> playerSkinUpdate = new ArrayList<>();
 
     @SubscribeEvent
     public void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {
@@ -50,7 +45,6 @@ public class FluffyFurEvents {
     public void onJoin(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Player player && !event.getLevel().isClientSide()) {
             FluffyFurPacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(player));
-            playerSkinUpdate.add(player);
         }
     }
 
@@ -58,7 +52,6 @@ public class FluffyFurEvents {
     public void onPlayerLogged(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
         FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(player));
-        playerSkinUpdate.add(player);
     }
 
     @SubscribeEvent
