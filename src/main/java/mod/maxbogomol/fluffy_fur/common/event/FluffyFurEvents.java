@@ -18,7 +18,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -56,17 +55,18 @@ public class FluffyFurEvents {
     }
 
     @SubscribeEvent
-    public void playerTick(TickEvent.PlayerTickEvent event) {
-        if (!event.player.level().isClientSide()) {
-            for (Player player : playerSkinUpdate) {
-                for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
-                    FluffyFurPacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
-                    if (player != serverPlayer) {
-                        FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(serverPlayer));
-                    }
-                }
-            }
-            playerSkinUpdate.clear();
+    public void onPlayerLogged(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
+        FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(player));
+        playerSkinUpdate.add(player);
+    }
+
+    @SubscribeEvent
+    public void onPlayerStartTracking(PlayerEvent.StartTracking event) {
+        Player player = event.getEntity();
+        if (event.getTarget() instanceof Player target) {
+            FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(target));
+            FluffyFurPacketHandler.sendTo(target, new PlayerSkinUpdatePacket(player));
         }
     }
 
