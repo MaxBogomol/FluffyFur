@@ -32,9 +32,9 @@ public class FluffyFurEvents {
 
     @SubscribeEvent
     public void onClone(PlayerEvent.Clone event) {
-        Capability<IPlayerSkin> KNOWLEDGE = IPlayerSkin.INSTANCE;
+        Capability<IPlayerSkin> SKIN = IPlayerSkin.INSTANCE;
         event.getOriginal().reviveCaps();
-        event.getEntity().getCapability(KNOWLEDGE).ifPresent((k) -> event.getOriginal().getCapability(KNOWLEDGE).ifPresent((o) ->
+        event.getEntity().getCapability(SKIN).ifPresent((k) -> event.getOriginal().getCapability(SKIN).ifPresent((o) ->
                 ((INBTSerializable<CompoundTag>) k).deserializeNBT(((INBTSerializable<CompoundTag>) o).serializeNBT())));
         if (!event.getEntity().level().isClientSide) {
             FluffyFurPacketHandler.sendTo((ServerPlayer) event.getEntity(), new PlayerSkinUpdatePacket(event.getEntity()));
