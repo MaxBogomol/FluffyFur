@@ -1,6 +1,5 @@
 package mod.maxbogomol.fluffy_fur;
 
-import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.event.FluffyFurEvents;
 import mod.maxbogomol.fluffy_fur.common.furry.Fox;
 import mod.maxbogomol.fluffy_fur.common.itemskin.ItemSkin;
@@ -19,9 +18,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -125,13 +122,5 @@ public class FluffyFur {
         LOGGER.info(" /\\_/\\");
         LOGGER.info("( o.o )");
         LOGGER.info(" > ^ <");
-    }
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void registerCaps(RegisterCapabilitiesEvent event) {
-            event.register(IPlayerSkin.class);
-        }
     }
 }
