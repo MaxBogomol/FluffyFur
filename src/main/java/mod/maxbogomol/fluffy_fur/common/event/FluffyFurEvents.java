@@ -49,12 +49,6 @@ public class FluffyFurEvents {
     }
 
     @SubscribeEvent
-    public void onPlayerLogged(PlayerEvent.PlayerLoggedInEvent event) {
-        Player player = event.getEntity();
-        FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(player));
-    }
-
-    @SubscribeEvent
     public void onPlayerStartTracking(PlayerEvent.StartTracking event) {
         Player player = event.getEntity();
         if (event.getTarget() instanceof Player target) {
