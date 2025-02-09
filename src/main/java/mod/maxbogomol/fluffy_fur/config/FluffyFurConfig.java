@@ -10,8 +10,10 @@ public class FluffyFurConfig {
             VOID_HEIGHT;
 
     public FluffyFurConfig(ForgeConfigSpec.Builder builder) {
-        TRIDENT_LOYALTY_VOID = builder.comment("Intensity of screenshake.").define("tridentLoyalityVoid", true);
-        VOID_HEIGHT = builder.comment("Intensity of screenshake.").define("voidHeight", -32d);
+        builder.comment("misc").push("misc");
+        TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyality in the void.").define("tridentLoyalityVoid", true);
+        VOID_HEIGHT = builder.comment("Height of void.").define("voidHeight", -32d);
+        builder.pop();
     }
 
     public static final FluffyFurConfig INSTANCE;
