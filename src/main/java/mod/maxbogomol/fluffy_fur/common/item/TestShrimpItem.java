@@ -59,7 +59,7 @@ public class TestShrimpItem extends Item {
     }
 
     public int getModes() {
-        return 29;
+        return 25;
     }
 
     public Component getModeComponent(int mode) {

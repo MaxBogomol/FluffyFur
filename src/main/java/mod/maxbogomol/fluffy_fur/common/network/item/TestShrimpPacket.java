@@ -109,7 +109,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 6) {
+        if (mode == 4) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.DOT)
                     .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
@@ -123,7 +123,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 5);
         }
 
-        if (mode == 7) {
+        if (mode == 5) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.SQUARE)
                     .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
@@ -137,7 +137,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 5);
         }
 
-        if (mode == 7) {
+        if (mode == 6) {
             Vec3 pos = startPos;
             ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(1, 1, 1, 1, 0, 0).build())
@@ -151,7 +151,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             level.playSound(FluffyFur.proxy.getPlayer(), pos.x(), pos.y(), pos.z(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1f, 1f);
         }
 
-        if (mode == 8) {
+        if (mode == 7) {
             Vec3 pos = startPos.add(lookPos.scale(0.75f));
             ItemParticleOptions options = new ItemParticleOptions(FluffyFurParticles.ITEM.get(), new ItemStack(FluffyFurItems.TEST_SHRIMP.get()));
             ParticleBuilder.create(options)
@@ -166,7 +166,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
 
-        if (mode == 9) {
+        if (mode == 8) {
             Vec3 pos = startPos.add(lookPos.scale(0.75f));
             BlockParticleOptions options = new BlockParticleOptions(FluffyFurParticles.BLOCK.get(), FluffyFurBlocks.YONKABLOCK.get().defaultBlockState());
             ParticleBuilder.create(options)
@@ -181,7 +181,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
 
-        if (mode == 10) {
+        if (mode == 9) {
             Vec3 pos = startPos.add(lookPos.scale(0.75f));
             FluidParticleOptions options = new FluidParticleOptions(FluffyFurParticles.FLUID.get(), new FluidStack(Fluids.LAVA, 1), false);
             ParticleBuilder.create(options)
@@ -196,7 +196,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .spawn(level, pos.x(), pos.y(), pos.z());
         }
 
-        if (mode == 13) {
+        if (mode == 10) {
             Vec3 pos = startPos.add(lookPos.scale(3f));
             ParticleBuilder.create(FluffyFurParticles.PANCAKE)
                     .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
@@ -210,7 +210,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 1);
         }
 
-        if (mode == 14) {
+        if (mode == 11) {
             Vec3 pos = startPos.add(lookPos.scale(3f));
             ParticleBuilder.create(FluffyFurParticles.DEATH)
                     .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE)
@@ -224,7 +224,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 1);
         }
 
-        if (mode == 15) {
+        if (mode == 12) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create().setRandomColor(Color.WHITE, Color.GREEN, Color.WHITE, Color.WHITE).build())
@@ -235,7 +235,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 17) {
+        if (mode == 13) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.CHERRY_LEAVES)
                     .setParticleRenderType(ParticleRenderType.PARTICLE_SHEET_OPAQUE)
@@ -245,7 +245,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 100);
         }
 
-        if (mode == 18) {
+        if (mode == 14) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setBehavior(SparkParticleBehavior.create().build())
@@ -259,7 +259,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 19) {
+        if (mode == 15) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setBehavior(SparkParticleBehavior.create()
@@ -277,7 +277,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 20) {
+        if (mode == 16) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.TRAIL)
                     .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
@@ -296,7 +296,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 21) {
+        if (mode == 17) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
@@ -322,14 +322,14 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 22) {
+        if (mode == 18) {
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT));
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.5f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enablePosition());
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(50).setIntensity(0.2f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enableFov());
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(20).setIntensity(0, 0.1f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableRotation().enableVector().setRandomVector());
         }
 
-        if (mode == 23) {
+        if (mode == 19) {
             Vec3 pos = startPos.add(lookPos.scale(5f));
             ParticleBuilder.create(FluffyFurParticles.SKULL)
                     .setColorData(ColorParticleData.create(0, 0, 1, 1, 0, 0).build())
@@ -340,7 +340,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 50);
         }
 
-        if (mode == 24) {
+        if (mode == 20) {
             Vec3 pos = startPos.add(lookPos.scale(10f));
             ParticleBuilder.create(FluffyFurParticles.EARTH)
                     .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
@@ -353,7 +353,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 1);
         }
 
-        if (mode == 25) {
+        if (mode == 21) {
             Vec3 pos = startPos.add(lookPos.scale(10f));
             ParticleBuilder.create(FluffyFurParticles.SUN)
                     .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
@@ -366,7 +366,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
                     .repeat(level, pos.x(), pos.y(), pos.z(), 1);
         }
 
-        if (mode == 26) {
+        if (mode == 22) {
             Vec3 pos = startPos.add(lookPos.scale(100f));
             ParticleBuilder.create(FluffyFurParticles.SUN)
                     .setRenderType(FluffyFurRenderTypes.ADDITIVE_PARTICLE_TEXTURE)
@@ -381,7 +381,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(200).setIntensity(1f, 0).setEasing(Easing.QUINTIC_IN_OUT));
         }
 
-        if (mode == 27) {
+        if (mode == 23) {
             Vec3 pos = startPos.add(lookPos.scale(15f));
             ParticleBuilder builder = ParticleBuilder.create(FluffyFurParticles.WISP)
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
@@ -396,7 +396,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             builder.spawnBoykisser(level, pos, 256, 256, 0.075f, blushBuilder, 3, 0.15f, 0.3f, 0.15f, 0.15f);
         }
 
-        if (mode == 28) {
+        if (mode == 24) {
             Vec3 pos = startPos.add(lookPos.scale(15f));
             GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 0, 1)).setRadius(25).setIntensity(5).setFadeTime(50));
         }
