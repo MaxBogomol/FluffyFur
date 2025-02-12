@@ -2,8 +2,6 @@
 
 #moj_import <fluffy_fur:common.glsl>
 
-uniform sampler2D Sampler0;
-
 uniform vec4 ColorModulator;
 uniform float FogStart;
 uniform float FogEnd;

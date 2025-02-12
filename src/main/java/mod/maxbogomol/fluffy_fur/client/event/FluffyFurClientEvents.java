@@ -55,7 +55,7 @@ public class FluffyFurClientEvents {
     public static void resetPanoramaScreen(Screen screen) {
         if (screen instanceof TitleScreen titleScreen) {
             FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
-            if (panorama != null || panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
+            if (panorama != null && panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
                 FluffyFurModsHandler.setOpenPanorama(titleScreen, FluffyFurClient.VANILLA_PANORAMA);
             }
         }

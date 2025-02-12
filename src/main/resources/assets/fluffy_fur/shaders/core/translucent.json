@@ -13,7 +13,6 @@
         "UV2"
     ],
     "samplers": [
-        { "name": "Sampler0" },
         { "name": "Sampler2" }
     ],
     "uniforms": [
