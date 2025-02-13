@@ -69,7 +69,7 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
             if (state.getBlock().equals(FluffyFurBlocks.ONIXTHECAT_PLUSH.get())) {
                 level.playSound(null, pos, SoundEvents.GOAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
-            if (state.getBlock().equals(FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.BOYKISSER_PLUSH.get())) {
+            if (state.getBlock().equals(FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.BOYKISSER_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.SPECKLE_PLUSH.get())) {
                 level.playSound(null, pos, SoundEvents.CAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
             FluffyFurPacketHandler.sendToTracking(level, pos, new PlushHeartsPacket(pos));

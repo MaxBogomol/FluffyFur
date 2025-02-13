@@ -21,6 +21,7 @@ public class FluffyFurCreativeTabs {
             event.accept(FluffyFurItems.SAMMYSEMICOLON_PLUSH);
             event.accept(FluffyFurItems.BOYKISSER_PLUSH);
             event.accept(FluffyFurItems.NANACHI_PLUSH);
+            event.accept(FluffyFurItems.SPECKLE_PLUSH);
         }
     }
 }
