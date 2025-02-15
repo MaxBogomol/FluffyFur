@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Explosion.class)
-public abstract class LevelMixin {
+public abstract class ExplosionMixin {
 
     @Final
     @Shadow

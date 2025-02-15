@@ -24,7 +24,7 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
-    "client.LevelMixin",
+    "client.ExplosionMixin",
     "client.LightningBoltMixin",
     "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",
