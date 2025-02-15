@@ -16,7 +16,7 @@
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.EffectProgramMixin",
-    "client.ExplosionMixin",
+    "common.ExplosionMixin",
     "client.FoxRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",

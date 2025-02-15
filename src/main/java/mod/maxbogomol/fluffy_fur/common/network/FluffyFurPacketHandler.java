@@ -2,6 +2,8 @@ package mod.maxbogomol.fluffy_fur.common.network;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
+import mod.maxbogomol.fluffy_fur.common.network.effect.BloodPacket;
+import mod.maxbogomol.fluffy_fur.common.network.effect.ExplosionPacket;
 import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
 import net.minecraft.core.BlockPos;
@@ -26,6 +28,7 @@ public class FluffyFurPacketHandler extends PacketHandler {
         PlayerSkinChangePacket.register(HANDLER, id++);
         PlushHeartsPacket.register(HANDLER, id++);
         BloodPacket.register(HANDLER, id++);
+        ExplosionPacket.register(HANDLER, id++);
         TestShrimpPacket.register(HANDLER, id++);
     }
 
