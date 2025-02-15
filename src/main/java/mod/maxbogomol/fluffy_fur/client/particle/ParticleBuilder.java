@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
+import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.client.particle.options.GenericParticleOptions;
@@ -7,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.Level;
@@ -54,6 +56,16 @@ public class ParticleBuilder {
     public ParticleBuilder setParticleRenderType(ParticleRenderType particleRenderType) {
         options.renderType = null;
         options.particleRenderType = particleRenderType;
+        return this;
+    }
+
+    public ParticleBuilder setBufferSource(MultiBufferSource bufferSource) {
+        options.bufferSource = bufferSource;
+        return this;
+    }
+
+    public ParticleBuilder setFormat(VertexFormat format) {
+        options.format = format;
         return this;
     }
 

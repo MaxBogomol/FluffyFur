@@ -1,11 +1,13 @@
 package mod.maxbogomol.fluffy_fur.client.particle.options;
 
+import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticleRenderType;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -22,6 +24,8 @@ public class GenericParticleOptions implements ParticleOptions {
 
     public RenderType renderType = FluffyFurRenderTypes.ADDITIVE_PARTICLE;
     public ParticleRenderType particleRenderType = GenericParticleRenderType.INSTANCE;
+    public MultiBufferSource bufferSource;
+    public VertexFormat format;
 
     public ParticleBehavior behavior = null;
 

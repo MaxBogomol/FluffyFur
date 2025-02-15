@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ParticleBehavior;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.ParticleBehaviorComponent;
 import mod.maxbogomol.fluffy_fur.client.particle.data.*;
@@ -11,6 +12,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
@@ -27,6 +29,8 @@ public class GenericParticle extends TextureSheetParticle {
 
     public RenderType renderType;
     public ParticleRenderType particleRenderType;
+    public MultiBufferSource bufferSource;
+    public VertexFormat format;
 
     public ParticleBehavior behavior;
     public ParticleBehaviorComponent behaviorComponent;
@@ -72,6 +76,8 @@ public class GenericParticle extends TextureSheetParticle {
         this.setPos(x, y, z);
         this.renderType = options.renderType;
         this.particleRenderType = options.particleRenderType;
+        this.bufferSource = options.bufferSource;
+        this.format = options.format;
         this.colorData = options.colorData;
         this.transparencyData = GenericParticleData.constrictTransparency(options.transparencyData);
         this.scaleData = options.scaleData;
