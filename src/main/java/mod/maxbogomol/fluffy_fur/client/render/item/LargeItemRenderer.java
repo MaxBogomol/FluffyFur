@@ -27,7 +27,23 @@ public class LargeItemRenderer {
         return new ModelResourceLocation(new ResourceLocation(modId, item + "_in_hand"), "inventory");
     }
 
+    public static ModelResourceLocation getInHandModelResourceLocation(String modId, String item) {
+        return new ModelResourceLocation(new ResourceLocation(modId, item + "_in_hand"), "inventory");
+    }
+
+    public static ModelResourceLocation getInHeadModelResourceLocation(String modId, String item) {
+        return new ModelResourceLocation(new ResourceLocation(modId, item + "_in_head"), "inventory");
+    }
+
     public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item, CustomItemOverrides itemOverrides) {
+        bakeInHandModel(map, modId, item, itemOverrides);
+    }
+
+    public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item) {
+        bakeModel(map, modId, item, new CustomItemOverrides());
+    }
+
+    public static void bakeInHandModel(Map<ResourceLocation, BakedModel> map, String modId, String item, CustomItemOverrides itemOverrides) {
         ResourceLocation modelInventory = new ModelResourceLocation(new ResourceLocation(modId, item), "inventory");
         ResourceLocation modelHand = new ModelResourceLocation(new ResourceLocation(modId, item + "_in_hand"), "inventory");
 
@@ -37,8 +53,22 @@ public class LargeItemRenderer {
         map.put(modelInventory, modelWrapper);
     }
 
-    public static void bakeModel(Map<ResourceLocation, BakedModel> map, String modId, String item) {
-        bakeModel(map, modId, item, new CustomItemOverrides());
+    public static void bakeInHandModel(Map<ResourceLocation, BakedModel> map, String modId, String item) {
+        bakeInHandModel(map, modId, item, new CustomItemOverrides());
+    }
+
+    public static void bakeInHeadModel(Map<ResourceLocation, BakedModel> map, String modId, String item, CustomItemOverrides itemOverrides) {
+        ResourceLocation modelInventory = new ModelResourceLocation(new ResourceLocation(modId, item), "inventory");
+        ResourceLocation modelHand = new ModelResourceLocation(new ResourceLocation(modId, item + "_in_head"), "inventory");
+
+        BakedModel bakedModelDefault = map.get(modelInventory);
+        BakedModel bakedModelHand = map.get(modelHand);
+        BakedModel modelWrapper = new HeadItemModel(bakedModelDefault, bakedModelHand, itemOverrides);
+        map.put(modelInventory, modelWrapper);
+    }
+
+    public static void bakeInHeadModel(Map<ResourceLocation, BakedModel> map, String modId, String item) {
+        bakeInHeadModel(map, modId, item, new CustomItemOverrides());
     }
 
     public static class LargeItemModel implements BakedModel {
@@ -98,6 +128,68 @@ public class LargeItemRenderer {
             BakedModel modelToUse = bakedModelDefault;
             if (context != ItemDisplayContext.GUI && context != ItemDisplayContext.GROUND  && context != ItemDisplayContext.FIXED){
                 modelToUse = bakedModelHand;
+            }
+            return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, context, applyLeftHandTransform);
+        }
+    }
+
+    public static class HeadItemModel implements BakedModel {
+        private final BakedModel bakedModelDefault;
+        private final BakedModel bakedModelHead;
+        private final CustomItemOverrides itemOverrides;
+
+        public HeadItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand) {
+            this.bakedModelDefault = bakedModelDefault;
+            this.bakedModelHead = bakedModelHand;
+            this.itemOverrides = new CustomItemOverrides();
+        }
+
+        public HeadItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand, CustomItemOverrides itemOverrides) {
+            this.bakedModelDefault = bakedModelDefault;
+            this.bakedModelHead = bakedModelHand;
+            this.itemOverrides = itemOverrides;
+        }
+
+        @Override
+        public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource random) {
+            return bakedModelDefault.getQuads(state, direction, random);
+        }
+
+        @Override
+        public boolean useAmbientOcclusion() {
+            return bakedModelDefault.useAmbientOcclusion();
+        }
+
+        @Override
+        public boolean isGui3d() {
+            return bakedModelDefault.isGui3d();
+        }
+
+        @Override
+        public boolean usesBlockLight() {
+            return bakedModelDefault.usesBlockLight();
+        }
+
+        @Override
+        public boolean isCustomRenderer() {
+            return bakedModelDefault.isCustomRenderer();
+        }
+
+        @Override
+        public TextureAtlasSprite getParticleIcon() {
+            return bakedModelDefault.getParticleIcon();
+        }
+
+        @Override
+        public ItemOverrides getOverrides() {
+            return itemOverrides;
+        }
+
+        @Override
+        public BakedModel applyTransform(ItemDisplayContext context, PoseStack poseStack, boolean applyLeftHandTransform) {
+            BakedModel modelToUse = bakedModelDefault;
+            if (context == ItemDisplayContext.HEAD) {
+                modelToUse = bakedModelHead;
             }
             return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, context, applyLeftHandTransform);
         }

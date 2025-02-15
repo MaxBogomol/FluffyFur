@@ -1,0 +1,10 @@
+{
+  "type": "fluffy_fur:add_loot_table",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/cat_morning_gift"
+    }
+  ],
+  "lootTable": "fluffy_fur:gameplay/cat_morning_gift"
+}

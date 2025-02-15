@@ -20,6 +20,7 @@ public class AddItemLootModifier extends LootModifier {
             -> RecordCodecBuilder.create((inst) -> codecStart(inst).and(inst.group(ForgeRegistries.ITEMS.getCodec().
             fieldOf("item").forGetter((m) -> m.addedItem), Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count)))
             .apply(inst, AddItemLootModifier::new)));
+
     private final Item addedItem;
     private final int count;
 
