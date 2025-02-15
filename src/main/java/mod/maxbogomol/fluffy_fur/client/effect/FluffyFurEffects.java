@@ -176,7 +176,6 @@ public class FluffyFurEffects {
     }
 
     public static void explosionEffect(Level level, Vec3 pos, float radius) {
-        System.out.println(radius);
         float r = 0.5f + (radius / 4f);
         float rr = 0.75f + (radius / 8f);
         ParticleBuilder.create(FluffyFurParticles.WISP)

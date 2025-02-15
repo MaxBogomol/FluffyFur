@@ -3,7 +3,7 @@ package mod.maxbogomol.fluffy_fur.common.event;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.capability.IPlayerSkin;
 import mod.maxbogomol.fluffy_fur.common.capability.PlayerSkinProvider;
-import mod.maxbogomol.fluffy_fur.common.network.effect.BloodPacket;
+import mod.maxbogomol.fluffy_fur.common.network.BloodPacket;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinUpdatePacket;
 import net.minecraft.core.BlockPos;

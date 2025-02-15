@@ -1,8 +1,6 @@
-package mod.maxbogomol.fluffy_fur.mixin.common;
+package mod.maxbogomol.fluffy_fur.mixin.client;
 
-import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
-import mod.maxbogomol.fluffy_fur.common.network.effect.ExplosionPacket;
-import net.minecraft.core.BlockPos;
+import mod.maxbogomol.fluffy_fur.client.effect.FluffyFurEffects;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -14,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Explosion.class)
-public abstract class ExplosionMixin {
+public abstract class LevelMixin {
 
     @Final
     @Shadow
@@ -24,14 +22,12 @@ public abstract class ExplosionMixin {
     @Shadow
     private Level level;
 
-    @Inject(at = @At("RETURN"), method = "finalizeExplosion")
+    @Inject(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     public void fluffy_fur$finalizeExplosion(boolean spawnParticles, CallbackInfo ci) {
-        if (!level.isClientSide()) {
-            if (spawnParticles) {
-                Explosion self = (Explosion) ((Object) this);
-                Vec3 pos = self.getPosition();
-                FluffyFurPacketHandler.sendToTracking(level, BlockPos.containing(pos), new ExplosionPacket(pos, radius));
-            }
+        if (level.isClientSide()) {
+            Explosion self = (Explosion) ((Object) this);
+            Vec3 pos = self.getPosition();
+            FluffyFurEffects.explosionEffect(level, pos, radius);
         }
     }
 }
