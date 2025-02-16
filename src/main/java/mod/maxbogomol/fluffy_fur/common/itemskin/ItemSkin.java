@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.model.armor.ArmorModel;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +25,7 @@ public class ItemSkin {
     public String id;
     public Color color;
     public List<ItemSkinEntry> skinEntries = new ArrayList<>();
+    public List<Component> applyingItems = new ArrayList<>();
 
     public ItemSkin(String id) {
         this.id = id;
@@ -47,10 +49,6 @@ public class ItemSkin {
         return getTranslatedName(id);
     }
 
-    public String getTranslatedLoreName() {
-        return getTranslatedLoreName(id);
-    }
-
     public static String getTranslatedName(String id) {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
@@ -58,18 +56,24 @@ public class ItemSkin {
         return "item_skin."  + modId + "." + monogramId;
     }
 
-    public static String getTranslatedLoreName(String id) {
-        return getTranslatedName(id) + ".lore";
-    }
-
     public static Component getSkinName(ItemSkin skin) {
         Color color = skin.getColor();
-
-        return Component.translatable(skin.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, color.getRed(), color.getGreen(), color.getBlue())));
+        return Component.translatable(skin.getTranslatedName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(color)));
     }
 
     public static Component getSkinComponent(ItemSkin skin) {
         return Component.translatable("lore.fluffy_fur.skin").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))).append(" ").append(getSkinName(skin));
+    }
+
+    public static List<Component> getApplyingItemsComponents(ItemSkin skin, boolean isShift) {
+        List<Component> list = new ArrayList<>();
+        list.add(Component.translatable("lore.fluffy_fur.skin_applies").append(isShift ? Component.empty() : Component.literal(" []")).withStyle(ChatFormatting.GRAY));
+        if (isShift) {
+            for (Component component : skin.applyingItems) {
+                list.add(Component.literal(" ").append(component).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))));
+            }
+        }
+        return list;
     }
 
     public Component getSkinName() {
@@ -78,6 +82,14 @@ public class ItemSkin {
 
     public Component getSkinComponent() {
         return getSkinComponent(this);
+    }
+
+    public List<Component> getApplyingItemsComponents(boolean isShift) {
+        return getApplyingItemsComponents(this, isShift);
+    }
+
+    public void addApplyingItem(Component component) {
+        applyingItems.add(component);
     }
 
     public boolean canApplyOnItem(ItemStack itemStack) {
