@@ -15,6 +15,7 @@ import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
+import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,6 +69,8 @@ public class FluffyFur {
 
         eventBus.addListener(this::setup);
         eventBus.addListener(FluffyFurClient::clientSetup);
+
+        FluffyFurCreativeTabs.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new FluffyFurEvents());
