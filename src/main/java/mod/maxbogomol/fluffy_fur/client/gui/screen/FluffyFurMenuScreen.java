@@ -448,10 +448,8 @@ public class FluffyFurMenuScreen extends Screen {
     }
 
     public void linkTo(String url) {
-        this.minecraft.setScreen(new ConfirmLinkScreen((p_213069_2_) -> {
-            if (p_213069_2_)
-                Util.getPlatform()
-                        .openUri(url);
+        this.minecraft.setScreen(new ConfirmLinkScreen((click) -> {
+            if (click) Util.getPlatform().openUri(url);
             this.minecraft.setScreen(this);
         }, url, true));
     }

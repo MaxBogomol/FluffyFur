@@ -2,7 +2,6 @@ package mod.maxbogomol.fluffy_fur.common.block.plush;
 
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
-import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -31,8 +30,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+    public static List<Block> foxSoundPlush = new ArrayList<>();
+    public static List<Block> goatSoundPlush = new ArrayList<>();
+    public static List<Block> catSoundPlush = new ArrayList<>();
 
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 
@@ -63,13 +67,13 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            if (state.getBlock().equals(FluffyFurBlocks.MAXBOGOMOL_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.UNOLOGICALSAMSAR_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.NANACHI_PLUSH.get())) {
+            if (foxSoundPlush.contains(state.getBlock())) {
                 level.playSound(null, pos, SoundEvents.FOX_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
-            if (state.getBlock().equals(FluffyFurBlocks.ONIXTHECAT_PLUSH.get())) {
+            if (goatSoundPlush.contains(state.getBlock())) {
                 level.playSound(null, pos, SoundEvents.GOAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
-            if (state.getBlock().equals(FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.BOYKISSER_PLUSH.get()) || state.getBlock().equals(FluffyFurBlocks.SPECKLE_PLUSH.get())) {
+            if (catSoundPlush.contains(state.getBlock())) {
                 level.playSound(null, pos, SoundEvents.CAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
             FluffyFurPacketHandler.sendToTracking(level, pos, new PlushHeartsPacket(pos));

@@ -14,6 +14,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -32,6 +35,7 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> MAXBOGOMOL_PLUSH = BLOCKS.register("maxbogomol_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_PINK).noOcclusion()));
     public static final RegistryObject<Block> ONIXTHECAT_PLUSH = BLOCKS.register("onixthecat_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> UNOLOGICALSAMSAR_PLUSH = BLOCKS.register("unlogicalsamsar_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion()));
+    public static final RegistryObject<Block> FOXAIRPLANE_PLUSH = BLOCKS.register("foxairplane_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
     public static final RegistryObject<Block> SAMMYSEMICOLON_PLUSH = BLOCKS.register("sammysemicolon_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion()));
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
@@ -41,6 +45,23 @@ public class FluffyFurBlocks {
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
+    }
+
+    @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void registerEntities(FMLCommonSetupEvent event) {
+            PlushBlock.foxSoundPlush.add(MAXBOGOMOL_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(UNOLOGICALSAMSAR_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
+
+            PlushBlock.goatSoundPlush.add(ONIXTHECAT_PLUSH.get());
+
+            PlushBlock.catSoundPlush.add(SAMMYSEMICOLON_PLUSH.get());
+            PlushBlock.catSoundPlush.add(BOYKISSER_PLUSH.get());
+            PlushBlock.catSoundPlush.add(SPECKLE_PLUSH.get());
+        }
     }
 
     public static FireBlock fireblock;

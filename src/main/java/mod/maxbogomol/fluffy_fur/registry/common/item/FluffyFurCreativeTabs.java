@@ -43,6 +43,7 @@ public class FluffyFurCreativeTabs {
             event.accept(FluffyFurItems.MAXBOGOMOL_PLUSH);
             event.accept(FluffyFurItems.ONIXTHECAT_PLUSH);
             event.accept(FluffyFurItems.UNOLOGICALSAMSAR_PLUSH);
+            event.accept(FluffyFurItems.FOXAIRPLANE_PLUSH);
             event.accept(FluffyFurItems.SAMMYSEMICOLON_PLUSH);
             event.accept(FluffyFurItems.BOYKISSER_PLUSH);
             event.accept(FluffyFurItems.NANACHI_PLUSH);
