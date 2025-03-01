@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/onjerlay",
+  "textures": {
+    "particle": "minecraft:block/yellow_wool"
+  }
+}

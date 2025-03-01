@@ -36,6 +36,7 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> ONIXTHECAT_PLUSH = BLOCKS.register("onixthecat_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> UNOLOGICALSAMSAR_PLUSH = BLOCKS.register("unlogicalsamsar_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion()));
     public static final RegistryObject<Block> FOXAIRPLANE_PLUSH = BLOCKS.register("foxairplane_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
+    public static final RegistryObject<Block> ONJERLAY_PLUSH = BLOCKS.register("onjerlay_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_YELLOW).noOcclusion()));
     public static final RegistryObject<Block> SAMMYSEMICOLON_PLUSH = BLOCKS.register("sammysemicolon_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion()));
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
@@ -54,6 +55,7 @@ public class FluffyFurBlocks {
             PlushBlock.foxSoundPlush.add(MAXBOGOMOL_PLUSH.get());
             PlushBlock.foxSoundPlush.add(UNOLOGICALSAMSAR_PLUSH.get());
             PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(ONJERLAY_PLUSH.get());
             PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
 
             PlushBlock.goatSoundPlush.add(ONIXTHECAT_PLUSH.get());
