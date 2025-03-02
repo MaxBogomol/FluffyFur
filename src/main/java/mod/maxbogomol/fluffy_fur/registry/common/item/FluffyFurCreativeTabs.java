@@ -33,9 +33,11 @@ public class FluffyFurCreativeTabs {
             event.accept(FluffyFurItems.MUSIC_DISC_FLUFFY);
         }
 
-        if (event.getTabKey() == FluffyFurCreativeTabs.FLUFFY_FUR.getKey() && event.hasPermissions()) {
+        if (event.getTabKey() == FluffyFurCreativeTabs.FLUFFY_FUR.getKey()) {
             event.accept(FluffyFurItems.MUSIC_DISC_FLUFFY);
+        }
 
+        if (event.getTabKey() == FluffyFurCreativeTabs.FLUFFY_FUR.getKey() && event.hasPermissions()) {
             event.accept(FluffyFurItems.TEST_SHRIMP);
             event.accept(FluffyFurItems.THING);
             event.accept(FluffyFurItems.SILLY_TREAT);

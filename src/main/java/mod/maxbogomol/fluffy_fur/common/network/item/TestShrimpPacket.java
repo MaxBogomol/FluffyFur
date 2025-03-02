@@ -11,8 +11,10 @@ import mod.maxbogomol.fluffy_fur.client.particle.options.ItemParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.particle.options.SpriteParticleOptions;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeInstance;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.DepthPostProcess;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcess;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcessInstance;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.NormalGlowPostProcess;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.common.network.TwoPositionClientPacket;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
@@ -27,6 +29,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
@@ -39,27 +42,33 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import org.joml.Vector3f;
 
 import java.awt.*;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class TestShrimpPacket extends TwoPositionClientPacket {
     protected final int mode;
+    protected final UUID uuid;
 
-    public TestShrimpPacket(double x1, double y1, double z1, double x2, double y2, double z2, int mode) {
+    public TestShrimpPacket(double x1, double y1, double z1, double x2, double y2, double z2, int mode, UUID uuid) {
         super(x1, y1, z1, x2, y2, z2);
         this.mode = mode;
+        this.uuid = uuid;
     }
 
-    public TestShrimpPacket(Vec3 vec1, Vec3 vec2, int mode) {
+    public TestShrimpPacket(Vec3 vec1, Vec3 vec2, int mode, UUID uuid) {
         super(vec1, vec2);
         this.mode = mode;
+        this.uuid = uuid;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void execute(Supplier<NetworkEvent.Context> context) {
+        Player player = FluffyFur.proxy.getPlayer();
         Level level = FluffyFur.proxy.getLevel();
         Vec3 startPos = new Vec3(x1, y1, z1);
         Vec3 lookPos = new Vec3(x2, y2, z2);
+        boolean isSamePlayer = player.getUUID().equals(uuid);
 
         if (mode == 0) {
             Vec3 pos = startPos.add(lookPos.scale(1.75f));
@@ -407,9 +416,18 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             builder.spawnBoykisser(level, pos, 256, 256, 0.075f, blushBuilder, 3, 0.15f, 0.3f, 0.15f, 0.15f);
         }
 
-        if (mode == 24) {
+        if (mode == 24 && isSamePlayer) {
+            DepthPostProcess.INSTANCE.toggle();
+        }
+
+        if (mode == 25) {
             Vec3 pos = startPos.add(lookPos.scale(15f));
             GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 0, 1)).setRadius(25).setIntensity(5).setFadeTime(50));
+        }
+
+        if (mode == 26) {
+            Vec3 pos = startPos.add(lookPos.scale(15f));
+            NormalGlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 0)).setRadius(25).setIntensity(5).setFadeTime(50));
         }
     }
 
@@ -425,9 +443,10 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
         buf.writeDouble(y2);
         buf.writeDouble(z2);
         buf.writeInt(mode);
+        buf.writeUUID(uuid);
     }
 
     public static TestShrimpPacket decode(FriendlyByteBuf buf) {
-        return new TestShrimpPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readInt());
+        return new TestShrimpPacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readInt(), buf.readUUID());
     }
 }

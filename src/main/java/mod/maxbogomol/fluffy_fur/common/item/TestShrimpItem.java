@@ -38,8 +38,9 @@ public class TestShrimpItem extends Item {
                 nbt.putInt("mode", (mode + 1) % getModes());
                 mode = nbt.getInt("mode");
                 player.displayClientMessage(getModeComponent(mode), true);
+            } else {
+                FluffyFurPacketHandler.sendToTracking(level, player.blockPosition(), new TestShrimpPacket(player.getEyePosition(), player.getLookAngle(), mode, player.getUUID()));
             }
-            FluffyFurPacketHandler.sendToTracking(level, player.blockPosition(), new TestShrimpPacket(player.getEyePosition(), player.getLookAngle(), mode));
         }
 
         return InteractionResultHolder.success(stack);
@@ -59,7 +60,7 @@ public class TestShrimpItem extends Item {
     }
 
     public int getModes() {
-        return 25;
+        return 27;
     }
 
     public Component getModeComponent(int mode) {
