@@ -1,11 +1,12 @@
 package mod.maxbogomol.fluffy_fur;
 
 import mod.maxbogomol.fluffy_fur.client.event.FluffyFurClientEvents;
-import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
+import mod.maxbogomol.fluffy_fur.integration.client.fusion.FluffyFurFusion;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -31,6 +32,9 @@ public class FluffyFurClient {
             forgeBus.register(new FluffyFurClientEvents());
 
             eventBus.addListener(FluffyFurCreativeTabs::addCreativeTabContent);
+
+            FluffyFurFusion.init(eventBus);
+            FluffyFurFusion.setup();
         }
     }
 
