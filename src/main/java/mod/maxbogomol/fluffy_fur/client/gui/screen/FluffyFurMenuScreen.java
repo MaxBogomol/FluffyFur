@@ -36,7 +36,7 @@ public class FluffyFurMenuScreen extends Screen {
     public FluffyFurLogoRenderer logoRenderer;
     public long fadeInStart;
 
-    private static final ResourceLocation LOGO = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/fluffy_fur.png");
+    private static final ResourceLocation LOGO = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/title/fluffy_fur.png");
     public static ResourceLocation BACKGROUND = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu_background.png");
     public static int ticks = 0;
 

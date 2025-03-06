@@ -68,8 +68,8 @@ public class FluffyFurClient {
         VANILLA_PANORAMA = new FluffyFurPanorama("minecraft:vanilla", Component.translatable("panorama.minecraft.vanilla")).setItem(new ItemStack(Items.GRASS_BLOCK));
         FLUFFY_PANORAMA = new FluffyFurPanorama(FluffyFur.MOD_ID + ":fluffy_zone", Component.translatable("panorama.fluffy_fur.fluffy_zone"))
                 .setMod(MOD_INSTANCE).setItem(new ItemStack(Items.CHERRY_LEAVES))
-                .setTexture(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama"))
-                .setLogo(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/fluffy_fur.png"));
+                .setTexture(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/panorama/fluffy_zone/panorama"))
+                .setLogo(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/title/fluffy_fur.png"));
 
         registerMod(MOD_INSTANCE);
         registerPanorama(VANILLA_PANORAMA);
