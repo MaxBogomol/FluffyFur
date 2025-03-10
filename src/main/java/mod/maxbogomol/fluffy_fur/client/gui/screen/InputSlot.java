@@ -14,4 +14,9 @@ public class InputSlot extends SlotItemHandler {
     public boolean allowModification(Player player) {
         return true;
     }
+
+    @Override
+    public boolean mayPickup(Player player) {
+        return true;
+    }
 }
