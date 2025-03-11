@@ -13,12 +13,18 @@ import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.List;
 import java.util.Random;
 
 public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
@@ -27,6 +33,12 @@ public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
 
     public ThingItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        list.add(Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(" " + FluffyFur.mcreatorModsCount).withStyle(ChatFormatting.DARK_RED));
     }
 
     @Override
