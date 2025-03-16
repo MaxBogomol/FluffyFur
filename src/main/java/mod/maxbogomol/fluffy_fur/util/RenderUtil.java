@@ -152,6 +152,22 @@ public class RenderUtil {
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
     }
 
+    public static TextureAtlasSprite getBlockSprite(ResourceLocation resourceLocation) {
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
+    }
+
+    public static TextureAtlasSprite getBlockSprite(String modId, String sprite) {
+        return getBlockSprite(new ResourceLocation(modId, sprite));
+    }
+
+    public static TextureAtlasSprite getParticleSprite(ResourceLocation resourceLocation) {
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_PARTICLES).apply(resourceLocation);
+    }
+
+    public static TextureAtlasSprite getParticleSprite(String modId, String sprite) {
+        return getParticleSprite(new ResourceLocation(modId, sprite));
+    }
+
     public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
         return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
     }
