@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.common.network;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
+import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
 import net.minecraft.core.BlockPos;
@@ -27,6 +28,7 @@ public class FluffyFurPacketHandler extends PacketHandler {
         PlushHeartsPacket.register(HANDLER, id++);
         BloodPacket.register(HANDLER, id++);
         TestShrimpPacket.register(HANDLER, id++);
+        StopUseItemPacket.register(HANDLER, id++);
     }
 
     public static SimpleChannel getHandler() {

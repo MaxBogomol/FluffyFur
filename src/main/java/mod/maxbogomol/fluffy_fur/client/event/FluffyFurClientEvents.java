@@ -9,6 +9,8 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
+import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
+import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
@@ -115,6 +117,7 @@ public class FluffyFurClientEvents {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
             String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
             if (name.equals("Dev") || name.equals("MaxBogomol")) {
+                FluffyFurPacketHandler.sendToServer(new StopUseItemPacket());
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
         }
