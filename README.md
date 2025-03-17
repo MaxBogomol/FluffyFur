@@ -14,7 +14,7 @@ Adds various things for rendering and simplifying development
 Shaders support  
 Flexible particle and rendering system  
 Items particles and animations  
-Custom items models  
+Custom item models  
 Screenshake  
 Custom panoramas and menu  
 Attribute name modifiers  
