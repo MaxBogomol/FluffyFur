@@ -92,13 +92,15 @@ public class FluffyFur {
             }
             if (dots == 2) {
                 if (pack.getName().startsWith("net.mcreator")) {
+                    LOGGER.error("Bad package detected: " + string);
                     mcreatorModsCount++;
                     int i = string.indexOf(".");
-                    string = string.substring(i + 1, string.length() - 1);
+                    string = string.substring(i + 1);
                     i = string.indexOf(".");
                     string = string.substring(i + 1);
                     mcreatorModsList.add(string);
                 } else if (pack.getName().contains("procedures")) {
+                    LOGGER.error("Bad package detected: " + string);
                     mcreatorModsCount++;
                     int i = string.indexOf(".");
                     string = string.substring(i + 1, string.length() - 1);
@@ -107,6 +109,14 @@ public class FluffyFur {
                     mcreatorModsList.add(string);
                 }
             }
+        }
+
+        if (mcreatorModsCount > 0) {
+            LOGGER.error("");
+            LOGGER.error("ATTENTION!!!!");
+            LOGGER.error("It seems you have MCreator mods installed");
+            LOGGER.error("It is highly recommended to delete them");
+            LOGGER.error(mcreatorModsList);
         }
     }
 
