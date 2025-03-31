@@ -4,7 +4,7 @@
     "item": "minecraft:pink_petals"
   },
   "base": {
-    "tag": "minecraft:music_discs"
+    "tag": "fluffy_fur:music_disc_fluffy_ingredient"
   },
   "result": {
     "item": "fluffy_fur:music_disc_fluffy"

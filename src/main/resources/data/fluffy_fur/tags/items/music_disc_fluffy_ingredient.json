@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:music_discs"
+  ],
+  "remove": [
+    "fluffy_fur:music_disc_fluffy"
+  ]
+}
