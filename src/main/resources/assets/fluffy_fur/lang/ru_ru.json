@@ -62,11 +62,20 @@
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердчеки",
 
-  "_comment_6": "Привязка клавиш",
+  "_comment_6": "Команды",
+  "commands.fluffy_fur.item_skin.unknown": "Не существует обликов предметов с ID '%s'",
+  "commands.fluffy_fur.skin.item.set.multiple": "Наложен облик %s на предмет у %s игроков",
+  "commands.fluffy_fur.skin.item.set.single": "Наложен облик %s на предмет %s",
+  "commands.fluffy_fur.skin.item.set.failed": "Не удалось наложить облик %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Удалён облик с предметов %s игроков",
+  "commands.fluffy_fur.skin.item.remove.single": "Удалён облик с предмета %s",
+  "commands.fluffy_fur.skin.item.remove.failed": "Не удалось удалить облик",
+
+  "_comment_7": "Привязка клавиш",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню обликов",
 
-  "_comment_7": "Конфиги",
+  "_comment_8": "Конфиги",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Частицы предметов",

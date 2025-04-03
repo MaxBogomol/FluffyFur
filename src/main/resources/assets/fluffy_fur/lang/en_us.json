@@ -62,11 +62,20 @@
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Fluffy",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Pink Hearts",
 
-  "_comment_6": "Key binds",
+  "_comment_6": "Commands",
+  "commands.fluffy_fur.item_skin.unknown": "No item skin exists with the ID '%s'",
+  "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %s to %s players",
+  "commands.fluffy_fur.skin.item.set.single": "Applied skin %s to %s's item",
+  "commands.fluffy_fur.skin.item.set.failed": "Failed to apply skin %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Removed item skin from %s players",
+  "commands.fluffy_fur.skin.item.remove.single": "Removed skin from %s's item",
+  "commands.fluffy_fur.skin.item.remove.failed": "Failed to remove item skin",
+
+  "_comment_7": "Key binds",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Skin Menu",
 
-  "_comment_7": "Config",
+  "_comment_8": "Config",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Screenshake Intensity",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Intensity of screenshake.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Item Particle",

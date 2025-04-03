@@ -11,6 +11,7 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurArgumentTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
@@ -58,6 +59,7 @@ public class FluffyFur {
         FluffyFurParticles.register(eventBus);
         FluffyFurLootModifier.register(eventBus);
         FluffyFurSounds.register(eventBus);
+        FluffyFurArgumentTypes.register(eventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FluffyFurClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, FluffyFurConfig.SPEC);
