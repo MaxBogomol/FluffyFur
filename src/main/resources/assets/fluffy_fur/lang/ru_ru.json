@@ -63,7 +63,7 @@
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердчеки",
 
   "_comment_6": "Команды",
-  "commands.fluffy_fur.item_skin.unknown": "Не существует обликов предметов с ID '%s'",
+  "commands.fluffy_fur.item_skin.unknown": "Не существует облика предмета с ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Наложен облик %s на предмет у %s игроков",
   "commands.fluffy_fur.skin.item.set.single": "Наложен облик %s на предмет %s",
   "commands.fluffy_fur.skin.item.set.failed": "Не удалось наложить облик %s",
