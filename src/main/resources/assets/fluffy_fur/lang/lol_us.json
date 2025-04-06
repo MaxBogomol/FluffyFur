@@ -1,4 +1,6 @@
 {
+  "creative_tab.fluffy_fur": "Fluffy Fur",
+
   "_comment_1": "Hey therre!! owo,,, hiiii!:3:3 please call me im free tonight",
   "block.fluffy_fur.potted_pink_petals": "pink petals. pot.",
 
@@ -10,14 +12,19 @@
 
   "block.fluffy_fur.maxbogomol_plush": "Pink fox plush meow >w<",
   "block.fluffy_fur.onixthecat_plush": "goated boy plush",
+  "block.fluffy_fur.unlogicalsamsar_plush": "unlogicalSamsar Plush",
+  "block.fluffy_fur.foxairplane_plush": "FoxAirPlane Plush",
+  "block.fluffy_fur.onjerlay_plush": "Onjerlay Plush",
   "block.fluffy_fur.sammysemicolon_plush": "la creatura",
   "block.fluffy_fur.boykisser_plush": "gay cat.",
   "block.fluffy_fur.nanachi_plush": "bnuyyyy plus",
+  "block.fluffy_fur.speckle_plush": "Speckle Plush",
 
   "block.fluffy_fur.yonkablock": "fish",
 
   "_comment_2": ":3",
   "lore.fluffy_fur.skin": "katt fur:",
+  "lore.fluffy_fur.skin_applies": "Applies to:",
 
   "_comment_3": "itemz",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
@@ -37,6 +44,7 @@
 
   "gui.fluffy_fur.menu.panoramas": "panamas",
   "gui.fluffy_fur.menu.mods": "kats",
+  "gui.fluffy_fur.menu.mcreator_mods": "MCreator mods:",
   "gui.fluffy_fur.menu.id": "IDE:",
   "gui.fluffy_fur.menu.version": "vershun:",
   "gui.fluffy_fur.menu.edition": "pocket edition:",
@@ -55,11 +63,20 @@
   "gui.fluffy_fur.skin_menu.cape.fluffy": "flufff",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "hearts <3",
 
-  "_comment_6": "beykinds",
+  "_comment_6": "Commands",
+  "commands.fluffy_fur.item_skin.unknown": "No item skin exists with the ID '%s'",
+  "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %s to %s players",
+  "commands.fluffy_fur.skin.item.set.single": "Applied skin %s to %s's item",
+  "commands.fluffy_fur.skin.item.set.failed": "Failed to apply skin %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Removed item skin from %s players",
+  "commands.fluffy_fur.skin.item.remove.single": "Removed skin from %s's item",
+  "commands.fluffy_fur.skin.item.remove.failed": "Failed to remove item skin",
+
+  "_comment_7": "beykinds",
   "key.category.fluffy_fur.general": "fufy flur",
   "key.fluffy_fur.skin_menu": "kat meownu",
 
-  "_comment_7": "Config",
+  "_comment_8": "Config",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "kat shake insanity",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "insanity of shaek.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "itum particel",

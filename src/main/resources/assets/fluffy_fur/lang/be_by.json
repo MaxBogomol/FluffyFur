@@ -1,4 +1,6 @@
 {
+  "creative_tab.fluffy_fur": "Fluffy Fur",
+
   "_comment_1": "Прадметы і блокі",
   "block.fluffy_fur.potted_pink_petals": "Ружовыя пялёсткі ў гаршчку",
 
@@ -6,13 +8,23 @@
 
   "item.fluffy_fur.test_shrimp": "Тэставая крэветка",
   "item.fluffy_fur.thing": "Штосьці",
+  "item.fluffy_fur.silly_treat": "Silly Treat",
 
   "block.fluffy_fur.maxbogomol_plush": "Плюшавы MaxBogomol",
   "block.fluffy_fur.onixthecat_plush": "Плюшавы OnixTheCat",
+  "block.fluffy_fur.unlogicalsamsar_plush": "unlogicalSamsar Plush",
+  "block.fluffy_fur.foxairplane_plush": "FoxAirPlane Plush",
+  "block.fluffy_fur.onjerlay_plush": "Onjerlay Plush",
   "block.fluffy_fur.sammysemicolon_plush": "Плюшавы SammySemicolon",
+  "block.fluffy_fur.boykisser_plush": "Boykisser Plush",
+  "block.fluffy_fur.nanachi_plush": "Nanachi Plush",
+  "block.fluffy_fur.speckle_plush": "Speckle Plush",
+
+  "block.fluffy_fur.yonkablock": "YonKaBlock",
 
   "_comment_2": "Гісторыі прадметаў",
   "lore.fluffy_fur.skin": "Скін:",
+  "lore.fluffy_fur.skin_applies": "Applies to:",
 
   "_comment_3": "Апісанні прадметаў",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
@@ -31,6 +43,7 @@
 
   "gui.fluffy_fur.menu.panoramas": "Панарамы",
   "gui.fluffy_fur.menu.mods": "Моды",
+  "gui.fluffy_fur.menu.mcreator_mods": "MCreator mods:",
   "gui.fluffy_fur.menu.id": "ID:",
   "gui.fluffy_fur.menu.version": "Версія:",
   "gui.fluffy_fur.menu.edition": "Эдыцыя:",
@@ -44,15 +57,25 @@
 
   "gui.fluffy_fur.skin_menu.standard": "Звычайны",
   "gui.fluffy_fur.skin_menu.empty": "Пусты",
+  "gui.fluffy_fur.skin_menu.skin.boykisser": "Boykisser",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначы",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пухнаткі",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ружовыя сардэчкі",
 
-  "_comment_6": "Прывязка клавішаў",
+  "_comment_6": "Commands",
+  "commands.fluffy_fur.item_skin.unknown": "No item skin exists with the ID '%s'",
+  "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %s to %s players",
+  "commands.fluffy_fur.skin.item.set.single": "Applied skin %s to %s's item",
+  "commands.fluffy_fur.skin.item.set.failed": "Failed to apply skin %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Removed item skin from %s players",
+  "commands.fluffy_fur.skin.item.remove.single": "Removed skin from %s's item",
+  "commands.fluffy_fur.skin.item.remove.failed": "Failed to remove item skin",
+
+  "_comment_7": "Прывязка клавішаў",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню скіноў",
 
-  "_comment_7": "Конфіг",
+  "_comment_8": "Конфіг",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Моц траскі экрана",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Моц траскі экрана.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Часцінкі прадметаў",
