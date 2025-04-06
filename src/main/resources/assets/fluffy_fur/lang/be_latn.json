@@ -1,0 +1,99 @@
+{
+  "creative_tab.fluffy_fur": "Fluffy Fur",
+
+  "_comment_1": "Pradmiety i błoki",
+  "block.fluffy_fur.potted_pink_petals": "Ružovyja pialostki ŭ harščku",
+
+  "item.fluffy_fur.music_disc_fluffy": "Puchkaja hrampłascinka",
+
+  "item.fluffy_fur.test_shrimp": "Testavaja krevietka",
+  "item.fluffy_fur.thing": "Štuka",
+  "item.fluffy_fur.silly_treat": "Durny łasunačak",
+
+  "block.fluffy_fur.maxbogomol_plush": "Plušavy MaxBogomol",
+  "block.fluffy_fur.onixthecat_plush": "Plušavy OnixTheCat",
+  "block.fluffy_fur.unlogicalsamsar_plush": "Plušavy unlogicalSamsar",
+  "block.fluffy_fur.foxairplane_plush": "Plušavy FoxAirPlane",
+  "block.fluffy_fur.onjerlay_plush": "Plušavy Onierlay",
+  "block.fluffy_fur.sammysemicolon_plush": "Plušavy SammySemicolon",
+  "block.fluffy_fur.boykisser_plush": "Plušavy bojkisier",
+  "block.fluffy_fur.nanachi_plush": "Plušavaje Nanačy",
+  "block.fluffy_fur.speckle_plush": "Plušavy Spiekał",
+
+  "block.fluffy_fur.yonkablock": "JOnKaBłok",
+
+  "_comment_2": "Historyi pradmietaŭ",
+  "lore.fluffy_fur.skin": "Skin:",
+  "lore.fluffy_fur.skin_applies": "Nakładajecca na:",
+
+  "_comment_3": "Apisanni pradmietaŭ",
+  "item.fluffy_fur.music_disc_fluffy.desc": "Onierlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "Mieniu",
+  "mod_description.fluffy_fur": "Fluffy Fur - mod-biblijateka ad MaxBogomola. \n Dadaje roznyja rečy dla renderinhu i spraščennia raspracoŭki. \n \n Miaŭ :3",
+
+  "panorama.minecraft.vanilla": "Vaniła",
+  "panorama.fluffy_fur.fluffy_zone": "Pušystaja zona",
+
+  "_comment_5": "GUI",
+  "gui.fluffy_fur.menu.optifine.0": "UVAHA! Zdajecca, vy ŭstalavali Optifine",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine łamaje Fluffy Fur i inšyja mody",
+  "gui.fluffy_fur.menu.optifine.2": "Vydalicie Optifine :3",
+  "gui.fluffy_fur.menu.piracy": "PIRACTVA HETA KJePSKA!!!",
+
+  "gui.fluffy_fur.menu.panoramas": "Panaramy",
+  "gui.fluffy_fur.menu.mods": "Mody",
+  "gui.fluffy_fur.menu.mcreator_mods": "MCreator mody:",
+  "gui.fluffy_fur.menu.id": "ID:",
+  "gui.fluffy_fur.menu.version": "Viersija:",
+  "gui.fluffy_fur.menu.edition": "Edycyja:",
+  "gui.fluffy_fur.menu.autor": "Aŭtar:",
+  "gui.fluffy_fur.menu.links": "Spasyłki:",
+  "gui.fluffy_fur.menu.mod": "Mod:",
+
+  "gui.fluffy_fur.skin_menu.skins": "Skiny",
+  "gui.fluffy_fur.skin_menu.capes": "Płaščy",
+  "gui.fluffy_fur.skin_menu.skin_effects": "Efiekty skina",
+
+  "gui.fluffy_fur.skin_menu.standard": "Zvyčajny",
+  "gui.fluffy_fur.skin_menu.empty": "Pusty",
+  "gui.fluffy_fur.skin_menu.skin.boykisser": "Bojkisier",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "Nanačy",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "Puchnatki",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ružovyja sardečki",
+
+  "_comment_6": "Kamandy",
+  "commands.fluffy_fur.item_skin.unknown": "Nie isnuje skinoŭ pradmietaŭ z ID %s",
+  "commands.fluffy_fur.skin.item.set.multiple": "Nakładzieny skin %s u %s hulcoŭ",
+  "commands.fluffy_fur.skin.item.set.single": "Nakładzieny skin %s na pradmiet %s",
+  "commands.fluffy_fur.skin.item.set.failed": "Zdaryłasia pamyłka pry nakładanni skina %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Vydaleny skin pradmietaŭ u %s hulcoŭ",
+  "commands.fluffy_fur.skin.item.remove.single": "Vydaleny skin u pradmieta %s",
+  "commands.fluffy_fur.skin.item.remove.failed": "Zdaryłasia pamyłka pry vydalenni skina",
+
+  "_comment_7": "Pryviazka kłavišaŭ",
+  "key.category.fluffy_fur.general": "Fluffy Fur",
+  "key.fluffy_fur.skin_menu": "Mieniu skinoŭ",
+
+  "_comment_8": "Konfih",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Moc traski ekrana",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Moc traski ekrana.",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "Čascinki pradmietaŭ",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Uklučyć čascinki kinutych pradmietaŭ.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "Čascinki pradmietaŭ u GUI",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "Uklučyć čascinki pradmietaŭ u GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "Kroŭ",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "Uklučyć čascinki kryvi ad pałučennia škody.",
+  "config.client.fluffy_fur.menu.panorama": "Panarama",
+  "config.client.fluffy_fur.menu.panorama.desc": "Panarama Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButton": "Knopka mieniu",
+  "config.client.fluffy_fur.menu.menuButton.desc": "Uklučyć knopkuju mieniu Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Radok konpki mieniu",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "Radok knopki mieniu Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "Zruch radka knopki mieniu pa X",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "Zruch radka knopki mieniu Fluffy Fur pa X.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "Zruch knopki mieniu pa X",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "Zruch knopki mieniu Fluffy Fur pa X.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Zruch knopki mieniu pa Y",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Zruch knopki mieniu Fluffy Fur pa Y."
+}
