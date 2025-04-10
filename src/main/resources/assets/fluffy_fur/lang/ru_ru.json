@@ -60,7 +60,7 @@
   "gui.fluffy_fur.skin_menu.skin.boykisser": "Бойкиссер",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначи",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
-  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердчеки",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердечки",
 
   "_comment_6": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существует облика предмета с ID '%s'",
@@ -77,7 +77,7 @@
 
   "_comment_8": "Конфиги",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
-  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Частицы предметов",
   "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Включает частицы брошенных предметов.",
   "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "GUI частицы предметов",

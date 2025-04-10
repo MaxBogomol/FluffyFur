@@ -39,8 +39,8 @@ import java.util.Random;
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
     public static final String NAME = "Fluffy Fur";
-    public static final String VERSION = "0.1.8";
-    public static final int VERSION_NUMBER = 9;
+    public static final String VERSION = "0.1.9";
+    public static final int VERSION_NUMBER = 10;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();

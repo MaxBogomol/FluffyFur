@@ -1,0 +1,99 @@
+{
+  "creative_tab.fluffy_fur": "Fluffy Fur",
+
+  "_comment_1": "Предмети й Блоки",
+  "block.fluffy_fur.potted_pink_petals": "Рожеві пелюстки в горщику",
+
+  "item.fluffy_fur.music_disc_fluffy": "Пухнаста платівка",
+
+  "item.fluffy_fur.test_shrimp": "Тестова креветка",
+  "item.fluffy_fur.thing": "Штуковина",
+  "item.fluffy_fur.silly_treat": "Дурненьке частування",
+
+  "block.fluffy_fur.maxbogomol_plush": "Плюшевий MaxBogomol",
+  "block.fluffy_fur.onixthecat_plush": "Плюшевий OnixTheCat",
+  "block.fluffy_fur.unlogicalsamsar_plush": "Плюшевий unlogicalSamsar",
+  "block.fluffy_fur.foxairplane_plush": "Плюшевий FoxAirPlane",
+  "block.fluffy_fur.onjerlay_plush": "Плюшевий Onjerlay",
+  "block.fluffy_fur.sammysemicolon_plush": "Плюшевий SammySemicolon",
+  "block.fluffy_fur.boykisser_plush": "Плюшка Бойкіссера",
+  "block.fluffy_fur.nanachi_plush": "Плюшка Наначі",
+  "block.fluffy_fur.speckle_plush": "Плюшка Спекл",
+
+  "block.fluffy_fur.yonkablock": "ЙонКаБлок",
+
+  "_comment_2": "Лор предметів",
+  "lore.fluffy_fur.skin": "Образ:",
+  "lore.fluffy_fur.skin_applies": "Застосовується до:",
+
+  "_comment_3": "Описи предметів",
+  "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
+  "_comment_4": "Меню",
+  "mod_description.fluffy_fur": "Fluffy Fur - мод бібліотека від MaxBogomol. \n Додає різні речі для рендерингу та спрощення розробки. \n \n Мяу :3",
+
+  "panorama.minecraft.vanilla": "Ванілла",
+  "panorama.fluffy_fur.fluffy_zone": "Пухнаста зона",
+
+  "_comment_5": "Інтерфейс",
+  "gui.fluffy_fur.menu.optifine.0": "УВАГА! Схоже, у вас установлено Optifine",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine ламає Fluffy Fur та інші моди",
+  "gui.fluffy_fur.menu.optifine.2": "Видаліть Optifine :3",
+  "gui.fluffy_fur.menu.piracy": "ПІРАТСТВО - ЦЕ ПОГАНО!!!",
+
+  "gui.fluffy_fur.menu.panoramas": "Панорами",
+  "gui.fluffy_fur.menu.mods": "Моди",
+  "gui.fluffy_fur.menu.mcreator_mods": "MCreator моди:",
+  "gui.fluffy_fur.menu.id": "ID:",
+  "gui.fluffy_fur.menu.version": "Версія:",
+  "gui.fluffy_fur.menu.edition": "Видання:",
+  "gui.fluffy_fur.menu.autor": "Автор:",
+  "gui.fluffy_fur.menu.links": "Посилання:",
+  "gui.fluffy_fur.menu.mod": "Мод:",
+
+  "gui.fluffy_fur.skin_menu.skins": "Образи",
+  "gui.fluffy_fur.skin_menu.capes": "Плащі",
+  "gui.fluffy_fur.skin_menu.skin_effects": "Ефекти образів",
+
+  "gui.fluffy_fur.skin_menu.standard": "Стандартний",
+  "gui.fluffy_fur.skin_menu.empty": "Порожній",
+  "gui.fluffy_fur.skin_menu.skin.boykisser": "Бойкіссер",
+  "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначі",
+  "gui.fluffy_fur.skin_menu.cape.fluffy": "Пухнастий",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Рожеві сердечка",
+
+  "_comment_6": "Команди",
+  "commands.fluffy_fur.item_skin.unknown": "Не існує образу предмета з ID '%s'",
+  "commands.fluffy_fur.skin.item.set.multiple": "Застосовано образ %s для %s гравців",
+  "commands.fluffy_fur.skin.item.set.single": "Застосовано образ %s на предмет %s",
+  "commands.fluffy_fur.skin.item.set.failed": "Не вдалося застосувати образ %s",
+  "commands.fluffy_fur.skin.item.remove.multiple": "Видалено образ з предметів для %s гравців",
+  "commands.fluffy_fur.skin.item.remove.single": "Видалено образ з предмета %s",
+  "commands.fluffy_fur.skin.item.remove.failed": "Не вдалося видалити образ",
+
+  "_comment_7": "Призначення клавіш",
+  "key.category.fluffy_fur.general": "Fluffy Fur",
+  "key.fluffy_fur.skin_menu": "Меню образів",
+
+  "_comment_8": "Конфігурація",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity": "Інтенсивність тряски екрана",
+  "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Інтенсивність тряски екрана.",
+  "config.client.fluffy_fur.graphics.particles.itemParticle": "Частинки предметів",
+  "config.client.fluffy_fur.graphics.particles.itemParticle.desc": "Увімкнути частинки кинутих предметів.",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle": "Частинки Предметів у GUI",
+  "config.client.fluffy_fur.graphics.particles.itemGuiParticle.desc": "Увімкнути частинки предметів у GUI.",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle": "Частинки крові",
+  "config.client.fluffy_fur.graphics.particles.bloodParticle.desc": "Увімкнути частинки крові при отриманні шкоди.",
+  "config.client.fluffy_fur.menu.panorama": "Панорама Fluffy Fur",
+  "config.client.fluffy_fur.menu.panorama.desc": "Панорама Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButton": "Кнопка меню",
+  "config.client.fluffy_fur.menu.menuButton.desc": "Увімкнути кнопку меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRow": "Рядок кнопки меню",
+  "config.client.fluffy_fur.menu.menuButtonRow.desc": "Рядок кнопки меню Fluffy Fur.",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset": "Зміщення X рядка кнопки Меню",
+  "config.client.fluffy_fur.menu.menuButtonRowXOffset.desc": "Зміщення рядку кнопки меню Fluffy Fur по осі X.",
+  "config.client.fluffy_fur.menu.menuButtonXOffset": "Зміщення кнопки меню по X",
+  "config.client.fluffy_fur.menu.menuButtonXOffset.desc": "Зміщення кнопки меню Fluffy Fur по осі X.",
+  "config.client.fluffy_fur.menu.menuButtonYOffset": "Зміщення кнопки меню по Y",
+  "config.client.fluffy_fur.menu.menuButtonYOffset.desc": "Зміщення кнопки меню Fluffy Fur по осі Y."
+}
