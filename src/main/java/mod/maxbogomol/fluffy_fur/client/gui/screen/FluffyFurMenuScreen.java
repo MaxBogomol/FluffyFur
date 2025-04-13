@@ -259,7 +259,7 @@ public class FluffyFurMenuScreen extends Screen {
                     list.add(Component.translatable("gui.fluffy_fur.menu.id").append(" ").append(Component.literal(mod.getId()).withStyle(ChatFormatting.GRAY)));
                     list.add(Component.translatable("gui.fluffy_fur.menu.version").append(" ").append(Component.literal(mod.getVersion()).withStyle(ChatFormatting.GRAY)));
                     if (mod.getEdition() > 0)list.add(Component.translatable("gui.fluffy_fur.menu.edition").append(" ").append(Component.literal(String.valueOf(mod.getEdition())).withStyle(ChatFormatting.GRAY)));
-                    list.add(Component.translatable("gui.fluffy_fur.menu.autor").append(" ").append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.fluffy_fur.menu.author").append(" ").append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
 
                     gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
                 }
