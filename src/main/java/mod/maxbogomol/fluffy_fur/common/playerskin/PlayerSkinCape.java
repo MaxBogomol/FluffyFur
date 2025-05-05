@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.playerskin;
+package mod.maxbogomol.fluffy_fur.common.playerskin;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;

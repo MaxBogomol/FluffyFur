@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.common.command.FluffyFurCommand;
 import mod.maxbogomol.fluffy_fur.common.network.BloodPacket;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinUpdatePacket;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -57,6 +59,11 @@ public class FluffyFurEvents {
             FluffyFurPacketHandler.sendTo(player, new PlayerSkinUpdatePacket(target));
             FluffyFurPacketHandler.sendTo(target, new PlayerSkinUpdatePacket(player));
         }
+    }
+
+    @SubscribeEvent
+    public void playerTick(TickEvent.PlayerTickEvent event) {
+        PlayerSkinHandler.skinTick(event.player);
     }
 
     @SubscribeEvent

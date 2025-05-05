@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.playerskin;
+package mod.maxbogomol.fluffy_fur.common.playerskin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
@@ -7,6 +7,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -53,6 +55,7 @@ public class PlayerSkin {
         return this;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public ResourceLocation getSkin(Player player) {
         PlayerSkinData data = getData(player);
         int ticks = ClientTickHandler.ticksInGame;
@@ -85,17 +88,21 @@ public class PlayerSkin {
     }
 
     public void tick(Player player) {
-        PlayerSkinData data = getData(player);
-        int ticks = ClientTickHandler.ticksInGame;
-        if (data.getBlinkTick() + blinkTime < ticks) {
-            data.setBlinkTick(ClientTickHandler.ticksInGame + random.nextInt(blinkMinDelay, blinkMaxDelay));
+        if (player.level().isClientSide()) {
+            PlayerSkinData data = getData(player);
+            int ticks = ClientTickHandler.ticksInGame;
+            if (data.getBlinkTick() + blinkTime < ticks) {
+                data.setBlinkTick(ClientTickHandler.ticksInGame + random.nextInt(blinkMinDelay, blinkMaxDelay));
+            }
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void extraRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Player player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, HumanoidModel defaultModel) {
 
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static ResourceLocation getSkinLocation(String mod, String texture) {
         return new ResourceLocation(mod, "textures/entity/skin/" + texture + ".png");
     }

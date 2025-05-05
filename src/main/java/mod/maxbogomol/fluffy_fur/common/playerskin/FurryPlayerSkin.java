@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.playerskin;
+package mod.maxbogomol.fluffy_fur.common.playerskin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;

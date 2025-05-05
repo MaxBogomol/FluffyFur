@@ -1,14 +1,18 @@
 package mod.maxbogomol.fluffy_fur.common.capability;
 
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinCape;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinEffect;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag> {
     PlayerSkinData data;
-    String skinId = "";
-    String skinEffectId = "";
-    String skinCapeId = "";
+    PlayerSkin skin;
+    PlayerSkinEffect skinEffect;
+    PlayerSkinCape cape;
 
     @Override
     public void setSkinData(PlayerSkinData data) {
@@ -21,41 +25,47 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     }
 
     @Override
-    public void setSkin(String id) {
-        this.skinId = id;
+    public void setSkin(PlayerSkin skin) {
+        this.skin = skin;
     }
 
     @Override
-    public String getSkin() {
-        return skinId;
+    public PlayerSkin getSkin() {
+        return skin;
     }
 
     @Override
-    public void setSkinEffect(String id) {
-        this.skinEffectId = id;
+    public void setSkinEffect(PlayerSkinEffect effect) {
+        this.skinEffect = effect;
     }
 
     @Override
-    public String getSkinEffect() {
-        return skinEffectId;
+    public PlayerSkinEffect getSkinEffect() {
+        return skinEffect;
     }
 
     @Override
-    public void setSkinCape(String id) {
-        this.skinCapeId = id;
+    public void setSkinCape(PlayerSkinCape cape) {
+        this.cape = cape;
     }
 
     @Override
-    public String getSkinCape() {
-        return skinCapeId;
+    public PlayerSkinCape getSkinCape() {
+        return cape;
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag wrapper = new CompoundTag();
-        wrapper.putString("skin", skinId);
-        wrapper.putString("skinEffect", skinEffectId);
-        wrapper.putString("skinCape", skinCapeId);
+        if (skin != null) {
+            wrapper.putString("skin", skin.getId());
+        }
+        if (skinEffect != null) {
+            wrapper.putString("skinEffect", skinEffect.getId());
+        }
+        if (cape != null) {
+            wrapper.putString("skinCape", cape.getId());
+        }
 
         return wrapper;
     }
@@ -63,13 +73,13 @@ public class PlayerSkinImpl implements IPlayerSkin, INBTSerializable<CompoundTag
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         if (nbt.contains("skin")) {
-            skinId = nbt.getString("skin");
+            skin = PlayerSkinHandler.getSkin(nbt.getString("skin"));
         }
         if (nbt.contains("skinEffect")) {
-            skinEffectId = nbt.getString("skinEffect");
+            skinEffect = PlayerSkinHandler.getSkinEffect(nbt.getString("skinEffect"));
         }
         if (nbt.contains("skinCape")) {
-            skinCapeId = nbt.getString("skinCape");
+            cape = PlayerSkinHandler.getSkinCape(nbt.getString("skinCape"));
         }
     }
 }

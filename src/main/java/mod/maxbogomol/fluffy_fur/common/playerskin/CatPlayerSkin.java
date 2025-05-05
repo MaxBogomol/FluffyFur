@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.playerskin;
+package mod.maxbogomol.fluffy_fur.common.playerskin;
 
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.EarsModel;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.TailModel;

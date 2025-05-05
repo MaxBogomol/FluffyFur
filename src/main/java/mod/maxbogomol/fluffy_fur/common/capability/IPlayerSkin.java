@@ -1,6 +1,9 @@
 package mod.maxbogomol.fluffy_fur.common.capability;
 
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.PlayerSkinData;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinCape;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinEffect;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -11,12 +14,12 @@ public interface IPlayerSkin {
     void setSkinData(PlayerSkinData data);
     PlayerSkinData getSkinData();
 
-    void setSkin(String id);
-    String getSkin();
+    void setSkin(PlayerSkin skin);
+    PlayerSkin getSkin();
 
-    void setSkinEffect(String id);
-    String getSkinEffect();
+    void setSkinEffect(PlayerSkinEffect effect);
+    PlayerSkinEffect getSkinEffect();
 
-    void setSkinCape(String id);
-    String getSkinCape();
+    void setSkinCape(PlayerSkinCape cape);
+    PlayerSkinCape getSkinCape();
 }

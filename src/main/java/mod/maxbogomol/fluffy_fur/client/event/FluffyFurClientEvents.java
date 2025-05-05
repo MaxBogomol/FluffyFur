@@ -1,12 +1,10 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
@@ -64,11 +62,6 @@ public class FluffyFurClientEvents {
     }
 
     @SubscribeEvent
-    public void playerTick(TickEvent.PlayerTickEvent event) {
-        PlayerSkinHandler.skinTick(event.player);
-    }
-
-    @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         ClientTickHandler.clientTick(event);
@@ -115,11 +108,11 @@ public class FluffyFurClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
-            if (name.equals("Dev") || name.equals("MaxBogomol")) {
+            //String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
+           // if (name.equals("Dev") || name.equals("MaxBogomol")) {
                 FluffyFurPacketHandler.sendToServer(new StopUseItemPacket());
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
-            }
+            //}
         }
     }
 }

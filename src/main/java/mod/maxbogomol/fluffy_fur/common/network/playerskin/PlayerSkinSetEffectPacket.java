@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.common.network.playerskin;
 
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.ServerPacket;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,7 +20,7 @@ public class PlayerSkinSetEffectPacket extends ServerPacket {
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
         ServerPlayer player = context.get().getSender();
-        PlayerSkinHandler.setSkinEffect(player, effect);
+        PlayerSkinHandler.setSkinEffect(player, PlayerSkinHandler.getSkinEffect(effect));
         for (ServerPlayer serverPlayer : player.getServer().getPlayerList().getPlayers()) {
             FluffyFurPacketHandler.sendTo(serverPlayer, new PlayerSkinUpdatePacket(player));
         }

@@ -1,13 +1,13 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinCape;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinEffect;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinChangePacket;
-import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurPlayerSkins;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinCape;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinEffect;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurPlayerSkins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -30,9 +30,9 @@ public class PlayerSkinMenuScreen extends Screen {
 
     public void initSkins() {
         skins.add(new SkinEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
-        skins.add(new SkinEntry(FluffyFurPlayerSkins.MAXBOGOMOL, Component.literal("MaxBogomol")));
-        skins.add(new SkinEntry(FluffyFurPlayerSkins.BOYKISSER, Component.translatable("gui.fluffy_fur.skin_menu.skin.boykisser")));
-        skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI, Component.translatable("gui.fluffy_fur.skin_menu.skin.nanachi")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.MAXBOGOMOL_SKIN, Component.literal("MaxBogomol")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.BOYKISSER_SKIN, Component.translatable("gui.fluffy_fur.skin_menu.skin.boykisser")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI_SKIN, Component.translatable("gui.fluffy_fur.skin_menu.skin.nanachi")));
 
         skinCapes.add(new SkinCapeEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.FLUFFY_CAPE, Component.translatable("gui.fluffy_fur.skin_menu.cape.fluffy")));
@@ -214,7 +214,7 @@ public class PlayerSkinMenuScreen extends Screen {
                 if (skin.getSkin() != null) {
                     PlayerSkinHandler.setSkinPacket(skin.getSkin());
                 } else {
-                    PlayerSkinHandler.setSkinPacket("");
+                    PlayerSkinHandler.setSkinPacket(FluffyFurPlayerSkins.EMPTY_SKIN);
                 }
                 FluffyFurPacketHandler.sendToServer(new PlayerSkinChangePacket(minecraft.player.position().add(0, minecraft.player.getBbHeight(), 0)));
                 this.onClose();
@@ -256,7 +256,7 @@ public class PlayerSkinMenuScreen extends Screen {
                 if (cape.getCape() != null) {
                     PlayerSkinHandler.setSkinCapePacket(cape.getCape());
                 } else {
-                    PlayerSkinHandler.setSkinCapePacket("");
+                    PlayerSkinHandler.setSkinCapePacket(FluffyFurPlayerSkins.EMPTY_CAPE);
                 }
                 this.onClose();
                 return true;
@@ -297,7 +297,7 @@ public class PlayerSkinMenuScreen extends Screen {
                 if (effect.getEffect() != null) {
                     PlayerSkinHandler.setSkinEffectPacket(effect.getEffect());
                 } else {
-                    PlayerSkinHandler.setSkinEffectPacket("");
+                    PlayerSkinHandler.setSkinEffectPacket(FluffyFurPlayerSkins.EMPTY_EFFECT);
                 }
                 this.onClose();
                 return true;

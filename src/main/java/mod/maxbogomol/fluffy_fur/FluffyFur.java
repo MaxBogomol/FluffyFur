@@ -13,6 +13,7 @@ import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurArgumentTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurPlayerSkins;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
@@ -39,8 +40,8 @@ import java.util.Random;
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
     public static final String NAME = "Fluffy Fur";
-    public static final String VERSION = "0.1.9";
-    public static final int VERSION_NUMBER = 10;
+    public static final String VERSION = "0.2";
+    public static final int VERSION_NUMBER = 11;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
@@ -60,6 +61,8 @@ public class FluffyFur {
         FluffyFurLootModifier.register(eventBus);
         FluffyFurSounds.register(eventBus);
         FluffyFurArgumentTypes.register(eventBus);
+
+        FluffyFurPlayerSkins.register();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FluffyFurClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, FluffyFurConfig.SPEC);

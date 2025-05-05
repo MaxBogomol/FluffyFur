@@ -1,8 +1,8 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkin;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinCape;
-import mod.maxbogomol.fluffy_fur.client.playerskin.PlayerSkinHandler;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkin;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinCape;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,8 +17,7 @@ public abstract class AbstractClientPlayerMixin {
     private void fluffy_fur$getSkinTextureLocation(CallbackInfoReturnable<ResourceLocation> cir) {
         AbstractClientPlayer self = (AbstractClientPlayer) ((Object) this);
         PlayerSkin skin = PlayerSkinHandler.getSkin(self);
-
-        if (skin != null) {
+        if (!PlayerSkinHandler.isEmptySkin(skin)) {
             ResourceLocation skinTexture = skin.getSkin(self);
             if (skinTexture != null) {
                 cir.setReturnValue(skinTexture);
@@ -30,8 +29,7 @@ public abstract class AbstractClientPlayerMixin {
     private void fluffy_fur$getCloakTextureLocation(CallbackInfoReturnable<ResourceLocation> cir) {
         AbstractClientPlayer self = (AbstractClientPlayer) ((Object) this);
         PlayerSkinCape cape = PlayerSkinHandler.getSkinCape(self);
-
-        if (cape != null) {
+        if (!PlayerSkinHandler.isEmptySkinCape(cape)) {
             ResourceLocation capeTexture = cape.getSkin(self);
             if (capeTexture != null) {
                 cir.setReturnValue(capeTexture);
@@ -43,8 +41,7 @@ public abstract class AbstractClientPlayerMixin {
     private void fluffy_fur$getModelName(CallbackInfoReturnable<String> cir) {
         AbstractClientPlayer self = (AbstractClientPlayer) ((Object) this);
         PlayerSkin skin = PlayerSkinHandler.getSkin(self);
-
-        if (skin != null) {
+        if (!PlayerSkinHandler.isEmptySkin(skin)) {
             if (skin.getSlim(self)) {
                 cir.setReturnValue("slim");
             } else {
