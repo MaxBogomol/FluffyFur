@@ -18,31 +18,37 @@ import java.util.function.Supplier;
 public class AddItemLootModifier extends LootModifier {
     public static final Supplier<Codec<AddItemLootModifier>> CODEC = Suppliers.memoize(()
             -> RecordCodecBuilder.create((inst) -> codecStart(inst).and(inst.group(ForgeRegistries.ITEMS.getCodec().
-            fieldOf("item").forGetter((m) -> m.addedItem), Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count)))
+            fieldOf("item").forGetter((m) -> m.addedItem),
+                    Codec.INT.optionalFieldOf("count", 1).forGetter((m) -> m.count),
+                    Codec.FLOAT.optionalFieldOf("chance", 1f).forGetter((m) -> m.chance)))
             .apply(inst, AddItemLootModifier::new)));
 
     private final Item addedItem;
     private final int count;
+    private final float chance;
 
-    protected AddItemLootModifier(LootItemCondition[] conditions, Item addedItemIn, int count) {
+    protected AddItemLootModifier(LootItemCondition[] conditions, Item addedItemIn, int count, float chance) {
         super(conditions);
         this.addedItem = addedItemIn;
         this.count = count;
+        this.chance = chance;
     }
 
     @Nonnull
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        ItemStack addedStack = new ItemStack(this.addedItem, this.count);
-        if (addedStack.getCount() < addedStack.getMaxStackSize()) {
-            generatedLoot.add(addedStack);
-        } else {
-            int i = addedStack.getCount();
+        if (chance == 1 || context.getRandom().nextFloat() < chance) {
+            ItemStack addedStack = new ItemStack(this.addedItem, this.count);
+            if (addedStack.getCount() < addedStack.getMaxStackSize()) {
+                generatedLoot.add(addedStack);
+            } else {
+                int i = addedStack.getCount();
 
-            while(i > 0) {
-                ItemStack subStack = addedStack.copy();
-                subStack.setCount(Math.min(addedStack.getMaxStackSize(), i));
-                i -= subStack.getCount();
-                generatedLoot.add(subStack);
+                while (i > 0) {
+                    ItemStack subStack = addedStack.copy();
+                    subStack.setCount(Math.min(addedStack.getMaxStackSize(), i));
+                    i -= subStack.getCount();
+                    generatedLoot.add(subStack);
+                }
             }
         }
 
