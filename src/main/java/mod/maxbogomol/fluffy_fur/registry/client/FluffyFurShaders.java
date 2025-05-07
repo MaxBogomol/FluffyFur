@@ -2,10 +2,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.DepthPostProcess;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcess;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.NormalGlowPostProcess;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.*;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,6 +20,7 @@ public class FluffyFurShaders {
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerShaders(FMLClientSetupEvent event) {
+            PostProcessHandler.addInstance(RainFogPostProcess.INSTANCE);
             PostProcessHandler.addInstance(DepthPostProcess.INSTANCE);
             PostProcessHandler.addInstance(GlowPostProcess.INSTANCE);
             PostProcessHandler.addInstance(NormalGlowPostProcess.INSTANCE);

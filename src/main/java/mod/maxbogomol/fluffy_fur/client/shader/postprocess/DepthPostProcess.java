@@ -40,6 +40,7 @@ public class DepthPostProcess extends PostProcess {
         }
     }
 
+    @Override
     public void tick() {
         oldTick = tick;
         if (isToggle) {
