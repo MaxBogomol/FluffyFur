@@ -6,11 +6,13 @@ import org.apache.commons.lang3.tuple.Pair;
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT,
+            RAIN_FOG_SHADER,
             MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
-            SCREENSHAKE_INTENSITY;
+            SCREENSHAKE_INTENSITY,
+            RAIN_FOG_SHADER_INTENSITY, THUNDER_FOG_SHADER_INTENSITY, THUNDER_FOG_FADE_SHADER_INTENSITY;
     public static ForgeConfigSpec.ConfigValue<String>
             PANORAMA;
 
@@ -24,6 +26,13 @@ public class FluffyFurClientConfig {
         BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").define("bloodParticle", false);
         LIGHTNING_BOLT_EFFECT = builder.comment("Enable custom effect of lightning bolt.").define("lightningBoltEffect", true);
         EXPLOSION_EFFECT = builder.comment("Enable custom effect of explosion.").define("explosionEffect", true);
+        builder.pop();
+
+        builder.comment("Shaders").push("shaders");
+        RAIN_FOG_SHADER = builder.comment("Enable Rain Fog effect post process shader.").define("rainFogShader", true);
+        RAIN_FOG_SHADER_INTENSITY = builder.comment("Intensity of Rain Fog effect post process shader.").defineInRange("rainFogShaderIntensity", 0.3d, 0, 2d);
+        THUNDER_FOG_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog effect post process shader.").defineInRange("thunderFogShaderIntensity", 0.1d, 0, 2d);
+        THUNDER_FOG_FADE_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog fade effect post process shader.").defineInRange("thunderFogFadeShaderIntensity", 0.25d, 0, 1d);
         builder.pop();
         builder.pop();
 

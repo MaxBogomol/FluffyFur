@@ -63,10 +63,6 @@ void main() {
     float final = fractal_brownian_motion(pos + motion) * INTENSITY;
 
     float a = rainIntensity * rainStrength * (final / 255.0);
-    //float r = mix(texture(DiffuseSampler, texCoord).r, (60.0 / 255.0), a);
-    //float g = mix(texture(DiffuseSampler, texCoord).g, (193.0 / 255.0), a);
-    //float b = mix(texture(DiffuseSampler, texCoord).b, (284.0 / 255.0), a);
-
     float r = mix(texture(DiffuseSampler, texCoord).r, 255.0 / 3.0, a);
     float g = mix(texture(DiffuseSampler, texCoord).g, 255.0 / 3.0, a);
     float b = mix(texture(DiffuseSampler, texCoord).b, 255.0 / 3.0, a);

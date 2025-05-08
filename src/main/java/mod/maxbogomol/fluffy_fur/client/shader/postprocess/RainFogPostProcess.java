@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.shader.postprocess;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -53,20 +54,22 @@ public class RainFogPostProcess extends PostProcess {
     }
 
     public void tickEffect() {
-        Player player = FluffyFur.proxy.getPlayer();
-        if (player != null && minecraft.level != null) {
-            BlockPos pos = BlockPos.containing(minecraft.gameRenderer.getMainCamera().getPosition());
-            if (minecraft.level.isRaining()) {
-                rainLevel = minecraft.level.getBrightness(LightLayer.SKY, pos);
+        if (FluffyFurClientConfig.RAIN_FOG_SHADER.get()) {
+            Player player = FluffyFur.proxy.getPlayer();
+            if (player != null && minecraft.level != null) {
+                BlockPos pos = BlockPos.containing(minecraft.gameRenderer.getMainCamera().getPosition());
+                if (minecraft.level.isRaining()) {
+                    rainLevel = minecraft.level.getBrightness(LightLayer.SKY, pos);
+                }
+                if (minecraft.level.isThundering()) {
+                    thunderLevel = minecraft.level.getBrightness(LightLayer.SKY, pos);
+                }
             }
-            if (minecraft.level.isThundering()) {
-                thunderLevel = minecraft.level.getBrightness(LightLayer.SKY, pos);
-            }
-        }
 
-        if (!isActive()) {
-            if (rainLevel > 0) setActive(true);
-            if (thunderLevel > 0) setActive(true);
+            if (!isActive()) {
+                if (rainLevel > 0) setActive(true);
+                if (thunderLevel > 0) setActive(true);
+            }
         }
     }
 
@@ -87,8 +90,8 @@ public class RainFogPostProcess extends PostProcess {
         float thunder = (Mth.lerp(ClientTickHandler.partialTicks, oldThunderTick, thunderTick) / (getTickLightLevel() * 15) * thunderL);
         effectInstance.safeGetUniform("rainStrength").set(rain);
         effectInstance.safeGetUniform("thunderStrength").set(thunder);
-        effectInstance.safeGetUniform("rainIntensity").set(0.3f + (0.1f * thunder));
-        effectInstance.safeGetUniform("thunderIntensity").set(0.25f);
+        effectInstance.safeGetUniform("rainIntensity").set(FluffyFurClientConfig.RAIN_FOG_SHADER_INTENSITY.get().floatValue() + (FluffyFurClientConfig.THUNDER_FOG_SHADER_INTENSITY.get().floatValue() * thunder));
+        effectInstance.safeGetUniform("thunderIntensity").set(FluffyFurClientConfig.THUNDER_FOG_FADE_SHADER_INTENSITY.get().floatValue());
     }
 
     @Override
