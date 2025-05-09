@@ -108,8 +108,9 @@ public class FluffyFurMenuButton extends Button {
                             .findFirst()
                             .ifPresent(w -> toAdd
                                     .setValue(new FluffyFurMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
-                    if (toAdd.getValue() != null)
+                    if (toAdd.getValue() != null) {
                         event.addListener(toAdd.getValue());
+                    }
                 }
             }
         }

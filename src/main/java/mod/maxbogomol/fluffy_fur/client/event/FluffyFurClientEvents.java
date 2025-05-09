@@ -2,12 +2,15 @@ package mod.maxbogomol.fluffy_fur.client.event;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
+import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.RainFogPostProcess;
+import mod.maxbogomol.fluffy_fur.common.creativetab.MultiCreativeTab;
+import mod.maxbogomol.fluffy_fur.common.creativetab.SubCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
@@ -16,8 +19,11 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
@@ -27,7 +33,11 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.ArrayList;
+
 public class FluffyFurClientEvents {
+
+    public static ArrayList<SubCreativeTabButton> subCreativeTabButtons = new ArrayList<>();
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onOpenScreen(ScreenEvent.Opening event) {
@@ -39,6 +49,27 @@ public class FluffyFurClientEvents {
     public void onOpenScreenFirst(ScreenEvent.Opening event) {
         resetPanoramaScreen(event.getCurrentScreen());
         resetPanoramaScreen(event.getNewScreen());
+    }
+
+    @SubscribeEvent
+    public void onScreenInitPost(ScreenEvent.Init.Post event) {
+        Screen screen = event.getScreen();
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
+            subCreativeTabButtons.clear();
+            int i = creativeScreen.getGuiLeft();
+            int j = creativeScreen.getGuiTop();
+            for (CreativeModeTab tab : CreativeModeTabs.allTabs()) {
+                if (tab instanceof MultiCreativeTab multiCreativeTab) {
+                    int ii = 0;
+                    for (SubCreativeTab subTab : multiCreativeTab.getSortedSubTabs()) {
+                        SubCreativeTabButton button = new SubCreativeTabButton(creativeScreen, multiCreativeTab, subTab, i - 22, j + 3 + (ii * 22), j + 3);
+                        subCreativeTabButtons.add(button);
+                        event.addListener(button);
+                        ii++;
+                    }
+                }
+            }
+        }
     }
 
     public static void panoramaScreen(Screen screen) {

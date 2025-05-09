@@ -85,6 +85,8 @@ public class FluffyFur {
         hi();
         FluffyFurBlocks.setFireBlock();
         FluffyFurPacketHandler.init();
+        FluffyFurCreativeTabs.init();
+
         for (ItemSkin skin : ItemSkinHandler.getSkins()) {
             skin.setupSkinEntries();
         }

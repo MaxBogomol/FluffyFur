@@ -15,7 +15,10 @@
   "client": [
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
+    "client.CreativeModeInventoryScreenMixin",
+    "client.CreativeModeTabsMixin",
     "client.EffectProgramMixin",
+    "client.ExplosionMixin",
     "client.FoxRendererMixin",
     "client.GameRendererMixin",
     "client.GuiGraphicsMixin",
@@ -24,7 +27,6 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
-    "client.ExplosionMixin",
     "client.LightningBoltMixin",
     "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",
