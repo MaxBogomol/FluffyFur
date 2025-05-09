@@ -64,6 +64,7 @@ public class SubCreativeTabButton extends Button {
         if (button instanceof SubCreativeTabButton subButton) {
             if (subButton.arrow == 0) {
                 subButton.multiTab.setCurrentSubTab(subButton.subTab);
+                subButton.screen.scrollOffs = 0;
                 subButton.screen.refreshCurrentTabContents(subButton.multiTab.getDisplayItems());
             } else {
                 subButton.multiTab.scroll = subButton.multiTab.scroll + subButton.arrow;
