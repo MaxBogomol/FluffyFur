@@ -160,25 +160,27 @@ public class SubCreativeTabStack extends SubCreativeTab {
 
     @Override
     public Collection<ItemStack> getDisplayItems() {
+        Collection<ItemStack> list = new ArrayList<>();
+        if (!displayItems.isEmpty()) list.addAll(displayItems);
         if (!getSubTabs().isEmpty()) {
-            Collection<ItemStack> list = new ArrayList<>();
             for (SubCreativeTab sub : getSubTabs()) {
-                list.addAll(sub.getDisplayItems());
+                if (sub.getDisplayItems() != null) list.addAll(sub.getDisplayItems());
             }
-            return list;
         }
+        if (!list.isEmpty()) return list;
         return null;
     }
 
     @Override
     public Collection<ItemStack> getSearchTabDisplayItems() {
+        Collection<ItemStack> list = new ArrayList<>();
+        if (!displayItemsSearchTab.isEmpty()) list.addAll(displayItemsSearchTab);
         if (!getSubTabs().isEmpty()) {
-            Collection<ItemStack> list = new ArrayList<>();
             for (SubCreativeTab sub : getSubTabs()) {
-                list.addAll(sub.getSearchTabDisplayItems());
+                if (sub.getSearchTabDisplayItems() != null) list.addAll(sub.getSearchTabDisplayItems());
             }
-            return list;
         }
+        if (!list.isEmpty()) return list;
         return null;
     }
 
