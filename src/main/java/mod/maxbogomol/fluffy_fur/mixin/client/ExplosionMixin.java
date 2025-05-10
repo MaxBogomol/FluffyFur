@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import mod.maxbogomol.fluffy_fur.client.effect.FluffyFurEffects;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -25,9 +26,11 @@ public abstract class ExplosionMixin {
     @Inject(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     public void fluffy_fur$finalizeExplosion(boolean spawnParticles, CallbackInfo ci) {
         if (level.isClientSide()) {
-            Explosion self = (Explosion) ((Object) this);
-            Vec3 pos = self.getPosition();
-            FluffyFurEffects.explosionEffect(level, pos, radius);
+            if (FluffyFurClientConfig.EXPLOSION_EFFECT.get()) {
+                Explosion self = (Explosion) ((Object) this);
+                Vec3 pos = self.getPosition();
+                FluffyFurEffects.explosionEffect(level, pos, radius);
+            }
         }
     }
 }
