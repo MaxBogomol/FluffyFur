@@ -70,8 +70,8 @@
 
   "_comment_6": "car manipulation (carulation?; caplation?; mani-car-lation?; no correlation (or should've I said car-relation????) idk.)",
   "commands.fluffy_fur.item_skin.unknown": "No item fur exists with the ID '%s'",
-  "commands.fluffy_fur.skin.item.set.multiple": "Applied fur %s to %s cat",
-  "commands.fluffy_fur.skin.item.set.single": "Applied fur %s to %s's item",
+  "commands.fluffy_fur.skin.item.set.multiple": "Applied fur %1$s to %2$s cat",
+  "commands.fluffy_fur.skin.item.set.single": "Applied fur %1$s to %2$s's item",
   "commands.fluffy_fur.skin.item.set.failed": "Failed to apply fur %s",
   "commands.fluffy_fur.skin.item.remove.multiple": "Removed item fur from %s cat",
   "commands.fluffy_fur.skin.item.remove.single": "Removed fur from %s's item",

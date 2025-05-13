@@ -66,8 +66,8 @@
 
   "_comment_6": "Commands",
   "commands.fluffy_fur.item_skin.unknown": "No item skin exists with the ID '%s'",
-  "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %s to %s players",
-  "commands.fluffy_fur.skin.item.set.single": "Applied skin %s to %s's item",
+  "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %1$s to %2$s players",
+  "commands.fluffy_fur.skin.item.set.single": "Applied skin %1$s to %2$s's item",
   "commands.fluffy_fur.skin.item.set.failed": "Failed to apply skin %s",
   "commands.fluffy_fur.skin.item.remove.multiple": "Removed item skin from %s players",
   "commands.fluffy_fur.skin.item.remove.single": "Removed skin from %s's item",

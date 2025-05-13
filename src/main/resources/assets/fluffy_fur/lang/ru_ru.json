@@ -66,8 +66,8 @@
 
   "_comment_6": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существует облика предмета с ID '%s'",
-  "commands.fluffy_fur.skin.item.set.multiple": "Наложен облик %s на предмет у %s игроков",
-  "commands.fluffy_fur.skin.item.set.single": "Наложен облик %s на предмет %s",
+  "commands.fluffy_fur.skin.item.set.multiple": "Наложен облик %1$s на предмет у %2$s игроков",
+  "commands.fluffy_fur.skin.item.set.single": "Наложен облик %1$s на предмет %2$s",
   "commands.fluffy_fur.skin.item.set.failed": "Не удалось наложить облик %s",
   "commands.fluffy_fur.skin.item.remove.multiple": "Удалён облик с предметов %s игроков",
   "commands.fluffy_fur.skin.item.remove.single": "Удалён облик с предмета %s",
