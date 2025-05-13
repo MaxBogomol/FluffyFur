@@ -1,7 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.gui.components;
 
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMenuScreen;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -48,10 +48,12 @@ public class FluffyFurMenuButton extends Button {
 
     public static class SingleMenuRow {
         public final String left, right;
+
         public SingleMenuRow(String left, String right) {
-            this.left = I18n.get(left);
-            this.right = I18n.get(right);
+            this.left = left;
+            this.right = right;
         }
+
         public SingleMenuRow(String center) {
             this(center, center);
         }
@@ -90,7 +92,7 @@ public class FluffyFurMenuButton extends Button {
                     offsetFreeY = FluffyFurClientConfig.MENU_BUTTON_Y_OFFSET.get();
                 }
 
-                if (rowIdx != 0 && menu != null) {
+                if (menu != null) {
                     boolean onLeft = offsetX < 0;
                     String target = (onLeft ? menu.leftButtons : menu.rightButtons).get(rowIdx - 1);
 
@@ -104,7 +106,7 @@ public class FluffyFurMenuButton extends Button {
                             .map(w -> (AbstractWidget) w)
                             .filter(w -> w.getMessage()
                                     .getString()
-                                    .equals(target))
+                                    .equals(I18n.get(target)))
                             .findFirst()
                             .ifPresent(w -> toAdd
                                     .setValue(new FluffyFurMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
