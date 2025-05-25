@@ -47,6 +47,9 @@ public class FluffyFurClient {
         }
         piracyPresent = ModList.get().isLoaded("tlskincape");
 
+        if (optifinePresent) FluffyFur.LOGGER.error("OptiFine detected!!!");
+        if (piracyPresent) FluffyFur.LOGGER.error("Piracy detected!!!");
+
         setupMenu();
         setupSplashes();
 
