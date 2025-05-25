@@ -33,9 +33,9 @@ public abstract class ItemInHandRendererMixin {
     }
 
     @Inject(at = @At("HEAD"), method = "evaluateWhichHandsToRender", cancellable = true)
-    private static void fluffy_fur$evaluateWhichHandsToRender(LocalPlayer pPlayer, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir) {
-        ItemStack itemStack = pPlayer.getUseItem();
-        InteractionHand hand = pPlayer.getUsedItemHand();
+    private static void fluffy_fur$evaluateWhichHandsToRender(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir) {
+        ItemStack itemStack = player.getUseItem();
+        InteractionHand hand = player.getUsedItemHand();
         for (Item item : BowHandler.getBows()) {
             if (itemStack.is(item)) {
                 cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(hand));

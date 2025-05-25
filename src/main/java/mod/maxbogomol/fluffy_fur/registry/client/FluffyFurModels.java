@@ -3,10 +3,7 @@ package mod.maxbogomol.fluffy_fur.registry.client;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
 import mod.maxbogomol.fluffy_fur.client.model.book.CustomBookModel;
-import mod.maxbogomol.fluffy_fur.client.model.item.BowItemOverrides;
-import mod.maxbogomol.fluffy_fur.client.model.item.CustomItemOverrides;
-import mod.maxbogomol.fluffy_fur.client.model.item.CustomModel;
-import mod.maxbogomol.fluffy_fur.client.model.item.CustomRenderModel;
+import mod.maxbogomol.fluffy_fur.client.model.item.*;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.resources.model.BakedModel;
@@ -98,7 +95,7 @@ public class FluffyFurModels {
         CustomModel customModel = new CustomModel(model, itemOverrides);
 
         for (int i = 0; i < 3; i++) {
-            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item.toString() + "_pulling_" + String.valueOf(i)), "inventory"));
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + i), "inventory"));
             itemOverrides.models.add(pullModel);
         }
 
@@ -120,6 +117,67 @@ public class FluffyFurModels {
 
     public static void addBowItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
         for (ModelResourceLocation model : getBowModels(modId, item)) {
+            event.register(model);
+        }
+    }
+
+    public static void addCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, CrossbowItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        for (int i = 0; i < 3; i++) {
+            BakedModel pullModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_pulling_" + i), "inventory"));
+            itemOverrides.pullingModels.add(pullModel);
+        }
+        itemOverrides.arrowModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_arrow"), "inventory"));
+        itemOverrides.fireworkModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_firework"), "inventory"));
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addCrossbowItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addCrossbowItemModel(map, item, new CrossbowItemOverrides());
+    }
+
+    public static ArrayList<ModelResourceLocation> getCrossbowModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_0"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_1"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_pulling_2"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_arrow"), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_firework"), "inventory"));
+        return models;
+    }
+
+    public static void addCrossbowItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getCrossbowModels(modId, item)) {
+            event.register(model);
+        }
+    }
+
+    public static void addFishingRodItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item, FishingRodItemOverrides itemOverrides) {
+        BakedModel model = map.get(new ModelResourceLocation(item, "inventory"));
+        CustomModel customModel = new CustomModel(model, itemOverrides);
+
+        itemOverrides.castModel = map.get(new ModelResourceLocation(new ResourceLocation(item + "_cast"), "inventory"));
+
+        map.replace(new ModelResourceLocation(item, "inventory"), customModel);
+    }
+
+    public static void addFishingRodItemModel(Map<ResourceLocation, BakedModel> map, ResourceLocation item) {
+        addFishingRodItemModel(map, item, new FishingRodItemOverrides());
+    }
+
+    public static ArrayList<ModelResourceLocation> getFishingRodModels(String modId, String item) {
+        ArrayList<ModelResourceLocation> models = new ArrayList<>();
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item), "inventory"));
+        models.add(new ModelResourceLocation(new ResourceLocation(modId, item + "_cast"), "inventory"));
+        return models;
+    }
+
+    public static void addFishingRodItemModel(ModelEvent.RegisterAdditional event, String modId, String item) {
+        for (ModelResourceLocation model : getFishingRodModels(modId, item)) {
             event.register(model);
         }
     }
