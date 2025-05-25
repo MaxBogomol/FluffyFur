@@ -19,8 +19,6 @@ public class CrossbowItemOverrides extends CustomItemOverrides {
     public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
         if (getPulling(stack, level, entity, seed) > 0) {
             float pull = getPull(stack, level, entity, seed);
-            boolean charged = getCharged(stack, level, entity, seed);
-            boolean firework = getFirework(stack, level, entity, seed);
             BakedModel model = pullingModels.get(0);
             if (pull >= 0.58f) {
                 model = pullingModels.get(1);
@@ -28,10 +26,12 @@ public class CrossbowItemOverrides extends CustomItemOverrides {
             if (pull >= 1f) {
                 model = pullingModels.get(2);
             }
-            if (charged) {
-                model = arrowModel;
-                if (firework) model = fireworkModel;
-            }
+            return model;
+        }
+        if (getCharged(stack, level, entity, seed)) {
+            boolean firework = getFirework(stack, level, entity, seed);
+            BakedModel model = arrowModel;
+            if (firework) model = fireworkModel;
             return model;
         }
         return originalModel;

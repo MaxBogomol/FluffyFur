@@ -23,8 +23,6 @@ public class CrossbowSkinItemOverrides extends CrossbowItemOverrides {
     public String getSkinModel(ItemSkin skin, BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
         if (getPulling(stack, level, entity, seed) > 0) {
             float pull = getPull(stack, level, entity, seed);
-            boolean charged = getCharged(stack, level, entity, seed);
-            boolean firework = getFirework(stack, level, entity, seed);
             String skinStr = skin.getItemModelName(stack) + "_pulling_0";
             if (pull >= 0.58f) {
                 skinStr = skin.getItemModelName(stack) + "_pulling_1";
@@ -32,10 +30,12 @@ public class CrossbowSkinItemOverrides extends CrossbowItemOverrides {
             if (pull >= 1f) {
                 skinStr = skin.getItemModelName(stack) + "_pulling_2";
             }
-            if (charged) {
-                skinStr = skin.getItemModelName(stack) + "_arrow";
-                if (firework) skinStr = skin.getItemModelName(stack) + "_firework";
-            }
+            return skinStr;
+        }
+        if ( getCharged(stack, level, entity, seed)) {
+            boolean firework = getFirework(stack, level, entity, seed);
+            String skinStr = skin.getItemModelName(stack) + "_arrow";
+            if (firework) skinStr = skin.getItemModelName(stack) + "_firework";
             return skinStr;
         }
         return skin.getItemModelName(stack);
