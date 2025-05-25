@@ -9,6 +9,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,6 +40,12 @@ public abstract class ItemInHandRendererMixin {
         for (Item item : BowHandler.getBows()) {
             if (itemStack.is(item)) {
                 cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(hand));
+            }
+        }
+        itemStack = player.getMainHandItem();
+        for (Item item : BowHandler.getCrossbows()) {
+            if (itemStack.is(item)) {
+                if (CrossbowItem.isCharged(itemStack)) cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY);
             }
         }
     }
