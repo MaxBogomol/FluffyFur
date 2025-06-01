@@ -38,9 +38,11 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> FOXAIRPLANE_PLUSH = BLOCKS.register("foxairplane_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
     public static final RegistryObject<Block> ONJERLAY_PLUSH = BLOCKS.register("onjerlay_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_YELLOW).noOcclusion()));
     public static final RegistryObject<Block> SAMMYSEMICOLON_PLUSH = BLOCKS.register("sammysemicolon_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion()));
+    public static final RegistryObject<Block> BIVEROM_PLUSH = BLOCKS.register("biverom_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_PURPLE).noOcclusion()));
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
     public static final RegistryObject<Block> SPECKLE_PLUSH = BLOCKS.register("speckle_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
+    public static final RegistryObject<Block> SEADRIVE_PLUSH = BLOCKS.register("seadrive_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
 
     public static final RegistryObject<Block> YONKABLOCK = BLOCKS.register("yonkablock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)));
 
@@ -57,12 +59,14 @@ public class FluffyFurBlocks {
             PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
             PlushBlock.foxSoundPlush.add(ONJERLAY_PLUSH.get());
             PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(BIVEROM_PLUSH.get());
 
             PlushBlock.goatSoundPlush.add(ONIXTHECAT_PLUSH.get());
 
             PlushBlock.catSoundPlush.add(SAMMYSEMICOLON_PLUSH.get());
             PlushBlock.catSoundPlush.add(BOYKISSER_PLUSH.get());
             PlushBlock.catSoundPlush.add(SPECKLE_PLUSH.get());
+            PlushBlock.catSoundPlush.add(SEADRIVE_PLUSH.get());
         }
     }
 

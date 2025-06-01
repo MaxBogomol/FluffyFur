@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/biverom",
+  "textures": {
+    "particle": "minecraft:block/purple_wool"
+  }
+}

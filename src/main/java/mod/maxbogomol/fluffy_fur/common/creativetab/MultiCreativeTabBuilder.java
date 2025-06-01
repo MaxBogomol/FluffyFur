@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class MultiCreativeTabBuilder extends CreativeModeTab.Builder {
 
-    public static ResourceLocation STANDARD_SUB_ARROWS = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/fluffy_fur_sub_arrows.png");
+    public static ResourceLocation STANDARD_SUB_ARROWS = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/sub_arrows.png");
     public ResourceLocation multiBackgroundLocation;
     public ResourceLocation subArrowsImage = STANDARD_SUB_ARROWS;
 

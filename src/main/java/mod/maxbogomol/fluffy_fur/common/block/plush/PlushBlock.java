@@ -37,6 +37,7 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
     public static List<Block> foxSoundPlush = new ArrayList<>();
     public static List<Block> goatSoundPlush = new ArrayList<>();
     public static List<Block> catSoundPlush = new ArrayList<>();
+    public static List<Block> wolfSoundPlush = new ArrayList<>();
 
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 
@@ -75,6 +76,9 @@ public class PlushBlock extends Block implements EntityBlock, SimpleWaterloggedB
             }
             if (catSoundPlush.contains(state.getBlock())) {
                 level.playSound(null, pos, SoundEvents.CAT_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
+            if (wolfSoundPlush.contains(state.getBlock())) {
+                level.playSound(null, pos, SoundEvents.WOLF_AMBIENT, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
             FluffyFurPacketHandler.sendToTracking(level, pos, new PlushHeartsPacket(pos));
         }
