@@ -119,6 +119,8 @@ public class FluffyFur {
                     mcreatorModsList.add(string);
                 }
             }
+
+            FluffyFurCurios.setup();
         }
 
         if (mcreatorModsCount > 0) {
