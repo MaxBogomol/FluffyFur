@@ -102,5 +102,7 @@ public class FluffyFurClient {
         List<String> strings = LanguageHandler.getStringsFromFile(new ResourceLocation(FluffyFur.MOD_ID, "texts/languages.txt"));
         LanguageHandler.addLanguage("be_tar", new LanguageInfo(strings.get(1), strings.get(0), false));
         LanguageHandler.addLanguage("be_tl", new LanguageInfo(strings.get(3), strings.get(2), false));
+        LanguageHandler.addLanguage("lol_ud", new LanguageInfo(strings.get(5), strings.get(4), false));
+        LanguageHandler.addLanguage("meow", new LanguageInfo(strings.get(7), strings.get(6), false));
     }
 }
