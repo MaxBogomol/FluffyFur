@@ -1,5 +1,7 @@
 {
   "creative_tab.fluffy_fur": "Fluffy Fur",
+  "creative_tab.fluffy_fur.sub.silly_things": "Silly Things",
+  "creative_tab.fluffy_fur.sub.plushies": "Plushies",
 
   "_comment_1": "Предмети й Блоки",
   "block.fluffy_fur.potted_pink_petals": "Рожеві пелюстки в горщику",
@@ -16,9 +18,12 @@
   "block.fluffy_fur.foxairplane_plush": "Плюшевий FoxAirPlane",
   "block.fluffy_fur.onjerlay_plush": "Плюшевий Onjerlay",
   "block.fluffy_fur.sammysemicolon_plush": "Плюшевий SammySemicolon",
+  "block.fluffy_fur.biverom_plush": "Biverom Plush",
   "block.fluffy_fur.boykisser_plush": "Плюшка Бойкіссера",
   "block.fluffy_fur.nanachi_plush": "Плюшка Наначі",
+  "block.fluffy_fur.niko_plush": "Niko Plush",
   "block.fluffy_fur.speckle_plush": "Плюшка Спекл",
+  "block.fluffy_fur.seadrive_plush": "SeaDrive Plush",
 
   "block.fluffy_fur.yonkablock": "ЙонКаБлок",
 
