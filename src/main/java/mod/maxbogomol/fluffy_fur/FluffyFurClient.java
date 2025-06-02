@@ -92,7 +92,10 @@ public class FluffyFurClient {
     }
 
     public static void setupSplashes() {
-        SplashHandler.addSplash("Привет, Россия!");
+        List<String> strings = LanguageHandler.getStringsFromFile(new ResourceLocation(FluffyFur.MOD_ID, "texts/splashes.txt"));
+        for (String string : strings) {
+            SplashHandler.addSplash(string);
+        }
     }
 
     public static void setupLanguages() {
