@@ -29,6 +29,7 @@
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
+    "client.LanguageManagerMixin",
     "client.LightningBoltMixin",
     "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",

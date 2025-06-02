@@ -4,10 +4,12 @@ import mod.maxbogomol.fluffy_fur.client.event.FluffyFurClientEvents;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
+import mod.maxbogomol.fluffy_fur.client.language.LanguageHandler;
 import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.integration.client.fusion.FluffyFurFusion;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
+import net.minecraft.client.resources.language.LanguageInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.awt.*;
+import java.util.List;
 
 public class FluffyFurClient {
 
@@ -52,6 +55,7 @@ public class FluffyFurClient {
 
         setupMenu();
         setupSplashes();
+        setupLanguages();
 
         ShadersIntegration.init();
     }
@@ -89,5 +93,11 @@ public class FluffyFurClient {
 
     public static void setupSplashes() {
         SplashHandler.addSplash("Привет, Россия!");
+    }
+
+    public static void setupLanguages() {
+        List<String> strings = LanguageHandler.getStringsFromFile(new ResourceLocation(FluffyFur.MOD_ID, "texts/languages.txt"));
+        LanguageHandler.addLanguage("be_tar", new LanguageInfo(strings.get(1), strings.get(0), false));
+        LanguageHandler.addLanguage("be_tl", new LanguageInfo(strings.get(3), strings.get(2), false));
     }
 }
