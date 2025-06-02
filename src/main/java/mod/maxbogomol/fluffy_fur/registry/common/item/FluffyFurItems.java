@@ -37,6 +37,7 @@ public class FluffyFurItems {
     public static final RegistryObject<Item> BIVEROM_PLUSH = ITEMS.register("biverom_plush", () -> new PlushItem(FluffyFurBlocks.BIVEROM_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> BOYKISSER_PLUSH = ITEMS.register("boykisser_plush", () -> new PlushItem(FluffyFurBlocks.BOYKISSER_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> NANACHI_PLUSH = ITEMS.register("nanachi_plush", () -> new PlushItem(FluffyFurBlocks.NANACHI_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> NIKO_PLUSH = ITEMS.register("niko_plush", () -> new PlushItem(FluffyFurBlocks.NIKO_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SPECKLE_PLUSH = ITEMS.register("speckle_plush", () -> new PlushItem(FluffyFurBlocks.SPECKLE_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SEADRIVE_PLUSH = ITEMS.register("seadrive_plush", () -> new PlushItem(FluffyFurBlocks.SEADRIVE_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 

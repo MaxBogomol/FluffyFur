@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/niko",
+  "textures": {
+    "particle": "minecraft:block/red_wool"
+  }
+}
