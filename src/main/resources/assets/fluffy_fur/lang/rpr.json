@@ -1,10 +1,10 @@
 {
   "creative_tab.fluffy_fur": "Fluffy Fur",
-  "creative_tab.fluffy_fur.sub.silly_things": "Глупые штуки",
+  "creative_tab.fluffy_fur.sub.silly_things": "Глупыя штуки",
   "creative_tab.fluffy_fur.sub.plushies": "Плюши",
 
   "_comment_1": "Предметы и блоки",
-  "block.fluffy_fur.potted_pink_petals": "Розовые лепестки въ горшкѣ",
+  "block.fluffy_fur.potted_pink_petals": "Розовыя лепестки въ горшкѣ",
 
   "item.fluffy_fur.music_disc_fluffy": "Пушистая пластинка",
 
@@ -37,9 +37,9 @@
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
 
   "_comment_4": "Меню",
-  "mod_description.fluffy_fur": "Fluffy Fur - модъ библіотека отъ MaxBogomol. \n Добавляетъ различные штуки для рендеринга и упрощенія разработки. \n \n Мяу :3",
+  "mod_description.fluffy_fur": "Fluffy Fur - модъ библіотека отъ MaxBogomol. \n Добавляетъ различныя штуки для рендеринга и упрощенія разработки. \n \n Мяу :3",
 
-  "panorama.minecraft.vanilla": "Ванилла",
+  "panorama.minecraft.vanilla": "Ваниль",
   "panorama.fluffy_fur.fluffy_zone": "Пушистое мѣсто",
 
   "_comment_5": "Интерфейсъ",
@@ -67,7 +67,7 @@
   "gui.fluffy_fur.skin_menu.skin.boykisser": "Бойкиссеръ",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначи",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
-  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердечки",
+  "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовыя сердечки",
 
   "_comment_6": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существуетъ облика предмета съ ID '%s'",
