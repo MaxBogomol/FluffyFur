@@ -40,8 +40,9 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> SAMMYSEMICOLON_PLUSH = BLOCKS.register("sammysemicolon_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion()));
     public static final RegistryObject<Block> BIVEROM_PLUSH = BLOCKS.register("biverom_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_PURPLE).noOcclusion()));
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
-    public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
+    public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NIKO_PLUSH = BLOCKS.register("niko_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
+    public static final RegistryObject<Block> TUNIC_THE_FOX_PLUSH = BLOCKS.register("tunic_the_fox_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
     public static final RegistryObject<Block> SPECKLE_PLUSH = BLOCKS.register("speckle_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> SEADRIVE_PLUSH = BLOCKS.register("seadrive_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
 
@@ -59,8 +60,9 @@ public class FluffyFurBlocks {
             PlushBlock.foxSoundPlush.add(UNOLOGICALSAMSAR_PLUSH.get());
             PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
             PlushBlock.foxSoundPlush.add(ONJERLAY_PLUSH.get());
-            PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
             PlushBlock.foxSoundPlush.add(BIVEROM_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(TUNIC_THE_FOX_PLUSH.get());
 
             PlushBlock.goatSoundPlush.add(ONIXTHECAT_PLUSH.get());
 

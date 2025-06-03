@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/tunic_the_fox",
+  "textures": {
+    "particle": "minecraft:block/orange_wool"
+  }
+}
