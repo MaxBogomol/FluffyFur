@@ -1,40 +1,53 @@
 {
   "creative_tab.fluffy_fur": "Fluffy Fur",
   "creative_tab.fluffy_fur.sub.silly_things": "Глупые штуки",
-  "creative_tab.fluffy_fur.sub.plushies": "Плюшки",
+  "creative_tab.fluffy_fur.sub.plushies": "Плюши",
+
   "_comment_1": "Предметы и блоки",
   "block.fluffy_fur.potted_pink_petals": "Розовые лепестки въ горшкѣ",
+
   "item.fluffy_fur.music_disc_fluffy": "Пушистая пластинка",
+
   "item.fluffy_fur.test_shrimp": "Тестовая креветка",
   "item.fluffy_fur.thing": "Штуковина",
   "item.fluffy_fur.silly_treat": "Глупенькое лакомство",
-  "block.fluffy_fur.maxbogomol_plush": "Плюшка MaxBogomol",
-  "block.fluffy_fur.onixthecat_plush": "Плюшка OnixTheCat",
-  "block.fluffy_fur.unlogicalsamsar_plush": "Плюшка unlogicalSamsar",
-  "block.fluffy_fur.foxairplane_plush": "Плюшка FoxAirPlane",
-  "block.fluffy_fur.onjerlay_plush": "Плюшка Onjerlay",
-  "block.fluffy_fur.sammysemicolon_plush": "Плюшка SammySemicolon",
-  "block.fluffy_fur.biverom_plush": "Плюшка Biverom",
-  "block.fluffy_fur.boykisser_plush": "Плюшка Бойкиссера",
-  "block.fluffy_fur.nanachi_plush": "Плюшка Наначи",
-  "block.fluffy_fur.niko_plush": "Плюшка Нико",
-  "block.fluffy_fur.speckle_plush": "Плюшка Спеклъ",
-  "block.fluffy_fur.seadrive_plush": "Плюшка СІАДРАЙВЪ",
-  "block.fluffy_fur.yonkablock": "ЙОНКАБЛОКЪ",
+
+  "block.fluffy_fur.maxbogomol_plush": "Плюшъ MaxBogomol",
+  "block.fluffy_fur.onixthecat_plush": "Плюшъ OnixTheCat",
+  "block.fluffy_fur.unlogicalsamsar_plush": "Плюшъ unlogicalSamsar",
+  "block.fluffy_fur.foxairplane_plush": "Плюшъ FoxAirPlane",
+  "block.fluffy_fur.onjerlay_plush": "Плюшъ Onjerlay",
+  "block.fluffy_fur.sammysemicolon_plush": "Плюшъ SammySemicolon",
+  "block.fluffy_fur.biverom_plush": "Плюшъ Biverom",
+  "block.fluffy_fur.boykisser_plush": "Плюшъ Бойкиссера",
+  "block.fluffy_fur.nanachi_plush": "Плюшъ Наначи",
+  "block.fluffy_fur.niko_plush": "Плюшъ Нико",
+  "block.fluffy_fur.puro_plush": "Плюшъ Пуро",
+  "block.fluffy_fur.tunic_the_fox_plush": "Плюшъ Лиса",
+  "block.fluffy_fur.speckle_plush": "Плюшъ Спеклъ",
+  "block.fluffy_fur.seadrive_plush": "Плюшъ СіаДрайвъ",
+
+  "block.fluffy_fur.yonkablock": "ЙонъКаБлокъ",
+
   "_comment_2": "Лоръ предметовъ",
   "lore.fluffy_fur.skin": "Обликъ:",
   "lore.fluffy_fur.skin_applies": "Примѣняется къ:",
+
   "_comment_3": "Описанія предметовъ",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
+
   "_comment_4": "Меню",
   "mod_description.fluffy_fur": "Fluffy Fur - модъ библіотека отъ MaxBogomol. \n Добавляетъ различные штуки для рендеринга и упрощенія разработки. \n \n Мяу :3",
+
   "panorama.minecraft.vanilla": "Ванилла",
   "panorama.fluffy_fur.fluffy_zone": "Пушистое мѣсто",
+
   "_comment_5": "Интерфейсъ",
   "gui.fluffy_fur.menu.optifine.0": "ВНИМАНІЕ! Кажется, у васъ установленъ Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine ломаетъ Fluffy Fur и другіе моды",
   "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
   "gui.fluffy_fur.menu.piracy": "ПИРАТСТВО ЭТО ПЛОХО!!!",
+
   "gui.fluffy_fur.menu.panoramas": "Панорамы",
   "gui.fluffy_fur.menu.mods": "Моды",
   "gui.fluffy_fur.menu.mcreator_mods": "MCreator моды:",
@@ -44,15 +57,18 @@
   "gui.fluffy_fur.menu.author": "Авторъ:",
   "gui.fluffy_fur.menu.links": "Ссылки:",
   "gui.fluffy_fur.menu.mod": "Модъ:",
+
   "gui.fluffy_fur.skin_menu.skins": "Облики",
   "gui.fluffy_fur.skin_menu.capes": "Плащи",
   "gui.fluffy_fur.skin_menu.skin_effects": "Эффекты обликовъ",
+
   "gui.fluffy_fur.skin_menu.standard": "Стандартный",
   "gui.fluffy_fur.skin_menu.empty": "Пустой",
   "gui.fluffy_fur.skin_menu.skin.boykisser": "Бойкиссеръ",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначи",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердечки",
+
   "_comment_6": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существуетъ облика предмета съ ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Наложенъ обликъ %1$s на предметъ у %2$s игроковъ",
@@ -61,9 +77,11 @@
   "commands.fluffy_fur.skin.item.remove.multiple": "Удаленъ обликъ съ предметовъ %s игроковъ",
   "commands.fluffy_fur.skin.item.remove.single": "Удаленъ обликъ съ предмета %s",
   "commands.fluffy_fur.skin.item.remove.failed": "Не удалось удалить обликъ",
+
   "_comment_7": "Привязка клавишъ",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню обликовъ",
+
   "_comment_8": "Конфиги",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана.",
