@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/puro",
+  "textures": {
+    "particle": "minecraft:block/black_wool"
+  }
+}
