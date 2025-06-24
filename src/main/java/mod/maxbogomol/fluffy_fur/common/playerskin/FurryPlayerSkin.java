@@ -14,6 +14,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FurryPlayerSkin extends PlayerSkin {
     public ResourceLocation earsTexture;
@@ -116,6 +118,7 @@ public class FurryPlayerSkin extends PlayerSkin {
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void extraRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Player player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, HumanoidModel defaultModel) {
         EarsModel earsModel = getEarsModel(player);
         ResourceLocation earsTexture = getEars(player);
@@ -138,6 +141,7 @@ public class FurryPlayerSkin extends PlayerSkin {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void earsAnimation(EarsModel model, Player player, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float f = player.isCrouching() ? 1f : 0;
         model.rightEar.zRot = (float) Math.toRadians(-15f - (20 * f));
@@ -161,6 +165,7 @@ public class FurryPlayerSkin extends PlayerSkin {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void tailAnimation(TailModel model, Player player, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float partialTicks = Minecraft.getInstance().getPartialTick();
         model.tail.xRot = (float) Math.toRadians(45f);

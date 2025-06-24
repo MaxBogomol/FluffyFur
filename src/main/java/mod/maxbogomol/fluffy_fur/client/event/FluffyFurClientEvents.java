@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
@@ -141,11 +142,11 @@ public class FluffyFurClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            //String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
-           // if (name.equals("Dev") || name.equals("MaxBogomol")) {
+            String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
+            if (name.equals("Dev") || name.equals("MaxBogomol")) {
                 FluffyFurPacketHandler.sendToServer(new StopUseItemPacket());
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
-            //}
+            }
         }
     }
 }
