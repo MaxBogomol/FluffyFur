@@ -2,8 +2,11 @@ package mod.maxbogomol.fluffy_fur.common.item;
 
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurFonts;
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -49,6 +52,9 @@ public class TestShrimpItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
+        list.add(Component.translatable("lore.fluffy_fur.shrimp").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 221, 46, 68)).withFont(FluffyFurFonts.FISHII_LOCATION)));
+        list.add(Component.translatable("lore.fluffy_fur.fishes").withStyle(Style.EMPTY.withColor(5592575).withFont(FluffyFurFonts.FISHII_LOCATION)));
+
         CompoundTag nbt = stack.getOrCreateTag();
         if (!nbt.contains("mode")) {
             nbt.putInt("mode", 0);
@@ -64,6 +70,6 @@ public class TestShrimpItem extends Item {
     }
 
     public Component getModeComponent(int mode) {
-        return Component.literal(String.valueOf(mode + 1) + "/" + String.valueOf(getModes()));
+        return Component.literal(mode + 1 + "/" + getModes());
     }
 }
