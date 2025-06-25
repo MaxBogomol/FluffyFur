@@ -72,9 +72,9 @@ public class LargeItemRenderer {
     }
 
     public static class LargeItemModel implements BakedModel {
-        private final BakedModel bakedModelDefault;
-        private final BakedModel bakedModelHand;
-        private final CustomItemOverrides itemOverrides;
+        public final BakedModel bakedModelDefault;
+        public final BakedModel bakedModelHand;
+        public final CustomItemOverrides itemOverrides;
 
         public LargeItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand) {
             this.bakedModelDefault = bakedModelDefault;
@@ -126,7 +126,7 @@ public class LargeItemRenderer {
         @Override
         public BakedModel applyTransform(ItemDisplayContext context, PoseStack poseStack, boolean applyLeftHandTransform) {
             BakedModel modelToUse = bakedModelDefault;
-            if (context != ItemDisplayContext.GUI && context != ItemDisplayContext.GROUND  && context != ItemDisplayContext.FIXED){
+            if (context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || context == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || context == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND) {
                 modelToUse = bakedModelHand;
             }
             return ForgeHooksClient.handleCameraTransforms(poseStack, modelToUse, context, applyLeftHandTransform);
@@ -134,9 +134,9 @@ public class LargeItemRenderer {
     }
 
     public static class HeadItemModel implements BakedModel {
-        private final BakedModel bakedModelDefault;
-        private final BakedModel bakedModelHead;
-        private final CustomItemOverrides itemOverrides;
+        public final BakedModel bakedModelDefault;
+        public final BakedModel bakedModelHead;
+        public final CustomItemOverrides itemOverrides;
 
         public HeadItemModel(BakedModel bakedModelDefault, BakedModel bakedModelHand) {
             this.bakedModelDefault = bakedModelDefault;

@@ -56,6 +56,8 @@ public class RenderUtil {
     public static Function<Float, Float> LINEAR_IN_SEMI_ROUND_WIDTH_FUNCTION = (f) -> f == 1 ? 0.5f : f;
     public static Function<Float, Float> LINEAR_OUT_SEMI_ROUND_WIDTH_FUNCTION = (f) -> f == 0 ? 0.5f : 1f - f;
 
+    public static ItemStack DIRT = new ItemStack(Items.DIRT);
+
     public static ShaderInstance getShader(RenderType type) {
         if (type instanceof FluffyFurRenderType renderType) {
             Optional<Supplier<ShaderInstance>> shader = renderType.state.shaderState.shader;
@@ -143,13 +145,17 @@ public class RenderUtil {
     }
 
     public static void renderCustomModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
-        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
+        BakedModel bakedModel = Minecraft.getInstance().getItemRenderer().getItemModelShaper().getModelManager().getModel(model);
+        Minecraft.getInstance().getItemRenderer().render(DIRT, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedModel);
     }
 
     public static void renderBlockModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-        BakedModel bakedmodel = Minecraft.getInstance().getModelManager().getModel(model);
-        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.DIRT), displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedmodel);
+        BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(model);
+        Minecraft.getInstance().getItemRenderer().render(DIRT, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedModel);
+    }
+
+    public static void renderCustomModel(BakedModel bakedModel, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        Minecraft.getInstance().getItemRenderer().render(DIRT, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedModel);
     }
 
     public static TextureAtlasSprite getBlockSprite(ResourceLocation resourceLocation) {

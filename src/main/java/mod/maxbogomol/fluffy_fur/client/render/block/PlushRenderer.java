@@ -26,7 +26,7 @@ public class PlushRenderer implements BlockEntityRenderer<PlushBlockEntity> {
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);
         poseStack.mulPose(Axis.YP.rotationDegrees((float) rotate * -22.5f + 180f));
-        minecraft.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+        minecraft.getItemRenderer().renderStatic(stack, ItemDisplayContext.NONE, light, overlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
         poseStack.popPose();
     }
 }
