@@ -56,7 +56,7 @@ public class FluffyFurBlocks {
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         @SubscribeEvent
-        public static void registerEntities(FMLCommonSetupEvent event) {
+        public static void registerBlocks(FMLCommonSetupEvent event) {
             PlushBlock.foxSoundPlush.add(MAXBOGOMOL_PLUSH.get());
             PlushBlock.foxSoundPlush.add(UNOLOGICALSAMSAR_PLUSH.get());
             PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
