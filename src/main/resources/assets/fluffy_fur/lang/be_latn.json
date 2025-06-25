@@ -22,6 +22,8 @@
   "block.fluffy_fur.boykisser_plush": "Plušavy bojkisier",
   "block.fluffy_fur.nanachi_plush": "Plušavaje Nanačy",
   "block.fluffy_fur.niko_plush": "Plušavy Nika",
+  "block.fluffy_fur.puro_plush": "Plušavy Puro",
+  "block.fluffy_fur.tunic_the_fox_plush": "Plušavy Łis",
   "block.fluffy_fur.speckle_plush": "Plušavy Spiekał",
   "block.fluffy_fur.seadrive_plush": "Plušavy SieaDrajv",
 
@@ -30,6 +32,9 @@
   "_comment_2": "Historyi pradmietaŭ",
   "lore.fluffy_fur.skin": "Skin:",
   "lore.fluffy_fur.skin_applies": "Nakładajecca na:",
+
+  "lore.fluffy_fur.shrimp": "🦐",
+  "lore.fluffy_fur.fishes": "🐟🐠🐡🪼",
 
   "_comment_3": "Apisanni pradmietaŭ",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onierlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
@@ -68,7 +73,7 @@
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ružovyja sardečki",
 
   "_comment_6": "Kamandy",
-  "commands.fluffy_fur.item_skin.unknown": "Nie isnuje skinoŭ pradmietaŭ z ID %s",
+  "commands.fluffy_fur.item_skin.unknown": "Nie isnuje skinoŭ pradmietaŭ z ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Nakładzieny skin %s u %s hulcoŭ",
   "commands.fluffy_fur.skin.item.set.single": "Nakładzieny skin %s na pradmiet %s",
   "commands.fluffy_fur.skin.item.set.failed": "Zdaryłasia pamyłka pry nakładanni skina %s",

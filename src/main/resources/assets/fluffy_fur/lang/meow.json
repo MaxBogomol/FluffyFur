@@ -2,12 +2,16 @@
   "creative_tab.fluffy_fur": "Meow",
   "creative_tab.fluffy_fur.sub.silly_things": "Meow",
   "creative_tab.fluffy_fur.sub.plushies": "Meow",
+
   "_comment_1": "Meow",
   "block.fluffy_fur.potted_pink_petals": "Meow",
+
   "item.fluffy_fur.music_disc_fluffy": "Meow",
+
   "item.fluffy_fur.test_shrimp": "Meow",
   "item.fluffy_fur.thing": "Meow",
   "item.fluffy_fur.silly_treat": "Meow",
+
   "block.fluffy_fur.maxbogomol_plush": "Meow",
   "block.fluffy_fur.onixthecat_plush": "Meow",
   "block.fluffy_fur.unlogicalsamsar_plush": "Meow",
@@ -18,23 +22,35 @@
   "block.fluffy_fur.boykisser_plush": "Meow",
   "block.fluffy_fur.nanachi_plush": "Meow",
   "block.fluffy_fur.niko_plush": "Meow",
+  "block.fluffy_fur.puro_plush": "Meow",
+  "block.fluffy_fur.tunic_the_fox_plush": "Meow",
   "block.fluffy_fur.speckle_plush": "Meow",
   "block.fluffy_fur.seadrive_plush": "Meow",
+
   "block.fluffy_fur.yonkablock": "Meow",
+
   "_comment_2": "Meow",
   "lore.fluffy_fur.skin": "Meow",
   "lore.fluffy_fur.skin_applies": "Meow",
+
+  "lore.fluffy_fur.shrimp": "Meow",
+  "lore.fluffy_fur.fishes": "Meow",
+
   "_comment_3": "Meow",
   "item.fluffy_fur.music_disc_fluffy.desc": "Meow",
+
   "_comment_4": "Meow",
   "mod_description.fluffy_fur": "Meow",
+
   "panorama.minecraft.vanilla": "Meow",
   "panorama.fluffy_fur.fluffy_zone": "Meow",
+
   "_comment_5": "Meow",
   "gui.fluffy_fur.menu.optifine.0": "Meow",
   "gui.fluffy_fur.menu.optifine.1": "Meow",
   "gui.fluffy_fur.menu.optifine.2": "Meow",
   "gui.fluffy_fur.menu.piracy": "Meow",
+
   "gui.fluffy_fur.menu.panoramas": "Meow",
   "gui.fluffy_fur.menu.mods": "Meow",
   "gui.fluffy_fur.menu.mcreator_mods": "Meow",
@@ -44,15 +60,18 @@
   "gui.fluffy_fur.menu.author": "Meow",
   "gui.fluffy_fur.menu.links": "Meow",
   "gui.fluffy_fur.menu.mod": "Meow",
+
   "gui.fluffy_fur.skin_menu.skins": "Meow",
   "gui.fluffy_fur.skin_menu.capes": "Meow",
   "gui.fluffy_fur.skin_menu.skin_effects": "Meow",
+
   "gui.fluffy_fur.skin_menu.standard": "Meow",
   "gui.fluffy_fur.skin_menu.empty": "Meow",
   "gui.fluffy_fur.skin_menu.skin.boykisser": "Meow",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Meow",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Meow",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Meow",
+
   "_comment_6": "Meow",
   "commands.fluffy_fur.item_skin.unknown": "Meow",
   "commands.fluffy_fur.skin.item.set.multiple": "Meow",
@@ -61,9 +80,11 @@
   "commands.fluffy_fur.skin.item.remove.multiple": "Meow",
   "commands.fluffy_fur.skin.item.remove.single": "Meow",
   "commands.fluffy_fur.skin.item.remove.failed": "Meow",
+
   "_comment_7": "Meow",
   "key.category.fluffy_fur.general": "Meow",
   "key.fluffy_fur.skin_menu": "Meow",
+
   "_comment_8": "Meow",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Meow",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Meow",
