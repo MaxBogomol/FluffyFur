@@ -19,8 +19,9 @@ public class FluffyFurCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("fluffy_fur")
-                .requires(s -> s.hasPermission(2))
+                .requires(s -> true)
                 .then(Commands.literal("skin")
+                        .requires(s -> s.hasPermission(2))
                         .then(Commands.literal("item")
                             .then(Commands.literal("set")
                                     .then(Commands.argument("player", EntityArgument.players())
@@ -35,6 +36,9 @@ public class FluffyFurCommand {
                                     )
                             )
                         )
+                )
+                .then(Commands.literal("fish")
+                        .executes(FluffyFurCommand::nothing)
                 )
         );
     }
@@ -92,6 +96,11 @@ public class FluffyFurCommand {
                 return Component.translatable("commands.fluffy_fur.skin.item.remove.multiple", targetPlayers.size());
             }, true);
         }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int nothing(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+        // <><
         return Command.SINGLE_SUCCESS;
     }
 }
