@@ -44,6 +44,7 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> NIKO_PLUSH = BLOCKS.register("niko_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
     public static final RegistryObject<Block> PURO_PLUSH = BLOCKS.register("puro_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_BLACK).noOcclusion()));
     public static final RegistryObject<Block> TUNIC_THE_FOX_PLUSH = BLOCKS.register("tunic_the_fox_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion()));
+    public static final RegistryObject<Block> DARK_PRINCE = BLOCKS.register("dark_prince_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_BLACK).noOcclusion()));
     public static final RegistryObject<Block> SPECKLE_PLUSH = BLOCKS.register("speckle_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> SEADRIVE_PLUSH = BLOCKS.register("seadrive_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
 
@@ -66,6 +67,7 @@ public class FluffyFurBlocks {
             PlushBlock.foxSoundPlush.add(TUNIC_THE_FOX_PLUSH.get());
 
             PlushBlock.goatSoundPlush.add(ONIXTHECAT_PLUSH.get());
+            PlushBlock.goatSoundPlush.add(DARK_PRINCE.get());
 
             PlushBlock.catSoundPlush.add(SAMMYSEMICOLON_PLUSH.get());
             PlushBlock.catSoundPlush.add(BOYKISSER_PLUSH.get());
