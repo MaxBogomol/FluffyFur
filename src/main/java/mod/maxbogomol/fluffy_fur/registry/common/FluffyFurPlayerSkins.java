@@ -34,6 +34,8 @@ public class FluffyFurPlayerSkins {
     public static PlayerSkinCape EMPTY_CAPE = new PlayerSkinCape(FluffyFur.MOD_ID + ":empty");
     public static PlayerSkinCape FLUFFY_CAPE = new PlayerSkinCape(FluffyFur.MOD_ID + ":fluffy")
             .setTexture(PlayerSkinCape.getCapeLocation(FluffyFur.MOD_ID, "fluffy"));
+    public static PlayerSkinCape SCARLET_DREAMS = new PlayerSkinCape(FluffyFur.MOD_ID + ":scarlet_dreams")
+            .setTexture(PlayerSkinCape.getCapeLocation(FluffyFur.MOD_ID, "scarlet_dreams"));
 
     public static PlayerSkinEffect EMPTY_EFFECT = new PlayerSkinEffect(FluffyFur.MOD_ID + ":empty");
     public static PlayerSkinEffect PINK_HEARTS_EFFECT = new PinkHeartsPlayerSkinEffect(FluffyFur.MOD_ID + ":pink_hearts");
@@ -47,6 +49,7 @@ public class FluffyFurPlayerSkins {
 
         PlayerSkinHandler.register(EMPTY_CAPE);
         PlayerSkinHandler.register(FLUFFY_CAPE);
+        PlayerSkinHandler.register(SCARLET_DREAMS);
 
         PlayerSkinHandler.register(EMPTY_EFFECT);
         PlayerSkinHandler.register(PINK_HEARTS_EFFECT);

@@ -37,6 +37,7 @@ public class PlayerSkinMenuScreen extends Screen {
 
         skinCapes.add(new SkinCapeEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.FLUFFY_CAPE, Component.translatable("gui.fluffy_fur.skin_menu.cape.fluffy")));
+        skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.SCARLET_DREAMS, Component.translatable("gui.fluffy_fur.skin_menu.cape.scarlet_dreams")));
 
         skinEffects.add(new SkinEffectEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.empty")));
         skinEffects.add(new SkinEffectEntry(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT, Component.translatable("gui.fluffy_fur.skin_menu.effect.pink_hearts")));
