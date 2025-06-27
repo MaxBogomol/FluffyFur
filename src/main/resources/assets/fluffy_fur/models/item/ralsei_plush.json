@@ -1,0 +1,6 @@
+{
+  "parent": "fluffy_fur:plush/ralsei",
+  "textures": {
+    "particle": "minecraft:block/white_wool"
+  }
+}
