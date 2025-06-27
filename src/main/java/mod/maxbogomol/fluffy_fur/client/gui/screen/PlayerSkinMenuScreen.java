@@ -29,17 +29,17 @@ public class PlayerSkinMenuScreen extends Screen {
     }
 
     public void initSkins() {
-        skins.add(new SkinEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
+        skins.add(new SkinEntry(FluffyFurPlayerSkins.EMPTY_SKIN, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.MAXBOGOMOL_SKIN, Component.literal("MaxBogomol")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.FURRYFOXES_SKIN, Component.literal("FurryFoxes")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.BOYKISSER_SKIN, Component.translatable("gui.fluffy_fur.skin_menu.skin.boykisser")));
         skins.add(new SkinEntry(FluffyFurPlayerSkins.NANACHI_SKIN, Component.translatable("gui.fluffy_fur.skin_menu.skin.nanachi")));
 
-        skinCapes.add(new SkinCapeEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
+        skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.EMPTY_CAPE, Component.translatable("gui.fluffy_fur.skin_menu.standard")));
         skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.FLUFFY_CAPE, Component.translatable("gui.fluffy_fur.skin_menu.cape.fluffy")));
         skinCapes.add(new SkinCapeEntry(FluffyFurPlayerSkins.SCARLET_DREAMS, Component.translatable("gui.fluffy_fur.skin_menu.cape.scarlet_dreams")));
 
-        skinEffects.add(new SkinEffectEntry(null, Component.translatable("gui.fluffy_fur.skin_menu.empty")));
+        skinEffects.add(new SkinEffectEntry(FluffyFurPlayerSkins.EMPTY_EFFECT, Component.translatable("gui.fluffy_fur.skin_menu.empty")));
         skinEffects.add(new SkinEffectEntry(FluffyFurPlayerSkins.PINK_HEARTS_EFFECT, Component.translatable("gui.fluffy_fur.skin_menu.effect.pink_hearts")));
     }
 
