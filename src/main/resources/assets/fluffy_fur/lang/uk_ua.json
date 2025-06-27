@@ -1,7 +1,7 @@
 {
   "creative_tab.fluffy_fur": "Fluffy Fur",
-  "creative_tab.fluffy_fur.sub.silly_things": "Silly Things",
-  "creative_tab.fluffy_fur.sub.plushies": "Plushies",
+  "creative_tab.fluffy_fur.sub.silly_things": "Дурні речі",
+  "creative_tab.fluffy_fur.sub.plushies": "Плюшки",
 
   "_comment_1": "Предмети й Блоки",
   "block.fluffy_fur.potted_pink_petals": "Рожеві пелюстки в горщику",
@@ -18,18 +18,24 @@
   "block.fluffy_fur.foxairplane_plush": "Плюшевий FoxAirPlane",
   "block.fluffy_fur.onjerlay_plush": "Плюшевий Onjerlay",
   "block.fluffy_fur.sammysemicolon_plush": "Плюшевий SammySemicolon",
-  "block.fluffy_fur.biverom_plush": "Biverom Plush",
+  "block.fluffy_fur.biverom_plush": "Плюшевий Biverom",
   "block.fluffy_fur.boykisser_plush": "Плюшка Бойкіссера",
   "block.fluffy_fur.nanachi_plush": "Плюшка Наначі",
-  "block.fluffy_fur.niko_plush": "Niko Plush",
+  "block.fluffy_fur.niko_plush": "Плюшка Ніко",
+  "block.fluffy_fur.puro_plush": "Плюшка Пуро",
+  "block.fluffy_fur.tunic_the_fox_plush": "Плюшка Лиса",
+  "block.fluffy_fur.dark_prince_plush": "Плюшка Принца Темряви",
   "block.fluffy_fur.speckle_plush": "Плюшка Спекл",
-  "block.fluffy_fur.seadrive_plush": "SeaDrive Plush",
+  "block.fluffy_fur.seadrive_plush": "Плюшка СіаДрайв",
 
   "block.fluffy_fur.yonkablock": "ЙонКаБлок",
 
   "_comment_2": "Лор предметів",
   "lore.fluffy_fur.skin": "Образ:",
   "lore.fluffy_fur.skin_applies": "Застосовується до:",
+
+  "lore.fluffy_fur.shrimp": "\uD83E\uDD90",
+  "lore.fluffy_fur.fishes": "\uD83D\uDC1F\uD83D\uDC20\uD83D\uDC21\uD83E\uDEBC",
 
   "_comment_3": "Описи предметів",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
