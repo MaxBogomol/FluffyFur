@@ -24,6 +24,8 @@
   "block.fluffy_fur.niko_plush": "Плюшъ Нико",
   "block.fluffy_fur.puro_plush": "Плюшъ Пуро",
   "block.fluffy_fur.tunic_the_fox_plush": "Плюшъ Лиса",
+  "block.fluffy_fur.dark_prince_plush": "Плюшъ Темнаго Принца",
+  "block.fluffy_fur.ralsei_plush": "Плюшъ Ральзея",
   "block.fluffy_fur.speckle_plush": "Плюшъ Спеклъ",
   "block.fluffy_fur.seadrive_plush": "Плюшъ СіаДрайвъ",
 
@@ -70,6 +72,7 @@
   "gui.fluffy_fur.skin_menu.skin.boykisser": "Бойкиссеръ",
   "gui.fluffy_fur.skin_menu.skin.nanachi": "Наначи",
   "gui.fluffy_fur.skin_menu.cape.fluffy": "Пушистый",
+  "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Алые Грезы",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовыя сердечки",
 
   "_comment_6": "Команды",
