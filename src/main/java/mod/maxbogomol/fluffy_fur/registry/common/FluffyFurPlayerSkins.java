@@ -12,6 +12,12 @@ public class FluffyFurPlayerSkins {
             .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/ears"))
             .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "maxbogomol/tail"))
             .setSlim(true);
+    public static PlayerSkin FURRYFOXES_SKIN = new FoxPlayerSkin(FluffyFur.MOD_ID + ":furryfoxes")
+            .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "furryfoxes/skin"))
+            .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "furryfoxes/skin_blink"))
+            .setEarsTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "furryfoxes/ears"))
+            .setTailTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "furryfoxes/tail"))
+            .setSlim(true);
     public static PlayerSkin BOYKISSER_SKIN = new CatPlayerSkin(FluffyFur.MOD_ID + ":boykisser")
             .setSkinTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/skin"))
             .setSkinBlinkTexture(PlayerSkin.getSkinLocation(FluffyFur.MOD_ID, "boykisser/skin_blink"))
@@ -35,6 +41,7 @@ public class FluffyFurPlayerSkins {
     public static void register() {
         PlayerSkinHandler.register(EMPTY_SKIN);
         PlayerSkinHandler.register(MAXBOGOMOL_SKIN);
+        PlayerSkinHandler.register(FURRYFOXES_SKIN);
         PlayerSkinHandler.register(BOYKISSER_SKIN);
         PlayerSkinHandler.register(NANACHI_SKIN);
 

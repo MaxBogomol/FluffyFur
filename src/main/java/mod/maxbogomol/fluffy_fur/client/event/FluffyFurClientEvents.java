@@ -143,7 +143,7 @@ public class FluffyFurClientEvents {
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
             String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
-            if (name.equals("Dev") || name.equals("MaxBogomol")) {
+            if (name.equals("Dev") || name.equals("MaxBogomol") || name.equals("FurryFoxes")) {
                 FluffyFurPacketHandler.sendToServer(new StopUseItemPacket());
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
