@@ -27,6 +27,7 @@
   "block.fluffy_fur.niko_plush": "Niko oneshot plushi haai",
   "block.fluffy_fur.puro_plush": "Puro :3",
   "block.fluffy_fur.tunic_the_fox_plush": "§kTunic§r the Fox Plush",
+  "block.fluffy_fur.dark_prince_plush": "Dark Prince Plush",
   "block.fluffy_fur.speckle_plush": "YonKaSpeckl",
   "block.fluffy_fur.seadrive_plush": "SeaDrive my beloved",
 
@@ -35,6 +36,9 @@
   "_comment_2": "itemz yapping (yap yap)",
   "lore.fluffy_fur.skin": "katt fur:",
   "lore.fluffy_fur.skin_applies": "fur-fies ur itemz:",
+
+  "lore.fluffy_fur.shrimp": "\uD83E\uDD90",
+  "lore.fluffy_fur.fishes": "\uD83D\uDC1F\uD83D\uDC20\uD83D\uDC21\uD83E\uDEBC",
 
   "_comment_3": "itemz yap",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onjerlay - I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",

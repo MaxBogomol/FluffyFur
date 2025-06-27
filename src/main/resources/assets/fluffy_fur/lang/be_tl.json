@@ -22,14 +22,19 @@
   "block.fluffy_fur.boykisser_plush": "Plušavy bojkisier",
   "block.fluffy_fur.nanachi_plush": "Plušavaje Nanačy",
   "block.fluffy_fur.niko_plush": "Plušavy Nika",
+  "block.fluffy_fur.puro_plush": "Plušavy Puro",
+  "block.fluffy_fur.tunic_the_fox_plush": "Plušavy Łis",
   "block.fluffy_fur.speckle_plush": "Plušavy Śpiekał",
   "block.fluffy_fur.seadrive_plush": "Plušavy SieaDrajv",
 
   "block.fluffy_fur.yonkablock": "JOnKaBłok",
 
-  "_comment_2": "Historyi pradmietaŭ",
+  "_comment_2": "Historyji pradmietaŭ",
   "lore.fluffy_fur.skin": "Skin:",
   "lore.fluffy_fur.skin_applies": "Nakładajecca na:",
+
+  "lore.fluffy_fur.shrimp": "🦐",
+  "lore.fluffy_fur.fishes": "🐟🐠🐡🪼",
 
   "_comment_3": "Apisańni pradmietaŭ",
   "item.fluffy_fur.music_disc_fluffy.desc": "Onierlay — I learned how to do the biiiiiiiiiiiwiwiwiwiwiwiwiwiwi",
@@ -42,7 +47,7 @@
 
   "_comment_5": "GUI",
   "gui.fluffy_fur.menu.optifine.0": "UVAHA! Zdajecca, vy ŭstalavali Optifine",
-  "gui.fluffy_fur.menu.optifine.1": "Optifine łamaje Fluffy Fur i inšyja mody",
+  "gui.fluffy_fur.menu.optifine.1": "Optifine łamaje Fluffy Fur i jinšyja mody",
   "gui.fluffy_fur.menu.optifine.2": "Vydalicie Optifine :3",
   "gui.fluffy_fur.menu.piracy": "PIRACTVA HETA KJePSKA!!!",
 
@@ -68,7 +73,7 @@
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ružovyja sardečki",
 
   "_comment_6": "Kamandy",
-  "commands.fluffy_fur.item_skin.unknown": "Nie isnuje skinoŭ pradmietaŭ z ID %s",
+  "commands.fluffy_fur.item_skin.unknown": "Nie jisnuje skinoŭ pradmietaŭ z ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Nakładzieny skin %s u %s hulcoŭ",
   "commands.fluffy_fur.skin.item.set.single": "Nakładzieny skin %s na pradmiet %s",
   "commands.fluffy_fur.skin.item.set.failed": "Zdaryłasia pamyłka pry nakładańni skina %s",

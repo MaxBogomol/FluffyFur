@@ -1,6 +1,5 @@
 package mod.maxbogomol.fluffy_fur.common.network.item;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.*;
@@ -22,9 +21,7 @@ import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurItems;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -356,11 +353,8 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
 
         if (mode == 20) {
             Vec3 pos = startPos.add(lookPos.scale(10f));
-            SpriteParticleOptions options = new SpriteParticleOptions(FluffyFurParticles.SPRITE.get(), RenderUtil.getSprite(new ResourceLocation(FluffyFur.MOD_ID, "particle/earth")));
-            ParticleBuilder.create(options)
-                    .setRenderType(RenderType.cutout())
-                    .setBufferSource(Minecraft.getInstance().renderBuffers().bufferSource())
-                    .setFormat(DefaultVertexFormat.BLOCK)
+            ParticleBuilder.create(FluffyFurParticles.EARTH)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
                     .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(64, 32).build())
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(1).build())
@@ -374,9 +368,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             Vec3 pos = startPos.add(lookPos.scale(10f));
             SpriteParticleOptions options = new SpriteParticleOptions(FluffyFurParticles.SPRITE.get(), RenderUtil.getSprite(new ResourceLocation(FluffyFur.MOD_ID, "particle/sun")));
             ParticleBuilder.create(options)
-                    .setRenderType(RenderType.cutout())
-                    .setBufferSource(Minecraft.getInstance().renderBuffers().bufferSource())
-                    .setFormat(DefaultVertexFormat.BLOCK)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
                     .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(64, 32).build())
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(1).build())
