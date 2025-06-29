@@ -102,7 +102,6 @@ public class PlayerSkin {
 
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static ResourceLocation getSkinLocation(String mod, String texture) {
         return new ResourceLocation(mod, "textures/entity/skin/" + texture + ".png");
     }

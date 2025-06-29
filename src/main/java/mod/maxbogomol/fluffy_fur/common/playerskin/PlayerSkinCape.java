@@ -28,7 +28,6 @@ public class PlayerSkinCape {
         return id;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static ResourceLocation getCapeLocation(String mod, String texture) {
         return new ResourceLocation(mod, "textures/entity/cape/" + texture + ".png");
     }
