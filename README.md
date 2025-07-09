@@ -25,5 +25,6 @@ Custom player and items skin system
 # Used by:  
 **[Wizard's Reborn](https://github.com/MaxBogomol/WizardsReborn)**  
 **[Purrfect](https://github.com/MaxBogomol/Purrfect)**  
+**[Silly Oddities](https://github.com/MaxBogomol/SillyOddities)**  
 
 if you want help to connect the library to your mod or learn about the development of my mods, you can join our **[Discord Server](https://discord.gg/cKf55qNugw)**
