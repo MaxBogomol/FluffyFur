@@ -5,6 +5,8 @@ import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMod;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.language.LanguageHandler;
+import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.integration.client.fusion.FluffyFurFusion;
@@ -33,6 +35,9 @@ public class FluffyFurClient {
             IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;
             forgeBus.register(new FluffyFurClientEvents());
+
+            forgeBus.addListener(LevelRenderHandler::onLevelRender);
+            forgeBus.addListener(PostProcessHandler::onLevelRender);
 
             eventBus.addListener(FluffyFurCreativeTabs::addCreativeTabContent);
 

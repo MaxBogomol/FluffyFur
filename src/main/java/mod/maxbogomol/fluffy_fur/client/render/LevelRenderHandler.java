@@ -16,12 +16,10 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL30C;
 
@@ -30,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LevelRenderHandler {
 
     public static Matrix4f MATRIX4F = null;
@@ -141,10 +138,14 @@ public class LevelRenderHandler {
         if (DELAYED_RENDER == null) {
             Map<RenderType, BufferBuilder> buffers = new HashMap<>();
             for (RenderType type : FluffyFurRenderTypes.renderTypes) {
-                buffers.put(type, new BufferBuilder(ModList.get().isLoaded("embeddium") || ModList.get().isLoaded("rubidium") ? 2097152 : type.bufferSize()));
+                buffers.put(type, new BufferBuilder(isLargeSizeBuffer() ? 2097152 : type.bufferSize()));
             }
             DELAYED_RENDER = MultiBufferSource.immediateWithBuffers(buffers, new BufferBuilder(256));
         }
         return DELAYED_RENDER;
+    }
+
+    public static boolean isLargeSizeBuffer() {
+        return ModList.get().isLoaded("embeddium") || ModList.get().isLoaded("rubidium") || ModList.get().isLoaded("sodium");
     }
 }

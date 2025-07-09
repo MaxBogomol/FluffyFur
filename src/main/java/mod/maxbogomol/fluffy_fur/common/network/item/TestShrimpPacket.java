@@ -368,7 +368,7 @@ public class TestShrimpPacket extends TwoPositionClientPacket {
             Vec3 pos = startPos.add(lookPos.scale(10f));
             SpriteParticleOptions options = new SpriteParticleOptions(FluffyFurParticles.SPRITE.get(), RenderUtil.getSprite(new ResourceLocation(FluffyFur.MOD_ID, "particle/sun")));
             ParticleBuilder.create(options)
-                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_PARTICLE_TEXTURE)
+                    .setRenderType(FluffyFurRenderTypes.TRANSLUCENT_TEXTURE)
                     .setBehavior(SphereParticleBehavior.create().disableSecondSide().setSphereSize(64, 32).build())
                     .setColorData(ColorParticleData.create(Color.WHITE).build())
                     .setTransparencyData(GenericParticleData.create(1).build())

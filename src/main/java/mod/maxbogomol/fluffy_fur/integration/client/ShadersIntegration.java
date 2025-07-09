@@ -14,7 +14,7 @@ public class ShadersIntegration {
     }
 
     public static void init() {
-        LOADED = ModList.get().isLoaded("oculus");
+        LOADED = ModList.get().isLoaded("oculus") || ModList.get().isLoaded("iris");
     }
 
     public static boolean isLoaded() {

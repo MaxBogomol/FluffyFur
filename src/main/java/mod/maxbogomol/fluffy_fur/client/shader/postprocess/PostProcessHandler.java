@@ -1,16 +1,14 @@
 package mod.maxbogomol.fluffy_fur.client.shader.postprocess;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PostProcessHandler {
     public static final List<PostProcess> instances = new ArrayList<>();
     public static boolean didCopyDepth = false;
@@ -39,6 +37,17 @@ public class PostProcessHandler {
         instances.forEach(i -> i.resize(width, height));
     }
 
+    public static void setupRender() {
+        RenderSystem.disableBlend();
+        RenderSystem.disableDepthTest();
+        RenderSystem.resetTextureMatrix();
+    }
+
+    public static void applyPostProcess(PostProcess postProcess) {
+        setupRender();
+        postProcess.applyPostProcess();
+    }
+
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS)) {
@@ -48,7 +57,7 @@ public class PostProcessHandler {
             copyDepthBuffer();
             for (PostProcess postProcess : getSortedInstances()) {
                 if (!postProcess.isScreen()) {
-                    postProcess.applyPostProcess();
+                    applyPostProcess(postProcess);
                 }
             }
             didCopyDepth = false;
@@ -58,7 +67,7 @@ public class PostProcessHandler {
     public static void onScreenRender(GameRenderer gameRenderer, float partialTicks, long nanoTime, boolean renderLevel) {
         for (PostProcess postProcess : getSortedInstances()) {
             if (postProcess.isScreen() && !postProcess.isWindow()) {
-                postProcess.applyPostProcess();
+                applyPostProcess(postProcess);
             }
         }
     }
@@ -66,7 +75,7 @@ public class PostProcessHandler {
     public static void onWindowRender(GameRenderer gameRenderer, float partialTicks, long nanoTime, boolean renderLevel) {
         for (PostProcess postProcess : getSortedInstances()) {
             if (postProcess.isScreen() && postProcess.isWindow()) {
-                postProcess.applyPostProcess();
+                applyPostProcess(postProcess);
             }
         }
     }
