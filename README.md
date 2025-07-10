@@ -11,16 +11,32 @@ Adds various things for rendering and simplifying development
 ![](https://cdn.modrinth.com/data/srqzRpcV/images/535438bcbee00c80044ac6536511177e300c375d.png)
 
 # Features:
-Shaders support  
 Flexible particle and rendering system  
-Items particles and animations  
-Custom item models  
-Screenshake  
+Post-process shaders  
+Shaders support  
+Custom player skin and item skin system  
 Custom panoramas and menu  
-Attribute name modifiers  
+Creative sub-tab system  
+Built-in resource & data packs  
+Modded book support  
+Easy networking  
+Screenshake  
+Raycast  
+Item particles  
+Item animations  
+Custom item models  
+Attribute modifiers  
 Music modifiers  
-Custom player and items skin system  
+Loot modifiers  
+Custom languages  
+Custom splashes  
+Custom fonts  
 ...and many other features to simplify development
+
+# Visual features:
+Explosion effect  
+Lightning bolt effect  
+Rain effect  
 
 # Used by:  
 **[Wizard's Reborn](https://github.com/MaxBogomol/WizardsReborn)**  
