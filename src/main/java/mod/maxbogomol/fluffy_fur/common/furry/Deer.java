@@ -1,22 +1,22 @@
 package mod.maxbogomol.fluffy_fur.common.furry;
 
-public class Cat extends Furry {
+public class Deer extends Furry {
 
-    public Cat(String name) {
+    public Deer(String name) {
         super(name);
     }
 
     @Override
     public String getFurryName() {
-        return "cat";
+        return "deer";
     }
 
     @Override
     public String sound() {
-        return meow();
+        return bwah();
     }
 
-    public String meow() {
-        return "Meow!";
+    public String bwah() {
+        return "Bwah!";
     }
 }
