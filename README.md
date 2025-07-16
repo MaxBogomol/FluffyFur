@@ -37,6 +37,7 @@ Custom fonts
 Explosion effect  
 Lightning bolt effect  
 Rain effect  
+Blood effect  
 
 # Used by:  
 **[Wizard's Reborn](https://github.com/MaxBogomol/WizardsReborn)**  
