@@ -106,7 +106,7 @@ public abstract class PostProcess {
     public void copyDepthBuffer() {
         if (isActive) {
             if (postChain == null || tempDepthBuffer == null) return;
-            tempDepthBuffer.copyDepthFrom(minecraft.getMainRenderTarget());
+            tempDepthBuffer.copyDepthFrom(getRenderTarget());
             GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, minecraft.getMainRenderTarget().frameBufferId);
         }
     }
@@ -114,8 +114,9 @@ public abstract class PostProcess {
     public void resize(int width, int height) {
         if (postChain != null) {
             postChain.resize(width, height);
-            if (tempDepthBuffer != null)
+            if (tempDepthBuffer != null) {
                 tempDepthBuffer.resize(width, height, Minecraft.ON_OSX);
+            }
         }
     }
 
@@ -147,6 +148,17 @@ public abstract class PostProcess {
     public abstract void beforeProcess(PoseStack viewModelStack);
 
     public abstract void afterProcess();
+
+    public RenderTarget getRenderTarget() {
+        if (Minecraft.useShaderTransparency()) {
+            return minecraft.levelRenderer.getTranslucentTarget();
+        }
+        return minecraft.getMainRenderTarget();
+    }
+
+    public boolean isTranslucentDepthBuffer() {
+        return false;
+    }
 
     public void setActive(boolean active) {
         this.isActive = active;

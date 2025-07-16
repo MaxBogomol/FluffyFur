@@ -11,10 +11,12 @@ import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -36,6 +38,8 @@ public class LevelRenderHandler {
     public static float FOG_START = 0;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
+
+    public static boolean disable = false;
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
@@ -72,39 +76,51 @@ public class LevelRenderHandler {
 
     public static void standardDelayedRender(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+            copyDepthBuffer(DEPTH_CACHE);
             Matrix4f last = new Matrix4f(RenderSystem.getModelViewMatrix());
             if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
-            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) endBatch(renderType);
             RenderSystem.getModelViewMatrix().set(last);
-            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) endBatch(renderType);
             if (MATRIX4F != null) RenderSystem.getModelViewMatrix().set(MATRIX4F);
-            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) endBatch(renderType);
             RenderSystem.getModelViewMatrix().set(last);
-            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) endBatch(renderType);
         }
     }
 
     public static void shadersDelayedRender(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+            copyDepthBuffer(DEPTH_CACHE);
             RenderSystem.setShaderFogStart(FOG_START);
             RenderSystem.getModelViewStack().pushPose();
             RenderSystem.getModelViewStack().setIdentity();
             if (MATRIX4F != null) RenderSystem.getModelViewStack().mulPoseMatrix(MATRIX4F);
             RenderSystem.applyModelViewMatrix();
-            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentParticleRenderTypes) endBatch(renderType);
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
-            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.translucentRenderTypes) endBatch(renderType);
             RenderSystem.getModelViewStack().pushPose();
             RenderSystem.getModelViewStack().setIdentity();
             if (MATRIX4F != null) RenderSystem.getModelViewStack().mulPoseMatrix(MATRIX4F);
             RenderSystem.applyModelViewMatrix();
-            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveParticleRenderTypes) endBatch(renderType);
             RenderSystem.getModelViewStack().popPose();
             RenderSystem.applyModelViewMatrix();
-            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) getDelayedRender().endBatch(renderType);
+            for (RenderType renderType : FluffyFurRenderTypes.additiveRenderTypes) endBatch(renderType);
             FogRenderer.setupNoFog();
         }
+    }
+
+    public static void endBatch(RenderType renderType) {
+        ShaderInstance shader = RenderUtil.getShader(renderType);
+        if (shader != null) {
+            shader.setSampler("SceneDepthBuffer", DEPTH_CACHE.getDepthTextureId());
+            shader.setSampler("SceneDiffuseBuffer", Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
+            shader.safeGetUniform("InvProjMat").set(new Matrix4f(RenderSystem.getProjectionMatrix()).invert());
+        }
+        getDelayedRender().endBatch(renderType);
     }
 
     public static void copyDepthBuffer(RenderTarget tempRenderTarget) {

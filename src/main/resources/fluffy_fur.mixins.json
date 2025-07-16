@@ -31,11 +31,13 @@
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
     "client.LanguageManagerMixin",
+    "client.LevelRendererMixin",
     "client.LightningBoltMixin",
     "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
     "client.RabbitRendererMixin",
+    "client.RenderStateShardMixin",
     "client.SplashManagerMixin",
     "client.TitleScreenMixin",
     "client.curios.CurioTooltipMixin"

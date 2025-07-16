@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
+            FABULOUS_WEATHER_FIX,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT,
             RAIN_FOG_SHADER,
             MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
@@ -19,6 +20,7 @@ public class FluffyFurClientConfig {
     public FluffyFurClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").push("graphics");
         SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.").defineInRange("screenshakeIntensity", 1d, 0, 10d);
+        FABULOUS_WEATHER_FIX = builder.comment("Enable weather render fix in fabulous graphics.").define("fabulousWeatherFix", true);
 
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);

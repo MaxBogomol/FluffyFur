@@ -12,6 +12,7 @@ import java.util.List;
 public class PostProcessHandler {
     public static final List<PostProcess> instances = new ArrayList<>();
     public static boolean didCopyDepth = false;
+    public static boolean didTranslucentCopyDepth = false;
 
     public static void addInstance(PostProcess instance) {
         instances.add(instance);
@@ -29,8 +30,18 @@ public class PostProcessHandler {
 
     public static void copyDepthBuffer() {
         if (didCopyDepth) return;
-        instances.forEach(PostProcess::copyDepthBuffer);
+        instances.forEach(postProcess -> {
+            if (!postProcess.isTranslucentDepthBuffer()) postProcess.copyDepthBuffer();
+        });
         didCopyDepth = true;
+    }
+
+    public static void copyTranslucentDepthBuffer() {
+        if (didTranslucentCopyDepth) return;
+        instances.forEach(postProcess -> {
+            if (postProcess.isTranslucentDepthBuffer()) postProcess.copyDepthBuffer();
+        });
+        didTranslucentCopyDepth = true;
     }
 
     public static void resize(int width, int height) {
@@ -52,6 +63,10 @@ public class PostProcessHandler {
     public static void onLevelRender(RenderLevelStageEvent event) {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS)) {
             PostProcess.viewModelStack = event.getPoseStack();
+        }
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
+            copyTranslucentDepthBuffer();
+            didTranslucentCopyDepth = false;
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
             copyDepthBuffer();
