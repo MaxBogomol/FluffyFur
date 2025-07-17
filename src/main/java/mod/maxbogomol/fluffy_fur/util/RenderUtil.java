@@ -158,28 +158,21 @@ public class RenderUtil {
         Minecraft.getInstance().getItemRenderer().render(DIRT, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay, bakedModel);
     }
 
-    public static TextureAtlasSprite getBlockSprite(ResourceLocation resourceLocation) {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
-    }
-
-    public static TextureAtlasSprite getBlockSprite(String modId, String sprite) {
-        return getBlockSprite(new ResourceLocation(modId, sprite));
-    }
-
-    public static TextureAtlasSprite getParticleSprite(ResourceLocation resourceLocation) {
-        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_PARTICLES).apply(resourceLocation);
-    }
-
-    public static TextureAtlasSprite getParticleSprite(String modId, String sprite) {
-        return getParticleSprite(new ResourceLocation(modId, sprite));
-    }
-
     public static TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
         return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(resourceLocation);
     }
 
     public static TextureAtlasSprite getSprite(String modId, String sprite) {
         return getSprite(new ResourceLocation(modId, sprite));
+    }
+
+    public static TextureAtlas getAtlas() {
+        return Minecraft.getInstance().getModelManager().getAtlas(TextureAtlas.LOCATION_BLOCKS);
+    }
+
+    public static Vec2 getAtlasSize() {
+        TextureAtlas atlas = getAtlas();
+        return new Vec2(atlas.getHeight(), atlas.getWidth());
     }
 
     public static void renderFluid(PoseStack stack, FluidStack fluidStack, float size, float texSize, boolean flowing, int light) {

@@ -1,6 +1,5 @@
 package mod.maxbogomol.fluffy_fur.client.particle.behavior;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.component.SparkParticleBehaviorComponent;
@@ -135,8 +134,11 @@ public class SparkParticleBehavior extends ParticleBehavior {
 
         Vec3 from = getStartPosition(particle, x, y, z, pos);
         Vec3 to = getEndPosition(particle, x, y, z, pos);
-        RenderBuilder builder = RenderBuilder.create().setFormat(DefaultVertexFormat.PARTICLE).setVertexConsumer(vertexConsumer)
-                .setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
+        RenderBuilder builder = RenderBuilder.create();
+        if (particle.bufferSource != null) builder.replaceBufferSource(particle.bufferSource);
+        builder.setRenderType(particle.renderType);
+        if (particle.format != null) builder.setFormat(particle.format);
+        builder.setUV(particle.getU0(), particle.getV0(), particle.getU1(), particle.getV1())
                 .setColorRaw(particle.getRed(), particle.getGreen(), particle.getBlue())
                 .setAlpha(particle.getAlpha())
                 .setLight(particle.getLightColor(partialTicks));

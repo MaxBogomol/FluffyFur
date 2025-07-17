@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
+import mod.maxbogomol.fluffy_fur.client.shader.ExtendedShaderInstance;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -38,8 +39,6 @@ public class LevelRenderHandler {
     public static float FOG_START = 0;
     public static List<ICustomParticleRender> particleList = new ArrayList<>();
     public static Map<GenericParticle, ICustomBehaviorParticleRender> behaviorParticleList = new HashMap<>();
-
-    public static boolean disable = false;
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
@@ -121,6 +120,9 @@ public class LevelRenderHandler {
             shader.safeGetUniform("InvProjMat").set(new Matrix4f(RenderSystem.getProjectionMatrix()).invert());
         }
         getDelayedRender().endBatch(renderType);
+        if (shader instanceof ExtendedShaderInstance extendedShader) {
+            extendedShader.setUniformDefaults();
+        }
     }
 
     public static void copyDepthBuffer(RenderTarget tempRenderTarget) {

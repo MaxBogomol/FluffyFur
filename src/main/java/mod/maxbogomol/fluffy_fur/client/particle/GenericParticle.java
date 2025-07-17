@@ -44,6 +44,7 @@ public class GenericParticle extends TextureSheetParticle {
 
     public Collection<Consumer<GenericParticle>> tickActors;
     public Collection<Consumer<GenericParticle>> renderActors;
+    public Collection<Consumer<GenericParticle>> renderPostActors;
 
     public GenericParticleOptions.DiscardFunctionType discardFunctionType;
     public boolean reachedPositiveAlpha;
@@ -86,6 +87,7 @@ public class GenericParticle extends TextureSheetParticle {
         this.spriteData = options.spriteData;
         this.tickActors = options.tickActors;
         this.renderActors = options.renderActors;
+        this.renderPostActors = options.renderPostActors;
         this.discardFunctionType = options.discardFunctionType;
         this.xd = vx;
         this.yd = vy;
@@ -209,6 +211,7 @@ public class GenericParticle extends TextureSheetParticle {
         } else {
             behavior.render(this, renderType != null ? FluffyFurRenderTypes.getDelayedRender().getBuffer(renderType) : vertexConsumer, camera, partialTicks);
         }
+        renderPostActors.forEach(actor -> actor.accept(this));
     }
 
     public void updateRenderTraits(float partialTicks) {

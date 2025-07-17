@@ -6,10 +6,14 @@ import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailPoint;
 import mod.maxbogomol.fluffy_fur.client.render.trail.TrailRenderPoint;
+import mod.maxbogomol.fluffy_fur.client.shader.ExtendedShaderInstance;
+import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHolder;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.Mth;
@@ -20,7 +24,6 @@ import org.joml.Vector4f;
 
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
@@ -45,24 +48,7 @@ public class RenderBuilder {
     protected VertexConsumerActor supplier;
     protected VertexConsumer vertexConsumer;
 
-    public static final HashMap<VertexFormatElement, VertexConsumerActor> CONSUMER_INFO_MAP = new HashMap<>();
-
     private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
-
-    static {
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_POSITION, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> {
-            if (last == null) {
-                consumer.vertex(x, y, z);
-            } else {
-                consumer.vertex(last, x, y, z);
-            }
-        });
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_COLOR, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.color(r, g, b, a));
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_UV0, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.uv(u, v));
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_UV2, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.uv2(l));
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_NORMAL, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.normal(0, 0, 0));
-        CONSUMER_INFO_MAP.put(DefaultVertexFormat.ELEMENT_PADDING, (consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> consumer.overlayCoords(OverlayTexture.NO_OVERLAY));
-    }
 
     public static RenderBuilder create() {
         return new RenderBuilder();
@@ -83,13 +69,7 @@ public class RenderBuilder {
     }
 
     public RenderBuilder setFormat(VertexFormat format) {
-        ImmutableList<VertexFormatElement> elements = format.getElements();
-        return setFormatRaw(format).setVertexSupplier((consumer, last, builder, x, y, z, r, g, b, a, u, v, l) -> {
-            for (VertexFormatElement element : elements) {
-                CONSUMER_INFO_MAP.get(element).placeVertex(consumer, last, this, x, y, z, r, g, b, a, u, v, l);
-            }
-            consumer.endVertex();
-        });
+        return setFormatRaw(format).setVertexSupplier(new StandardVertexConsumer());
     }
 
     public RenderBuilder setFormatRaw(VertexFormat format) {
@@ -355,6 +335,10 @@ public class RenderBuilder {
 
     public RenderBuilder endBatch() {
         ((MultiBufferSource.BufferSource) getBufferSource()).endBatch();
+        ShaderInstance shader = RenderUtil.getShader(renderType);
+        if (shader instanceof ExtendedShaderInstance extendedShader) {
+            extendedShader.setUniformDefaults();
+        }
         return this;
     }
 
@@ -881,5 +865,39 @@ public class RenderBuilder {
 
     public interface VertexConsumerActor {
         void placeVertex(VertexConsumer consumer, Matrix4f last, RenderBuilder builder, float x, float y, float z, float r, float g, float b, float a, float u, float v, int l);
+    }
+
+    public static class StandardVertexConsumer implements VertexConsumerActor {
+
+        @Override
+        public void placeVertex(VertexConsumer consumer, Matrix4f last, RenderBuilder builder, float x, float y, float z, float r, float g, float b, float a, float u, float v, int l) {
+            ImmutableList<VertexFormatElement> elements = builder.format.getElements();
+            BufferBuilder bufferBuilder = null;
+            if (consumer instanceof BufferBuilder buffer) {
+                bufferBuilder = buffer;
+            }
+            for (VertexFormatElement element : elements) {
+                if (element == DefaultVertexFormat.ELEMENT_POSITION) {
+                    if (last == null) {
+                        consumer.vertex(x, y, z);
+                    } else {
+                        consumer.vertex(last, x, y, z);
+                    }
+                }
+                if (element == DefaultVertexFormat.ELEMENT_COLOR) consumer.color(r, g, b, a);
+                if (element == DefaultVertexFormat.ELEMENT_UV0) consumer.uv(u, v);
+                if (element == DefaultVertexFormat.ELEMENT_UV2) consumer.uv2(l);
+                if (element == DefaultVertexFormat.ELEMENT_NORMAL) consumer.normal(0, 0, 0);
+                if (element == DefaultVertexFormat.ELEMENT_PADDING) consumer.overlayCoords(OverlayTexture.NO_OVERLAY);
+
+                if (bufferBuilder != null) {
+                    VertexAttributeHolder holder = VertexAttributeHandler.getAttribute(element);
+                    if (holder != null) {
+                        holder.accept(bufferBuilder);
+                    }
+                }
+            }
+            consumer.endVertex();
+        }
     }
 }

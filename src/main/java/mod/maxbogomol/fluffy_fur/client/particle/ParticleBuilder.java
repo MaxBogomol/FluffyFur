@@ -119,8 +119,13 @@ public class ParticleBuilder {
         return this;
     }
 
+    public ParticleBuilder addRenderPostActor(Consumer<GenericParticle> particleActor) {
+        getParticleOptions().renderPostActors.add(particleActor);
+        return this;
+    }
+
     public ParticleBuilder clearActors() {
-        return clearTickActor().clearSpawnActors().clearRenderActors();
+        return clearTickActor().clearSpawnActors().clearRenderActors().clearRenderPostActors();
     }
 
     public ParticleBuilder clearTickActor() {
@@ -135,6 +140,11 @@ public class ParticleBuilder {
 
     public ParticleBuilder clearRenderActors() {
         getParticleOptions().renderActors.clear();
+        return this;
+    }
+
+    public ParticleBuilder clearRenderPostActors() {
+        getParticleOptions().renderPostActors.clear();
         return this;
     }
 

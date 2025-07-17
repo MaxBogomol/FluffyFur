@@ -1,0 +1,44 @@
+package mod.maxbogomol.fluffy_fur.registry.client;
+
+import com.google.common.collect.ImmutableMap;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHolder;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+public class FluffyFurVertexFormats {
+    public static final VertexFormatElement UV_DISTORT = new VertexFormatElement(0, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.GENERIC, 4);
+    public static final VertexFormatElement TIME_SCALE_DISTORT = new VertexFormatElement(1, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.GENERIC, 1);
+    public static final VertexFormatElement AMPLIFIER_DISTORT = new VertexFormatElement(2, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.GENERIC, 1);
+    public static final VertexFormatElement OFFSET_DISTORT = new VertexFormatElement(3, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.GENERIC, 1);
+
+    public static final VertexFormat ADDITIVE_DISTORT = new VertexFormat(ImmutableMap.<String, VertexFormatElement>builder()
+            .put("Position", DefaultVertexFormat.ELEMENT_POSITION).put("UV0", DefaultVertexFormat.ELEMENT_UV0).put("Color", DefaultVertexFormat.ELEMENT_COLOR)
+            .put("UVCap", UV_DISTORT).put("TimeScale", TIME_SCALE_DISTORT).put("Amplifier", AMPLIFIER_DISTORT).put("Offset", OFFSET_DISTORT).build());
+
+    public static final VertexFormat TRANSLUCENT_DISTORT = new VertexFormat(ImmutableMap.<String, VertexFormatElement>builder()
+            .put("Position", DefaultVertexFormat.ELEMENT_POSITION).put("UV0", DefaultVertexFormat.ELEMENT_UV0).put("Color", DefaultVertexFormat.ELEMENT_COLOR).put("UV2", DefaultVertexFormat.ELEMENT_UV2)
+            .put("UVCap", UV_DISTORT).put("TimeScale", TIME_SCALE_DISTORT).put("Amplifier", AMPLIFIER_DISTORT).put("Offset", OFFSET_DISTORT).build());
+
+    public static VertexAttributeHolder.UV UV_DISTORT_HOLDER = VertexAttributeHolder.UV.create(0.0f, 0.0f, 1.0f, 1.0f);
+    public static VertexAttributeHolder.Float TIME_SCALE_DISTORT_HOLDER = VertexAttributeHolder.Float.create(600.0f);
+    public static VertexAttributeHolder.Float AMPLIFIER_DISTORT_HOLDER = VertexAttributeHolder.Float.create(1.0f);
+    public static VertexAttributeHolder.Float OFFSET_DISTORT_HOLDER = VertexAttributeHolder.Float.create(0.02f);
+
+    @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientRegistryEvents {
+        @SubscribeEvent
+        public static void registerVertexFormats(FMLClientSetupEvent event) {
+            VertexAttributeHandler.register(UV_DISTORT, UV_DISTORT_HOLDER);
+            VertexAttributeHandler.register(TIME_SCALE_DISTORT, TIME_SCALE_DISTORT_HOLDER);
+            VertexAttributeHandler.register(AMPLIFIER_DISTORT, AMPLIFIER_DISTORT_HOLDER);
+            VertexAttributeHandler.register(OFFSET_DISTORT, OFFSET_DISTORT_HOLDER);
+        }
+    }
+}

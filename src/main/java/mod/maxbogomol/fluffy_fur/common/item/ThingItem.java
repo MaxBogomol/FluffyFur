@@ -9,12 +9,15 @@ import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.GenericParticleData;
 import mod.maxbogomol.fluffy_fur.client.particle.data.SpinParticleData;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
+import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHandler;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurVertexFormats;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -80,5 +83,23 @@ public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
                 .renderCenteredQuad(poseStack, 10f)
                 .endBatch();
         poseStack.popPose();
+
+        if (FluffyFur.mcreatorModsCount > 0) {
+            poseStack.pushPose();
+            poseStack.translate(x + 8, y + 8, 100);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(ticks / 10f));
+
+            TextureAtlasSprite sprite = RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star");
+
+            FluffyFurVertexFormats.UV_DISTORT_HOLDER.setValue(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+            FluffyFurVertexFormats.AMPLIFIER_DISTORT_HOLDER.setValue(15f);
+            builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_DISTORT);
+            builder.setUV(sprite);
+            builder.setColorRaw(1, 0, 0)
+                    .renderCenteredQuad(poseStack, 20f)
+                    .endBatch();
+            poseStack.popPose();
+            VertexAttributeHandler.clear(FluffyFurVertexFormats.ADDITIVE_DISTORT);
+        }
     }
 }

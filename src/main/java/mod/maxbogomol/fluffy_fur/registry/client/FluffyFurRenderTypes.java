@@ -66,6 +66,10 @@ public class FluffyFurRenderTypes {
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucentTexture);
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucent);
 
+    public static final RenderStateShard.ShaderStateShard ADDITIVE_DISTORT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditiveDistort);
+    public static final RenderStateShard.ShaderStateShard TRANSLUCENT_DISTORT_TEXTURE_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucentDistort);
+
+    //ADDITIVE
     public static RenderType ADDITIVE_PARTICLE = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":additive_particle",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
@@ -91,6 +95,7 @@ public class FluffyFurRenderTypes {
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
                     .setShaderState(ADDITIVE_SHADER).createCompositeState(true));
 
+    //TRANSLUCENT
     public static RenderType TRANSLUCENT_PARTICLE = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":translucent_particle",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, false, RenderType.CompositeState.builder()
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
@@ -116,6 +121,17 @@ public class FluffyFurRenderTypes {
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
                     .setShaderState(TRANSLUCENT_SHADER).createCompositeState(true));
 
+    //DISTORT
+    public static RenderType ADDITIVE_DISTORT = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":additive_distort_particle",
+            FluffyFurVertexFormats.ADDITIVE_DISTORT, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(ADDITIVE_TRANSPARENCY)
+                    .setTextureState(BLOCK_SHEET).setShaderState(ADDITIVE_DISTORT_TEXTURE_SHADER).createCompositeState(true));
+
+    public static RenderType TRANSLUCENT_DISTORT = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":additive_distort_particle",
+            FluffyFurVertexFormats.TRANSLUCENT_DISTORT, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_DISTORT_TEXTURE_SHADER).createCompositeState(true));
+
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
@@ -130,6 +146,9 @@ public class FluffyFurRenderTypes {
             addTranslucentRenderType(TRANSLUCENT_PARTICLE_TEXTURE);
             addTranslucentRenderType(TRANSLUCENT_TEXTURE);
             addTranslucentRenderType(TRANSLUCENT);
+
+            addAdditiveRenderType(ADDITIVE_DISTORT);
+            addAdditiveRenderType(TRANSLUCENT_DISTORT);
         }
     }
 
