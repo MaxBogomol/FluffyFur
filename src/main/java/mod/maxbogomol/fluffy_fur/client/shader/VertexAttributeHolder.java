@@ -96,6 +96,33 @@ public class VertexAttributeHolder {
         }
     }
 
+    public static class Boolean extends VertexAttributeHolder {
+        boolean standardValue;
+        boolean value;
+
+        public Boolean(boolean value) {
+            this.standardValue = value;
+            this.value = value;
+        }
+
+        public static Boolean create(boolean value) {
+            return new Boolean(value);
+        }
+
+        public void setValue(boolean value) {
+            this.value = value;
+        }
+
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder builder) {
+            bufferBuilder.putFloat(0, value ? 1f : 0f);
+            bufferBuilder.nextElement();
+        }
+
+        public void clear() {
+            value = standardValue;
+        }
+    }
+
     public static class PosUV extends VertexAttributeHolder {
         float standardX, standardY;
         float x, y;
@@ -146,8 +173,8 @@ public class VertexAttributeHolder {
             this.z = z;
         }
 
-        public static Pos create(float x, float y) {
-            return new Pos(x, y, Z);
+        public static Pos create(float x, float y, float z) {
+            return new Pos(x, y, z);
         }
 
         public void setValue(float x, float y, float z) {
@@ -159,7 +186,7 @@ public class VertexAttributeHolder {
         public void setValue(Vec3 vec3) {
             this.x = (float) vec3.x;
             this.y = (float) vec3.y;
-            this.y = (float) vec3.z;
+            this.z = (float) vec3.z;
         }
 
         public void accept(BufferBuilder bufferBuilder, RenderBuilder renderBuilder) {
