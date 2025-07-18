@@ -13,6 +13,7 @@
         "UV2",
         "UVCap",
         "Time",
+        "TimeOffset",
         "Amplifier",
         "Offset"
     ],

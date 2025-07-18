@@ -15,6 +15,7 @@ in float vertexDistance;
 in vec2 vertexUV;
 in vec4 vertexUVCap;
 in float vertexTime;
+in float vertexTimeOffset;
 in float vertexAmplifier;
 in float vertexOffset;
 
@@ -23,7 +24,7 @@ out vec4 fragColor;
 void main() {
     vec2 uv = vertexUV;
     vec4 cap = vertexUVCap;
-    float time = -GameTime * vertexTime;
+    float time = -GameTime * vertexTime + vertexTimeOffset;
 
     vec2 uCap = vec2(cap.x, cap.z);
     vec2 vCap = vec2(cap.y, cap.w);

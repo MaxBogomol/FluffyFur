@@ -14,6 +14,7 @@ in vec4 Color;
 in ivec2 UV2;
 in vec4 UVCap;
 in float Time;
+in float TimeOffset;
 in float Amplifier;
 in float Offset;
 
@@ -23,6 +24,7 @@ out vec4 vertexColor;
 out vec4 vertexLight;
 out vec4 vertexUVCap;
 out float vertexTime;
+out float vertexTimeOffset;
 out float vertexAmplifier;
 out float vertexOffset;
 
@@ -36,6 +38,7 @@ void main() {
 
     vertexUVCap = UVCap;
     vertexTime = Time;
+    vertexTime = TimeOffset;
     vertexAmplifier = Amplifier;
     vertexOffset = Offset;
 }

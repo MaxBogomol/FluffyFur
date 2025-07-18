@@ -12,6 +12,7 @@
         "Color",
         "UVCap",
         "Time",
+        "TimeOffset",
         "Amplifier",
         "Offset"
     ],
