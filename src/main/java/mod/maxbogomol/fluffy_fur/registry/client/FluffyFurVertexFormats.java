@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.client.render.FluffyFurVertexFormatElement;
+import mod.maxbogomol.fluffy_fur.client.shader.FluffyFurVertexFormatElement;
 import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHolder;
 import net.minecraftforge.api.distmarker.Dist;

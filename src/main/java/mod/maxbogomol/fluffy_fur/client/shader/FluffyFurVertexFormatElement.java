@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.render;
+package mod.maxbogomol.fluffy_fur.client.shader;
 
 import com.mojang.blaze3d.vertex.VertexFormatElement;
 

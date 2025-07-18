@@ -1,16 +1,72 @@
 package mod.maxbogomol.fluffy_fur.client.shader;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 
 public class VertexAttributeHolder {
 
-    public void accept(BufferBuilder bufferBuilder) {
+    public void accept(BufferBuilder bufferBuilder, RenderBuilder renderBuilder) {
 
     }
 
     public void clear() {
 
+    }
+
+    public static class Byte extends VertexAttributeHolder {
+        byte standardValue;
+        byte value;
+
+        public Byte(byte value) {
+            this.standardValue = value;
+            this.value = value;
+        }
+
+        public static Byte create(byte value) {
+            return new Byte(value);
+        }
+
+        public void setValue(byte value) {
+            this.value = value;
+        }
+
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder builder) {
+            bufferBuilder.putByte(0, value);
+            bufferBuilder.nextElement();
+        }
+
+        public void clear() {
+            value = standardValue;
+        }
+    }
+
+    public static class Short extends VertexAttributeHolder {
+        short standardValue;
+        short value;
+
+        public Short(short value) {
+            this.standardValue = value;
+            this.value = value;
+        }
+
+        public static Short create(short value) {
+            return new Short(value);
+        }
+
+        public void setValue(short value) {
+            this.value = value;
+        }
+
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder builder) {
+            bufferBuilder.putShort(0, value);
+            bufferBuilder.nextElement();
+        }
+
+        public void clear() {
+            value = standardValue;
+        }
     }
 
     public static class Float extends VertexAttributeHolder {
@@ -30,7 +86,7 @@ public class VertexAttributeHolder {
             this.value = value;
         }
 
-        public void accept(BufferBuilder bufferBuilder) {
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder builder) {
             bufferBuilder.putFloat(0, value);
             bufferBuilder.nextElement();
         }
@@ -40,21 +96,19 @@ public class VertexAttributeHolder {
         }
     }
 
-    public static class Coord extends VertexAttributeHolder {
-        float standardX;
-        float standardY;
-        float x;
-        float y;
+    public static class PosUV extends VertexAttributeHolder {
+        float standardX, standardY;
+        float x, y;
 
-        public Coord(float x, float y) {
+        public PosUV(float x, float y) {
             this.standardX = x;
             this.standardY = y;
             this.x = x;
             this.y = y;
         }
 
-        public static Coord create(float x, float y) {
-            return new Coord(x, y);
+        public static PosUV create(float x, float y) {
+            return new PosUV(x, y);
         }
 
         public void setValue(float x, float y) {
@@ -67,7 +121,7 @@ public class VertexAttributeHolder {
             this.y = vec2.y;
         }
 
-        public void accept(BufferBuilder bufferBuilder) {
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder renderBuilder) {
             bufferBuilder.putFloat(0, x);
             bufferBuilder.putFloat(4, y);
             bufferBuilder.nextElement();
@@ -76,6 +130,49 @@ public class VertexAttributeHolder {
         public void clear() {
             this.x = standardX;
             this.y = standardY;
+        }
+    }
+
+    public static class Pos extends VertexAttributeHolder {
+        float standardX, standardY, standardZ;
+        float x, y, z;
+
+        public Pos(float x, float y, float z) {
+            this.standardX = x;
+            this.standardY = y;
+            this.standardZ = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        public static Pos create(float x, float y) {
+            return new Pos(x, y, Z);
+        }
+
+        public void setValue(float x, float y, float z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        public void setValue(Vec3 vec3) {
+            this.x = (float) vec3.x;
+            this.y = (float) vec3.y;
+            this.y = (float) vec3.z;
+        }
+
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder renderBuilder) {
+            bufferBuilder.putFloat(0, x);
+            bufferBuilder.putFloat(4, y);
+            bufferBuilder.putFloat(8, z);
+            bufferBuilder.nextElement();
+        }
+
+        public void clear() {
+            this.x = standardX;
+            this.y = standardY;
+            this.z = standardZ;
         }
     }
 
@@ -105,7 +202,7 @@ public class VertexAttributeHolder {
             this.v1 = v1;
         }
 
-        public void accept(BufferBuilder bufferBuilder) {
+        public void accept(BufferBuilder bufferBuilder, RenderBuilder renderBuilder) {
             bufferBuilder.putFloat(0, u0);
             bufferBuilder.putFloat(4, v0);
             bufferBuilder.putFloat(8, u1);

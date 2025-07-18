@@ -42,6 +42,8 @@ public class RenderBuilder {
     public boolean firstSide = true;
     public boolean secondSide = false;
 
+    public static GenericVertexConsumer GENERIC_VERTEX_CONSUMER = new GenericVertexConsumer();
+
     protected MultiBufferSource bufferSource = LevelRenderHandler.DELAYED_RENDER;
     protected RenderType renderType;
     protected VertexFormat format;
@@ -51,7 +53,7 @@ public class RenderBuilder {
     private static final float ROOT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
 
     public static RenderBuilder create() {
-        return new RenderBuilder();
+        return new RenderBuilder().setVertexSupplier(GENERIC_VERTEX_CONSUMER);
     }
 
     public RenderBuilder replaceBufferSource(MultiBufferSource bufferSource) {
@@ -69,7 +71,7 @@ public class RenderBuilder {
     }
 
     public RenderBuilder setFormat(VertexFormat format) {
-        return setFormatRaw(format).setVertexSupplier(new StandardVertexConsumer());
+        return setFormatRaw(format);
     }
 
     public RenderBuilder setFormatRaw(VertexFormat format) {
@@ -867,7 +869,7 @@ public class RenderBuilder {
         void placeVertex(VertexConsumer consumer, Matrix4f last, RenderBuilder builder, float x, float y, float z, float r, float g, float b, float a, float u, float v, int l);
     }
 
-    public static class StandardVertexConsumer implements VertexConsumerActor {
+    public static class GenericVertexConsumer implements VertexConsumerActor {
 
         @Override
         public void placeVertex(VertexConsumer consumer, Matrix4f last, RenderBuilder builder, float x, float y, float z, float r, float g, float b, float a, float u, float v, int l) {
@@ -877,27 +879,32 @@ public class RenderBuilder {
                 bufferBuilder = buffer;
             }
             for (VertexFormatElement element : elements) {
-                if (element == DefaultVertexFormat.ELEMENT_POSITION) {
-                    if (last == null) {
-                        consumer.vertex(x, y, z);
-                    } else {
-                        consumer.vertex(last, x, y, z);
-                    }
-                }
-                if (element == DefaultVertexFormat.ELEMENT_COLOR) consumer.color(r, g, b, a);
-                if (element == DefaultVertexFormat.ELEMENT_UV0) consumer.uv(u, v);
-                if (element == DefaultVertexFormat.ELEMENT_UV2) consumer.uv2(l);
-                if (element == DefaultVertexFormat.ELEMENT_NORMAL) consumer.normal(0, 0, 0);
-                if (element == DefaultVertexFormat.ELEMENT_PADDING) consumer.overlayCoords(OverlayTexture.NO_OVERLAY);
-
-                if (bufferBuilder != null) {
-                    VertexAttributeHolder holder = VertexAttributeHandler.getAttribute(element);
-                    if (holder != null) {
-                        holder.accept(bufferBuilder);
-                    }
-                }
+                genericPlaceVertex(element, consumer, last, builder, x, y, z, r, g, b, a, u, v, l);
+                if (bufferBuilder != null) attributeHolderAccept(element, bufferBuilder, builder);
             }
             consumer.endVertex();
+        }
+
+        public void genericPlaceVertex(VertexFormatElement element, VertexConsumer consumer, Matrix4f last, RenderBuilder builder, float x, float y, float z, float r, float g, float b, float a, float u, float v, int l) {
+            if (element == DefaultVertexFormat.ELEMENT_POSITION) {
+                if (last == null) {
+                    consumer.vertex(x, y, z);
+                } else {
+                    consumer.vertex(last, x, y, z);
+                }
+            }
+            if (element == DefaultVertexFormat.ELEMENT_COLOR) consumer.color(r, g, b, a);
+            if (element == DefaultVertexFormat.ELEMENT_UV0) consumer.uv(u, v);
+            if (element == DefaultVertexFormat.ELEMENT_UV2) consumer.uv2(l);
+            if (element == DefaultVertexFormat.ELEMENT_NORMAL) consumer.normal(0, 0, 0);
+            if (element == DefaultVertexFormat.ELEMENT_PADDING) consumer.overlayCoords(OverlayTexture.NO_OVERLAY);
+        }
+
+        public void attributeHolderAccept(VertexFormatElement element, BufferBuilder bufferBuilder, RenderBuilder builder) {
+            VertexAttributeHolder holder = VertexAttributeHandler.getAttribute(element);
+            if (holder != null) {
+                holder.accept(bufferBuilder, builder);
+            }
         }
     }
 }
