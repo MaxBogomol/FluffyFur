@@ -33,7 +33,7 @@ void main() {
 
     vertexUVCap = UVCap;
     vertexTime = Time;
-    vertexTime = TimeOffset;
+    vertexTimeOffset = TimeOffset;
     vertexAmplifier = Amplifier;
     vertexOffset = Offset;
 }
