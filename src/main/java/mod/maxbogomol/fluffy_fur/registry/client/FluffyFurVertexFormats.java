@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.render.FluffyFurVertexFormatElement;
 import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.VertexAttributeHolder;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,11 +14,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class FluffyFurVertexFormats {
-    public static final VertexFormatElement UV_CAP_DISTORTED = new VertexFormatElement(0, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.UV, 4);
-    public static final VertexFormatElement TIME_DISTORTED = new VertexFormatElement(1, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.UV, 1);
-    public static final VertexFormatElement TIME_OFFSET_DISTORTED = new VertexFormatElement(2, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.UV, 1);
-    public static final VertexFormatElement AMPLIFIER_DISTORTED = new VertexFormatElement(3, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.UV, 1);
-    public static final VertexFormatElement OFFSET_DISTORTED = new VertexFormatElement(4, VertexFormatElement.Type.FLOAT, VertexFormatElement.Usage.UV, 1);
+    public static final VertexFormatElement UV_CAP_DISTORTED = new FluffyFurVertexFormatElement(VertexFormatElement.Type.FLOAT, 4);
+    public static final VertexFormatElement TIME_DISTORTED = new FluffyFurVertexFormatElement(VertexFormatElement.Type.FLOAT, 1);
+    public static final VertexFormatElement TIME_OFFSET_DISTORTED = new FluffyFurVertexFormatElement(VertexFormatElement.Type.FLOAT, 1);
+    public static final VertexFormatElement AMPLIFIER_DISTORTED = new FluffyFurVertexFormatElement(VertexFormatElement.Type.FLOAT, 1);
+    public static final VertexFormatElement OFFSET_DISTORTED = new FluffyFurVertexFormatElement(VertexFormatElement.Type.FLOAT, 1);
 
     public static final VertexFormat TRANSLUCENT = new VertexFormat(ImmutableMap.<String, VertexFormatElement>builder()
             .put("Position", DefaultVertexFormat.ELEMENT_POSITION).put("Color", DefaultVertexFormat.ELEMENT_COLOR).put("UV2", DefaultVertexFormat.ELEMENT_UV2).build());
