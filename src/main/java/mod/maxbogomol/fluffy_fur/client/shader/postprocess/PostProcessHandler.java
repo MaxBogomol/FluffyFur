@@ -3,8 +3,6 @@ package mod.maxbogomol.fluffy_fur.client.shader.postprocess;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +57,6 @@ public class PostProcessHandler {
         postProcess.applyPostProcess();
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLevelRender(RenderLevelStageEvent event) {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS)) {
             PostProcess.viewModelStack = event.getPoseStack();

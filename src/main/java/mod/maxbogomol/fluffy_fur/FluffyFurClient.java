@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -36,8 +37,8 @@ public class FluffyFurClient {
             IEventBus forgeBus = MinecraftForge.EVENT_BUS;
             forgeBus.register(new FluffyFurClientEvents());
 
-            forgeBus.addListener(LevelRenderHandler::onLevelRender);
-            forgeBus.addListener(PostProcessHandler::onLevelRender);
+            forgeBus.addListener(EventPriority.LOWEST, LevelRenderHandler::onLevelRender);
+            forgeBus.addListener(EventPriority.LOWEST, PostProcessHandler::onLevelRender);
 
             eventBus.addListener(FluffyFurCreativeTabs::addCreativeTabContent);
 
