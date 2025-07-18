@@ -8,7 +8,6 @@
     "fragment": "fluffy_fur:translucent",
     "attributes": [
         "Position",
-        "UV0",
         "Color",
         "UV2"
     ],

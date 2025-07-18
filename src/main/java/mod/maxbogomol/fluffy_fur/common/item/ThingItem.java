@@ -91,15 +91,15 @@ public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
 
             TextureAtlasSprite sprite = RenderUtil.getSprite(FluffyFur.MOD_ID, "particle/star");
 
-            FluffyFurVertexFormats.UV_DISTORT_HOLDER.setValue(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
-            FluffyFurVertexFormats.AMPLIFIER_DISTORT_HOLDER.setValue(15f);
-            builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_DISTORT);
+            FluffyFurVertexFormats.UV_CAP_DISTORTED_HOLDER.setValue(sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1());
+            FluffyFurVertexFormats.AMPLIFIER_DISTORTED_HOLDER.setValue(15f);
+            builder = RenderBuilder.create().setRenderType(FluffyFurRenderTypes.ADDITIVE_DISTORTED);
             builder.setUV(sprite);
             builder.setColorRaw(1, 0, 0)
-                    .renderCenteredQuad(poseStack, 20f)
+                    .renderCenteredQuad(poseStack, 15f + ((float) Math.sin(Math.toRadians(ticks * 2f)) * 5f))
                     .endBatch();
             poseStack.popPose();
-            VertexAttributeHandler.clear(FluffyFurVertexFormats.ADDITIVE_DISTORT);
+            VertexAttributeHandler.clear(FluffyFurVertexFormats.ADDITIVE_DISTORTED);
         }
     }
 }

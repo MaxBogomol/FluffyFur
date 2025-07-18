@@ -12,6 +12,7 @@ uniform mat4 invProjMat;
 uniform vec3 cameraPos;
 
 in vec2 texCoord;
+
 out vec4 fragColor;
 
 vec3 getSmoothedNormal(vec3 worldPos) {

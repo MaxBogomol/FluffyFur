@@ -13,6 +13,7 @@ uniform vec3 cameraPos;
 uniform float fade;
 
 in vec2 texCoord;
+
 out vec4 fragColor;
 
 void main() {

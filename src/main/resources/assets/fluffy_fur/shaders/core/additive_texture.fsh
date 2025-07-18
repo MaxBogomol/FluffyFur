@@ -10,13 +10,13 @@ uniform float FogEnd;
 uniform vec4 FogColor;
 
 in float vertexDistance;
-in vec2 texCoord0;
+in vec2 vertexUV;
 in vec4 vertexColor;
 
 out vec4 fragColor;
 
 void main() {
-    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
+    vec4 color = texture(Sampler0, vertexUV) * vertexColor * ColorModulator;
     if (color.a == 0.0) {
         discard;
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 public class FluffyFurShaders {
     public static ShaderInstance
             ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT,
-            ADDITIVE_DISTORT, TRANSLUCENT_DISTORT;
+            ADDITIVE_DISTORTED, TRANSLUCENT_DISTORTED;
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
@@ -33,10 +33,10 @@ public class FluffyFurShaders {
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_texture"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> ADDITIVE_TEXTURE = shader);
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive"), DefaultVertexFormat.POSITION_COLOR), shader -> ADDITIVE = shader);
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_texture"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT_TEXTURE = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent"), DefaultVertexFormat.PARTICLE), shader -> TRANSLUCENT = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent"), FluffyFurVertexFormats.TRANSLUCENT), shader -> TRANSLUCENT = shader);
 
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "additive_distort"), FluffyFurVertexFormats.ADDITIVE_DISTORT), shader -> ADDITIVE_DISTORT = shader);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "translucent_distort"), FluffyFurVertexFormats.TRANSLUCENT_DISTORT), shader -> TRANSLUCENT_DISTORT = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "distorted/additive_distorted"), FluffyFurVertexFormats.ADDITIVE_DISTORTED), shader -> ADDITIVE_DISTORTED = shader);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "distorted/translucent_distorted"), FluffyFurVertexFormats.TRANSLUCENT_DISTORTED), shader -> TRANSLUCENT_DISTORTED = shader);
         }
     }
 
@@ -56,11 +56,11 @@ public class FluffyFurShaders {
         return TRANSLUCENT;
     }
 
-    public static ShaderInstance getAdditiveDistort() {
-        return ADDITIVE_DISTORT;
+    public static ShaderInstance getAdditiveDistorted() {
+        return ADDITIVE_DISTORTED;
     }
 
-    public static ShaderInstance getTranslucentDistort() {
-        return TRANSLUCENT_DISTORT;
+    public static ShaderInstance getTranslucentDistorted() {
+        return TRANSLUCENT_DISTORTED;
     }
 }

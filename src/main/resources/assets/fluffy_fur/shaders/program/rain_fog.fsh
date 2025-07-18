@@ -2,15 +2,14 @@
 
 uniform sampler2D DiffuseSampler;
 
-in vec2 texCoord;
-in vec2 oneTexel;
-
 uniform float rainStrength;
 uniform float thunderStrength;
 uniform float rainIntensity;
 uniform float thunderIntensity;
-
 uniform float totalTicks;
+
+in vec2 texCoord;
+in vec2 oneTexel;
 
 out vec4 fragColor;
 
