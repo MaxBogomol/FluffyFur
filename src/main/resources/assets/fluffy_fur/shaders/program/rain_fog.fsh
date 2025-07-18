@@ -8,8 +8,7 @@ uniform float rainIntensity;
 uniform float thunderIntensity;
 uniform float totalTicks;
 
-in vec2 texCoord;
-in vec2 oneTexel;
+in vec2 vertexUV;
 
 out vec4 fragColor;
 
@@ -55,16 +54,16 @@ float fractal_brownian_motion(vec2 coord) {
 
 void main() {
     float time = totalTicks / 20;
-    vec2 st = texCoord.xy * vec2(640.0, 320.0) + vec2(time * 50.0, time * 10.0);
+    vec2 st = vertexUV.xy * vec2(640.0, 320.0) + vec2(time * 50.0, time * 10.0);
     st *= 0.0025;
     vec2 pos = vec2(st);
     vec2 motion = vec2(fractal_brownian_motion(pos + vec2(time * -0.5, time * -0.3)));
     float final = fractal_brownian_motion(pos + motion) * INTENSITY;
 
     float a = rainIntensity * rainStrength * (final / 255.0);
-    float r = mix(texture(DiffuseSampler, texCoord).r, 255.0 / 3.0, a);
-    float g = mix(texture(DiffuseSampler, texCoord).g, 255.0 / 3.0, a);
-    float b = mix(texture(DiffuseSampler, texCoord).b, 255.0 / 3.0, a);
+    float r = mix(texture(DiffuseSampler, vertexUV).r, 255.0 / 3.0, a);
+    float g = mix(texture(DiffuseSampler, vertexUV).g, 255.0 / 3.0, a);
+    float b = mix(texture(DiffuseSampler, vertexUV).b, 255.0 / 3.0, a);
 
     a = thunderIntensity * thunderStrength;
     r = mix(r, 0.0, a);

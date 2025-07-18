@@ -11,7 +11,7 @@ uniform mat4 invViewMat;
 uniform mat4 invProjMat;
 uniform vec3 cameraPos;
 
-in vec2 texCoord;
+in vec2 vertexUV;
 
 out vec4 fragColor;
 
@@ -20,8 +20,8 @@ vec3 getSmoothedNormal(vec3 worldPos) {
 }
 
 void main() {
-    vec4 diffuseColor = texture(DiffuseSampler, texCoord);
-    vec3 worldPos = getWorldPos(MainDepthSampler, texCoord, invProjMat, invViewMat, cameraPos);
+    vec4 diffuseColor = texture(DiffuseSampler, vertexUV);
+    vec3 worldPos = getWorldPos(MainDepthSampler, vertexUV, invProjMat, invViewMat, cameraPos);
 
     fragColor = diffuseColor;
     for (int instance = 0; instance < InstanceCount; instance++) {

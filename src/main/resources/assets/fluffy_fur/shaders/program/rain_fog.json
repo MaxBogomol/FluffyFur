@@ -4,7 +4,7 @@
         "srcrgb": "one",
         "dstrgb": "zero"
     },
-    "vertex": "sobel",
+    "vertex": "fluffy_fur:blit",
     "fragment": "fluffy_fur:rain_fog",
     "attributes": [ "Position" ],
     "samplers": [

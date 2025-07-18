@@ -12,13 +12,13 @@ uniform mat4 invProjMat;
 uniform vec3 cameraPos;
 uniform float fade;
 
-in vec2 texCoord;
+in vec2 vertexUV;
 
 out vec4 fragColor;
 
 void main() {
-    vec4 diffuseColor = texture(DiffuseSampler, texCoord);
-    vec3 worldPos = getWorldPos(MainDepthSampler, texCoord, invProjMat, invViewMat, cameraPos);
+    vec4 diffuseColor = texture(DiffuseSampler, vertexUV);
+    vec3 worldPos = getWorldPos(MainDepthSampler, vertexUV, invProjMat, invViewMat, cameraPos);
 
     fragColor = diffuseColor;
     float distance = length(worldPos - cameraPos);
