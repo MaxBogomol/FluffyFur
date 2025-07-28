@@ -12,10 +12,7 @@ import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.FluffyFurCurios;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurArgumentTypes;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurLootModifier;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurPlayerSkins;
-import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
+import mod.maxbogomol.fluffy_fur.registry.common.*;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlockEntities;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
@@ -65,6 +62,7 @@ public class FluffyFur {
         FluffyFurLootModifier.register(eventBus);
         FluffyFurSounds.register(eventBus);
         FluffyFurArgumentTypes.register(eventBus);
+        FluffyFurMobEffects.register(eventBus);
 
         FluffyFurCurios.init(eventBus);
 
