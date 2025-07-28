@@ -9,6 +9,6 @@ public class KnockbackSensibilityMobEffect extends MobEffect {
 
     public KnockbackSensibilityMobEffect() {
         super(MobEffectCategory.HARMFUL, 0x867b86);
-        addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "63B66ECF-B2BB-4339-8D12-4D534A3F06BB", -1f, AttributeModifier.Operation.ADDITION);
+        addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "63B66ECF-B2BB-4339-8D12-4D534A3F06BB", -0.1f, AttributeModifier.Operation.ADDITION);
     }
 }

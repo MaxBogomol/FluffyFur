@@ -9,6 +9,6 @@ public class KnockbackResistanceMobEffect extends MobEffect {
 
     public KnockbackResistanceMobEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x867b86);
-        addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "3DA0207A-9549-4093-A93C-2C582E618719", 1f, AttributeModifier.Operation.ADDITION);
+        addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "3DA0207A-9549-4093-A93C-2C582E618719", 0.1f, AttributeModifier.Operation.ADDITION);
     }
 }

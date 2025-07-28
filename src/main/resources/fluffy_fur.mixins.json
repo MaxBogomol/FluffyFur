@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "fluffy_fur.refmap.json",
   "mixins": [
+    "common.AttributesMixin",
     "common.BlockItemMixin",
     "common.BlocksMixin",
     "common.CreeperMixin",
