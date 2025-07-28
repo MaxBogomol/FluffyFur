@@ -35,8 +35,12 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class FluffyFurClientEvents {
+
+    public static UUID FOX = UUID.fromString("a3b9ab92-41ea-4ec1-87f8-db64036c105f"); //MaxBogomol
+    public static UUID VOICES = UUID.fromString("2472235e-b8f9-47c7-aa8f-ca9fcc48d92e"); //FurryFoxes
 
     public static ArrayList<SubCreativeTabButton> subCreativeTabButtons = new ArrayList<>();
 
@@ -142,8 +146,8 @@ public class FluffyFurClientEvents {
     @SubscribeEvent
     public void onInput(InputEvent event) {
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
-            String name = FluffyFur.proxy.getPlayer().getGameProfile().getName();
-            if (name.equals("Dev") || name.equals("MaxBogomol") || name.equals("FurryFoxes")) {
+            UUID uuid = FluffyFur.proxy.getPlayer().getGameProfile().getId();
+            if (FluffyFur.devEnvironment || uuid.equals(FOX) || uuid.equals(VOICES)) {
                 FluffyFurPacketHandler.sendToServer(new StopUseItemPacket());
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }

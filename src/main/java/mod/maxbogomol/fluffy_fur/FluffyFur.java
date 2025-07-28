@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,8 +42,8 @@ import java.util.Random;
 public class FluffyFur {
     public static final String MOD_ID = "fluffy_fur";
     public static final String NAME = "Fluffy Fur";
-    public static final String VERSION = "0.2.2";
-    public static final int VERSION_NUMBER = 13;
+    public static final String VERSION = "0.2.3";
+    public static final int VERSION_NUMBER = 14;
 
     public static final ISidedProxy proxy = DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static final Logger LOGGER = LogManager.getLogger();
@@ -51,6 +52,8 @@ public class FluffyFur {
 
     public static int mcreatorModsCount = 0;
     public static List<String> mcreatorModsList = new ArrayList<>();
+
+    public static boolean devEnvironment = !FMLLoader.isProduction();
 
     public FluffyFur() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -94,6 +97,8 @@ public class FluffyFur {
             skin.setupSkinEntries();
         }
 
+        FluffyFurCurios.setup();
+
         for (Package pack: Arrays.stream(Package.getPackages()).toList()) {
             String string = pack.getName();
             int dots = 0;
@@ -119,8 +124,6 @@ public class FluffyFur {
                     mcreatorModsList.add(string);
                 }
             }
-
-            FluffyFurCurios.setup();
         }
 
         if (mcreatorModsCount > 0) {
@@ -129,6 +132,9 @@ public class FluffyFur {
             LOGGER.error("It seems you have MCreator mods installed");
             LOGGER.error("It is highly recommended to delete them");
             LOGGER.error(mcreatorModsList);
+        }
+        if (devEnvironment) {
+            LOGGER.info("Developer environment!");
         }
     }
 
