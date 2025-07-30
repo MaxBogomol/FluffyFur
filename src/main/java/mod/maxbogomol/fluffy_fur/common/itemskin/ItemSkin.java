@@ -53,7 +53,7 @@ public class ItemSkin {
         int i = id.indexOf(":");
         String modId = id.substring(0, i);
         String monogramId = id.substring(i + 1);
-        return "item_skin."  + modId + "." + monogramId;
+        return "item_skin." + modId + "." + monogramId;
     }
 
     public static Component getSkinName(ItemSkin skin) {

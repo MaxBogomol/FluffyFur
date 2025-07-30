@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -120,24 +120,27 @@ public class FurryPlayerSkin extends PlayerSkin {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void extraRender(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Player player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, HumanoidModel defaultModel) {
-        EarsModel earsModel = getEarsModel(player);
-        ResourceLocation earsTexture = getEars(player);
-        if (earsModel != null && earsTexture != null) {
-            earsModel.young = player.isBaby();
-            earsModel.copyFromDefault(defaultModel);
-            earsModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            earsAnimation(earsModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            earsModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(earsTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        }
+        if (!player.isInvisible()) {
+            int overlay = LivingEntityRenderer.getOverlayCoords(player, 0.0f);
+            EarsModel earsModel = getEarsModel(player);
+            ResourceLocation earsTexture = getEars(player);
+            if (earsModel != null && earsTexture != null) {
+                earsModel.young = player.isBaby();
+                earsModel.copyFromDefault(defaultModel);
+                earsModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
+                earsAnimation(earsModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
+                earsModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(earsTexture)), packedLight, overlay, 1, 1, 1, 1);
+            }
 
-        TailModel tailModel = getTailModel(player);
-        ResourceLocation tailTexture = getTail(player);
-        if (tailModel != null && tailTexture != null) {
-            tailModel.young = player.isBaby();
-            tailModel.copyFromDefault(defaultModel);
-            tailModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            tailAnimation(tailModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
-            tailModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(tailTexture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            TailModel tailModel = getTailModel(player);
+            ResourceLocation tailTexture = getTail(player);
+            if (tailModel != null && tailTexture != null) {
+                tailModel.young = player.isBaby();
+                tailModel.copyFromDefault(defaultModel);
+                tailModel.setupAnim(player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
+                tailAnimation(tailModel, player, player.walkAnimation.position(partialTick), player.walkAnimation.speed(partialTick), player.tickCount + partialTick, netHeadYaw, headPitch);
+                tailModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(tailTexture)), packedLight, overlay, 1, 1, 1, 1);
+            }
         }
     }
 
