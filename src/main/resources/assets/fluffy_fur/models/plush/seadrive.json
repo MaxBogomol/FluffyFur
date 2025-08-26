@@ -311,10 +311,12 @@
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [45, 45, 0],
+			"translation": [-0.25, 0.5, 0.25],
 			"scale": [0.5, 0.5, 0.5]
 		},
 		"thirdperson_lefthand": {
 			"rotation": [45, 45, 0],
+			"translation": [-0.25, 0.5, 0.25],
 			"scale": [0.5, 0.5, 0.5]
 		},
 		"firstperson_righthand": {
@@ -335,6 +337,9 @@
 			"rotation": [45, 135, 0],
 			"translation": [0, 1.5, 0],
 			"scale": [0.8, 0.8, 0.8]
+		},
+		"head": {
+			"translation": [0, 14, -1.5]
 		}
 	},
 	"groups": [
