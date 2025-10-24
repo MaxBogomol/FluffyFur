@@ -3,8 +3,8 @@
 	"credit": "Made by OnixTheCat",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "fluffy_fur:plush/biverom",
-		"particle": "fluffy_fur:plush/biverom"
+		"0": "fluffy_fur:plush/violunae",
+		"particle": "fluffy_fur:plush/violunae"
 	},
 	"elements": [
 		{

@@ -83,7 +83,7 @@ public class FluffyFurCreativeTabs {
             addInSub(event, PLUSHIES, FluffyFurItems.FOXAIRPLANE_PLUSH);
             addInSub(event, PLUSHIES, FluffyFurItems.ONJERLAY_PLUSH);
             addInSub(event, PLUSHIES, FluffyFurItems.SAMMYSEMICOLON_PLUSH);
-            addInSub(event, PLUSHIES, FluffyFurItems.BIVEROM_PLUSH);
+            addInSub(event, PLUSHIES, FluffyFurItems.VIOLUNAE_PLUSH);
             addInSub(event, PLUSHIES, FluffyFurItems.BOYKISSER_PLUSH);
             addInSub(event, PLUSHIES, FluffyFurItems.NANACHI_PLUSH);
             addInSub(event, PLUSHIES, FluffyFurItems.NIKO_PLUSH);

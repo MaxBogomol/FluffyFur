@@ -17,7 +17,7 @@ public class FluffyFurCurios {
             CuriosRendererRegistry.register(FluffyFurItems.FOXAIRPLANE_PLUSH.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(FluffyFurItems.ONJERLAY_PLUSH.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(FluffyFurItems.SAMMYSEMICOLON_PLUSH.get(), PlushHeadRenderer::new);
-            CuriosRendererRegistry.register(FluffyFurItems.BIVEROM_PLUSH.get(), PlushHeadRenderer::new);
+            CuriosRendererRegistry.register(FluffyFurItems.VIOLUNAE_PLUSH.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(FluffyFurItems.BOYKISSER_PLUSH.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(FluffyFurItems.NANACHI_PLUSH.get(), PlushHeadRenderer::new);
             CuriosRendererRegistry.register(FluffyFurItems.NIKO_PLUSH.get(), PlushHeadRenderer::new);

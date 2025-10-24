@@ -26,7 +26,7 @@ public class FluffyFurBlockEntities {
     public static final RegistryObject<BlockEntityType<PlushBlockEntity>> PLUSH = BLOCK_ENTITIES.register("plush", () -> BlockEntityType.Builder.of(PlushBlockEntity::new,
                     FluffyFurBlocks.MAXBOGOMOL_PLUSH.get(), FluffyFurBlocks.ONIXTHECAT_PLUSH.get(), FluffyFurBlocks.UNOLOGICALSAMSAR_PLUSH.get(),
                     FluffyFurBlocks.FOXAIRPLANE_PLUSH.get(), FluffyFurBlocks.ONJERLAY_PLUSH.get(),
-                    FluffyFurBlocks.BIVEROM_PLUSH.get(), FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(),
+                    FluffyFurBlocks.VIOLUNAE_PLUSH.get(), FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(),
                     FluffyFurBlocks.BOYKISSER_PLUSH.get(), FluffyFurBlocks.NANACHI_PLUSH.get(), FluffyFurBlocks.NIKO_PLUSH.get(), FluffyFurBlocks.PURO_PLUSH.get(), FluffyFurBlocks.TUNIC_THE_FOX_PLUSH.get(), FluffyFurBlocks.DARK_PRINCE_PLUSH.get(), FluffyFurBlocks.RALSEI_PLUSH.get(),
                     FluffyFurBlocks.SPECKLE_PLUSH.get(), FluffyFurBlocks.SEADRIVE_PLUSH.get())
             .build(null));
