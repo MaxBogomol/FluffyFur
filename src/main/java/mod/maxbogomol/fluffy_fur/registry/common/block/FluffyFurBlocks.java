@@ -39,6 +39,7 @@ public class FluffyFurBlocks {
     public static final RegistryObject<Block> ONJERLAY_PLUSH = BLOCKS.register("onjerlay_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_YELLOW).noOcclusion()));
     public static final RegistryObject<Block> SAMMYSEMICOLON_PLUSH = BLOCKS.register("sammysemicolon_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_GRAY).noOcclusion()));
     public static final RegistryObject<Block> VIOLUNAE_PLUSH = BLOCKS.register("violunae_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_PURPLE).noOcclusion()));
+    public static final RegistryObject<Block> FURRYFOXES_PLUSH = BLOCKS.register("furryfoxes_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
     public static final RegistryObject<Block> BOYKISSER_PLUSH = BLOCKS.register("boykisser_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NANACHI_PLUSH = BLOCKS.register("nanachi_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_WHITE).noOcclusion()));
     public static final RegistryObject<Block> NIKO_PLUSH = BLOCKS.register("niko_plush", () -> new PlushBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(MapColor.TERRACOTTA_RED).noOcclusion()));
@@ -64,6 +65,7 @@ public class FluffyFurBlocks {
             PlushBlock.foxSoundPlush.add(FOXAIRPLANE_PLUSH.get());
             PlushBlock.foxSoundPlush.add(ONJERLAY_PLUSH.get());
             PlushBlock.foxSoundPlush.add(VIOLUNAE_PLUSH.get());
+            PlushBlock.foxSoundPlush.add(FURRYFOXES_PLUSH.get());
             PlushBlock.foxSoundPlush.add(NANACHI_PLUSH.get());
             PlushBlock.foxSoundPlush.add(TUNIC_THE_FOX_PLUSH.get());
 
