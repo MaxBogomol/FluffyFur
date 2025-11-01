@@ -7,7 +7,7 @@ public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             FABULOUS_WEATHER_FIX,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT,
-            RAIN_FOG_SHADER,
+            RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
             MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
@@ -35,6 +35,8 @@ public class FluffyFurClientConfig {
         RAIN_FOG_SHADER_INTENSITY = builder.comment("Intensity of Rain Fog effect post process shader.").defineInRange("rainFogShaderIntensity", 0.3d, 0, 2d);
         THUNDER_FOG_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog effect post process shader.").defineInRange("thunderFogShaderIntensity", 0.1d, 0, 2d);
         THUNDER_FOG_FADE_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog fade effect post process shader.").defineInRange("thunderFogFadeShaderIntensity", 0.25d, 0, 1d);
+        RAIN_FOG_SHADER_NOISE = builder.comment("Enable noise for Rain Fog effect.").define("rainFogShaderNoise", true);
+        RAIN_FOG_SHADER_IGN = builder.comment("Enable Interleaved Gradient Noise for Rain Fog effect.").define("rainFogShaderIGN", true);
         builder.pop();
         builder.pop();
 

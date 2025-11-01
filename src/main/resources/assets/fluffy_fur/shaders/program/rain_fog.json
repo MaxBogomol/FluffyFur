@@ -18,6 +18,8 @@
         { "name": "thunderStrength", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "rainIntensity", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "thunderIntensity", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "enabledNoise", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "enabledIGN", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "totalTicks", "type": "float", "count": 1, "values": [ 1.0 ] }
     ]
 }

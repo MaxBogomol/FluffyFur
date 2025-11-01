@@ -8,6 +8,8 @@ uniform float rainStrength;
 uniform float thunderStrength;
 uniform float rainIntensity;
 uniform float thunderIntensity;
+uniform float enabledNoise;
+uniform float enabledIGN;
 uniform float totalTicks;
 
 in vec2 vertexUV;
@@ -59,14 +61,21 @@ float interleaved_gradient_noise(vec2 p) {
 }
 
 void main() {
-    float time = totalTicks / 20;
-    vec2 st = vertexUV.xy * vec2(ScreenSize.x / 3, ScreenSize.y / 3) + vec2(time * 50.0, time * 10.0);
-    st *= 0.0025;
-    vec2 pos = vec2(st);
-    vec2 motion = vec2(fractal_brownian_motion(pos + vec2(time * -0.5, time * -0.3)));
-    float final = fractal_brownian_motion(pos + motion) * INTENSITY;
-    final = final + (interleaved_gradient_noise(vertexUV * ScreenSize) * min(INTENSITY, 1) * 0.05f);
-    final = max(final, 0);
+    float final = INTENSITY * 0.25f;
+
+    if (enabledNoise == 1) {
+        float time = totalTicks / 20;
+        vec2 st = vertexUV.xy * vec2(ScreenSize.x / 3, ScreenSize.y / 3) + vec2(time * 50.0, time * 10.0);
+        st *= 0.0025;
+        vec2 pos = vec2(st);
+        vec2 motion = vec2(fractal_brownian_motion(pos + vec2(time * -0.5, time * -0.3)));
+        final = fractal_brownian_motion(pos + motion) * INTENSITY;
+    }
+
+    if (enabledIGN == 1) {
+        final = final + (interleaved_gradient_noise(vertexUV * ScreenSize) * min(INTENSITY, 1) * 0.05f);
+        final = max(final, 0);
+    }
 
     float a = rainIntensity * rainStrength * (final / 255.0);
     float r = mix(texture(DiffuseSampler, vertexUV).r, 255.0 / 3.0, a);

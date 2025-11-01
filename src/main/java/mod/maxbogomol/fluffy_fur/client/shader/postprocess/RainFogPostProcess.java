@@ -92,6 +92,8 @@ public class RainFogPostProcess extends PostProcess {
         effectInstance.safeGetUniform("thunderStrength").set(thunder);
         effectInstance.safeGetUniform("rainIntensity").set(FluffyFurClientConfig.RAIN_FOG_SHADER_INTENSITY.get().floatValue() + (FluffyFurClientConfig.THUNDER_FOG_SHADER_INTENSITY.get().floatValue() * thunder));
         effectInstance.safeGetUniform("thunderIntensity").set(FluffyFurClientConfig.THUNDER_FOG_FADE_SHADER_INTENSITY.get().floatValue());
+        effectInstance.safeGetUniform("enabledNoise").set(FluffyFurClientConfig.RAIN_FOG_SHADER_NOISE.get() ? 1f : 0f);
+        effectInstance.safeGetUniform("enabledIGN").set(FluffyFurClientConfig.RAIN_FOG_SHADER_IGN.get() ? 1f : 0f);
     }
 
     @Override
