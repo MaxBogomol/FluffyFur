@@ -34,8 +34,9 @@ public abstract class MinecraftMixin {
         List<Music> possibleMusic = new ArrayList<>();
         List<Music> menuMusic = new ArrayList<>();
         Music defaultMusic = cir.getReturnValue();
+        List<MusicModifier> menuModifiers = new ArrayList<>(MusicHandler.getModifiers());
 
-        for (MusicModifier modifier : MusicHandler.getModifiers()) {
+        for (MusicModifier modifier : menuModifiers) {
             if (modifier.isCanPlay(defaultMusic, minecraft)) {
                 Music music = modifier.play(defaultMusic, minecraft);
                 if (music != null) {
@@ -52,6 +53,7 @@ public abstract class MinecraftMixin {
             if (minecraft.screen instanceof TitleScreen || defaultMusic == Musics.MENU) {
                 if (!menuMusic.contains(defaultMusic)) {
                     cir.setReturnValue(menuMusic.get(fluffy_fur$random.nextInt(0, menuMusic.size())));
+                    return;
                 }
             }
         }

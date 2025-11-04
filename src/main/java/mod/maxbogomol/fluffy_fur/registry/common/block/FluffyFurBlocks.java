@@ -117,6 +117,7 @@ public class FluffyFurBlocks {
     }
 
     public static void fireBlock(Block block, int encouragement, int flammability) {
+        if (fireblock == null) fireblock = (FireBlock) Blocks.FIRE;
         fireblock.setFlammable(block, encouragement, flammability);
     }
 
