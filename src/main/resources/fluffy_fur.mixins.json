@@ -17,6 +17,7 @@
     "common.TntBlockMixin"
   ],
   "client": [
+    "client.PotionUtilsMixin",
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.CreativeModeInventoryScreenMixin",
