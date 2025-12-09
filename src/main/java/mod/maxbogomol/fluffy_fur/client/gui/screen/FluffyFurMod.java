@@ -1,9 +1,11 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurFonts;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
-import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -22,6 +24,12 @@ public class FluffyFurMod {
     public Color versionColor = Color.GRAY;
     public Component description = Component.empty();
     public List<Link> links = new ArrayList<>();
+
+    public static Color fluffyVillageColor = new Color(150, 71, 71);
+    public static Color githubColor = new Color(60, 116, 195);
+    public static Color curseForgeColor = new Color(241, 100, 54);
+    public static Color modrinthColor = new Color(0, 175, 92);
+    public static Color discordColor = new Color(88, 101, 242);
 
     public FluffyFurMod(String id, String name, String version) {
         this.id = id;
@@ -122,28 +130,32 @@ public class FluffyFurMod {
         return this;
     }
 
-    public FluffyFurMod addFluffyVillageLink(String string) {
-        addLink(Component.literal("The Fluffy Village").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(new Color(150, 71, 71)))), string);
+    public FluffyFurMod addIconLink(String string, String name, Color color, String icon, ResourceLocation font) {
+        addLink(Component.empty()
+                        .append(Component.literal(icon).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(color)).withFont(font)))
+                        .append(CommonComponents.SPACE.copy().withStyle(Style.EMPTY.withColor(ColorUtil.packColor(color))))
+                        .append(Component.literal(name).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(color)))),
+                string);
         return this;
+    }
+
+    public FluffyFurMod addFluffyVillageLink(String string) {
+        return addIconLink(string, "The Fluffy Village", fluffyVillageColor, "\u0001", FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addGithubLink(String string) {
-        addLink(Component.literal("Github").withStyle(ChatFormatting.DARK_GRAY), string);
-        return this;
+        return addIconLink(string, "Github", githubColor, "\u0002", FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addCurseForgeLink(String string) {
-        addLink(Component.literal("CurseForge").withStyle(ChatFormatting.GOLD), string);
-        return this;
+        return addIconLink(string, "CurseForge", curseForgeColor, "\u0003", FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addModrinthLink(String string) {
-        addLink(Component.literal("Modrinth").withStyle(ChatFormatting.GREEN), string);
-        return this;
+        return addIconLink(string, "Modrinth", modrinthColor, "\u0004", FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addDiscordLink(String string) {
-        addLink(Component.literal("Discord").withStyle(ChatFormatting.BLUE), string);
-        return this;
+        return addIconLink(string, "Discord", discordColor, "\u0005", FluffyFurFonts.ICONS_LOCATION);
     }
 }

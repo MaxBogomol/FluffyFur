@@ -6,11 +6,11 @@
     },
     {
       "type": "bitmap",
-      "file": "fluffy_fur:font/fishii.png",
+      "file": "fluffy_fur:font/icons.png",
       "height": 8,
       "ascent": 7,
       "chars": [
-        "\uD83E\uDD90\uD83D\uDC1F\uD83D\uDC20\uD83D\uDC21\uD83E\uDEBC\u0000\u0000\u0000",
+        "\u0001\u0002\u0003\u0004\u0005\u0000\u0000\u0000",
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
         "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
