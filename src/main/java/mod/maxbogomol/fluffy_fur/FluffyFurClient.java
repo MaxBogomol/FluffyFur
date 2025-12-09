@@ -74,6 +74,7 @@ public class FluffyFurClient {
         MOD_INSTANCE = new FluffyFurMod(FluffyFur.MOD_ID, FluffyFur.NAME, FluffyFur.VERSION).setDev("MaxBogomol").setItem(new ItemStack(Items.PINK_PETALS))
                 .setEdition(FluffyFur.VERSION_NUMBER).setNameColor(new Color(254, 200, 207)).setVersionColor(new Color(92, 72, 90))
                 .setDescription(Component.translatable("mod_description.fluffy_fur"))
+                .addFluffyVillageLink("https://fluffy-village.dev/pages/eng/creations/fluffy_fur.html")
                 .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/fluffy-fur")
                 .addModrinthLink("https://modrinth.com/mod/fluffy-fur")

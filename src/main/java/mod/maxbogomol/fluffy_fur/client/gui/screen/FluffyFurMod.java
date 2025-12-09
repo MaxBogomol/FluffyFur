@@ -1,7 +1,9 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -117,6 +119,11 @@ public class FluffyFurMod {
 
     public FluffyFurMod addLink(Component component, String string) {
         links.add(new Link(component, string));
+        return this;
+    }
+
+    public FluffyFurMod addFluffyVillageLink(String string) {
+        addLink(Component.literal("The Fluffy Village").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(new Color(150, 71, 71)))), string);
         return this;
     }
 
