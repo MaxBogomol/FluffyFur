@@ -30,6 +30,11 @@ public class FluffyFurMod {
     public static Color curseForgeColor = new Color(241, 100, 54);
     public static Color modrinthColor = new Color(0, 175, 92);
     public static Color discordColor = new Color(88, 101, 242);
+    public static Color youTubeColor = new Color(255, 0, 0);
+    public static Color blueSkyColor = new Color(41, 94, 246);
+    public static Color redditColor = new Color(255, 69, 0);
+    public static Color websiteColor = new Color(153, 153, 153);
+    public static Color twitterColor = new Color(29, 155, 240);
 
     public FluffyFurMod(String id, String name, String version) {
         this.id = id;
@@ -157,5 +162,33 @@ public class FluffyFurMod {
 
     public FluffyFurMod addDiscordLink(String string) {
         return addIconLink(string, "Discord", discordColor, "\u0005", FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addYouTubeLink(String string) {
+        return addIconLink(string, "YouTube", youTubeColor, "\u0006", FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addBlueSkyLink(String string) {
+        return addIconLink(string, "BlueSky", blueSkyColor, "\u0007", FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addRedditLink(String string) {
+        return addIconLink(string, "Reddit", redditColor, "\u0008", FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addWebsiteLink(String string, String website, Color color) {
+        return addIconLink(string, website, color, "\u0009", FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addWebsiteLink(String string, String website) {
+        return addWebsiteLink(string, website, websiteColor);
+    }
+
+    public FluffyFurMod addWebsiteLink(String string) {
+        return addWebsiteLink(string, "Website", websiteColor);
+    }
+
+    public FluffyFurMod addTwitterLink(String string) {
+        return addIconLink(string, "Twitter", twitterColor, "\u0010", FluffyFurFonts.ICONS_LOCATION);
     }
 }
