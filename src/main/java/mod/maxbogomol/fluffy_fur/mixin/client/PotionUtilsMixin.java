@@ -18,7 +18,7 @@ import java.util.Map;
 @Mixin(PotionUtils.class)
 public class PotionUtilsMixin {
 
-    @ModifyVariable(method = "addPotionTooltip*", at = @At("STORE"), ordinal = 0)
+    @ModifyVariable(method = "Lnet/minecraft/world/item/alchemy/PotionUtils;addPotionTooltip(Ljava/util/List;Ljava/util/List;F)V", at = @At("STORE"), ordinal = 0)
     private static Map<Attribute, AttributeModifier> fluffy_fur$addPotionTooltipModifier(Map<Attribute, AttributeModifier> map) {
         Player player = FluffyFur.proxy.getPlayer();
         if (player != null && map != null && !map.isEmpty()) {

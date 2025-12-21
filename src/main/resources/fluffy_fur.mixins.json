@@ -17,7 +17,6 @@
     "common.TntBlockMixin"
   ],
   "client": [
-    "client.PotionUtilsMixin",
     "client.AbstractClientPlayerMixin",
     "client.CameraMixin",
     "client.CreativeModeInventoryScreenMixin",
@@ -38,6 +37,7 @@
     "client.LightningBoltRendererMixin",
     "client.MinecraftMixin",
     "client.PlayerRendererMixin",
+    "client.PotionUtilsMixin",
     "client.RabbitRendererMixin",
     "client.RenderStateShardMixin",
     "client.SplashManagerMixin",
