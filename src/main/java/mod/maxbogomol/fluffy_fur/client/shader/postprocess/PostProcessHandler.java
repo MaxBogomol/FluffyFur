@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.shader.postprocess;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 
@@ -93,8 +94,11 @@ public class PostProcessHandler {
     }
 
     public static void tick() {
+        Minecraft minecraft = Minecraft.getInstance();
         for (PostProcess postProcess : getSortedInstances()) {
-            postProcess.tick();
+            if (!postProcess.isPaused() || !minecraft.isPaused()) {
+                postProcess.tick();
+            }
         }
     }
 }

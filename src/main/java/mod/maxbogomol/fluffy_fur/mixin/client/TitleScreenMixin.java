@@ -66,7 +66,7 @@ public abstract class TitleScreenMixin {
     }
 
     @Inject(at = @At("RETURN"), method = "tick")
-    public void fluffy_fur$render(CallbackInfo ci) {
+    public void fluffy_fur$tick(CallbackInfo ci) {
         fluffy_fur$ticks++;
     }
 }

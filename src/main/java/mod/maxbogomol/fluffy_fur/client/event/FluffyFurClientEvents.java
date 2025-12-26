@@ -103,13 +103,14 @@ public class FluffyFurClientEvents {
         Minecraft minecraft = Minecraft.getInstance();
         ClientTickHandler.clientTick(event);
         if (event.phase == TickEvent.Phase.END) {
-            if (minecraft.isPaused()) {
-                return;
+            if (!minecraft.isPaused()) {
+                Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+                ScreenshakeHandler.clientTick(camera);
             }
-            Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-            ScreenshakeHandler.clientTick(camera);
             PostProcessHandler.tick();
-            RainFogPostProcess.INSTANCE.tickEffect();
+            if (!minecraft.isPaused()) {
+                RainFogPostProcess.INSTANCE.tickEffect();
+            }
         }
     }
 

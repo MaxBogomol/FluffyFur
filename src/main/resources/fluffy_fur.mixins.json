@@ -40,6 +40,7 @@
     "client.PotionUtilsMixin",
     "client.RabbitRendererMixin",
     "client.RenderStateShardMixin",
+    "client.ShareToLanScreenMixin",
     "client.SplashManagerMixin",
     "client.TitleScreenMixin",
     "client.curios.CurioTooltipMixin"

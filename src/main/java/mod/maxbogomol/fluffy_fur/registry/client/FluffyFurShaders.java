@@ -26,6 +26,7 @@ public class FluffyFurShaders {
             PostProcessHandler.addInstance(DepthPostProcess.INSTANCE);
             PostProcessHandler.addInstance(GlowPostProcess.INSTANCE);
             PostProcessHandler.addInstance(NormalGlowPostProcess.INSTANCE);
+            PostProcessHandler.addInstance(HardcoreLanPostProcess.INSTANCE);
         }
 
         @SubscribeEvent

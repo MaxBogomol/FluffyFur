@@ -60,7 +60,7 @@ public abstract class PostProcess {
     public Collection<Pair<Uniform, Consumer<Uniform>>> defaultUniforms;
 
     public boolean initialized = false;
-    public boolean isActive = true;
+    public boolean isActive = false;
     public double time;
 
     public void init() {
@@ -175,6 +175,10 @@ public abstract class PostProcess {
 
     public boolean isWindow() {
         return false;
+    }
+
+    public boolean isPaused() {
+        return true;
     }
 
     public float getPriority() {

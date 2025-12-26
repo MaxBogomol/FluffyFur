@@ -326,7 +326,7 @@ public class FluffyFurMenuScreen extends Screen {
         if (panoramaListMouseClicked(this.width / 2 - 204, this.height / 4 + 48, mouseX, mouseY, button)) return true;
         if (modListMouseClicked(this.width / 2 + 84, this.height / 4 + 48, mouseX, mouseY, button)) return true;
 
-        return  super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     public boolean descriptionMouseClicked(int x, int y, double mouseX, double mouseY, int button) {
