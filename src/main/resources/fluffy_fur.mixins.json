@@ -13,6 +13,7 @@
     "common.HangingEntityItemMixin",
     "common.ItemEntityMixin",
     "common.PaintingMixin",
+    "common.ServerGamePacketListenerImplMixin",
     "common.ThrownTridentMixin",
     "common.TntBlockMixin"
   ],
