@@ -7,9 +7,12 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.chunk.storage.ChunkScanAccess;
+import net.minecraft.world.level.chunk.storage.IOWorker;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class SpectatorServerDimensionsPacket extends ServerPacket {
@@ -23,7 +26,13 @@ public class SpectatorServerDimensionsPacket extends ServerPacket {
             for(ServerLevel serverLevel : player.server.getAllLevels()) {
                 CompoundTag dimension = new CompoundTag();
                 dimension.putString("name", serverLevel.dimension().location().toString());
-                dimension.putBoolean("save", !serverLevel.noSave());
+                boolean save = false;
+                ChunkScanAccess chunkScanAccess = serverLevel.getChunkSource().chunkMap.chunkScanner();
+                if (chunkScanAccess instanceof IOWorker ioWorker) {
+                    Path path = ioWorker.storage.folder;
+                    save = path.toFile().exists();
+                }
+                dimension.putBoolean("save", save);
                 dimensions.add(dimension);
             }
             nbt.put("dimensions", dimensions);
