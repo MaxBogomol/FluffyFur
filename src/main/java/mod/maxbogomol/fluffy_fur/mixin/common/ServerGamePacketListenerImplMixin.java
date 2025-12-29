@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.mixin.common;
 
-import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurServerConfig;
 import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,9 +25,9 @@ public abstract class ServerGamePacketListenerImplMixin {
 
     @Inject(method = "handleClientCommand", at = @At("RETURN"))
     private void fluffy_fur$use(ServerboundClientCommandPacket packet, CallbackInfo ci) {
-        if (FluffyFurConfig.HARDCORE_SPECTATORS_GENERATE_CHUNKS.get()) {
+        if (FluffyFurServerConfig.HARDCORE_SPECTATORS_GENERATE_CHUNKS.get()) {
             ServerboundClientCommandPacket.Action serverboundclientcommandpacket$action = packet.getAction();
-            if (this.server.isHardcore() && (!this.server.isDedicatedServer() || FluffyFurConfig.HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED.get())) {
+            if (this.server.isHardcore() && (!this.server.isDedicatedServer() || FluffyFurServerConfig.HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED.get())) {
                 if (serverboundclientcommandpacket$action == ServerboundClientCommandPacket.Action.PERFORM_RESPAWN) {
                     this.player.level().getGameRules().getRule(GameRules.RULE_SPECTATORSGENERATECHUNKS).set(true, this.server);
                 }

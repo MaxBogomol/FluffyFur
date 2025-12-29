@@ -41,7 +41,9 @@
     "client.PotionUtilsMixin",
     "client.RabbitRendererMixin",
     "client.RenderStateShardMixin",
+    "client.RootSpectatorMenuCategoryMixin",
     "client.ShareToLanScreenMixin",
+    "client.SpectatorMenuMixin",
     "client.SplashManagerMixin",
     "client.TitleScreenMixin",
     "client.curios.CurioTooltipMixin"

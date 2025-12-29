@@ -5,8 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            TRIDENT_LOYALTY_VOID,
-            HARDCORE_SPECTATORS_GENERATE_CHUNKS, HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED;
+            TRIDENT_LOYALTY_VOID;
     public static ForgeConfigSpec.ConfigValue<Double>
             VOID_HEIGHT;
 
@@ -14,11 +13,6 @@ public class FluffyFurConfig {
         builder.comment("Misc").push("misc");
         TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyality in the void.").define("tridentLoyalityVoid", true);
         VOID_HEIGHT = builder.comment("Height of void.").define("voidHeight", -32d);
-        builder.pop();
-
-        builder.comment("Hardcore").push("hardcore");
-        HARDCORE_SPECTATORS_GENERATE_CHUNKS = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore.").define("hardcoreSpectatorsGenerateChunks", true);
-        HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore on dedicated servers.").define("hardcoreSpectatorsGenerateChunksDedicated", false);
         builder.pop();
     }
 

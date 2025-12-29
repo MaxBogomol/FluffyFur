@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.common.proxy.ISidedProxy;
 import mod.maxbogomol.fluffy_fur.common.proxy.ServerProxy;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurConfig;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurServerConfig;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.FluffyFurCurios;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.common.*;
@@ -70,6 +71,7 @@ public class FluffyFur {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FluffyFurClientConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, FluffyFurConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, FluffyFurServerConfig.SPEC);
 
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
             FluffyFurClient.ClientOnly.clientInit();

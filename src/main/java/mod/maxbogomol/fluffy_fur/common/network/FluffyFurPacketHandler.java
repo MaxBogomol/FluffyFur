@@ -5,6 +5,7 @@ import mod.maxbogomol.fluffy_fur.common.network.block.PlushHeartsPacket;
 import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
 import mod.maxbogomol.fluffy_fur.common.network.item.TestShrimpPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.*;
+import mod.maxbogomol.fluffy_fur.common.network.spectator.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,6 +30,12 @@ public class FluffyFurPacketHandler extends PacketHandler {
         BloodPacket.register(HANDLER, id++);
         TestShrimpPacket.register(HANDLER, id++);
         StopUseItemPacket.register(HANDLER, id++);
+
+        TeleportToSpawnPointPacket.register(HANDLER, id++);
+        TeleportToLevelSpawnPointPacket.register(HANDLER, id++);
+        TeleportToDimensionPacket.register(HANDLER, id++);
+        SpectatorClientDimensionsPacket.register(HANDLER, id++);
+        SpectatorServerDimensionsPacket.register(HANDLER, id++);
     }
 
     public static SimpleChannel getHandler() {
