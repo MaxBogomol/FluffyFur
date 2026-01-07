@@ -83,15 +83,14 @@ public class FluffyFurEvents {
     }
 
     @SubscribeEvent
-    public void registerCommands(RenderPlayerEvent.Pre event) {
-        float f = 1.63f / 1.875f;
-        //f = 1;
+    public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
         event.getPoseStack().pushPose();
-        event.getPoseStack().scale(f, f, f);
+        float scale = PlayerSkinHandler.getPlayerSizeScale(event.getEntity());
+        if (scale != 1) event.getPoseStack().scale(scale, scale, scale);
     }
 
     @SubscribeEvent
-    public void registerCommands(RenderPlayerEvent.Post event) {
+    public void onRenderPlayerPost(RenderPlayerEvent.Post event) {
         event.getPoseStack().popPose();
     }
 }

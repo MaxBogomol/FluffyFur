@@ -6,7 +6,9 @@ import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetCapePacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetEffectPacket;
 import mod.maxbogomol.fluffy_fur.common.network.playerskin.PlayerSkinSetPacket;
+import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurAttributes;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurPlayerSkins;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -151,5 +153,13 @@ public class PlayerSkinHandler {
         if (!isEmptySkinEffect(skinEffect)) {
             skinEffect.tick(player);
         }
+    }
+
+    public static float getPlayerSizeScale(Player player) {
+        if (player != null) {
+            AttributeInstance attribute = player.getAttribute(FluffyFurAttributes.SIZE_SCALE.get());
+            if (attribute != null) return (float) attribute.getValue();
+        }
+        return 1;
     }
 }

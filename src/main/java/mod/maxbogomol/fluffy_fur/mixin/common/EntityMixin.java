@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.mixin.common;
 
 import mod.maxbogomol.fluffy_fur.common.entity.ITouchingFluid;
 import mod.maxbogomol.fluffy_fur.common.fluid.CustomFluidType;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -85,8 +86,8 @@ public abstract class EntityMixin implements ITouchingFluid {
     private void fluffy_fur$getEyeHeight(CallbackInfoReturnable<Float> cir) {
         Entity self = (Entity) ((Object) this);
         if (self instanceof Player player) {
-            float f = 1.63f / 1.875f;
-            cir.setReturnValue(cir.getReturnValue() * f);
+            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
+            if (scale != 1) cir.setReturnValue(cir.getReturnValue() * scale);
         }
     }
 
@@ -94,8 +95,8 @@ public abstract class EntityMixin implements ITouchingFluid {
     private void fluffy_fur$getBbWidth(CallbackInfoReturnable<Float> cir) {
         Entity self = (Entity) ((Object) this);
         if (self instanceof Player player) {
-            float f = 1.63f / 1.875f;
-            cir.setReturnValue(cir.getReturnValue() * f);
+            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
+            if (scale != 1) cir.setReturnValue(cir.getReturnValue() * scale);
         }
     }
 
@@ -103,8 +104,8 @@ public abstract class EntityMixin implements ITouchingFluid {
     private void fluffy_fur$getBbHeight(CallbackInfoReturnable<Float> cir) {
         Entity self = (Entity) ((Object) this);
         if (self instanceof Player player) {
-            float f = 1.63f / 1.875f;
-            cir.setReturnValue(cir.getReturnValue() * f);
+            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
+            if (scale != 1) cir.setReturnValue(cir.getReturnValue() * scale);
         }
     }
 
@@ -112,8 +113,8 @@ public abstract class EntityMixin implements ITouchingFluid {
     private void fluffy_fur$getEyeY(CallbackInfoReturnable<Double> cir) {
         Entity self = (Entity) ((Object) this);
         if (self instanceof Player player) {
-            float f = 1.63f / 1.875f;
-            cir.setReturnValue(this.position.y + (this.eyeHeight * f));
+            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
+            if (scale != 1) cir.setReturnValue(this.position.y + (this.eyeHeight * scale));
         }
     }
 }

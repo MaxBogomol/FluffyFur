@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.mixin.common;
 
 import com.mojang.authlib.GameProfile;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
@@ -18,14 +19,15 @@ public abstract class PlayerMixin {
     @Inject(at = @At("RETURN"), method = "<init>")
     private void fluffy_fur$Player(Level level, BlockPos pos, float yRot, GameProfile gameProfile, CallbackInfo ci) {
         Player self = (Player) ((Object) this);
-        self.refreshDimensions();
+        float scale = PlayerSkinHandler.getPlayerSizeScale(self);
+        if (scale != 1) self.refreshDimensions();
     }
 
     @Inject(method = "getDimensions", at = @At("RETURN"), cancellable = true)
     private void fluffy_fur$getDimensions(Pose pose, CallbackInfoReturnable<EntityDimensions> cir) {
         Player self = (Player) ((Object) this);
         EntityDimensions entityDimensions = cir.getReturnValue();
-        float f = 1.63f / 1.875f;
-        cir.setReturnValue(new EntityDimensions(entityDimensions.width * f, entityDimensions.height * f, false));
+        float scale = PlayerSkinHandler.getPlayerSizeScale(self);
+        if (scale != 1) cir.setReturnValue(new EntityDimensions(entityDimensions.width * scale, entityDimensions.height * scale, false));
     }
 }

@@ -63,6 +63,7 @@ public class FluffyFur {
         FluffyFurLootModifier.register(eventBus);
         FluffyFurSounds.register(eventBus);
         FluffyFurArgumentTypes.register(eventBus);
+        FluffyFurAttributes.register(eventBus);
         FluffyFurMobEffects.register(eventBus);
 
         FluffyFurCurios.init(eventBus);
