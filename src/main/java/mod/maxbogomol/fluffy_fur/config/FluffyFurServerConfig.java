@@ -12,6 +12,9 @@ public class FluffyFurServerConfig {
         HARDCORE_SPECTATORS_GENERATE_CHUNKS = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore.").define("hardcoreSpectatorsGenerateChunks", true);
         HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore on dedicated servers.").define("hardcoreSpectatorsGenerateChunksDedicated", false);
         builder.pop();
+
+        builder.comment("Spectator").push("spectator");
+        builder.pop();
     }
 
     public static final FluffyFurServerConfig INSTANCE;

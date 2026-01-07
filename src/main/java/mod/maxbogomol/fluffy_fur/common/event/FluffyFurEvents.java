@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -79,5 +80,18 @@ public class FluffyFurEvents {
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
         FluffyFurCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public void registerCommands(RenderPlayerEvent.Pre event) {
+        float f = 1.63f / 1.875f;
+        //f = 1;
+        event.getPoseStack().pushPose();
+        event.getPoseStack().scale(f, f, f);
+    }
+
+    @SubscribeEvent
+    public void registerCommands(RenderPlayerEvent.Post event) {
+        event.getPoseStack().popPose();
     }
 }

@@ -4,17 +4,26 @@ import mod.maxbogomol.fluffy_fur.common.entity.ITouchingFluid;
 import mod.maxbogomol.fluffy_fur.common.fluid.CustomFluidType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements ITouchingFluid {
+
+    @Shadow
+    private Vec3 position;
+
+    @Shadow
+    private float eyeHeight;
 
     @Unique
     private boolean fluffy_fur$isTouchingFluid = false;
@@ -69,6 +78,42 @@ public abstract class EntityMixin implements ITouchingFluid {
             fluffy_fur$setTouchingFluid(true);
         } else {
             fluffy_fur$setTouchingFluid(false);
+        }
+    }
+
+    @Inject(method = "Lnet/minecraft/world/entity/Entity;getEyeHeight()F", at = @At("RETURN"), cancellable = true)
+    private void fluffy_fur$getEyeHeight(CallbackInfoReturnable<Float> cir) {
+        Entity self = (Entity) ((Object) this);
+        if (self instanceof Player player) {
+            float f = 1.63f / 1.875f;
+            cir.setReturnValue(cir.getReturnValue() * f);
+        }
+    }
+
+    @Inject(method = "getBbWidth", at = @At("RETURN"), cancellable = true)
+    private void fluffy_fur$getBbWidth(CallbackInfoReturnable<Float> cir) {
+        Entity self = (Entity) ((Object) this);
+        if (self instanceof Player player) {
+            float f = 1.63f / 1.875f;
+            cir.setReturnValue(cir.getReturnValue() * f);
+        }
+    }
+
+    @Inject(method = "getBbHeight", at = @At("RETURN"), cancellable = true)
+    private void fluffy_fur$getBbHeight(CallbackInfoReturnable<Float> cir) {
+        Entity self = (Entity) ((Object) this);
+        if (self instanceof Player player) {
+            float f = 1.63f / 1.875f;
+            cir.setReturnValue(cir.getReturnValue() * f);
+        }
+    }
+
+    @Inject(method = "getEyeY", at = @At("RETURN"), cancellable = true)
+    private void fluffy_fur$getEyeY(CallbackInfoReturnable<Double> cir) {
+        Entity self = (Entity) ((Object) this);
+        if (self instanceof Player player) {
+            float f = 1.63f / 1.875f;
+            cir.setReturnValue(this.position.y + (this.eyeHeight * f));
         }
     }
 }

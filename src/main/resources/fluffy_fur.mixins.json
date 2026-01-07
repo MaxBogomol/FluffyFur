@@ -13,9 +13,11 @@
     "common.HangingEntityItemMixin",
     "common.ItemEntityMixin",
     "common.PaintingMixin",
+    "common.PlayerMixin",
     "common.ServerGamePacketListenerImplMixin",
     "common.ThrownTridentMixin",
-    "common.TntBlockMixin"
+    "common.TntBlockMixin",
+    "common.ZombieMixin"
   ],
   "client": [
     "client.AbstractClientPlayerMixin",

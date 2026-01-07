@@ -40,6 +40,8 @@ public class FluffyFurClient {
             forgeBus.addListener(EventPriority.LOWEST, LevelRenderHandler::onLevelRender);
             forgeBus.addListener(EventPriority.LOWEST, PostProcessHandler::onLevelRender);
 
+            forgeBus.addListener(EventPriority.HIGHEST, LevelRenderHandler::onRenderFog);
+
             eventBus.addListener(FluffyFurCreativeTabs::addCreativeTabContent);
 
             FluffyFurFusion.init(eventBus);

@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.fml.ModList;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL30C;
@@ -162,5 +163,11 @@ public class LevelRenderHandler {
 
     public static boolean isLargeSizeBuffer() {
         return ModList.get().isLoaded("embeddium") || ModList.get().isLoaded("rubidium") || ModList.get().isLoaded("sodium");
+    }
+
+    public static void onRenderFog(ViewportEvent.RenderFog event) {
+        //event.setFogShape(FogShape.SPHERE);
+        event.setNearPlaneDistance(event.getNearPlaneDistance() / 2f);
+        event.setCanceled(true);
     }
 }
