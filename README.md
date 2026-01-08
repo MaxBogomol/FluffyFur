@@ -8,7 +8,7 @@
 "Fluffy Fur" - a mod library by MaxBogomol  
 Adds various things for rendering and simplifying development
 
-![](https://cdn.modrinth.com/data/srqzRpcV/images/535438bcbee00c80044ac6536511177e300c375d.png)
+![](https://fluffy-village.dev/assets/creations/fluffy_fur/logo.png)
 
 # Features:
 Flexible particle and rendering system  
