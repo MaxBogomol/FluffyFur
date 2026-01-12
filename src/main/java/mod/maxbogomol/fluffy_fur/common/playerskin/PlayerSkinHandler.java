@@ -162,4 +162,8 @@ public class PlayerSkinHandler {
         }
         return 1;
     }
+
+    public static float getRealLifeHeightScale(float height) {
+        return height / 1.875f;
+    }
 }

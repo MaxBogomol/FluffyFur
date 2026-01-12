@@ -91,24 +91,6 @@ public abstract class EntityMixin implements ITouchingFluid {
         }
     }
 
-    @Inject(method = "getBbWidth", at = @At("RETURN"), cancellable = true)
-    private void fluffy_fur$getBbWidth(CallbackInfoReturnable<Float> cir) {
-        Entity self = (Entity) ((Object) this);
-        if (self instanceof Player player) {
-            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
-            if (scale != 1) cir.setReturnValue(cir.getReturnValue() * scale);
-        }
-    }
-
-    @Inject(method = "getBbHeight", at = @At("RETURN"), cancellable = true)
-    private void fluffy_fur$getBbHeight(CallbackInfoReturnable<Float> cir) {
-        Entity self = (Entity) ((Object) this);
-        if (self instanceof Player player) {
-            float scale = PlayerSkinHandler.getPlayerSizeScale(player);
-            if (scale != 1) cir.setReturnValue(cir.getReturnValue() * scale);
-        }
-    }
-
     @Inject(method = "getEyeY", at = @At("RETURN"), cancellable = true)
     private void fluffy_fur$getEyeY(CallbackInfoReturnable<Double> cir) {
         Entity self = (Entity) ((Object) this);

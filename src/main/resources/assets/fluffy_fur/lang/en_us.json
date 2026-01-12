@@ -60,13 +60,18 @@
   "effect.fluffy_fur.swim_speed": "Swim Speed",
   "effect.fluffy_fur.swim_slowness": "Swim Slowness",
 
-  "_comment_5": "Menu",
+  "_comment_5": "Attributes",
+  "attribute.name.fluffy_fur.size_scale": "Size Scale",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Jump Height Amplifier",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Camera Distance Amplifier",
+
+  "_comment_6": "Menu",
   "mod_description.fluffy_fur": "Fluffy Fur - a mod library by MaxBogomol. \n Adds various things for rendering and simplifying development. \n \n Meow :3",
 
   "panorama.minecraft.vanilla": "Vanilla",
   "panorama.fluffy_fur.fluffy_zone": "Fluffy Zone",
 
-  "_comment_6": "Gui",
+  "_comment_7": "Gui",
   "gui.fluffy_fur.menu.optifine.0": "ATTENTION! It seems you have Optifine installed",
   "gui.fluffy_fur.menu.optifine.1": "Optifine breaks Fluffy Fur and other mods",
   "gui.fluffy_fur.menu.optifine.2": "Delete Optifine :3",
@@ -101,7 +106,7 @@
   "gui.spectator_menu.dimension_teleport.prompt": "Select a dimension to teleport to",
   "gui.spectator_menu.dimension_teleport.unknown": "Unknown dimension",
 
-  "_comment_7": "Commands",
+  "_comment_8": "Commands",
   "commands.fluffy_fur.item_skin.unknown": "No item skin exists with the ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Applied skin %1$s to %2$s players",
   "commands.fluffy_fur.skin.item.set.single": "Applied skin %1$s to %2$s's item",
@@ -110,11 +115,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Removed skin from %s's item",
   "commands.fluffy_fur.skin.item.remove.failed": "Failed to remove item skin",
 
-  "_comment_8": "Key binds",
+  "_comment_9": "Key binds",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Skin Menu",
 
-  "_comment_9": "Config",
+  "_comment_10": "Config",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Screenshake Intensity",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Intensity of screenshake.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Item Particle",

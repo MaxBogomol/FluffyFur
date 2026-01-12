@@ -95,6 +95,12 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Алые Грёзы",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовые сердечки",
 
+  "gui.spectator_menu.spawn_point_teleport": "Teleport to Spawn Point",
+  "gui.spectator_menu.level_spawn_point_teleport": "Teleport to World Spawn Point",
+  "gui.spectator_menu.dimension_teleport": "Teleport to Dimension",
+  "gui.spectator_menu.dimension_teleport.prompt": "Select a dimension to teleport to",
+  "gui.spectator_menu.dimension_teleport.unknown": "Неизвестное измерение",
+
   "_comment_7": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существует облика предмета с ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Наложен облик %1$s на предмет у %2$s игроков",

@@ -14,6 +14,7 @@ import mod.maxbogomol.fluffy_fur.common.creativetab.MultiCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.creativetab.SubCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
+import mod.maxbogomol.fluffy_fur.common.playerskin.PlayerSkinHandler;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -153,5 +155,17 @@ public class FluffyFurClientEvents {
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
+        event.getPoseStack().pushPose();
+        float scale = PlayerSkinHandler.getPlayerSizeScale(event.getEntity());
+        if (scale != 1) event.getPoseStack().scale(scale, scale, scale);
+    }
+
+    @SubscribeEvent
+    public void onRenderPlayerPost(RenderPlayerEvent.Post event) {
+        event.getPoseStack().popPose();
     }
 }
