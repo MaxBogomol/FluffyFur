@@ -5,14 +5,17 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
+            LEADER_ZOMBIE_FIX;
+    public static ForgeConfigSpec.ConfigValue<Boolean>
             TRIDENT_LOYALTY_VOID;
     public static ForgeConfigSpec.ConfigValue<Double>
             VOID_HEIGHT;
 
     public FluffyFurConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Misc").push("misc");
-        TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyality in the void.").define("tridentLoyalityVoid", true);
+        TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyalty in the void.").define("tridentLoyaltyVoid", true);
         VOID_HEIGHT = builder.comment("Height of void.").define("voidHeight", -32d);
+        LEADER_ZOMBIE_FIX = builder.comment("Enable leader zombie health fix.").define("leaderZombieFix", true);
         builder.pop();
     }
 

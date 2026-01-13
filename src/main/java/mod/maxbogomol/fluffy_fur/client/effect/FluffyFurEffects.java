@@ -15,6 +15,7 @@ import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcess;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.GlowPostProcessInstance;
 import mod.maxbogomol.fluffy_fur.common.easing.Easing;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurParticles;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -228,6 +229,8 @@ public class FluffyFurEffects {
                 .setFriction(0.88f)
                 .setGravity(1f)
                 .repeat(level, pos, 50, 0.7f);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        if (FluffyFurClientConfig.EXPLOSION_EFFECT_SCREENSHAKE.get()) {
+            ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(30, pos, 0, 25).setIntensity(0.8f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        }
     }
 }

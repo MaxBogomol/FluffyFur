@@ -3,13 +3,16 @@ package mod.maxbogomol.fluffy_fur.client.render;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
 import mod.maxbogomol.fluffy_fur.client.shader.ExtendedShaderInstance;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import mod.maxbogomol.fluffy_fur.util.RenderUtil;
@@ -166,8 +169,10 @@ public class LevelRenderHandler {
     }
 
     public static void onRenderFog(ViewportEvent.RenderFog event) {
-        //event.setFogShape(FogShape.SPHERE);
-        event.setNearPlaneDistance(event.getNearPlaneDistance() / 2f);
-        event.setCanceled(true);
+        if (FluffyFurClientConfig.FANCY_FOG.get()) {
+            if (FluffyFurClientConfig.FANCY_FOG_SPHERE.get()) event.setFogShape(FogShape.SPHERE);
+            if (FluffyFurClientConfig.FANCY_FOG_INTENSITY.get() > 0) event.setNearPlaneDistance(event.getNearPlaneDistance() / (FluffyFurClientConfig.FANCY_FOG_INTENSITY.get().floatValue()));
+            event.setCanceled(true);
+        }
     }
 }

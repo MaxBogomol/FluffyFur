@@ -5,14 +5,14 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            FABULOUS_WEATHER_FIX,
-            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT,
+            FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE,
+            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
             MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
-            SCREENSHAKE_INTENSITY,
+            SCREENSHAKE_INTENSITY, FANCY_FOG_INTENSITY,
             RAIN_FOG_SHADER_INTENSITY, THUNDER_FOG_SHADER_INTENSITY, THUNDER_FOG_FADE_SHADER_INTENSITY;
     public static ForgeConfigSpec.ConfigValue<String>
             PANORAMA;
@@ -21,6 +21,9 @@ public class FluffyFurClientConfig {
         builder.comment("Graphics").push("graphics");
         SCREENSHAKE_INTENSITY = builder.comment("Intensity of screenshake.").defineInRange("screenshakeIntensity", 1d, 0, 10d);
         FABULOUS_WEATHER_FIX = builder.comment("Enable weather render fix in fabulous graphics.").define("fabulousWeatherFix", true);
+        FANCY_FOG = builder.comment("Enable fancy fog.").define("fancyFog", true);
+        FANCY_FOG_INTENSITY = builder.comment("Intensity of fancy fog.").defineInRange("fancyFogntensity", 2d, 0f, 100d);
+        FANCY_FOG_SPHERE = builder.comment("Enable sphere shape of fancy fog.").define("fancyFogSphere", false);
 
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);
@@ -28,6 +31,7 @@ public class FluffyFurClientConfig {
         BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").define("bloodParticle", false);
         LIGHTNING_BOLT_EFFECT = builder.comment("Enable custom effect of lightning bolt.").define("lightningBoltEffect", true);
         EXPLOSION_EFFECT = builder.comment("Enable custom effect of explosion.").define("explosionEffect", true);
+        EXPLOSION_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of explosion.").define("explosionEffectScreenshake", true);
         builder.pop();
 
         builder.comment("Shaders").push("shaders");
