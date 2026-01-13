@@ -1,43 +1,43 @@
-package mod.maxbogomol.fluffy_fur.mixin.client;
+package mod.maxbogomol.fluffy_fur.mixin.client.sodium;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import me.jellysquid.mods.sodium.client.render.immediate.CloudRenderer;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.ModList;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LevelRenderer.class)
-public class LevelRendererMixin {
+@Mixin(CloudRenderer.class)
+public abstract class CloudRendererMixin implements IMixinConfigPlugin {
     @Unique
     private float fluffy_fur$partialTick;
 
-    @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShader(Ljava/util/function/Supplier;)V"), method = "renderSnowAndRain")
-    private void fluffy_fur$renderSnowAndRain(LightTexture lightTexture, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
-        if (Minecraft.useShaderTransparency()) {
-            if (FluffyFurClientConfig.FABULOUS_WEATHER_FIX.get()) {
-                RenderSystem.depthMask(false);
-            }
+    @Override
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.startsWith("me.jellysquid.mods.sodium.client.render.immediate.CloudRenderer")) {
+            return ModList.get().isLoaded("embeddium") || ModList.get().isLoaded("rubidium") || ModList.get().isLoaded("sodium");
         }
+        return false;
     }
 
-    @Inject(method = "renderClouds", at = @At(value = "HEAD"))
-    private void fluffy_fur$renderClouds(PoseStack poseStack, Matrix4f projectionMatrix, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
+    @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
+    private void fluffy_fur$renderClouds(ClientLevel level, LocalPlayer player, PoseStack poseStack, Matrix4f projectionMatrix, float ticks, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
         fluffy_fur$partialTick = partialTick;
     }
 
-    @ModifyVariable(method = "renderClouds", at = @At("STORE"), ordinal = 4)
-    private double fluffy_fur$renderClouds(double value) {
+    @ModifyVariable(method = "render", at = @At("STORE"), ordinal = 3, remap = false)
+    private double fluffy_fur$render(double value) {
         if (FluffyFurClientConfig.DAYLIGHT_CLOUDS.get()) {
             Level level = FluffyFur.proxy.getLevel();
             if (level != null) {

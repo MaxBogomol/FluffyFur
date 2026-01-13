@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE,
+            FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
             MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
@@ -24,6 +24,8 @@ public class FluffyFurClientConfig {
         FANCY_FOG = builder.comment("Enable fancy fog.").define("fancyFog", true);
         FANCY_FOG_INTENSITY = builder.comment("Intensity of fancy fog.").defineInRange("fancyFogntensity", 2d, 0f, 100d);
         FANCY_FOG_SPHERE = builder.comment("Enable sphere shape of fancy fog.").define("fancyFogSphere", false);
+        DAYLIGHT_CLOUDS = builder.comment("Enable dependence of clouds on day time.").define("daylightClouds", true);
+        DAYLIGHT_CLOUDS_IGNORE = builder.comment("Enable dependence of clouds on day time when daylight cycle disabled.").define("daylightCloudsIgnore", false);
 
         builder.comment("Particles").push("particles");
         ITEM_PARTICLE = builder.comment("Enable dropping items particles.").define("itemParticle", true);

@@ -50,7 +50,8 @@
     "client.SpectatorMenuMixin",
     "client.SplashManagerMixin",
     "client.TitleScreenMixin",
-    "client.curios.CurioTooltipMixin"
+    "client.curios.CurioTooltipMixin",
+    "client.sodium.CloudRendererMixin"
   ],
   "minVersion": "0.8",
   "injectors": {
