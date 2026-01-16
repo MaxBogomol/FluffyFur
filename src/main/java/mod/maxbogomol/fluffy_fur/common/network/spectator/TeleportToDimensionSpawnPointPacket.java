@@ -9,7 +9,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
-public class TeleportToLevelSpawnPointPacket extends ServerPacket {
+public class TeleportToDimensionSpawnPointPacket extends ServerPacket {
 
     @Override
     public void execute(Supplier<NetworkEvent.Context> context) {
@@ -21,10 +21,10 @@ public class TeleportToLevelSpawnPointPacket extends ServerPacket {
     }
 
     public static void register(SimpleChannel instance, int index) {
-        instance.registerMessage(index, TeleportToLevelSpawnPointPacket.class, TeleportToLevelSpawnPointPacket::encode, TeleportToLevelSpawnPointPacket::decode, TeleportToLevelSpawnPointPacket::handle);
+        instance.registerMessage(index, TeleportToDimensionSpawnPointPacket.class, TeleportToDimensionSpawnPointPacket::encode, TeleportToDimensionSpawnPointPacket::decode, TeleportToDimensionSpawnPointPacket::handle);
     }
 
-    public static TeleportToLevelSpawnPointPacket decode(FriendlyByteBuf buf) {
-        return new TeleportToLevelSpawnPointPacket();
+    public static TeleportToDimensionSpawnPointPacket decode(FriendlyByteBuf buf) {
+        return new TeleportToDimensionSpawnPointPacket();
     }
 }

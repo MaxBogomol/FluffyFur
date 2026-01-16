@@ -65,18 +65,24 @@
   "effect.fluffy_fur.swim_speed": "wotah speedz",
   "effect.fluffy_fur.swim_slowness": "wotah wet",
 
-  "_comment_5": "menyiuu",
+  "_comment_5": "Attributes",
+  "attribute.name.fluffy_fur.size_scale": "Size Scale",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Jump Height Amplifier",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Camera Distance Amplifier",
+
+  "_comment_6": "menyiuu",
   "mod_description.fluffy_fur": "Fluf fur ^･ω･^ - silly fox mod librari. \n adds cul things (shrimps and fishz) and also cul visualz an and shrimple devlpment and. \n \n Meow mew meow mewow :3 \n plz don use optifine.",
 
   "panorama.minecraft.vanilla": "vanillian",
   "panorama.fluffy_fur.fluffy_zone": "furry zone",
 
-  "_comment_6": "guiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyui",
+  "_comment_7": "guiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyuiyui",
   "_comment_6.o": "yuiyuiyuiyuiyuiyuiyui ... yuiyuiyuiyui ... ∞",
   "gui.fluffy_fur.menu.optifine.0": "atenshion kitteh! it seems you have  o p t i f i n e  installed",
   "gui.fluffy_fur.menu.optifine.1": "The  o p t i f i n e  is BREAKING the render of the whole Universe itself very very BAD",
   "gui.fluffy_fur.menu.optifine.2": "(ples delet it >:3)",
   "gui.fluffy_fur.menu.piracy": "PIWACY IS BAD (du not steal games, cats)",
+  "gui.fluffy_fur.menu.hardcore_lan": "Sooner or later, your existence must cease",
 
   "gui.fluffy_fur.menu.panoramas": "panamas",
   "gui.fluffy_fur.menu.mods": "kats!",
@@ -100,7 +106,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Silli dreamz :3c",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "<3 hearts ~~",
 
-  "_comment_7": "car manipulation (carulation?; caplation?; mani-car-lation?; no correlation (or should've I said car-relation????) idk.)",
+  "gui.spectator_menu.spawn_point_teleport": "Teleport to Spawn Point",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Teleport to Dimension Spawn Point",
+  "gui.spectator_menu.dimension_teleport": "Teleport to Dimension",
+  "gui.spectator_menu.dimension_teleport.prompt": "Select a dimension to teleport to",
+  "gui.spectator_menu.dimension_teleport.unknown": "Unknown dimension",
+
+  "_comment_8": "car manipulation (carulation?; caplation?; mani-car-lation?; no correlation (or should've I said car-relation????) idk.)",
   "commands.fluffy_fur.item_skin.unknown": "No item fur exist wth ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Appleid fur %1$s to %2$s kitth",
   "commands.fluffy_fur.skin.item.set.single": "Applied fur %1$s to %2$s's item",
@@ -109,11 +121,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Remuvd fur from %s's thing",
   "commands.fluffy_fur.skin.item.remove.failed": "Faild to remuv itm fur :<",
 
-  "_comment_8": "beykinds",
+  "_comment_9": "beykinds",
   "key.category.fluffy_fur.general": "fufy flur",
   "key.fluffy_fur.skin_menu": "kat meownu",
 
-  "_comment_9": "Cat-figuration",
+  "_comment_10": "Cat-figuration",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "kat shake insanity",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "insanity of shaek",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "itum particel",

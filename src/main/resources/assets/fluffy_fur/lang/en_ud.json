@@ -60,17 +60,23 @@
   "effect.fluffy_fur.swim_speed": "pǝǝdS ɯᴉʍS",
   "effect.fluffy_fur.swim_slowness": "ssǝuʍoꞁS ɯᴉʍS",
 
-  "_comment_5": "nuǝW",
+  "_comment_5": "sǝʇnqᴉɹʇʇⱯ",
+  "attribute.name.fluffy_fur.size_scale": "ǝꞁɐɔS ǝzᴉS",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "ɹǝᴉɟᴉꞁdɯⱯ ʇɥƃᴉǝH dɯnᒋ",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "ɹǝᴉɟᴉꞁdɯⱯ ǝɔuɐʇsᴉᗡ ɐɹǝɯɐƆ",
+
+  "_comment_6": "nuǝW",
   "mod_description.fluffy_fur": "Ɛ: ʍoǝW \n \n ˙ʇuǝɯdoꞁǝʌǝp ƃuᴉʎɟᴉꞁdɯᴉs puɐ ƃuᴉɹǝpuǝɹ ɹoɟ sƃuᴉɥʇ snoᴉɹɐʌ sppⱯ \n ˙ꞁoɯoƃoᗺxɐW ʎq ʎɹɐɹqᴉꞁ poɯ ɐ - ɹnᖵ ʎɟɟnꞁᖵ",
 
   "panorama.minecraft.vanilla": "ɐꞁꞁᴉuɐɅ",
   "panorama.fluffy_fur.fluffy_zone": "ǝuoZ ʎɟɟnꞁᖵ",
 
-  "_comment_6": "ᴉn⅁",
+  "_comment_7": "ᴉn⅁",
   "gui.fluffy_fur.menu.optifine.0": "pǝꞁꞁɐʇsuᴉ ǝuᴉɟᴉʇdO ǝʌɐɥ noʎ sɯǝǝs ʇI ¡NOI⊥NƎ⊥⊥Ɐ",
   "gui.fluffy_fur.menu.optifine.1": "spoɯ ɹǝɥʇo puɐ ɹnᖵ ʎɟɟnꞁᖵ sʞɐǝɹq ǝuᴉɟᴉʇdO",
   "gui.fluffy_fur.menu.optifine.2": "Ɛ: ǝuᴉɟᴉʇdO ǝʇǝꞁǝᗡ",
   "gui.fluffy_fur.menu.piracy": "¡¡¡ᗡⱯᗺ SI ⅄ƆⱯᴚIԀ",
+  "gui.fluffy_fur.menu.hardcore_lan": "ǝsɐǝɔ ʇsnɯ ǝɔuǝʇsᴉxǝ ɹnoʎ 'ɹǝʇɐꞁ ɹo ɹǝuooS",
 
   "gui.fluffy_fur.menu.panoramas": "sɐɯɐɹouɐԀ",
   "gui.fluffy_fur.menu.mods": "spoW",
@@ -94,7 +100,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "sɯɐǝɹᗡ ʇǝꞁɹɐɔS",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "sʇɹɐǝH ʞuᴉԀ",
 
-  "_comment_7": "spuɐɯɯoƆ",
+  "gui.spectator_menu.spawn_point_teleport": "ʇuᴉoԀ uʍɐdS oʇ ʇɹodǝꞁǝ⊥",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "ʇuᴉoԀ uʍɐdS uoᴉsuǝɯᴉᗡ oʇ ʇɹodǝꞁǝ⊥",
+  "gui.spectator_menu.dimension_teleport": "uoᴉsuǝɯᴉᗡ oʇ ʇɹodǝꞁǝ⊥",
+  "gui.spectator_menu.dimension_teleport.prompt": "oʇ ʇɹodǝꞁǝʇ oʇ uoᴉsuǝɯᴉp ɐ ʇɔǝꞁǝS",
+  "gui.spectator_menu.dimension_teleport.unknown": "uoᴉsuǝɯᴉp uʍouʞu∩",
+
+  "_comment_8": "spuɐɯɯoƆ",
   "commands.fluffy_fur.item_skin.unknown": ",%s, ᗡI ǝɥʇ ɥʇᴉʍ sʇsᴉxǝ uᴉʞs ɯǝʇᴉ oN",
   "commands.fluffy_fur.skin.item.set.multiple": "sɹǝʎɐꞁd %2$s oʇ %1$s uᴉʞs pǝᴉꞁddⱯ",
   "commands.fluffy_fur.skin.item.set.single": "ɯǝʇᴉ s,%2$s oʇ %1$s uᴉʞs pǝᴉꞁddⱯ",
@@ -103,11 +115,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "ɯǝʇᴉ s,%s ɯoɹɟ uᴉʞs pǝʌoɯǝᴚ",
   "commands.fluffy_fur.skin.item.remove.failed": "uᴉʞs ɯǝʇᴉ ǝʌoɯǝɹ oʇ pǝꞁᴉɐᖵ",
 
-  "_comment_8": "spuᴉq ʎǝ⋊",
+  "_comment_9": "spuᴉq ʎǝ⋊",
   "key.category.fluffy_fur.general": "ɹnᖵ ʎɟɟnꞁᖵ",
   "key.fluffy_fur.skin_menu": "nuǝW uᴉʞS",
 
-  "_comment_9": "ƃᴉɟuoƆ",
+  "_comment_10": "ƃᴉɟuoƆ",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "ʎʇᴉsuǝʇuI ǝʞɐɥsuǝǝɹɔS",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "˙ǝʞɐɥsuǝǝɹɔs ɟo ʎʇᴉsuǝʇuI",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "ǝꞁɔᴉʇɹɐԀ ɯǝʇI",

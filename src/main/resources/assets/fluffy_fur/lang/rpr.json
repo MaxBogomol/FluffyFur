@@ -60,17 +60,23 @@
   "effect.fluffy_fur.swim_speed": "Скорость плаванія",
   "effect.fluffy_fur.swim_slowness": "Замедленіе плаванія",
 
-  "_comment_5": "Меню",
+  "_comment_5": "Атрибуты",
+  "attribute.name.fluffy_fur.size_scale": "Размѣръ игрока",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Множитель высоты прыжка",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Множитель отдаленія камеры",
+
+  "_comment_6": "Меню",
   "mod_description.fluffy_fur": "Fluffy Fur - модъ библіотека отъ MaxBogomol. \n Добавляетъ различныя штуки для рендеринга и упрощенія разработки. \n \n Мяу :3",
 
   "panorama.minecraft.vanilla": "Ваниль",
   "panorama.fluffy_fur.fluffy_zone": "Пушистое мѣсто",
 
-  "_comment_6": "Интерфейсъ",
+  "_comment_7": "Интерфейсъ",
   "gui.fluffy_fur.menu.optifine.0": "ВНИМАНІЕ! Кажется, у васъ установленъ Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine ломаетъ Fluffy Fur и другіе моды",
   "gui.fluffy_fur.menu.optifine.2": "Удалите Optifine :3",
   "gui.fluffy_fur.menu.piracy": "ПИРАТСТВО ЭТО ПЛОХО!!!",
+  "gui.fluffy_fur.menu.hardcore_lan": "Рано или поздно, твоё существованіе прекратится ",
 
   "gui.fluffy_fur.menu.panoramas": "Панорамы",
   "gui.fluffy_fur.menu.mods": "Моды",
@@ -94,7 +100,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Алые Грезы",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Розовыя сердечки",
 
-  "_comment_7": "Команды",
+  "gui.spectator_menu.spawn_point_teleport": "Перемѣститься къ точкѣ возрожденіе",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Перемѣститься къ точкѣ возрожденіе измѣренія",
+  "gui.spectator_menu.dimension_teleport": "Перемѣститься въ измѣреніе",
+  "gui.spectator_menu.dimension_teleport.prompt": "Выбрать измѣреніе для перемѣщенія",
+  "gui.spectator_menu.dimension_teleport.unknown": "Неизвѣстное измѣреніе",
+
+  "_comment_8": "Команды",
   "commands.fluffy_fur.item_skin.unknown": "Не существуетъ облика предмета съ ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Наложенъ обликъ %1$s на предметъ у %2$s игроковъ",
   "commands.fluffy_fur.skin.item.set.single": "Наложенъ обликъ %1$s на предметъ %2$s",
@@ -103,11 +115,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Удалёнъ обликъ съ предмета %s",
   "commands.fluffy_fur.skin.item.remove.failed": "Не удалось удалить обликъ",
 
-  "_comment_8": "Привязка клавишъ",
+  "_comment_9": "Привязка клавишъ",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню обликовъ",
 
-  "_comment_9": "Конфиги",
+  "_comment_10": "Конфиги",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Интенсивность тряски экрана",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Интенсивность тряски экрана.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Частицы предметовъ",

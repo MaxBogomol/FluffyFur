@@ -61,16 +61,22 @@
   "effect.fluffy_fur.swim_slowness": "Meow",
 
   "_comment_5": "Meow",
+  "attribute.name.fluffy_fur.size_scale": "Meow",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Meow",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Meow",
+
+  "_comment_6": "Meow",
   "mod_description.fluffy_fur": "Meow",
 
   "panorama.minecraft.vanilla": "Meow",
   "panorama.fluffy_fur.fluffy_zone": "Meow",
 
-  "_comment_6": "Meow",
+  "_comment_7": "Meow",
   "gui.fluffy_fur.menu.optifine.0": "Meow",
   "gui.fluffy_fur.menu.optifine.1": "Meow",
   "gui.fluffy_fur.menu.optifine.2": "Meow",
   "gui.fluffy_fur.menu.piracy": "Meow",
+  "gui.fluffy_fur.menu.hardcore_lan": "Meow",
 
   "gui.fluffy_fur.menu.panoramas": "Meow",
   "gui.fluffy_fur.menu.mods": "Meow",
@@ -94,7 +100,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Meow",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Meow",
 
-  "_comment_7": "Meow",
+  "gui.spectator_menu.spawn_point_teleport": "Meow",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Meow",
+  "gui.spectator_menu.dimension_teleport": "Meow",
+  "gui.spectator_menu.dimension_teleport.prompt": "Meow",
+  "gui.spectator_menu.dimension_teleport.unknown": "Meow",
+
+  "_comment_8": "Meow",
   "commands.fluffy_fur.item_skin.unknown": "Meow",
   "commands.fluffy_fur.skin.item.set.multiple": "Meow",
   "commands.fluffy_fur.skin.item.set.single": "Meow",
@@ -103,11 +115,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Meow",
   "commands.fluffy_fur.skin.item.remove.failed": "Meow",
 
-  "_comment_8": "Meow",
+  "_comment_9": "Meow",
   "key.category.fluffy_fur.general": "Meow",
   "key.fluffy_fur.skin_menu": "Meow",
 
-  "_comment_9": "Meow",
+  "_comment_10": "Meow",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Meow",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Meow",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Meow",

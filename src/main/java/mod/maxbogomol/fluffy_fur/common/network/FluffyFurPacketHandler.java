@@ -32,7 +32,7 @@ public class FluffyFurPacketHandler extends PacketHandler {
         StopUseItemPacket.register(HANDLER, id++);
 
         TeleportToSpawnPointPacket.register(HANDLER, id++);
-        TeleportToLevelSpawnPointPacket.register(HANDLER, id++);
+        TeleportToDimensionSpawnPointPacket.register(HANDLER, id++);
         TeleportToDimensionPacket.register(HANDLER, id++);
         SpectatorClientDimensionsPacket.register(HANDLER, id++);
         SpectatorServerDimensionsPacket.register(HANDLER, id++);

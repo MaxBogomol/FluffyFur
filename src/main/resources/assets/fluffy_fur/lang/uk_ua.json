@@ -60,17 +60,23 @@
   "effect.fluffy_fur.swim_speed": "Швидкість плавання",
   "effect.fluffy_fur.swim_slowness": "Сповільнення плавання",
 
-  "_comment_5": "Меню",
+  "_comment_5": "Attributes",
+  "attribute.name.fluffy_fur.size_scale": "Size Scale",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Jump Height Amplifier",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Camera Distance Amplifier",
+
+  "_comment_6": "Меню",
   "mod_description.fluffy_fur": "Fluffy Fur - мод бібліотека від MaxBogomol. \n Додає різні речі для рендерингу та спрощення розробки. \n \n Мяу :3",
 
   "panorama.minecraft.vanilla": "Ванілла",
   "panorama.fluffy_fur.fluffy_zone": "Пухнаста зона",
 
-  "_comment_6": "Інтерфейс",
+  "_comment_7": "Інтерфейс",
   "gui.fluffy_fur.menu.optifine.0": "УВАГА! Схоже, у вас установлено Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine ламає Fluffy Fur та інші моди",
   "gui.fluffy_fur.menu.optifine.2": "Видаліть Optifine :3",
   "gui.fluffy_fur.menu.piracy": "ПІРАТСТВО - ЦЕ ПОГАНО!!!",
+  "gui.fluffy_fur.menu.hardcore_lan": "Sooner or later, your existence must cease",
 
   "gui.fluffy_fur.menu.panoramas": "Панорами",
   "gui.fluffy_fur.menu.mods": "Моди",
@@ -94,7 +100,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Червоні мрії",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Рожеві сердечка",
 
-  "_comment_7": "Команди",
+  "gui.spectator_menu.spawn_point_teleport": "Teleport to Spawn Point",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Teleport to Dimension Spawn Point",
+  "gui.spectator_menu.dimension_teleport": "Teleport to Dimension",
+  "gui.spectator_menu.dimension_teleport.prompt": "Select a dimension to teleport to",
+  "gui.spectator_menu.dimension_teleport.unknown": "Unknown dimension",
+
+  "_comment_8": "Команди",
   "commands.fluffy_fur.item_skin.unknown": "Не існує образу предмета з ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Застосовано образ %s для %s гравців",
   "commands.fluffy_fur.skin.item.set.single": "Застосовано образ %s на предмет %s",
@@ -103,11 +115,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Видалено образ з предмета %s",
   "commands.fluffy_fur.skin.item.remove.failed": "Не вдалося видалити образ",
 
-  "_comment_8": "Призначення клавіш",
+  "_comment_9": "Призначення клавіш",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Меню образів",
 
-  "_comment_9": "Конфігурація",
+  "_comment_10": "Конфігурація",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Інтенсивність тряски екрана",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Інтенсивність тряски екрана.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Частинки предметів",
