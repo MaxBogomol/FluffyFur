@@ -5,7 +5,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurServerConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            HARDCORE_SPECTATORS_GENERATE_CHUNKS, HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED;
+            HARDCORE_SPECTATORS_GENERATE_CHUNKS, HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED,
+            TELEPORT_TO_SPAWN_SPECTATOR, TELEPORT_TO_DIMENSION_SPAWN_SPECTATOR, TELEPORT_TO_DIMENSION_SPECTATOR;
 
     public FluffyFurServerConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Hardcore").push("hardcore");
@@ -14,6 +15,9 @@ public class FluffyFurServerConfig {
         builder.pop();
 
         builder.comment("Spectator").push("spectator");
+        TELEPORT_TO_SPAWN_SPECTATOR = builder.comment("Enables teleport to spawn in spectator menu.").define("teleportToSpawnSpectator", true);
+        TELEPORT_TO_DIMENSION_SPAWN_SPECTATOR = builder.comment("Enables teleport to dimension spawn in spectator menu.").define("teleportToDimensionSpawnSpectator", true);
+        TELEPORT_TO_DIMENSION_SPECTATOR = builder.comment("Enables teleport to dimension in spectator menu.").define("teleportToDimensionSpectator", true);
         builder.pop();
     }
 

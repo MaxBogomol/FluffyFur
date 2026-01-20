@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.client.gui.spectator;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.spectator.TeleportToSpawnPointPacket;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurServerConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.gui.spectator.SpectatorMenuItem;
@@ -30,6 +31,6 @@ public class TeleportToSpawnPointMenuItem implements SpectatorMenuItem {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return FluffyFurServerConfig.TELEPORT_TO_SPAWN_SPECTATOR.get();
     }
 }

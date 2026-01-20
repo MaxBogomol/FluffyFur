@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.client.spectator.SpectatorDimensionHandler;
 import mod.maxbogomol.fluffy_fur.client.spectator.SpectatorDimensionType;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.spectator.TeleportToDimensionPacket;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurServerConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurSpectatorDimensionTypes;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
@@ -58,6 +59,6 @@ public class TeleportToDimensionMenuItem implements SpectatorMenuItem {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return FluffyFurServerConfig.TELEPORT_TO_DIMENSION_SPECTATOR.get();
     }
 }
