@@ -7,7 +7,6 @@ import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.particle.GenericParticle;
 import mod.maxbogomol.fluffy_fur.client.particle.ICustomParticleRender;
 import mod.maxbogomol.fluffy_fur.client.particle.behavior.ICustomBehaviorParticleRender;
@@ -45,7 +44,7 @@ public class LevelRenderHandler {
     public static void onLevelRender(RenderLevelStageEvent event) {
         PoseStack stack = event.getPoseStack();
         float partialTicks = event.getPartialTick();
-        MultiBufferSource bufferSource = LevelRenderHandler.getDelayedRender();
+        MultiBufferSource bufferSource = getDelayedRender();
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             Vec3 pos = event.getCamera().getPosition();
