@@ -5,8 +5,8 @@
 
 # About:
 
-"Fluffy Fur" - a mod library by MaxBogomol  
-Adds various things for rendering and simplifying development
+"Fluffy Fur" - a mod library by MaxBogomol.  
+Adds various things for rendering and simplifying development.
 
 ![](https://fluffy-village.dev/assets/creations/fluffy_fur/logo.png)
 
@@ -38,6 +38,14 @@ Explosion effect
 Lightning bolt effect  
 Rain effect  
 Blood effect  
+Fancy fog  
+Clouds dependence on day time  
+Torchflower's light  
+
+# Fixes:
+Trident loyality in void  
+Leader zombie max health  
+Armor attribute limit  
 
 # Used by:  
 **[Wizard's Reborn](https://github.com/MaxBogomol/WizardsReborn)**  
