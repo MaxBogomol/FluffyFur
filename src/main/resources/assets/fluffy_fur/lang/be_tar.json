@@ -61,9 +61,9 @@
   "effect.fluffy_fur.swim_slowness": "Запаволеннасьць плаваньня",
 
   "_comment_5": "Attributes",
-  "attribute.name.fluffy_fur.size_scale": "Size Scale",
-  "attribute.name.fluffy_fur.jump_height_amplifier": "Jump Height Amplifier",
-  "attribute.name.fluffy_fur.camera_distance_amplifier": "Camera Distance Amplifier",
+  "attribute.name.fluffy_fur.size_scale": "Множыва памеру",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Множыва вышыні скоку",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Множыва далечыні камеры",
 
   "_comment_6": "Мэню",
   "mod_description.fluffy_fur": "Fluffy Fur - мод-бібліятэка ад MaxBogomolʼа. \n Дадае розныя рэчы для рэндэрінгу й спрашчэньня распрацоўкі. \n \n Мяў :3",
@@ -76,7 +76,7 @@
   "gui.fluffy_fur.menu.optifine.1": "Optifine ламае Fluffy Fur і іншыя моды",
   "gui.fluffy_fur.menu.optifine.2": "Выдаліце Optifine :3",
   "gui.fluffy_fur.menu.piracy": "ПІРАЦТВА ГЭТА КЕПСКА!!!",
-  "gui.fluffy_fur.menu.hardcore_lan": "Sooner or later, your existence must cease",
+  "gui.fluffy_fur.menu.hardcore_lan": "Рана ці позна, ты перастанеш існаваць...",
 
   "gui.fluffy_fur.menu.panoramas": "Панарамы",
   "gui.fluffy_fur.menu.mods": "Моды",
@@ -100,11 +100,11 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Пунсовыя дрымоты",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ружовыя сардэчкі",
 
-  "gui.spectator_menu.spawn_point_teleport": "Teleport to Spawn Point",
-  "gui.spectator_menu.dimension_spawn_point_teleport": "Teleport to Dimension Spawn Point",
-  "gui.spectator_menu.dimension_teleport": "Teleport to Dimension",
-  "gui.spectator_menu.dimension_teleport.prompt": "Select a dimension to teleport to",
-  "gui.spectator_menu.dimension_teleport.unknown": "Unknown dimension",
+  "gui.spectator_menu.spawn_point_teleport": "Тэлепартаваць да пункту спаўна",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Тэлепартаваць да пункту спаўна вымеру",
+  "gui.spectator_menu.dimension_teleport": "Тэлепартаваць да вымеру",
+  "gui.spectator_menu.dimension_teleport.prompt": "Абярыце вымер, каб тэлепартавацца",
+  "gui.spectator_menu.dimension_teleport.unknown": "Невядомы вымер",
 
   "_comment_8": "Каманды",
   "commands.fluffy_fur.item_skin.unknown": "Не існуе скіноў прадметаў з ID '%s'",
