@@ -1,0 +1,22 @@
+{
+    "block.minecraft.netherite_block": "Nedarytavy blok",
+    "item.minecraft.netherite_axe": "Nedarytavaja siakiera",
+    "item.minecraft.netherite_boots": "Nedarytavyja boty",
+    "item.minecraft.netherite_chestplate": "Nedarytavaja kirasa",
+    "item.minecraft.netherite_helmet": "Nedarytavy šlem",
+    "item.minecraft.netherite_hoe": "Nedarytavaja matyka",
+    "item.minecraft.netherite_ingot": "Nedarytavy zlitak",
+    "item.minecraft.netherite_leggings": "Nedarytavyja ponažy",
+    "item.minecraft.netherite_pickaxe": "Nedarytavaja kirka",
+    "item.minecraft.netherite_scrap": "Nedarytavy abłomak",
+    "item.minecraft.netherite_shovel": "Nedarytavaja rydloŭka",
+    "item.minecraft.netherite_sword": "Nedarytavy mieč",
+    "item.minecraft.smithing_template.netherite_upgrade.additions_slot_description": "Zmiaścicie siudy nedarytavy zlitak",
+    "item.minecraft.smithing_template.netherite_upgrade.ingredients": "Nedarytavy zlitak",
+    "subtitles.item.armor.equip_netherite": "Brazgat nedarytavaj brani",
+    "trim_material.minecraft.netherite": "Materyjał - Nedaryt",
+    "upgrade.minecraft.netherite_upgrade": "Nedarytavaje palapšennie",
+    "advancements.husbandry.netherite_hoe.description": "Vykarystajcie nedarytavy zlitak, kab palepšyć matyku, a potym padumajcie, ci ŭsio ŭ žycci vy robicie pravilna",
+    "advancements.nether.netherite_armor.description": "Atrymajcie poŭny kamplekt nedarytavaj brani",
+    "advancements.nether.netherite_armor.title": "Pakryjcie mianie nedarytam"
+}
