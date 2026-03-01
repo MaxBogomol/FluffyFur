@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.common.gui.menu;
+package mod.maxbogomol.fluffy_fur.common.gui.slot;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

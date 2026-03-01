@@ -1,6 +1,7 @@
 package mod.maxbogomol.fluffy_fur.common.gui.menu;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.common.gui.slot.InputSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
