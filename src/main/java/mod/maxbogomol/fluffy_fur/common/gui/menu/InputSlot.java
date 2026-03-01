@@ -1,10 +1,9 @@
-package mod.maxbogomol.fluffy_fur.client.gui.screen;
+package mod.maxbogomol.fluffy_fur.common.gui.menu;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-@Deprecated(forRemoval = true)
 public class InputSlot extends SlotItemHandler {
 
     public InputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {

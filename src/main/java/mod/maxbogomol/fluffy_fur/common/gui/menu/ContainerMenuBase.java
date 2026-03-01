@@ -1,4 +1,4 @@
-package mod.maxbogomol.fluffy_fur.client.gui.screen;
+package mod.maxbogomol.fluffy_fur.common.gui.menu;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import net.minecraft.world.entity.player.Player;
@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-@Deprecated(forRemoval = true)
 public class ContainerMenuBase extends AbstractContainerMenu {
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
