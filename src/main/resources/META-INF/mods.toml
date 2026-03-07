@@ -1,12 +1,14 @@
 modLoader="javafml"
 loaderVersion="[47,)"
 license="GPL-2.0"
+issueTrackerURL="https://github.com/MaxBogomol/FluffyFur/issues"
 
 [[mods]]
     modId="fluffy_fur"
     version="${file.jarVersion}"
-    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/FluffyFur/refs/heads/master/update.json"
     displayName="Fluffy Fur"
+    updateJSONURL = "https://raw.githubusercontent.com/MaxBogomol/FluffyFur/refs/heads/master/update.json"
+    displayURL = "https://fluffy-village.dev/pages/eng/creations/fluffy_fur.html"
     logoFile="fluffy_fur.png"
     authors="MaxBogomol"
     description="Adds fluffy and renders things"
