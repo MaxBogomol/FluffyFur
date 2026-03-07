@@ -37,12 +37,6 @@ public class FluffyFurCurios {
         LOADED = ModList.get().isLoaded(MOD_ID);
     }
 
-    public static void setup() {
-        if (isLoaded()) {
-            ClientLoadedOnly.init();
-        }
-    }
-
     public static boolean isLoaded() {
         return LOADED;
     }

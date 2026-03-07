@@ -10,6 +10,7 @@ import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.client.splash.SplashHandler;
 import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.integration.client.fusion.FluffyFurFusion;
+import mod.maxbogomol.fluffy_fur.integration.common.curios.FluffyFurCurios;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
 import net.minecraft.client.resources.language.LanguageInfo;
 import net.minecraft.network.chat.Component;
@@ -66,6 +67,10 @@ public class FluffyFurClient {
         setupLanguages();
 
         ShadersIntegration.init();
+
+        if (FluffyFurCurios.isLoaded()) {
+            FluffyFurCurios.ClientLoadedOnly.init();
+        }
     }
 
     public static FluffyFurMod MOD_INSTANCE;

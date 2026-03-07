@@ -98,8 +98,6 @@ public class FluffyFur {
             skin.setupSkinEntries();
         }
 
-        FluffyFurCurios.setup();
-
         for (Package pack: Arrays.stream(Package.getPackages()).toList()) {
             String string = pack.getName();
             int dots = 0;
