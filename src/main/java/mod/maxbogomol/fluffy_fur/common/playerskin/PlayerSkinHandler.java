@@ -157,8 +157,10 @@ public class PlayerSkinHandler {
 
     public static float getPlayerSizeScale(Player player) {
         if (player != null) {
-            AttributeInstance attribute = player.getAttribute(FluffyFurAttributes.SIZE_SCALE.get());
-            if (attribute != null) return (float) attribute.getValue();
+            if (player.getAttributes() != null) {
+                AttributeInstance attribute = player.getAttribute(FluffyFurAttributes.SIZE_SCALE.get());
+                if (attribute != null) return (float) attribute.getValue();
+            }
         }
         return 1;
     }

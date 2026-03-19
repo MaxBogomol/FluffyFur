@@ -82,7 +82,7 @@ public abstract class EntityMixin implements ITouchingFluid {
         }
     }
 
-    @Inject(method = "Lnet/minecraft/world/entity/Entity;getEyeHeight()F", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getEyeHeight()F", at = @At("RETURN"), cancellable = true)
     private void fluffy_fur$getEyeHeight(CallbackInfoReturnable<Float> cir) {
         Entity self = (Entity) ((Object) this);
         if (self instanceof Player player) {
