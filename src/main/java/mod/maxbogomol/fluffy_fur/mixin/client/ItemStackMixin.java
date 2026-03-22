@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(ItemStack.class)
+@Mixin(value = ItemStack.class, priority = 100)
 public class ItemStackMixin {
     @Unique
     public AttributeModifier fluffy_fur$attributeModifier;
