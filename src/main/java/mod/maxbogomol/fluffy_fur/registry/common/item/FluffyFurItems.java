@@ -1,23 +1,28 @@
 package mod.maxbogomol.fluffy_fur.registry.common.item;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.common.item.PlushItem;
-import mod.maxbogomol.fluffy_fur.common.item.SillyTreatItem;
-import mod.maxbogomol.fluffy_fur.common.item.TestShrimpItem;
-import mod.maxbogomol.fluffy_fur.common.item.ThingItem;
+import mod.maxbogomol.fluffy_fur.common.item.*;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurModels;
 import mod.maxbogomol.fluffy_fur.registry.common.FluffyFurSounds;
 import mod.maxbogomol.fluffy_fur.registry.common.block.FluffyFurBlocks;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Map;
 
 public class FluffyFurItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FluffyFur.MOD_ID);
@@ -35,6 +40,7 @@ public class FluffyFurItems {
     public static final RegistryObject<Item> ONJERLAY_PLUSH = ITEMS.register("onjerlay_plush", () -> new PlushItem(FluffyFurBlocks.ONJERLAY_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SAMMYSEMICOLON_PLUSH = ITEMS.register("sammysemicolon_plush", () -> new PlushItem(FluffyFurBlocks.SAMMYSEMICOLON_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> VIOLUNAE_PLUSH = ITEMS.register("violunae_plush", () -> new PlushItem(FluffyFurBlocks.VIOLUNAE_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> FIRCH_PLUSH = ITEMS.register("firch_plush", () -> new FirchPlushItem(FluffyFurBlocks.FIRCH_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> FURRYFOXES_PLUSH = ITEMS.register("furryfoxes_plush", () -> new PlushItem(FluffyFurBlocks.FURRYFOXES_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> BOYKISSER_PLUSH = ITEMS.register("boykisser_plush", () -> new PlushItem(FluffyFurBlocks.BOYKISSER_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> NANACHI_PLUSH = ITEMS.register("nanachi_plush", () -> new PlushItem(FluffyFurBlocks.NANACHI_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -50,6 +56,16 @@ public class FluffyFurItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientRegistryEvents {
+        @SubscribeEvent
+        public static void modelBakeItems(ModelEvent.ModifyBakingResult event) {
+            Map<ResourceLocation, BakedModel> map = event.getModels();
+
+            FluffyFurModels.addCustomRenderItemModel(map, FIRCH_PLUSH.getId());
+        }
     }
 
     public static void composterItem(float chance, ItemLike item) {

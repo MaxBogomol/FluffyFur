@@ -5,6 +5,8 @@ import mod.maxbogomol.fluffy_fur.client.model.armor.EmptyArmorModel;
 import mod.maxbogomol.fluffy_fur.client.model.book.CustomBookModel;
 import mod.maxbogomol.fluffy_fur.client.model.item.*;
 import mod.maxbogomol.fluffy_fur.client.model.playerskin.*;
+import mod.maxbogomol.fluffy_fur.client.render.item.FluffyFurItemRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -14,6 +16,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,8 +44,25 @@ public class FluffyFurModels {
 
     public static CustomBookModel BOOK = null;
 
+    public static ModelResourceLocation FIRCH_PLUSH_PIECE = addCustomModel("firch_plush_piece");
+    public static ModelResourceLocation FIRCH_PLUSH_EAR = addCustomModel("firch_plush_ear");
+
+    public static FluffyFurItemRenderer itemRenderer;
+
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
+        @SubscribeEvent
+        public static void registerModels(FMLClientSetupEvent event) {
+            Minecraft minecraft = Minecraft.getInstance();
+            itemRenderer = new FluffyFurItemRenderer(minecraft.getBlockEntityRenderDispatcher(), minecraft.getEntityModels());
+        }
+
+        @SubscribeEvent
+        public static void modelRegistry(ModelEvent.RegisterAdditional event) {
+            event.register(FIRCH_PLUSH_PIECE);
+            event.register(FIRCH_PLUSH_EAR);
+        }
+
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(CAT_EARS_LAYER, CatEarsModel::createBodyLayer);
@@ -78,6 +98,10 @@ public class FluffyFurModels {
 
     public static ModelLayerLocation addLayer(String modId, String layer) {
         return new ModelLayerLocation(new ResourceLocation(modId, layer), "main");
+    }
+
+    public static ModelResourceLocation addCustomModel(String model) {
+        return new ModelResourceLocation(FluffyFur.MOD_ID, model, "");
     }
 
     public static ModelResourceLocation addCustomModel(String modId, String model) {

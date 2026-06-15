@@ -5,9 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class FluffyFurConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
-            LEADER_ZOMBIE_FIX;
-    public static ForgeConfigSpec.ConfigValue<Boolean>
-            TRIDENT_LOYALTY_VOID;
+            LEADER_ZOMBIE_FIX, TRIDENT_LOYALTY_VOID;
     public static ForgeConfigSpec.ConfigValue<Double>
             VOID_HEIGHT;
 

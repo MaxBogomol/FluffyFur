@@ -1,0 +1,49 @@
+{
+	"ambientocclusion": false,
+	"credit": "Model: OnixTheCat; Texture: Firch",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "fluffy_fur:plush/firch",
+		"particle": "fluffy_fur:plush/firch"
+	},
+	"elements": [
+		{
+			"name": "ear_l1",
+			"from": [6, 6, 7.5],
+			"to": [10, 10, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-1.5, 6, 0.25]},
+			"faces": {
+				"north": {"uv": [11.75, 0.25, 10.75, 1.25], "texture": "#0"},
+				"east": {"uv": [12, 0.25, 11.75, 1.25], "texture": "#0"},
+				"south": {"uv": [13, 0.25, 12, 1.25], "texture": "#0"},
+				"west": {"uv": [10.75, 0.25, 10.5, 1.25], "texture": "#0"},
+				"up": {"uv": [10.75, 0.25, 11.75, 0], "texture": "#0"},
+				"down": {"uv": [11.75, 0, 12.75, 0.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "ear_l2",
+			"from": [5.875, 5.875, 7.375],
+			"to": [10.125, 10.125, 8.625],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-1.5, 6, 0.25]},
+			"faces": {
+				"north": {"uv": [14.25, 0.25, 13.25, 1.25], "texture": "#0"},
+				"east": {"uv": [14.5, 0.25, 14.25, 1.25], "texture": "#0"},
+				"south": {"uv": [15.5, 0.25, 14.5, 1.25], "texture": "#0"},
+				"west": {"uv": [13.25, 0.25, 13, 1.25], "texture": "#0"},
+				"up": {"uv": [13.25, 0.25, 14.25, 0], "texture": "#0"},
+				"down": {"uv": [14.25, 0, 15.25, 0.25], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "ear",
+			"origin": [0, 11.75, 0.25],
+			"rotation": [-25, 0, 0],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}
