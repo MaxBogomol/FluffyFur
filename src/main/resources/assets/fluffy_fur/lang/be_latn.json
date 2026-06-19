@@ -19,6 +19,7 @@
   "block.fluffy_fur.onjerlay_plush": "Plušavy Onierlay",
   "block.fluffy_fur.sammysemicolon_plush": "Plušavy SammySemicolon",
   "block.fluffy_fur.violunae_plush": "Plušavy Violunae",
+  "block.fluffy_fur.firch_plush": "Plušavy Plush",
   "block.fluffy_fur.furryfoxes_plush": "Plušavy FurryFoxes",
   "block.fluffy_fur.boykisser_plush": "Plušavy bojkisier",
   "block.fluffy_fur.nanachi_plush": "Plušavaje Nanačy",
@@ -60,17 +61,23 @@
   "effect.fluffy_fur.swim_speed": "Chutkasć płavannia",
   "effect.fluffy_fur.swim_slowness": "Zapavolennasć płavannia",
 
-  "_comment_5": "Mieniu",
+  "_comment_5": "Attributes",
+  "attribute.name.fluffy_fur.size_scale": "Množyva pamieru",
+  "attribute.name.fluffy_fur.jump_height_amplifier": "Množyva vyšyni skoku",
+  "attribute.name.fluffy_fur.camera_distance_amplifier": "Množyva dalečyni kamiery",
+
+  "_comment_6": "Mieniu",
   "mod_description.fluffy_fur": "Fluffy Fur - mod-biblijateka ad MaxBogomola. \n Dadaje roznyja rečy dla renderinhu i spraščennia raspracoŭki. \n \n Miaŭ :3",
 
   "panorama.minecraft.vanilla": "Vaniła",
   "panorama.fluffy_fur.fluffy_zone": "Pušystaja zona",
 
-  "_comment_6": "GUI",
+  "_comment_7": "GUI",
   "gui.fluffy_fur.menu.optifine.0": "UVAHA! Zdajecca, vy ŭstalavali Optifine",
   "gui.fluffy_fur.menu.optifine.1": "Optifine łamaje Fluffy Fur i inšyja mody",
   "gui.fluffy_fur.menu.optifine.2": "Vydalicie Optifine :3",
   "gui.fluffy_fur.menu.piracy": "PIRACTVA HETA KJePSKA!!!",
+  "gui.fluffy_fur.menu.hardcore_lan": "Rana ci pozna, ty pierastanieš isnavać...",
 
   "gui.fluffy_fur.menu.panoramas": "Panaramy",
   "gui.fluffy_fur.menu.mods": "Mody",
@@ -94,7 +101,13 @@
   "gui.fluffy_fur.skin_menu.cape.scarlet_dreams": "Punsovyja drymoty",
   "gui.fluffy_fur.skin_menu.effect.pink_hearts": "Ružovyja sardečki",
 
-  "_comment_7": "Kamandy",
+  "gui.spectator_menu.spawn_point_teleport": "Telepartavać da punkta spaŭna",
+  "gui.spectator_menu.dimension_spawn_point_teleport": "Telepartavać da punkta spaŭna vymieru",
+  "gui.spectator_menu.dimension_teleport": "Telepartavać da vymieru",
+  "gui.spectator_menu.dimension_teleport.prompt": "Abiarycie vymier, kab telepartavacca",
+  "gui.spectator_menu.dimension_teleport.unknown": "Nieviadomy vymier",
+
+  "_comment_8": "Kamandy",
   "commands.fluffy_fur.item_skin.unknown": "Nie isnuje skinoŭ pradmietaŭ z ID '%s'",
   "commands.fluffy_fur.skin.item.set.multiple": "Nakładzieny skin %s u %s hulcoŭ",
   "commands.fluffy_fur.skin.item.set.single": "Nakładzieny skin %s na pradmiet %s",
@@ -103,11 +116,11 @@
   "commands.fluffy_fur.skin.item.remove.single": "Vydaleny skin u pradmieta %s",
   "commands.fluffy_fur.skin.item.remove.failed": "Zdaryłasia pamyłka pry vydalenni skina",
 
-  "_comment_8": "Pryviazka kłavišaŭ",
+  "_comment_9": "Pryviazka kłavišaŭ",
   "key.category.fluffy_fur.general": "Fluffy Fur",
   "key.fluffy_fur.skin_menu": "Mieniu skinoŭ",
 
-  "_comment_9": "Konfih",
+  "_comment_10": "Konfih",
   "config.client.fluffy_fur.graphics.screenshakeIntensity": "Moc traski ekrana",
   "config.client.fluffy_fur.graphics.screenshakeIntensity.desc": "Moc traski ekrana.",
   "config.client.fluffy_fur.graphics.particles.itemParticle": "Čascinki pradmietaŭ",
