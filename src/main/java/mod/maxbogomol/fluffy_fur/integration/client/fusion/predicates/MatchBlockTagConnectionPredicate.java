@@ -2,8 +2,8 @@ package mod.maxbogomol.fluffy_fur.integration.client.fusion.predicates;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.supermartijn642.fusion.api.texture.types.connecting.predicates.ConnectionDirection;
-import com.supermartijn642.fusion.api.texture.types.connecting.predicates.ConnectionPredicate;
+import com.supermartijn642.fusion.api.predicate.ConnectionDirection;
+import com.supermartijn642.fusion.api.predicate.ConnectionPredicate;
 import com.supermartijn642.fusion.api.util.Serializer;
 import com.supermartijn642.fusion.util.IdentifierUtil;
 import net.minecraft.core.Direction;
