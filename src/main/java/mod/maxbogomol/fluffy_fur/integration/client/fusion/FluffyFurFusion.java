@@ -1,6 +1,6 @@
 package mod.maxbogomol.fluffy_fur.integration.client.fusion;
 
-import com.supermartijn642.fusion.api.predicate.FusionPredicateRegistry;
+import com.supermartijn642.fusion.api.texture.types.connecting.predicates.FusionConnectionPredicateRegistry;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.integration.client.fusion.predicates.MatchBlockTagConnectionPredicate;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +12,7 @@ public class FluffyFurFusion {
 
     public static class ClientLoadedOnly {
         public static void init() {
-            FusionPredicateRegistry.registerConnectionPredicate(new ResourceLocation(FluffyFur.MOD_ID, "match_block_tag"), MatchBlockTagConnectionPredicate.SERIALIZER);
+            FusionConnectionPredicateRegistry.registerConnectionPredicate(new ResourceLocation(FluffyFur.MOD_ID, "match_block_tag"), MatchBlockTagConnectionPredicate.SERIALIZER);
         }
     }
 
