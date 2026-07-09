@@ -80,9 +80,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:embeddium-908741:${embeddium_version}")
     implementation fg.deobf("curse.maven:oculus-581495:${oculus_version}")
-    implementation fg.deobf("curse.maven:fusion-connected-textures-854949:${fusion_version}")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
+    compileOnly fg.deobf("curse.maven:fusion-connected-textures-854949:${fusion_version}")
 
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_version}")

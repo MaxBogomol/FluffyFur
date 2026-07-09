@@ -10,10 +10,10 @@ public class FluffyFurConfig {
             VOID_HEIGHT;
 
     public FluffyFurConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("Misc").push("misc");
-        TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyalty in the void.").define("tridentLoyaltyVoid", true);
-        VOID_HEIGHT = builder.comment("Height of void.").define("voidHeight", -32d);
-        LEADER_ZOMBIE_FIX = builder.comment("Enable leader zombie health fix.").define("leaderZombieFix", true);
+        builder.comment("Misc").translation("config.common.fluffy_fur.misc").push("misc");
+        TRIDENT_LOYALTY_VOID = builder.comment("Enables invulnerability of a trident enchanted to a loyalty in the void.").translation("config.common.fluffy_fur.misc.tridentLoyaltyVoid").define("tridentLoyaltyVoid", true);
+        VOID_HEIGHT = builder.comment("Height of void.").translation("config.common.fluffy_fur.misc.voidHeight").define("voidHeight", -32d);
+        LEADER_ZOMBIE_FIX = builder.comment("Enable leader zombie health fix.").translation("config.common.fluffy_fur.misc.leaderZombieFix").define("leaderZombieFix", true);
         builder.pop();
     }
 

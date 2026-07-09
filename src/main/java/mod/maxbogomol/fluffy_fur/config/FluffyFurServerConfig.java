@@ -9,15 +9,15 @@ public class FluffyFurServerConfig {
             TELEPORT_TO_SPAWN_SPECTATOR, TELEPORT_TO_DIMENSION_SPAWN_SPECTATOR, TELEPORT_TO_DIMENSION_SPECTATOR;
 
     public FluffyFurServerConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("Hardcore").push("hardcore");
-        HARDCORE_SPECTATORS_GENERATE_CHUNKS = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore.").define("hardcoreSpectatorsGenerateChunks", true);
-        HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore on dedicated servers.").define("hardcoreSpectatorsGenerateChunksDedicated", false);
+        builder.comment("Hardcore").translation("config.common.fluffy_fur.hardcore").push("hardcore");
+        HARDCORE_SPECTATORS_GENERATE_CHUNKS = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore.").translation("config.common.fluffy_fur.hardcore.hardcoreSpectatorsGenerateChunks").define("hardcoreSpectatorsGenerateChunks", true);
+        HARDCORE_SPECTATORS_GENERATE_CHUNKS_DEDICATED = builder.comment("Enables fix of spectatorsGenerateChunks game rule in hardcore on dedicated servers.").translation("config.common.fluffy_fur.hardcore.hardcoreSpectatorsGenerateChunksDedicated").define("hardcoreSpectatorsGenerateChunksDedicated", false);
         builder.pop();
 
-        builder.comment("Spectator").push("spectator");
-        TELEPORT_TO_SPAWN_SPECTATOR = builder.comment("Enables teleport to spawn in spectator menu.").define("teleportToSpawnSpectator", true);
-        TELEPORT_TO_DIMENSION_SPAWN_SPECTATOR = builder.comment("Enables teleport to dimension spawn in spectator menu.").define("teleportToDimensionSpawnSpectator", true);
-        TELEPORT_TO_DIMENSION_SPECTATOR = builder.comment("Enables teleport to dimension in spectator menu.").define("teleportToDimensionSpectator", true);
+        builder.comment("Spectator").translation("config.common.fluffy_fur.spectator").push("spectator");
+        TELEPORT_TO_SPAWN_SPECTATOR = builder.comment("Enables teleport to spawn in spectator menu.").translation("config.common.fluffy_fur.spectator.teleportToSpawnSpectator").define("teleportToSpawnSpectator", true);
+        TELEPORT_TO_DIMENSION_SPAWN_SPECTATOR = builder.comment("Enables teleport to dimension spawn in spectator menu.").translation("config.common.fluffy_fur.spectator.teleportToDimensionSpawnSpectator").define("teleportToDimensionSpawnSpectator", true);
+        TELEPORT_TO_DIMENSION_SPECTATOR = builder.comment("Enables teleport to dimension in spectator menu.").translation("config.common.fluffy_fur.spectator.teleportToDimensionSpectator").define("teleportToDimensionSpectator", true);
         builder.pop();
     }
 
