@@ -1,17 +1,18 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
-import net.minecraft.client.gui.components.LogoRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.*;
 
 public class FluffyFurModsHandler {
+    public static FluffyFurPanoramaRenderer ACTIVE_PANORAMA = new FluffyFurPanoramaRenderer();
+    public static FluffyFurLogoRenderer ACTIVE_LOGO = new FluffyFurLogoRenderer();
+
     public static Map<String, FluffyFurMod> mods = new HashMap<>();
     public static Map<String, FluffyFurPanorama> panoramas = new HashMap<>();
 
@@ -114,25 +115,28 @@ public class FluffyFurModsHandler {
         FluffyFurClientConfig.PANORAMA.set(panorama.getId());
     }
 
+    public static void setActivePanorama(FluffyFurPanorama panorama) {
+        ACTIVE_PANORAMA = panorama.getCustomRenderer();
+        ACTIVE_LOGO = panorama.getCustomLogoRenderer();
+    }
+
     public static void setOpenPanorama(TitleScreen titleScreen, FluffyFurPanorama panorama) {
-        float spin = titleScreen.panorama.spin;
-        float bob = titleScreen.panorama.bob;
-        ResourceLocation base = new ResourceLocation("textures/gui/title/background/panorama");
-        ResourceLocation overlay = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
+        setActivePanorama(panorama);
+        copyPanoramaRenderer(titleScreen.panorama, ACTIVE_PANORAMA);
         if (panorama.getTexture() != null) {
-            base = panorama.getTexture();
+            ACTIVE_PANORAMA.setTexture(panorama.getTexture());
         }
-        TitleScreen.CUBE_MAP = new CubeMap(base);
-        titleScreen.panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
-        TitleScreen.PANORAMA_OVERLAY = overlay;
-        if (panorama.getLogo() != null && FluffyFurClientConfig.PANORAMA_LOGO.get()) {
-            titleScreen.logoRenderer = new FluffyFurLogoRenderer(panorama.getLogo(), titleScreen.logoRenderer.keepLogoThroughFade);
-        } else {
-            if (titleScreen.logoRenderer instanceof FluffyFurLogoRenderer) {
-                titleScreen.logoRenderer = new LogoRenderer(titleScreen.logoRenderer.keepLogoThroughFade);
-            }
+        if (panorama.getLogo() != null) {
+            ACTIVE_LOGO.setLogo(panorama.getLogo());
         }
-        titleScreen.panorama.spin = spin;
-        titleScreen.panorama.bob = bob;
+        titleScreen.panorama = ACTIVE_PANORAMA;
+        if (FluffyFurClientConfig.PANORAMA_LOGO.get()) {
+            titleScreen.logoRenderer = ACTIVE_LOGO;
+        }
+    }
+
+    public static void copyPanoramaRenderer(PanoramaRenderer from, PanoramaRenderer to) {
+        to.spin = from.spin;
+        to.bob = from.bob;
     }
 }

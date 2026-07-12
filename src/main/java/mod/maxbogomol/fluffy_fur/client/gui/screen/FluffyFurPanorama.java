@@ -1,5 +1,7 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -10,6 +12,8 @@ public class FluffyFurPanorama {
     public Component name;
     public ResourceLocation texture = new ResourceLocation("textures/gui/title/background/panorama");
     public ResourceLocation logo;
+    public FluffyFurPanoramaRenderer customRenderer = new FluffyFurPanoramaRenderer();
+    public FluffyFurLogoRenderer customLogoRenderer = new FluffyFurLogoRenderer();
     public ItemStack itemStack = new ItemStack(Items.DIRT);
     public FluffyFurMod mod;
     public int sort = 0;
@@ -26,6 +30,16 @@ public class FluffyFurPanorama {
 
     public FluffyFurPanorama setLogo(ResourceLocation logo) {
         this.logo = logo;
+        return this;
+    }
+
+    public FluffyFurPanorama setCustomRenderer(FluffyFurPanoramaRenderer customRenderer) {
+        this.customRenderer = customRenderer;
+        return this;
+    }
+
+    public FluffyFurPanorama setCustomLogoRenderer(FluffyFurLogoRenderer customLogoRenderer) {
+        this.customLogoRenderer = customLogoRenderer;
         return this;
     }
 
@@ -58,6 +72,14 @@ public class FluffyFurPanorama {
 
     public ResourceLocation getLogo() {
         return logo;
+    }
+
+    public FluffyFurPanoramaRenderer getCustomRenderer() {
+        return customRenderer;
+    }
+
+    public FluffyFurLogoRenderer getCustomLogoRenderer() {
+        return customLogoRenderer;
     }
 
     public ItemStack getItem() {

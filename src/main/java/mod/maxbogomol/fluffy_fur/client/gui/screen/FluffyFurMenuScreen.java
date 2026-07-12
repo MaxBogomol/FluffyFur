@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
@@ -15,8 +16,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.client.renderer.CubeMap;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -31,9 +30,8 @@ import java.util.Optional;
 
 public class FluffyFurMenuScreen extends Screen {
     public Screen lastScreen;
-    public CubeMap CUBE_MAP = new CubeMap(new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/title/background/panorama"));
-    public PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
-    public FluffyFurLogoRenderer logoRenderer;
+    public FluffyFurPanoramaRenderer panorama = new FluffyFurPanoramaRenderer();
+    public FluffyFurLogoRenderer logoRenderer = new FluffyFurLogoRenderer(LOGO, false);
     public long fadeInStart;
 
     private static final ResourceLocation LOGO = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/title/fluffy_fur.png");
@@ -53,7 +51,7 @@ public class FluffyFurMenuScreen extends Screen {
     public FluffyFurMenuScreen(Screen lastScreen) {
         super(Component.empty());
         this.lastScreen = lastScreen;
-        this.logoRenderer = new FluffyFurLogoRenderer(LOGO, false);
+        panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
         if (lastScreen instanceof TitleScreen titleScreen) {
             copyPanorama(titleScreen);
         }
@@ -73,37 +71,18 @@ public class FluffyFurMenuScreen extends Screen {
             selectedPanorama = 0;
         }
         descriptionScroll = 0;
+
+        logoRenderer.keepLogoThroughFade = ((panoramas.get(selectedPanorama) == FluffyFurClient.FLUFFY_PANORAMA));
     }
 
     public void copyPanorama(TitleScreen titleScreen) {
-        CUBE_MAP = TitleScreen.CUBE_MAP;
-        panorama = new PanoramaRenderer(CUBE_MAP);
-
-        panorama.spin = titleScreen.panorama.spin;
-        panorama.bob = titleScreen.panorama.bob;
-    }
-
-    public void setLocalPanorama(FluffyFurPanorama panorama) {
-        float spin = this.panorama.spin;
-        float bob = this.panorama.bob;
-        ResourceLocation base = new ResourceLocation("textures/gui/title/background/panorama");
-        if (panorama.getTexture() != null) {
-            base = panorama.getTexture();
-        }
-        CUBE_MAP = new CubeMap(base);
-        this.panorama = new PanoramaRenderer(CUBE_MAP);
-        this.panorama.spin = spin;
-        this.panorama.bob = bob;
+        FluffyFurModsHandler.copyPanoramaRenderer(titleScreen.panorama, panorama);
     }
 
     @Override
     public void init() {
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
-            this.minecraft.setScreen(this.lastScreen);
-            if (lastScreen instanceof TitleScreen titleScreen) {
-                titleScreen.panorama.spin = panorama.spin;
-                titleScreen.panorama.bob = panorama.bob;
-            }
+            onClose();
         }).bounds(this.width / 2 - 80, this.height / 4 + 152, 160, 20).build());
     }
 
@@ -115,7 +94,7 @@ public class FluffyFurMenuScreen extends Screen {
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         float f = (float) (Util.getMillis() - this.fadeInStart) / 250.0F;
-        this.panorama.render(partialTicks, 1f);
+        this.panorama.render(1f);
         if (lastScreen instanceof TitleScreen titleScreen) {
             titleScreen.logoRenderer.renderLogo(gui, this.width, 1f - f);
         }
@@ -362,7 +341,9 @@ public class FluffyFurMenuScreen extends Screen {
                 if (mouseX >= x + 2 && mouseY >= y + 2 + (i * 20) && mouseX <= x + 102 && mouseY < y + 22 + (i * 20)) {
                     selectedPanorama = index;
                     FluffyFurModsHandler.setPanorama(panoramas.get(selectedPanorama));
-                    setLocalPanorama(panoramas.get(selectedPanorama));
+                    FluffyFurModsHandler.setActivePanorama(panoramas.get(selectedPanorama));
+                    FluffyFurModsHandler.copyPanoramaRenderer(panorama, FluffyFurModsHandler.ACTIVE_PANORAMA);
+                    panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 1.0f, 0.25f));
                     return true;
                 }
@@ -458,11 +439,11 @@ public class FluffyFurMenuScreen extends Screen {
         }, url, true));
     }
 
-    public boolean isPauseScreen() {
-        return false;
-    }
-
-    public boolean shouldCloseOnEsc() {
-        return false;
+    @Override
+    public void onClose() {
+        this.minecraft.setScreen(this.lastScreen);
+        if (lastScreen instanceof TitleScreen titleScreen) {
+            FluffyFurModsHandler.copyPanoramaRenderer(panorama, titleScreen.panorama);
+        }
     }
 }

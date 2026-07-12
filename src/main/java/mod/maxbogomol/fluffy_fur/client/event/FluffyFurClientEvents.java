@@ -18,6 +18,7 @@ import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -81,10 +82,7 @@ public class FluffyFurClientEvents {
         if (screen instanceof TitleScreen titleScreen) {
             FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
             if (panorama != null && !panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
-                boolean setPanorama = !TitleScreen.CUBE_MAP.images[0].equals(panorama.getTexture());
-                if (setPanorama) {
-                    FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
-                }
+                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
             }
         }
     }
@@ -93,7 +91,8 @@ public class FluffyFurClientEvents {
         if (screen instanceof TitleScreen titleScreen) {
             FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
             if (panorama != null && panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
-                FluffyFurModsHandler.setOpenPanorama(titleScreen, FluffyFurClient.VANILLA_PANORAMA);
+                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
+                titleScreen.logoRenderer = new LogoRenderer(false);
             }
         }
     }
@@ -102,6 +101,9 @@ public class FluffyFurClientEvents {
     public void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         ClientTickHandler.clientTick(event);
+        if (event.phase == TickEvent.Phase.START) {
+            FluffyFurModsHandler.ACTIVE_PANORAMA.tick();
+        }
         if (event.phase == TickEvent.Phase.END) {
             if (!minecraft.isPaused()) {
                 Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();

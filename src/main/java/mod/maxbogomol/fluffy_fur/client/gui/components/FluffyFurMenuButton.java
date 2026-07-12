@@ -78,13 +78,13 @@ public class FluffyFurMenuButton extends Button {
     @EventBusSubscriber(value = Dist.CLIENT)
     public static class OpenConfigButtonHandler {
         @SubscribeEvent
-        public static void onGuiInit(ScreenEvent.Init event) {
+        public static void onScreenInit(ScreenEvent.Init event) {
             if (FluffyFurClientConfig.MENU_BUTTON.get()) {
-                Screen gui = event.getScreen();
+                Screen screen = event.getScreen();
 
                 MenuRows menu = null;
                 int rowIdx = 0, offsetX = 0, offsetFreeX = 0, offsetFreeY = 0;
-                if (gui instanceof TitleScreen) {
+                if (screen instanceof TitleScreen) {
                     menu = MenuRows.MAIN_MENU;
                     rowIdx = FluffyFurClientConfig.MENU_BUTTON_ROW.get();
                     offsetX = FluffyFurClientConfig.MENU_BUTTON_ROW_X_OFFSET.get();
@@ -104,12 +104,9 @@ public class FluffyFurMenuButton extends Button {
                             .stream()
                             .filter(w -> w instanceof AbstractWidget)
                             .map(w -> (AbstractWidget) w)
-                            .filter(w -> w.getMessage()
-                                    .getString()
-                                    .equals(I18n.get(target)))
+                            .filter(w -> w.getMessage().getString().equals(I18n.get(target)))
                             .findFirst()
-                            .ifPresent(w -> toAdd
-                                    .setValue(new FluffyFurMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
+                            .ifPresent(w -> toAdd.setValue(new FluffyFurMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_)));
                     if (toAdd.getValue() != null) {
                         event.addListener(toAdd.getValue());
                     }
