@@ -21,9 +21,9 @@ public class FluffyFurPanoramaRenderer extends PanoramaRenderer {
     }
 
     @Override
-    public void render(float partialTick, float alpha) {
+    public void render(float delta, float alpha) {
         float deltaSpin = Mth.lerp(ClientTickHandler.partialTicks, oldSpin, spin);
-        cubeMap.render(this.minecraft, 10.0F, -wrap(deltaSpin, 360.0F), alpha);
+        cubeMap.render(this.minecraft, 10.0F, -deltaSpin, alpha);
     }
 
     public void render(float alpha) {
@@ -38,6 +38,11 @@ public class FluffyFurPanoramaRenderer extends PanoramaRenderer {
         oldSpin = spin;
         float speed = (float) ((double) this.minecraft.options.panoramaSpeed().get());
         spin = spin + speed * 0.1f;
+
+        if (oldSpin > 360f && spin > 360f) {
+            oldSpin = wrap(oldSpin, 360f);
+            spin = wrap(spin, 360f);
+        }
     }
 
     public static float wrap(float value, float max) {
