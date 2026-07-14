@@ -138,5 +138,12 @@ public class FluffyFurModsHandler {
     public static void copyPanoramaRenderer(PanoramaRenderer from, PanoramaRenderer to) {
         to.spin = from.spin;
         to.bob = from.bob;
+        if (to instanceof FluffyFurPanoramaRenderer furTo) {
+            if (from instanceof FluffyFurPanoramaRenderer furFrom) {
+                furTo.oldSpin = furFrom.oldSpin;
+            } else {
+                furTo.oldSpin = from.spin;
+            }
+        }
     }
 }

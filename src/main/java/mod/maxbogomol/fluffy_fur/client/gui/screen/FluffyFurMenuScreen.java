@@ -344,6 +344,9 @@ public class FluffyFurMenuScreen extends Screen {
                     FluffyFurModsHandler.setActivePanorama(panoramas.get(selectedPanorama));
                     FluffyFurModsHandler.copyPanoramaRenderer(panorama, FluffyFurModsHandler.ACTIVE_PANORAMA);
                     panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
+                    if (lastScreen instanceof TitleScreen titleScreen) {
+                        FluffyFurModsHandler.setOpenPanorama(titleScreen, panoramas.get(selectedPanorama));
+                    }
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 1.0f, 0.25f));
                     return true;
                 }
