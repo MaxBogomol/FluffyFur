@@ -35,7 +35,7 @@ public abstract class PlayerRendererMixin {
         poseStack.popPose();
     }
 
-    @Inject(at = @At("RETURN"), method = "Lnet/minecraft/client/renderer/entity/player/PlayerRenderer;getRenderOffset(Lnet/minecraft/client/player/AbstractClientPlayer;F)Lnet/minecraft/world/phys/Vec3;", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "getRenderOffset(Lnet/minecraft/client/player/AbstractClientPlayer;F)Lnet/minecraft/world/phys/Vec3;", cancellable = true)
     private void fluffy_fur$getRenderOffset(AbstractClientPlayer entity, float partialTicks, CallbackInfoReturnable<Vec3> cir) {
         if (entity.isCrouching()) {
             float scale = PlayerSkinHandler.getPlayerSizeScale(entity);

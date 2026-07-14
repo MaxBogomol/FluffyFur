@@ -2,6 +2,7 @@ package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.EnhancedMenuHandler;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.TabButton;
 import net.minecraft.resources.ResourceLocation;
@@ -15,12 +16,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TabButtonMixin {
 
     @Inject(at = @At("HEAD"), method = "renderWidget")
-    public void fluffy_fur$renderDirtBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
-        RenderSystem.enableBlend();
+    public void fluffy_fur$renderEnhancedBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        if (FluffyFurClientConfig.ENHANCED_MENU.get()) {
+            RenderSystem.enableBlend();
+        }
     }
 
     @ModifyArg(method = "renderWidget", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitNineSliced(Lnet/minecraft/resources/ResourceLocation;IIIIIIIIIIII)V"))
     private ResourceLocation fluffy_fur$replaceTabButton(ResourceLocation value) {
-        return EnhancedMenuHandler.TAB_BUTTON_LOCATION;
+        if (FluffyFurClientConfig.ENHANCED_MENU.get()) {
+            return EnhancedMenuHandler.TAB_BUTTON_LOCATION;
+        }
+        return value;
     }
 }

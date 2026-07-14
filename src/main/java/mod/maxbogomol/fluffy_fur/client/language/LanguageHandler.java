@@ -25,8 +25,8 @@ public class LanguageHandler {
 
     public static List<String> getStringsFromFile(ResourceLocation resourceLocation) {
         try (BufferedReader bufferedreader = Minecraft.getInstance().getResourceManager().openAsReader(resourceLocation)) {
-            return bufferedreader.lines().map(String::trim).filter((p_118876_) -> {
-                return p_118876_.hashCode() != 125780783;
+            return bufferedreader.lines().map(String::trim).filter((s) -> {
+                return s.hashCode() != 125780783;
             }).collect(Collectors.toList());
         } catch (IOException ioexception) {
             return Collections.emptyList();
