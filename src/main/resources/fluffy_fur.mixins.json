@@ -41,6 +41,8 @@
     "client.ItemInHandRendererMixin",
     "client.ItemStackMixin",
     "client.LanguageManagerMixin",
+    "client.LanguageSelectionListMixin",
+    "client.LanguageSelectScreenMixin",
     "client.LevelRendererMixin",
     "client.LightningBoltMixin",
     "client.LightningBoltRendererMixin",
