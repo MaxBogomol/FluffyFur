@@ -1,6 +1,5 @@
 package mod.maxbogomol.fluffy_fur.client.gui.components;
 
-import mod.maxbogomol.fluffy_fur.FluffyFur;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +8,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class FluffyFurLogoRenderer extends LogoRenderer {
-    public ResourceLocation logo = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/title/fluffy_fur.png");
+    public ResourceLocation logo;
 
     public FluffyFurLogoRenderer(ResourceLocation logo, boolean keepLogoThroughFade) {
         super(keepLogoThroughFade);
@@ -27,14 +26,22 @@ public class FluffyFurLogoRenderer extends LogoRenderer {
 
     @Override
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency) {
-        this.renderLogo(guiGraphics, screenWidth, transparency, 30);
+        renderLogo(guiGraphics, screenWidth, transparency, 30);
     }
 
     @Override
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency, int height) {
-        guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.keepLogoThroughFade ? 1.0F : transparency);
-        int i = screenWidth / 2 - 128;
-        guiGraphics.blit(logo, i, height, 0.0F, 0.0F, 256, 64, 256, 64);
-        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        if (isRenderCustom()) {
+            guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.keepLogoThroughFade ? 1.0F : transparency);
+            int i = screenWidth / 2 - 128;
+            guiGraphics.blit(logo, i, height, 0.0F, 0.0F, 256, 64, 256, 64);
+            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        } else {
+            super.renderLogo(guiGraphics, screenWidth, transparency, height);
+        }
+    }
+
+    public boolean isRenderCustom() {
+        return logo != null;
     }
 }

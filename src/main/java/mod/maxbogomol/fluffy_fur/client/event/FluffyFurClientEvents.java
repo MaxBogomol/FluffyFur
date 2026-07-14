@@ -1,7 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.event;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
-import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurButtonsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
@@ -17,7 +16,6 @@ import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -46,14 +44,18 @@ public class FluffyFurClientEvents {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onOpenScreen(ScreenEvent.Opening event) {
-        panoramaScreen(event.getCurrentScreen());
-        panoramaScreen(event.getNewScreen());
+        setPanoramaScreen(event.getCurrentScreen());
+        setPanoramaScreen(event.getNewScreen());
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onOpenScreenFirst(ScreenEvent.Opening event) {
-        resetPanoramaScreen(event.getCurrentScreen());
-        resetPanoramaScreen(event.getNewScreen());
+    public static void setPanoramaScreen(Screen screen) {
+        if (screen instanceof TitleScreen titleScreen) {
+            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
+            if (panorama != null) {
+                FluffyFurModsHandler.copyPanoramaRenderer(FluffyFurModsHandler.ACTIVE_PANORAMA, titleScreen.panorama);
+                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
+            }
+        }
     }
 
     @SubscribeEvent
@@ -79,25 +81,6 @@ public class FluffyFurClientEvents {
                         ii++;
                     }
                 }
-            }
-        }
-    }
-
-    public static void panoramaScreen(Screen screen) {
-        if (screen instanceof TitleScreen titleScreen) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
-            if (panorama != null && !panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
-                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
-            }
-        }
-    }
-
-    public static void resetPanoramaScreen(Screen screen) {
-        if (screen instanceof TitleScreen titleScreen) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
-            if (panorama != null && panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
-                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
-                titleScreen.logoRenderer = new LogoRenderer(false);
             }
         }
     }

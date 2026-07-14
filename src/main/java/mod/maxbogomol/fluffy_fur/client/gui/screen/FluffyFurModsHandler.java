@@ -6,6 +6,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.PanoramaRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.*;
 
@@ -123,12 +124,24 @@ public class FluffyFurModsHandler {
     public static void setOpenPanorama(TitleScreen titleScreen, FluffyFurPanorama panorama) {
         setActivePanorama(panorama);
         copyPanoramaRenderer(titleScreen.panorama, ACTIVE_PANORAMA);
-        if (panorama.getTexture() != null) {
-            ACTIVE_PANORAMA.setTexture(panorama.getTexture());
-        }
-        if (panorama.getLogo() != null) {
+
+        if (panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
+            ResourceLocation activeTexture = ACTIVE_PANORAMA.cubeMap.images[0];
+            ResourceLocation panoramaTexture = titleScreen.panorama.cubeMap.images[0];
+            if (!panoramaTexture.equals(activeTexture) && (titleScreen.panorama.equals(ACTIVE_PANORAMA) || !(titleScreen.panorama instanceof FluffyFurPanoramaRenderer))) {
+                String textureName = panoramaTexture.toString().substring(0, panoramaTexture.toString().length() - 6);
+                ACTIVE_PANORAMA.setTexture(new ResourceLocation(textureName));
+            }
+        } else {
+            if (panorama.getTexture() != null) {
+                ACTIVE_PANORAMA.setTexture(panorama.getTexture());
+            }
+            if (!TitleScreen.PANORAMA_OVERLAY.equals(panorama.getOverlayTexture())) {
+                TitleScreen.PANORAMA_OVERLAY = panorama.getOverlayTexture();
+            }
             ACTIVE_LOGO.setLogo(panorama.getLogo());
         }
+
         titleScreen.panorama = ACTIVE_PANORAMA;
         if (FluffyFurClientConfig.PANORAMA_LOGO.get()) {
             titleScreen.logoRenderer = ACTIVE_LOGO;

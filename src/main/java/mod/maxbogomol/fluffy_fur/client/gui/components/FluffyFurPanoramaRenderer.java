@@ -7,7 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class FluffyFurPanoramaRenderer extends PanoramaRenderer {
-    public static CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
+    public static ResourceLocation VANILLA_LOCATION = new ResourceLocation("textures/gui/title/background/panorama");
+    public static CubeMap CUBE_MAP = new CubeMap(VANILLA_LOCATION);
 
     public float oldSpin = 0;
 
@@ -18,6 +19,10 @@ public class FluffyFurPanoramaRenderer extends PanoramaRenderer {
     public FluffyFurPanoramaRenderer setTexture(ResourceLocation texture) {
         cubeMap = new CubeMap(texture);
         return this;
+    }
+
+    public FluffyFurPanoramaRenderer resetTexture() {
+        return setTexture(VANILLA_LOCATION);
     }
 
     @Override

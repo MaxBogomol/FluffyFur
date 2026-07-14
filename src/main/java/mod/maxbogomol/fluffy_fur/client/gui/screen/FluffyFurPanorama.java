@@ -11,6 +11,7 @@ public class FluffyFurPanorama {
     public String id;
     public Component name;
     public ResourceLocation texture = new ResourceLocation("textures/gui/title/background/panorama");
+    public ResourceLocation overlayTexture = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
     public ResourceLocation logo;
     public FluffyFurPanoramaRenderer customRenderer = new FluffyFurPanoramaRenderer();
     public FluffyFurLogoRenderer customLogoRenderer = new FluffyFurLogoRenderer();
@@ -25,6 +26,11 @@ public class FluffyFurPanorama {
 
     public FluffyFurPanorama setTexture(ResourceLocation texture) {
         this.texture = texture;
+        return this;
+    }
+
+    public FluffyFurPanorama setOverlayTexture(ResourceLocation texture) {
+        this.overlayTexture = texture;
         return this;
     }
 
@@ -68,6 +74,10 @@ public class FluffyFurPanorama {
 
     public ResourceLocation getTexture() {
         return texture;
+    }
+
+    public ResourceLocation getOverlayTexture() {
+        return overlayTexture;
     }
 
     public ResourceLocation getLogo() {
