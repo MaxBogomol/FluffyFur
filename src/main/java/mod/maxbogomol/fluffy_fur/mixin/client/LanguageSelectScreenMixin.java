@@ -17,10 +17,12 @@ public abstract class LanguageSelectScreenMixin {
     @Inject(method = "render", at = @At(value = "HEAD"))
     public void fluffy_fur$renderEnhancedBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         if (FluffyFurClientConfig.ENHANCED_MENU.get()) {
+            LanguageSelectScreen self = (LanguageSelectScreen) ((Object) this);
             if (Minecraft.getInstance().level == null) {
                 FluffyFurModsHandler.ACTIVE_PANORAMA.render();
+                RenderSystem.enableBlend();
+                guiGraphics.blit(FluffyFurModsHandler.ACTIVE_OVERLAY, 0, 0, self.width, self.height, 0.0F, 0.0F, 16, 128, 16, 128);
             }
-            LanguageSelectScreen self = (LanguageSelectScreen) ((Object) this);
             RenderSystem.enableBlend();
             self.renderBackground(guiGraphics);
         }

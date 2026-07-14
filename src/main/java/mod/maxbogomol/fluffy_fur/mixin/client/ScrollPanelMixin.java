@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.mixin.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.Tesselator;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.EnhancedMenuHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
@@ -22,6 +23,8 @@ public abstract class ScrollPanelMixin {
         if (FluffyFurClientConfig.ENHANCED_MENU.get()) {
             if (Minecraft.getInstance().level == null) {
                 FluffyFurModsHandler.ACTIVE_PANORAMA.render();
+                RenderSystem.enableBlend();
+                guiGraphics.blit(FluffyFurModsHandler.ACTIVE_OVERLAY, 0, 0, Minecraft.getInstance().screen.width, Minecraft.getInstance().screen.height, 0.0F, 0.0F, 16, 128, 16, 128);
             }
         }
     }

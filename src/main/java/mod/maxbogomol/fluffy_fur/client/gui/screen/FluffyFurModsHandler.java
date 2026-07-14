@@ -13,6 +13,7 @@ import java.util.*;
 public class FluffyFurModsHandler {
     public static FluffyFurPanoramaRenderer ACTIVE_PANORAMA = new FluffyFurPanoramaRenderer();
     public static FluffyFurLogoRenderer ACTIVE_LOGO = new FluffyFurLogoRenderer();
+    public static ResourceLocation ACTIVE_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
 
     public static Map<String, FluffyFurMod> mods = new HashMap<>();
     public static Map<String, FluffyFurPanorama> panoramas = new HashMap<>();
@@ -119,6 +120,7 @@ public class FluffyFurModsHandler {
     public static void setActivePanorama(FluffyFurPanorama panorama) {
         ACTIVE_PANORAMA = panorama.getCustomRenderer();
         ACTIVE_LOGO = panorama.getCustomLogoRenderer();
+        ACTIVE_OVERLAY = panorama.getOverlayTexture();
     }
 
     public static void setOpenPanorama(TitleScreen titleScreen, FluffyFurPanorama panorama) {
@@ -132,12 +134,15 @@ public class FluffyFurModsHandler {
                 String textureName = panoramaTexture.toString().substring(0, panoramaTexture.toString().length() - 6);
                 ACTIVE_PANORAMA.setTexture(new ResourceLocation(textureName));
             }
+            if (!TitleScreen.PANORAMA_OVERLAY.equals(ACTIVE_OVERLAY)) {
+                ACTIVE_OVERLAY = TitleScreen.PANORAMA_OVERLAY;
+            }
         } else {
             if (panorama.getTexture() != null) {
                 ACTIVE_PANORAMA.setTexture(panorama.getTexture());
             }
-            if (!TitleScreen.PANORAMA_OVERLAY.equals(panorama.getOverlayTexture())) {
-                TitleScreen.PANORAMA_OVERLAY = panorama.getOverlayTexture();
+            if (!TitleScreen.PANORAMA_OVERLAY.equals(ACTIVE_OVERLAY)) {
+                TitleScreen.PANORAMA_OVERLAY = ACTIVE_OVERLAY;
             }
             ACTIVE_LOGO.setLogo(panorama.getLogo());
         }

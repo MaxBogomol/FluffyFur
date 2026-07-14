@@ -32,6 +32,7 @@ public class FluffyFurMenuScreen extends Screen {
     public Screen lastScreen;
     public FluffyFurPanoramaRenderer panorama;
     public FluffyFurLogoRenderer logoRenderer = new FluffyFurLogoRenderer(LOGO, false);
+    public ResourceLocation overlay;
     public long fadeInStart;
 
     private static final ResourceLocation LOGO = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/title/fluffy_fur.png");
@@ -52,6 +53,7 @@ public class FluffyFurMenuScreen extends Screen {
         super(Component.empty());
         this.lastScreen = lastScreen;
         panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
+        overlay = FluffyFurModsHandler.ACTIVE_OVERLAY;
         if (lastScreen instanceof TitleScreen titleScreen) {
             copyPanorama(titleScreen);
         }
@@ -94,7 +96,8 @@ public class FluffyFurMenuScreen extends Screen {
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
         if (Minecraft.getInstance().level == null) {
-            this.panorama.render(1f);
+            panorama.render(1f);
+            gui.blit(overlay, 0, 0, width, height, 0.0F, 0.0F, 16, 128, 16, 128);
         } else {
             renderBackground(gui);
         }
@@ -348,6 +351,7 @@ public class FluffyFurMenuScreen extends Screen {
                     FluffyFurModsHandler.setActivePanorama(panoramas.get(selectedPanorama));
                     FluffyFurModsHandler.copyPanoramaRenderer(panorama, FluffyFurModsHandler.ACTIVE_PANORAMA);
                     panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
+                    overlay = FluffyFurModsHandler.ACTIVE_OVERLAY;
                     if (lastScreen instanceof TitleScreen titleScreen) {
                         FluffyFurModsHandler.setOpenPanorama(titleScreen, panoramas.get(selectedPanorama));
                     }

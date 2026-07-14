@@ -20,11 +20,12 @@ public abstract class CreateWorldScreenMixin {
     @Inject(at = @At("HEAD"), method = "renderDirtBackground")
     public void fluffy_fur$renderEnhancedBackground(GuiGraphics guiGraphics, CallbackInfo ci) {
         if (FluffyFurClientConfig.ENHANCED_MENU.get()) {
+            CreateWorldScreen self = (CreateWorldScreen) ((Object) this);
             if (Minecraft.getInstance().level == null) {
                 FluffyFurModsHandler.ACTIVE_PANORAMA.render();
+                RenderSystem.enableBlend();
+                guiGraphics.blit(FluffyFurModsHandler.ACTIVE_OVERLAY, 0, 0, self.width, self.height, 0.0F, 0.0F, 16, 128, 16, 128);
             }
-            CreateWorldScreen self = (CreateWorldScreen) ((Object) this);
-            RenderSystem.enableBlend();
             guiGraphics.blit(EnhancedMenuHandler.MENU_LIST_BACKGROUND_LOCATION, 0, 24, 0.0F, 0.0F, self.width, self.height - 36 - 25, 32, 32);
         }
     }
