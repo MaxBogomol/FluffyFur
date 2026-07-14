@@ -18,6 +18,10 @@ public abstract class FoxRendererMixin {
     @Unique
     private static final ResourceLocation MAXBOGOMOL_SLEEP_LOCATION = new ResourceLocation(FluffyFur.MOD_ID,"textures/entity/fox/maxbogomol_sleep.png");
     @Unique
+    private static final ResourceLocation FURRYFOXES_LOCATION = new ResourceLocation(FluffyFur.MOD_ID,"textures/entity/fox/furryfoxes.png");
+    @Unique
+    private static final ResourceLocation FURRYFOXES_SLEEP_LOCATION = new ResourceLocation(FluffyFur.MOD_ID,"textures/entity/fox/furryfoxes_sleep.png");
+    @Unique
     private static final ResourceLocation FOXPLANE_LOCATION = new ResourceLocation(FluffyFur.MOD_ID,"textures/entity/fox/foxplane.png");
     @Unique
     private static final ResourceLocation FOXPLANE_SLEEP_LOCATION = new ResourceLocation(FluffyFur.MOD_ID,"textures/entity/fox/foxplane_sleep.png");
@@ -25,17 +29,25 @@ public abstract class FoxRendererMixin {
     @Inject(at = @At("HEAD"), method = "getTextureLocation*", cancellable = true)
     public void fluffy_fur$getTextureLocation(Fox entity, CallbackInfoReturnable<ResourceLocation> ci) {
         String s = ChatFormatting.stripFormatting(entity.getName().getString());
-        if ("MaxBogomol".equals(s)) {
-            if (entity.isSleeping()) {
-                ci.setReturnValue(MAXBOGOMOL_SLEEP_LOCATION);
+        if (s != null) {
+            if (s.equals("MaxBogomol") || s.equals("PinkJoke") || s.equals("Pink Joke")) {
+                if (entity.isSleeping()) {
+                    ci.setReturnValue(MAXBOGOMOL_SLEEP_LOCATION);
+                }
+                ci.setReturnValue(MAXBOGOMOL_LOCATION);
             }
-            ci.setReturnValue(MAXBOGOMOL_LOCATION);
-        }
-        if ("FoxPlane".equals(s)) {
-            if (entity.isSleeping()) {
-                ci.setReturnValue(FOXPLANE_SLEEP_LOCATION);
+            if (s.equals("FurryFoxes")) {
+                if (entity.isSleeping()) {
+                    ci.setReturnValue(FURRYFOXES_SLEEP_LOCATION);
+                }
+                ci.setReturnValue(FURRYFOXES_LOCATION);
             }
-            ci.setReturnValue(FOXPLANE_LOCATION);
+            if (s.equals("FoxPlane")) {
+                if (entity.isSleeping()) {
+                    ci.setReturnValue(FOXPLANE_SLEEP_LOCATION);
+                }
+                ci.setReturnValue(FOXPLANE_LOCATION);
+            }
         }
     }
 }

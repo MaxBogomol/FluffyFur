@@ -19,8 +19,10 @@ public abstract class RabbitRendererMixin {
     @Inject(at = @At("HEAD"), method = "getTextureLocation*", cancellable = true)
     public void fluffy_fur$getTextureLocation(Rabbit entity, CallbackInfoReturnable<ResourceLocation> ci) {
         String s = ChatFormatting.stripFormatting(entity.getName().getString());
-        if ("Nanachi".equals(s)) {
-            ci.setReturnValue(RABBIT_NANACHI_LOCATION);
+        if (s != null) {
+            if (s.equals("Nanachi")) {
+                ci.setReturnValue(RABBIT_NANACHI_LOCATION);
+            }
         }
     }
 }
