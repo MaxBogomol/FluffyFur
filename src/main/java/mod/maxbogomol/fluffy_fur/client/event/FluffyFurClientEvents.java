@@ -3,11 +3,9 @@ package mod.maxbogomol.fluffy_fur.client.event;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurButtonsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
-import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMenuScreen;
-import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
-import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
-import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.*;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.RainFogPostProcess;
@@ -56,6 +54,12 @@ public class FluffyFurClientEvents {
     public void onOpenScreenFirst(ScreenEvent.Opening event) {
         resetPanoramaScreen(event.getCurrentScreen());
         resetPanoramaScreen(event.getNewScreen());
+    }
+
+    @SubscribeEvent
+    public void onScreenInit(ScreenEvent.Init event) {
+        FluffyFurButtonsHandler.onScreenInit(event);
+        HardcoreShareToLanScreenHandler.onScreenInit(event);
     }
 
     @SubscribeEvent

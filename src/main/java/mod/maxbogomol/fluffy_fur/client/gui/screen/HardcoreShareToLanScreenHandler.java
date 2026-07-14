@@ -18,8 +18,6 @@ import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.awt.*;
 import java.util.Random;
@@ -79,34 +77,31 @@ public class HardcoreShareToLanScreenHandler {
         }
     }
 
-    @Mod.EventBusSubscriber(value = Dist.CLIENT)
-    public static class HardcoreLanHandler {
-        @SubscribeEvent
-        public static void onGuiInit(ScreenEvent.Init event) {
-            Screen screen = event.getScreen();
+    @OnlyIn(Dist.CLIENT)
+    public static void onScreenInit(ScreenEvent.Init event) {
+        Screen screen = event.getScreen();
 
-            if (screen instanceof ShareToLanScreen shareToLanScreen) {
-                isDumbAss = false;
-                IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
-                if (integratedServer != null && integratedServer.isHardcore()) {
-                    if (shareToLanScreen.renderables.size() >= 1) {
-                        Renderable renderable = shareToLanScreen.renderables.get(0);
-                        if (renderable instanceof CycleButton<?> cycleButton) {
-                            GameType gameMode = integratedServer.getDefaultGameType();
-                            HardcoreLanGameModeButton gameModeButton = new HardcoreLanGameModeButton(cycleButton.getX(), cycleButton.getY(), cycleButton.getWidth(), cycleButton.getHeight(), gameMode);
-                            shareToLanScreen.renderables.remove(0);
-                            shareToLanScreen.children().remove(0);
-                            event.addListener(gameModeButton);
-                        }
+        if (screen instanceof ShareToLanScreen shareToLanScreen) {
+            isDumbAss = false;
+            IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
+            if (integratedServer != null && integratedServer.isHardcore()) {
+                if (shareToLanScreen.renderables.size() >= 1) {
+                    Renderable renderable = shareToLanScreen.renderables.get(0);
+                    if (renderable instanceof CycleButton<?> cycleButton) {
+                        GameType gameMode = integratedServer.getDefaultGameType();
+                        HardcoreLanGameModeButton gameModeButton = new HardcoreLanGameModeButton(cycleButton.getX(), cycleButton.getY(), cycleButton.getWidth(), cycleButton.getHeight(), gameMode);
+                        shareToLanScreen.renderables.remove(0);
+                        shareToLanScreen.children().remove(0);
+                        event.addListener(gameModeButton);
                     }
-                    if (shareToLanScreen.renderables.size() >= 1) {
-                        Renderable renderable = shareToLanScreen.renderables.get(0);
-                        if (renderable instanceof CycleButton<?> cycleButton) {
-                            HardcoreLanCommandsButton commandsButton = new HardcoreLanCommandsButton(cycleButton.getX(), cycleButton.getY(), cycleButton.getWidth(), cycleButton.getHeight());
-                            shareToLanScreen.renderables.remove(0);
-                            shareToLanScreen.children().remove(0);
-                            event.addListener(commandsButton);
-                        }
+                }
+                if (shareToLanScreen.renderables.size() >= 1) {
+                    Renderable renderable = shareToLanScreen.renderables.get(0);
+                    if (renderable instanceof CycleButton<?> cycleButton) {
+                        HardcoreLanCommandsButton commandsButton = new HardcoreLanCommandsButton(cycleButton.getX(), cycleButton.getY(), cycleButton.getWidth(), cycleButton.getHeight());
+                        shareToLanScreen.renderables.remove(0);
+                        shareToLanScreen.children().remove(0);
+                        event.addListener(commandsButton);
                     }
                 }
             }
