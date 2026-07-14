@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.language.I18n;
@@ -67,6 +68,15 @@ public class FluffyFurMenuButton extends Button {
                 new SingleMenuRow("narrator.button.language", "narrator.button.accessibility")
         ));
 
+        public static final MenuRows PAUSE_MENU = new MenuRows(Arrays.asList(
+                new SingleMenuRow("menu.returnToGame"),
+                new SingleMenuRow("gui.advancements", "gui.stats"),
+                new SingleMenuRow("menu.sendFeedback", "menu.reportBugs"),
+                new SingleMenuRow("menu.options", "menu.shareToLan"),
+                new SingleMenuRow("fml.menu.mods"),
+                new SingleMenuRow("menu.returnToMenu")
+        ));
+
         protected final List<String> leftButtons, rightButtons;
 
         public MenuRows(List<SingleMenuRow> variants) {
@@ -90,6 +100,12 @@ public class FluffyFurMenuButton extends Button {
                     offsetX = FluffyFurClientConfig.MENU_BUTTON_ROW_X_OFFSET.get();
                     offsetFreeX = FluffyFurClientConfig.MENU_BUTTON_X_OFFSET.get();
                     offsetFreeY = FluffyFurClientConfig.MENU_BUTTON_Y_OFFSET.get();
+                } else if (screen instanceof PauseScreen) {
+                    menu = MenuRows.PAUSE_MENU;
+                    rowIdx = FluffyFurClientConfig.PAUSE_BUTTON_ROW.get();
+                    offsetX = FluffyFurClientConfig.PAUSE_BUTTON_ROW_X_OFFSET.get();
+                    offsetFreeX = FluffyFurClientConfig.PAUSE_BUTTON_X_OFFSET.get();
+                    offsetFreeY = FluffyFurClientConfig.PAUSE_BUTTON_Y_OFFSET.get();
                 }
 
                 if (menu != null) {

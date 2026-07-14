@@ -4,6 +4,7 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
+import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurMenuScreen;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurModsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPanorama;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.PlayerSkinMenuScreen;
@@ -148,6 +149,10 @@ public class FluffyFurClientEvents {
 
     @SubscribeEvent
     public void onInput(InputEvent event) {
+        if (FluffyFurKeyMappings.FLUFFY_FUR_MENU.isDown()) {
+            Minecraft.getInstance().setScreen(new FluffyFurMenuScreen(null));
+        }
+
         if (FluffyFurKeyMappings.SKIN_MENU.isDown()) {
             UUID uuid = FluffyFur.proxy.getPlayer().getGameProfile().getId();
             if (FluffyFur.devEnvironment || uuid.equals(FOX) || uuid.equals(VOICES)) {

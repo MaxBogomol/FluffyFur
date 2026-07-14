@@ -8,9 +8,11 @@ public class FluffyFurClientConfig {
             FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
-            ENHANCED_MENU, MENU_BUTTON, PANORAMA_LOGO, PANORAMA_MUSIC;
+            ENHANCED_MENU, PANORAMA_LOGO, PANORAMA_MUSIC,
+            MENU_BUTTON, PAUSE_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
-            MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET;
+            MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET,
+            PAUSE_BUTTON_ROW, PAUSE_BUTTON_ROW_X_OFFSET, PAUSE_BUTTON_X_OFFSET, PAUSE_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
             SCREENSHAKE_INTENSITY, FANCY_FOG_INTENSITY,
             RAIN_FOG_SHADER_INTENSITY, THUNDER_FOG_SHADER_INTENSITY, THUNDER_FOG_FADE_SHADER_INTENSITY;
@@ -52,10 +54,15 @@ public class FluffyFurClientConfig {
         PANORAMA_LOGO = builder.comment("Enable logo in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaLogo").define("panoramaLogo", true);
         PANORAMA_MUSIC = builder.comment("Enable music in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaMusic").define("panoramaMusic", true);
         MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.").translation("config.client.fluffy_fur.menu.menuButton").define("menuButton", true);
-        MENU_BUTTON_ROW = builder.comment("Fluffy Fur menu button row.").translation("config.client.fluffy_fur.menu.menuButtonRow").defineInRange("menuButtonRow", 3, 0, 4);
+        MENU_BUTTON_ROW = builder.comment("Fluffy Fur menu button row.").translation("config.client.fluffy_fur.menu.menuButtonRow").defineInRange("menuButtonRow", 3, 1, 4);
         MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").translation("config.client.fluffy_fur.menu.menuButtonRowXOffset").define("menuButtonRowXOffset", 4);
         MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.").translation("config.client.fluffy_fur.menu.menuButtonXOffset").define("menuButtonXOffset", 0);
         MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.").translation("config.client.fluffy_fur.menu.menuButtonYOffset").define("menuButtonYOffset", 0);
+        PAUSE_BUTTON = builder.comment("Enable Fluffy Fur pause screen button.").translation("config.client.fluffy_fur.menu.screenButton").define("screenButton", true);
+        PAUSE_BUTTON_ROW = builder.comment("Fluffy Fur pause screen button row.").translation("config.client.fluffy_fur.menu.screenButtonRow").defineInRange("screenButtonRow", 4, 1, 6);
+        PAUSE_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset with row.").translation("config.client.fluffy_fur.menu.screenButtonRowXOffset").define("screenButtonRowXOffset", 4);
+        PAUSE_BUTTON_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset.").translation("config.client.fluffy_fur.menu.screenButtonXOffset").define("screenButtonXOffset", 0);
+        PAUSE_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur pause screen button Y offset.").translation("config.client.fluffy_fur.menu.screenButtonYOffset").define("screenButtonYOffset", 0);
         builder.pop();
     }
 

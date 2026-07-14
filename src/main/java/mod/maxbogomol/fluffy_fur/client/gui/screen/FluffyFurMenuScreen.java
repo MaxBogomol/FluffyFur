@@ -30,7 +30,7 @@ import java.util.Optional;
 
 public class FluffyFurMenuScreen extends Screen {
     public Screen lastScreen;
-    public FluffyFurPanoramaRenderer panorama = new FluffyFurPanoramaRenderer();
+    public FluffyFurPanoramaRenderer panorama;
     public FluffyFurLogoRenderer logoRenderer = new FluffyFurLogoRenderer(LOGO, false);
     public long fadeInStart;
 
@@ -93,8 +93,12 @@ public class FluffyFurMenuScreen extends Screen {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
+        if (Minecraft.getInstance().level == null) {
+            this.panorama.render(1f);
+        } else {
+            renderBackground(gui);
+        }
         float f = (float) (Util.getMillis() - this.fadeInStart) / 250.0F;
-        this.panorama.render(1f);
         if (lastScreen instanceof TitleScreen titleScreen) {
             titleScreen.logoRenderer.renderLogo(gui, this.width, 1f - f);
         }
@@ -436,15 +440,15 @@ public class FluffyFurMenuScreen extends Screen {
     }
 
     public void linkTo(String url) {
-        this.minecraft.setScreen(new ConfirmLinkScreen((click) -> {
+        Minecraft.getInstance().setScreen(new ConfirmLinkScreen((click) -> {
             if (click) Util.getPlatform().openUri(url);
-            this.minecraft.setScreen(this);
+            Minecraft.getInstance().setScreen(this);
         }, url, true));
     }
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(this.lastScreen);
+        Minecraft.getInstance().setScreen(this.lastScreen);
         if (lastScreen instanceof TitleScreen titleScreen) {
             FluffyFurModsHandler.copyPanoramaRenderer(panorama, titleScreen.panorama);
         }

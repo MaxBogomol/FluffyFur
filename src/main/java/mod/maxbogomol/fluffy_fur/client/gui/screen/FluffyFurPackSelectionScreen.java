@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -30,6 +31,6 @@ public class FluffyFurPackSelectionScreen extends Screen {
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(this.lastScreen);
+        Minecraft.getInstance().setScreen(this.lastScreen);
     }
 }
