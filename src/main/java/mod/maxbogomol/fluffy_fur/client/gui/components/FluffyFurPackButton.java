@@ -5,11 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 public class FluffyFurPackButton extends Button {
-    public static ItemStack icon;
 
     public FluffyFurPackButton(int x, int y) {
         super(x, y, 20, 20, Component.empty(), FluffyFurPackButton::click, DEFAULT_NARRATION);
@@ -18,8 +15,6 @@ public class FluffyFurPackButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-        if (icon == null) icon = new ItemStack(Items.PINK_PETALS);
-        guiGraphics.renderItem(icon, this.getX() + 2, this.getY() + 2);
     }
 
     public static void click(Button button) {
