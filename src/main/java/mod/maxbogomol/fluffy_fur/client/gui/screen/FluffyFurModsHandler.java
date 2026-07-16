@@ -127,7 +127,7 @@ public class FluffyFurModsHandler {
         setActivePanorama(panorama);
         copyPanoramaRenderer(titleScreen.panorama, ACTIVE_PANORAMA);
 
-        if (panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
+        if (FluffyFurClientConfig.VANILLA_PANORAMA_CONFLICT_PREVENTION.get() && panorama.equals(FluffyFurClient.VANILLA_PANORAMA)) {
             ResourceLocation activeTexture = ACTIVE_PANORAMA.cubeMap.images[0];
             ResourceLocation panoramaTexture = titleScreen.panorama.cubeMap.images[0];
             if (!panoramaTexture.equals(activeTexture) && (titleScreen.panorama.equals(ACTIVE_PANORAMA) || !(titleScreen.panorama instanceof FluffyFurPanoramaRenderer))) {

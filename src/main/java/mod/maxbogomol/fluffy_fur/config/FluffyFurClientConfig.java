@@ -8,7 +8,7 @@ public class FluffyFurClientConfig {
             FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
-            ENHANCED_MENU, PANORAMA_LOGO, PANORAMA_MUSIC,
+            ENHANCED_MENU, VANILLA_PANORAMA_CONFLICT_PREVENTION, PANORAMA_LOGO, PANORAMA_MUSIC,
             MENU_BUTTON, PAUSE_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET,
@@ -50,6 +50,7 @@ public class FluffyFurClientConfig {
 
         builder.comment("Menu").translation("config.client.fluffy_fur.menu").push("menu");
         ENHANCED_MENU = builder.comment(".").translation("config.client.fluffy_fur.menu.enhancedMenu").define("enhancedMenu", true);
+        VANILLA_PANORAMA_CONFLICT_PREVENTION = builder.comment(".").translation("config.client.fluffy_fur.menu.vanillaPanoramaConflictPrevention").define("vanillaPanoramaConflictPrevention", true);
         PANORAMA = builder.comment("Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panorama").define("panorama", "minecraft:vanilla");
         PANORAMA_LOGO = builder.comment("Enable logo in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaLogo").define("panoramaLogo", true);
         PANORAMA_MUSIC = builder.comment("Enable music in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaMusic").define("panoramaMusic", true);
