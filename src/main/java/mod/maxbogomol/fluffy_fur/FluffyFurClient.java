@@ -82,6 +82,7 @@ public class FluffyFurClient {
                 .setEdition(FluffyFur.VERSION_NUMBER).setNameColor(new Color(254, 200, 207)).setVersionColor(new Color(92, 72, 90))
                 .setDescription(Component.translatable("mod_description.fluffy_fur"))
                 .addFluffyVillageLink("https://fluffy-village.dev/pages/eng/creations/fluffy_fur.html")
+                .addFluffyWikiLink("https://fluffy-village.dev/pages/eng/wiki/fluffy_fur/index.html")
                 .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/fluffy-fur")
                 .addModrinthLink("https://modrinth.com/mod/fluffy-fur")

@@ -1,5 +1,6 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import mod.maxbogomol.fluffy_fur.client.font.IconsFontHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurFonts;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.network.chat.CommonComponents;
@@ -24,17 +25,6 @@ public class FluffyFurMod {
     public Color versionColor = Color.GRAY;
     public Component description = Component.empty();
     public List<Link> links = new ArrayList<>();
-
-    public static Color fluffyVillageColor = new Color(150, 71, 71);
-    public static Color githubColor = new Color(60, 116, 195);
-    public static Color curseForgeColor = new Color(241, 100, 54);
-    public static Color modrinthColor = new Color(0, 175, 92);
-    public static Color discordColor = new Color(88, 101, 242);
-    public static Color youTubeColor = new Color(255, 0, 0);
-    public static Color blueSkyColor = new Color(41, 94, 246);
-    public static Color redditColor = new Color(255, 69, 0);
-    public static Color websiteColor = new Color(153, 153, 153);
-    public static Color twitterColor = new Color(29, 155, 240);
 
     public FluffyFurMod(String id, String name, String version) {
         this.id = id;
@@ -145,50 +135,78 @@ public class FluffyFurMod {
     }
 
     public FluffyFurMod addFluffyVillageLink(String string) {
-        return addIconLink(string, "The Fluffy Village", fluffyVillageColor, "\u0001", FluffyFurFonts.ICONS_LOCATION);
+        return addIconLink(string, "The Fluffy Village", IconsFontHandler.getFluffyVillageColor(), IconsFontHandler.getFluffyVillageIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 
-    public FluffyFurMod addGithubLink(String string) {
-        return addIconLink(string, "Github", githubColor, "\u0002", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addCurseForgeLink(String string) {
-        return addIconLink(string, "CurseForge", curseForgeColor, "\u0003", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addModrinthLink(String string) {
-        return addIconLink(string, "Modrinth", modrinthColor, "\u0004", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addDiscordLink(String string) {
-        return addIconLink(string, "Discord", discordColor, "\u0005", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addYouTubeLink(String string) {
-        return addIconLink(string, "YouTube", youTubeColor, "\u0006", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addBlueSkyLink(String string) {
-        return addIconLink(string, "BlueSky", blueSkyColor, "\u0007", FluffyFurFonts.ICONS_LOCATION);
-    }
-
-    public FluffyFurMod addRedditLink(String string) {
-        return addIconLink(string, "Reddit", redditColor, "\u0008", FluffyFurFonts.ICONS_LOCATION);
+    public FluffyFurMod addFluffyWikiLink(String string) {
+        return addIconLink(string, "The Fluffy Wiki", IconsFontHandler.getFluffyWikiColor(), IconsFontHandler.getFluffyWikiIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addWebsiteLink(String string, String website, Color color) {
-        return addIconLink(string, website, color, "\u0009", FluffyFurFonts.ICONS_LOCATION);
+        return addIconLink(string, website, color, IconsFontHandler.getWebsiteIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addWebsiteLink(String string, String website) {
-        return addWebsiteLink(string, website, websiteColor);
+        return addWebsiteLink(string, website, IconsFontHandler.getWebsiteColor());
     }
 
     public FluffyFurMod addWebsiteLink(String string) {
-        return addWebsiteLink(string, "Website", websiteColor);
+        return addWebsiteLink(string, "Website", IconsFontHandler.getWebsiteColor());
+    }
+
+    public FluffyFurMod addEmailLink(String string, String email, Color color) {
+        return addIconLink(string, email, color, IconsFontHandler.getEmailIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addEmailLink(String string, String website) {
+        return addEmailLink(string, website, IconsFontHandler.getEmailColor());
+    }
+
+    public FluffyFurMod addEmailLink(String string) {
+        return addEmailLink(string, "E-mail", IconsFontHandler.getEmailColor());
+    }
+
+    public FluffyFurMod addGithubLink(String string) {
+        return addIconLink(string, "Github", IconsFontHandler.getGithubColor(), IconsFontHandler.getGithubIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addItchLink(String string) {
+        return addIconLink(string, "itch.io", IconsFontHandler.getItchColor(), IconsFontHandler.getItchIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addCurseForgeLink(String string) {
+        return addIconLink(string, "CurseForge", IconsFontHandler.getCurseForgeColor(), IconsFontHandler.getCurseForgeIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addModrinthLink(String string) {
+        return addIconLink(string, "Modrinth", IconsFontHandler.getModrinthColor(), IconsFontHandler.getModrinthIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addDiscordLink(String string) {
+        return addIconLink(string, "Discord", IconsFontHandler.getDiscordColor(), IconsFontHandler.getDiscordIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addYouTubeLink(String string) {
+        return addIconLink(string, "YouTube", IconsFontHandler.getYouTubeColor(), IconsFontHandler.getYouTubeIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addBlueSkyLink(String string) {
+        return addIconLink(string, "BlueSky", IconsFontHandler.getBlueSkyColor(), IconsFontHandler.getBlueSkyIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addTwitterLink(String string) {
-        return addIconLink(string, "Twitter", twitterColor, "\u0010", FluffyFurFonts.ICONS_LOCATION);
+        return addIconLink(string, "Twitter", IconsFontHandler.getTwitterColor(), IconsFontHandler.getTwitterIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addRedditLink(String string) {
+        return addIconLink(string, "Reddit", IconsFontHandler.getRedditColor(), IconsFontHandler.getRedditIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addBandcampLink(String string) {
+        return addIconLink(string, "Bandcamp", IconsFontHandler.getBandcampColor(), IconsFontHandler.getBandcampIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addSpotifyLink(String string) {
+        return addIconLink(string, "Spotify", IconsFontHandler.getSpotifyColor(), IconsFontHandler.getSpotifyIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 }
