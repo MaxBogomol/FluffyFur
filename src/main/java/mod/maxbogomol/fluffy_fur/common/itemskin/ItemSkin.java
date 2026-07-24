@@ -8,6 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
@@ -62,7 +63,7 @@ public class ItemSkin {
     }
 
     public static Component getSkinComponent(ItemSkin skin) {
-        return Component.translatable("lore.fluffy_fur.skin").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))).append(" ").append(getSkinName(skin));
+        return Component.translatable("lore.fluffy_fur.skin").withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))).append(CommonComponents.SPACE).append(getSkinName(skin));
     }
 
     public static List<Component> getApplyingItemsComponents(ItemSkin skin, boolean isShift) {
@@ -70,7 +71,7 @@ public class ItemSkin {
         list.add(Component.translatable("lore.fluffy_fur.skin_applies").append(isShift ? Component.empty() : Component.literal(" []")).withStyle(ChatFormatting.GRAY));
         if (isShift) {
             for (Component component : skin.applyingItems) {
-                list.add(Component.literal(" ").append(component).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))));
+                list.add(Component.empty().append(CommonComponents.SPACE).append(component).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(255, 249, 210, 129))));
             }
         }
         return list;

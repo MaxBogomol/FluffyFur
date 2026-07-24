@@ -48,6 +48,7 @@ public class FluffyFurMenuScreen extends Screen {
 
     public static int selectedPanorama = 0;
     public static int selectedMod = 0;
+    public static String selectedLink;
 
     public FluffyFurMenuScreen(Screen lastScreen) {
         super(Component.empty());
@@ -107,11 +108,12 @@ public class FluffyFurMenuScreen extends Screen {
         }
         this.logoRenderer.renderLogo(gui, this.width, f);
 
+        super.render(gui, mouseX, mouseY, partialTicks);
+
         drawDescription(gui, this.width / 2 - 80, this.height / 4 + 48, mouseX, mouseY, partialTicks);
         drawPanoramaList(gui, this.width / 2 - 204, this.height / 4 + 48, mouseX, mouseY, partialTicks);
         drawModList(gui, this.width / 2 + 84, this.height / 4 + 48, mouseX, mouseY, partialTicks);
-
-        super.render(gui, mouseX, mouseY, partialTicks);
+        drawLink(gui, this.width / 2, this.height - 14, mouseX, mouseY, partialTicks);
     }
 
     public static void drawDescription(GuiGraphics gui, int x, int y, int mouseX, int mouseY, float partialTicks) {
@@ -121,10 +123,11 @@ public class FluffyFurMenuScreen extends Screen {
 
         Font font = Minecraft.getInstance().font;
         Component component = Component.literal(mod.getName()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getNameColor())))
-                .append(" ").append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getVersionColor()))));
+                .append(CommonComponents.SPACE).append(Component.literal("v" + mod.getVersion()).withStyle(Style.EMPTY.withColor(ColorUtil.packColor(mod.getVersionColor()))));
         drawBlackBackground(gui, x + 80, y - 12, font.width(component) + 8, mouseX, mouseY, partialTicks);
         gui.drawCenteredString(font, component, x + 80, y - 11, 16777215);
 
+        selectedLink = null;
         List<Component> lines = getDescription(mod);
         int links = mod.getLinks().size();
         int l = lines.size() - links;
@@ -136,6 +139,7 @@ public class FluffyFurMenuScreen extends Screen {
             if (index >= l) {
                 if (mouseX >= x + 5 && mouseY >= y + 5 + (i * (font.lineHeight + 1)) && mouseX <= x + 5 + font.width(line) && mouseY < y + 5 + (i * (font.lineHeight + 1) + font.lineHeight)) {
                     line.withStyle(ChatFormatting.UNDERLINE);
+                    selectedLink = mod.getLinks().get(index - l).getLink();
                 }
             }
             gui.drawString(font, line, x + 5, y + 5 + (i * (font.lineHeight + 1)), 16777215);
@@ -179,14 +183,14 @@ public class FluffyFurMenuScreen extends Screen {
                     list.add(panorama.getName());
                     if (panorama.getMod() != null) {
                         list.add(Component.empty());
-                        list.add(Component.translatable("gui.fluffy_fur.menu.mod").append(" ").append(Component.literal(panorama.getMod().getName()).withStyle(ChatFormatting.GRAY)));
+                        list.add(Component.translatable("gui.fluffy_fur.menu.mod").append(CommonComponents.SPACE).append(Component.literal(panorama.getMod().getName()).withStyle(ChatFormatting.GRAY)));
                     }
                     if (panorama == FluffyFurClient.VANILLA_PANORAMA) {
                         list.add(Component.empty());
                         list.add(Component.literal("Minecraft").withStyle(ChatFormatting.GRAY));
                     }
 
-                    gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
+                    gui.renderTooltip(font, list, Optional.empty(), mouseX, mouseY);
                 }
             }
         }
@@ -206,7 +210,7 @@ public class FluffyFurMenuScreen extends Screen {
         gui.drawCenteredString(font, component, x + 60, y - 11, 16777215);
 
         if (FluffyFur.mcreatorModsCount > 0) {
-            component = Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(" " + FluffyFur.mcreatorModsCount);
+            component = Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(CommonComponents.SPACE).append(String.valueOf(FluffyFur.mcreatorModsCount));
             drawBlackBackground(gui, x + 60, y - 24, font.width(component) + 8, mouseX, mouseY, partialTicks);
             gui.drawCenteredString(font, component, x + 60, y - 23, 16777215);
 
@@ -215,7 +219,7 @@ public class FluffyFurMenuScreen extends Screen {
                 for (String string : FluffyFur.mcreatorModsList) {
                     list.add(Component.literal(string));
                 }
-                gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
+                gui.renderTooltip(font, list, Optional.empty(), mouseX, mouseY);
             }
         }
 
@@ -242,14 +246,24 @@ public class FluffyFurMenuScreen extends Screen {
                     List<Component> list = new ArrayList<>();
                     list.add(Component.literal(mod.getName()));
                     list.add(Component.empty());
-                    list.add(Component.translatable("gui.fluffy_fur.menu.id").append(" ").append(Component.literal(mod.getId()).withStyle(ChatFormatting.GRAY)));
-                    list.add(Component.translatable("gui.fluffy_fur.menu.version").append(" ").append(Component.literal(mod.getVersion()).withStyle(ChatFormatting.GRAY)));
-                    if (mod.getEdition() > 0)list.add(Component.translatable("gui.fluffy_fur.menu.edition").append(" ").append(Component.literal(String.valueOf(mod.getEdition())).withStyle(ChatFormatting.GRAY)));
-                    list.add(Component.translatable("gui.fluffy_fur.menu.author").append(" ").append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.fluffy_fur.menu.id").append(CommonComponents.SPACE).append(Component.literal(mod.getId()).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.fluffy_fur.menu.version").append(CommonComponents.SPACE).append(Component.literal(mod.getVersion()).withStyle(ChatFormatting.GRAY)));
+                    if (mod.getEdition() > 0)list.add(Component.translatable("gui.fluffy_fur.menu.edition").append(CommonComponents.SPACE).append(Component.literal(String.valueOf(mod.getEdition())).withStyle(ChatFormatting.GRAY)));
+                    list.add(Component.translatable("gui.fluffy_fur.menu.author").append(CommonComponents.SPACE).append(Component.literal(mod.getDev()).withStyle(ChatFormatting.GRAY)));
 
-                    gui.renderTooltip(Minecraft.getInstance().font, list, Optional.empty(), mouseX, mouseY);
+                    gui.renderTooltip(font, list, Optional.empty(), mouseX, mouseY);
                 }
             }
+        }
+    }
+
+    public static void drawLink(GuiGraphics gui, int x, int y, int mouseX, int mouseY, float partialTicks) {
+        Font font = Minecraft.getInstance().font;
+
+        if (selectedLink != null && !selectedLink.isEmpty()) {
+            Component component = Component.translatable("gui.fluffy_fur.menu.link").append(CommonComponents.SPACE).append(Component.literal(selectedLink).withStyle(ChatFormatting.GRAY));
+            drawBlackBackground(gui, x, y, font.width(component) + 8, mouseX, mouseY, partialTicks);
+            gui.drawCenteredString(font, component, x, y + 1, 16777215);
         }
     }
 
@@ -295,7 +309,7 @@ public class FluffyFurMenuScreen extends Screen {
             else line += s + " ";
         }
         if (!line.isEmpty()) lines.add(Component.literal(line));
-        if (mod.getLinks().size() > 0) {
+        if (!mod.getLinks().isEmpty()) {
             lines.add(Component.empty());
             lines.add(Component.translatable("gui.fluffy_fur.menu.links").withStyle(ChatFormatting.GRAY));
             for (FluffyFurMod.Link link : mod.getLinks()) {
