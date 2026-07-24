@@ -18,10 +18,10 @@ public class FluffyFurGlslPreprocessor extends GlslPreprocessor {
     @Nullable
     @Override
     public String applyImport(boolean useFullPath, String directory) {
-        ResourceLocation resourcelocation = new ResourceLocation(directory);
-        ResourceLocation resourcelocation1 = new ResourceLocation(resourcelocation.getNamespace(), "shaders/include/" + resourcelocation.getPath());
+        ResourceLocation resourceLocation = new ResourceLocation(directory);
+        ResourceLocation resourceLocation1 = new ResourceLocation(resourceLocation.getNamespace(), "shaders/include/" + resourceLocation.getPath());
         try {
-            Resource resource1 = Minecraft.getInstance().getResourceManager().getResource(resourcelocation1).get();
+            Resource resource1 = Minecraft.getInstance().getResourceManager().getResource(resourceLocation1).get();
             return IOUtils.toString(resource1.open(), StandardCharsets.UTF_8);
         } catch (IOException ioexception) {
             FluffyFur.LOGGER.error("Could not open GLSL import {}: {}", directory, ioexception.getMessage());
