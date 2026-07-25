@@ -83,7 +83,7 @@ public class FluffyFurClient {
                 .setDescription(Component.translatable("mod_description.fluffy_fur"))
                 .addFluffyVillageLink("https://fluffy-village.dev/pages/eng/creations/fluffy_fur.html")
                 .addFluffyWikiLink("https://fluffy-village.dev/pages/eng/wiki/fluffy_fur/index.html")
-                .addGithubLink("https://github.com/MaxBogomol/FluffyFur")
+                .addGitHubLink("https://github.com/MaxBogomol/FluffyFur")
                 .addCurseForgeLink("https://www.curseforge.com/minecraft/mc-mods/fluffy-fur")
                 .addModrinthLink("https://modrinth.com/mod/fluffy-fur")
                 .addDiscordLink("https://discord.fluffy-village.dev/");

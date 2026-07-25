@@ -166,8 +166,24 @@ public class FluffyFurMod {
         return addEmailLink(string, "E-mail", IconsFontHandler.getEmailColor());
     }
 
+    public FluffyFurMod addGitHubLink(String string) {
+        return addIconLink(string, "GitHub", IconsFontHandler.getGitHubColor(), IconsFontHandler.getGitHubIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
     public FluffyFurMod addGithubLink(String string) {
-        return addIconLink(string, "Github", IconsFontHandler.getGithubColor(), IconsFontHandler.getGithubIcon(), FluffyFurFonts.ICONS_LOCATION);
+        return addGitHubLink(string);
+    }
+
+    public FluffyFurMod addGitLabLink(String string) {
+        return addIconLink(string, "GitLab", IconsFontHandler.getGitLabColor(), IconsFontHandler.getGitLabIcon(), FluffyFurFonts.ICONS_LOCATION);
+    }
+
+    public FluffyFurMod addGitlabLink(String string) {
+        return addGitLabLink(string);
+    }
+
+    public FluffyFurMod addCodebergIcon(String string) {
+        return addIconLink(string, "Codeberg", IconsFontHandler.getCodebergColor(), IconsFontHandler.getCodebergIcon(), FluffyFurFonts.ICONS_LOCATION);
     }
 
     public FluffyFurMod addItchLink(String string) {

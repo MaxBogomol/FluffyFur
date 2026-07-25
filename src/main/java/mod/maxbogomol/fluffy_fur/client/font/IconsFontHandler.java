@@ -7,21 +7,25 @@ public class IconsFontHandler {
     public static String fluffyWikiIcon = "\uE001";
     public static String websiteIcon = "\uE002";
     public static String emailIcon = "\uE003";
-    public static String githubIcon = "\uE004";
-    public static String itchIcon = "\uE005";
-    public static String curseForgeIcon = "\uE006";
-    public static String modrinthIcon = "\uE007";
-    public static String discordIcon = "\uE008";
-    public static String youTubeIcon = "\uE009";
-    public static String blueSkyIcon = "\uE00A";
-    public static String twitterIcon = "\uE00B";
-    public static String redditIcon = "\uE00C";
-    public static String bandcampIcon = "\uE00D";
-    public static String spotifyIcon = "\uE00E";
+    public static String gitHubIcon = "\uE004";
+    public static String gitLabIcon = "\uE005";
+    public static String codebergIcon = "\uE006";
+    public static String itchIcon = "\uE007";
+    public static String curseForgeIcon = "\uE008";
+    public static String modrinthIcon = "\uE009";
+    public static String discordIcon = "\uE00A";
+    public static String youTubeIcon = "\uE00B";
+    public static String blueSkyIcon = "\uE00C";
+    public static String twitterIcon = "\uE00D";
+    public static String redditIcon = "\uE00E";
+    public static String bandcampIcon = "\uE00F";
+    public static String spotifyIcon = "\uE010";
 
     public static Color fluffyVillageColor = new Color(150, 71, 71);
     public static Color websiteColor = new Color(153, 153, 153);
-    public static Color githubColor = new Color(60, 116, 195);
+    public static Color gitHubColor = new Color(60, 116, 195);
+    public static Color gitLabColor = new Color(226, 67, 41);
+    public static Color codebergColor = new Color(33, 133, 208);
     public static Color itchColor = new Color(250, 92, 92);
     public static Color curseForgeColor = new Color(241, 100, 54);
     public static Color modrinthColor = new Color(0, 175, 92);
@@ -49,8 +53,16 @@ public class IconsFontHandler {
         return emailIcon;
     }
 
-    public static String getGithubIcon() {
-        return githubIcon;
+    public static String getGitHubIcon() {
+        return gitHubIcon;
+    }
+
+    public static String getGitLabIcon() {
+        return gitLabIcon;
+    }
+
+    public static String getCodebergIcon() {
+        return codebergIcon;
     }
 
     public static String getItchIcon() {
@@ -109,8 +121,16 @@ public class IconsFontHandler {
         return websiteColor;
     }
 
-    public static Color getGithubColor() {
-        return githubColor;
+    public static Color getGitHubColor() {
+        return gitHubColor;
+    }
+
+    public static Color getGitLabColor() {
+        return gitLabColor;
+    }
+
+    public static Color getCodebergColor() {
+        return codebergColor;
     }
 
     public static Color getItchColor() {
