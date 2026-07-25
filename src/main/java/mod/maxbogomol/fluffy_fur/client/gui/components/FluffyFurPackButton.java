@@ -1,12 +1,15 @@
 package mod.maxbogomol.fluffy_fur.client.gui.components;
 
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.FluffyFurPackSelectionScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public class FluffyFurPackButton extends Button {
+    public static final ResourceLocation PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/pack.png");
 
     public FluffyFurPackButton(int x, int y) {
         super(x, y, 20, 20, Component.empty(), FluffyFurPackButton::click, DEFAULT_NARRATION);
@@ -15,6 +18,7 @@ public class FluffyFurPackButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.blit(PACK_LOCATION, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
     }
 
     public static void click(Button button) {

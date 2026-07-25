@@ -52,13 +52,13 @@ public class FluffyFurMenuScreen extends Screen {
 
     public FluffyFurMenuScreen(Screen lastScreen) {
         super(Component.empty());
-        this.lastScreen = lastScreen;
+        lastScreen = lastScreen;
         panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
         overlay = FluffyFurModsHandler.ACTIVE_OVERLAY;
         if (lastScreen instanceof TitleScreen titleScreen) {
             copyPanorama(titleScreen);
         }
-        this.fadeInStart = Util.getMillis();
+        fadeInStart = Util.getMillis();
 
         mods = FluffyFurModsHandler.getSortedMods();
         panoramas = FluffyFurModsHandler.getSortedPanoramas();
@@ -84,9 +84,9 @@ public class FluffyFurMenuScreen extends Screen {
 
     @Override
     public void init() {
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
+        addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
             onClose();
-        }).bounds(this.width / 2 - 80, this.height / 4 + 152, 160, 20).build());
+        }).bounds(width / 2 - 80, height / 4 + 152, 160, 20).build());
     }
 
     @Override
@@ -102,18 +102,18 @@ public class FluffyFurMenuScreen extends Screen {
         } else {
             renderBackground(gui);
         }
-        float f = (float) (Util.getMillis() - this.fadeInStart) / 250.0F;
+        float f = (float) (Util.getMillis() - fadeInStart) / 250.0F;
         if (lastScreen instanceof TitleScreen titleScreen) {
-            titleScreen.logoRenderer.renderLogo(gui, this.width, 1f - f);
+            titleScreen.logoRenderer.renderLogo(gui, width, 1f - f);
         }
-        this.logoRenderer.renderLogo(gui, this.width, f);
+        logoRenderer.renderLogo(gui, width, f);
 
         super.render(gui, mouseX, mouseY, partialTicks);
 
-        drawDescription(gui, this.width / 2 - 80, this.height / 4 + 48, mouseX, mouseY, partialTicks);
-        drawPanoramaList(gui, this.width / 2 - 204, this.height / 4 + 48, mouseX, mouseY, partialTicks);
-        drawModList(gui, this.width / 2 + 84, this.height / 4 + 48, mouseX, mouseY, partialTicks);
-        drawLink(gui, this.width / 2, this.height - 14, mouseX, mouseY, partialTicks);
+        drawDescription(gui, width / 2 - 80, height / 4 + 48, mouseX, mouseY, partialTicks);
+        drawPanoramaList(gui, width / 2 - 204, height / 4 + 48, mouseX, mouseY, partialTicks);
+        drawModList(gui, width / 2 + 84, height / 4 + 48, mouseX, mouseY, partialTicks);
+        drawLink(gui, width / 2, height - 14, mouseX, mouseY, partialTicks);
     }
 
     public static void drawDescription(GuiGraphics gui, int x, int y, int mouseX, int mouseY, float partialTicks) {
@@ -322,9 +322,9 @@ public class FluffyFurMenuScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (descriptionMouseClicked(this.width / 2 - 80, this.height / 4 + 48, mouseX, mouseY, button)) return true;
-        if (panoramaListMouseClicked(this.width / 2 - 204, this.height / 4 + 48, mouseX, mouseY, button)) return true;
-        if (modListMouseClicked(this.width / 2 + 84, this.height / 4 + 48, mouseX, mouseY, button)) return true;
+        if (descriptionMouseClicked(width / 2 - 80, height / 4 + 48, mouseX, mouseY, button)) return true;
+        if (panoramaListMouseClicked(width / 2 - 204, height / 4 + 48, mouseX, mouseY, button)) return true;
+        if (modListMouseClicked(width / 2 + 84, height / 4 + 48, mouseX, mouseY, button)) return true;
 
         return super.mouseClicked(mouseX, mouseY, button);
     }
@@ -398,9 +398,9 @@ public class FluffyFurMenuScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        if (descriptionMouseScrolled(this.width / 2 - 80, this.height / 4 + 48, mouseX, mouseY, delta)) return true;
-        if (panoramaListMouseScrolled(this.width / 2 - 204, this.height / 4 + 48, mouseX, mouseY, delta)) return true;
-        if (modListMouseScrolled(this.width / 2 + 84, this.height / 4 + 48, mouseX, mouseY, delta)) return true;
+        if (descriptionMouseScrolled(width / 2 - 80, height / 4 + 48, mouseX, mouseY, delta)) return true;
+        if (panoramaListMouseScrolled(width / 2 - 204, height / 4 + 48, mouseX, mouseY, delta)) return true;
+        if (modListMouseScrolled(width / 2 + 84, height / 4 + 48, mouseX, mouseY, delta)) return true;
 
         return super.mouseScrolled(mouseX, mouseY, delta);
     }
@@ -466,7 +466,7 @@ public class FluffyFurMenuScreen extends Screen {
 
     @Override
     public void onClose() {
-        Minecraft.getInstance().setScreen(this.lastScreen);
+        Minecraft.getInstance().setScreen(lastScreen);
         if (lastScreen instanceof TitleScreen titleScreen) {
             FluffyFurModsHandler.copyPanoramaRenderer(panorama, titleScreen.panorama);
         }
