@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
-            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
+            ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, LIGHTNING_BOLT_EFFECT_LIGHT, LIGHTNING_BOLT_EFFECT_SCREENSHAKE, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
             ENHANCED_MENU, VANILLA_PANORAMA_CONFLICT_PREVENTION, PANORAMA_LOGO, PANORAMA_MUSIC,
             MENU_BUTTON, PAUSE_BUTTON;
@@ -34,6 +34,8 @@ public class FluffyFurClientConfig {
         ITEM_GUI_PARTICLE = builder.comment("Enable items particles in GUI.").translation("config.client.fluffy_fur.graphics.particles.itemGuiParticle").define("itemGuiParticle", true);
         BLOOD_PARTICLE = builder.comment("Enable blood particles in case of damage.").translation("config.client.fluffy_fur.graphics.particles.bloodParticle").define("bloodParticle", false);
         LIGHTNING_BOLT_EFFECT = builder.comment("Enable custom effect of lightning bolt.").translation("config.client.fluffy_fur.graphics.particles.lightningBoltEffect").define("lightningBoltEffect", true);
+        LIGHTNING_BOLT_EFFECT_LIGHT = builder.comment("Enable light for custom effect of lightning bolt.").translation("config.client.fluffy_fur.graphics.particles.lightningBoltEffectLight").define("lightningBoltEffectLight", true);
+        LIGHTNING_BOLT_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of lightning bolt.").translation("config.client.fluffy_fur.graphics.particles.lightningBoltEffectScreenshake").define("lightningBoltEffectScreenshake", true);
         EXPLOSION_EFFECT = builder.comment("Enable custom effect of explosion.").translation("config.client.fluffy_fur.graphics.particles.explosionEffect").define("explosionEffect", true);
         EXPLOSION_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of explosion.").translation("config.client.fluffy_fur.graphics.particles.explosionEffectScreenshake").define("explosionEffectScreenshake", true);
         builder.pop();

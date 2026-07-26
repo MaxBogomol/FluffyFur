@@ -2,7 +2,7 @@ package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
-import mod.maxbogomol.fluffy_fur.client.render.RainFogRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RainFogOverlayHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
@@ -45,9 +45,9 @@ public abstract class GameRendererMixin {
         PostProcessHandler.onWindowRender((GameRenderer) (Object) this, partialTicks, nanoTime, renderLevel);
     }
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", ordinal = 0), method = "render")
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V", ordinal = 0), method = "render")
     public void fluffy_fur$renderScreenOverlay(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci) {
-        RainFogRenderHandler.renderOverlay(fluffy_fur$guiGraphics);
+        RainFogOverlayHandler.renderOverlay(fluffy_fur$guiGraphics);
     }
 
     @ModifyVariable(method = "render", at = @At("STORE"), ordinal = 0)

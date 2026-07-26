@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LightLayer;
 
-public class RainFogRenderHandler {
+public class RainFogOverlayHandler {
     public static int rainTick = 0;
     public static int oldRainTick = 0;
     public static int rainLevel = 0;
@@ -69,8 +69,8 @@ public class RainFogRenderHandler {
                     rainL = minecraft.level.rainLevel;
                     thunderL = minecraft.level.thunderLevel;
                 }
-                float rain = (Mth.lerp(ClientTickHandler.partialTicks, RainFogRenderHandler.oldRainTick, RainFogRenderHandler.rainTick) / (RainFogRenderHandler.getTickLightLevel() * 15) * rainL);
-                float thunder = (Mth.lerp(ClientTickHandler.partialTicks, RainFogRenderHandler.oldThunderTick, RainFogRenderHandler.thunderTick) / (RainFogRenderHandler.getTickLightLevel() * 15) * thunderL);
+                float rain = (Mth.lerp(ClientTickHandler.partialTicks, RainFogOverlayHandler.oldRainTick, RainFogOverlayHandler.rainTick) / (RainFogOverlayHandler.getTickLightLevel() * 15) * rainL);
+                float thunder = (Mth.lerp(ClientTickHandler.partialTicks, RainFogOverlayHandler.oldThunderTick, RainFogOverlayHandler.thunderTick) / (RainFogOverlayHandler.getTickLightLevel() * 15) * thunderL);
                 if (rain > 0 || thunder > 0) {
                     FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("screenSize").set(width, height);
                     FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("totalTicks").set(ClientTickHandler.getTotal());

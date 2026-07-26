@@ -73,8 +73,12 @@ public class FluffyFurEffects {
                 .setLifetime(100)
                 .disableDistanceSpawn()
                 .spawn(level, pos);
-        ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
-        GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 1)).setRadius(10).setIntensity(2).setFadeTime(20));
+        if (FluffyFurClientConfig.LIGHTNING_BOLT_EFFECT_SCREENSHAKE.get()) {
+            ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance(40, pos, 0, 25).setIntensity(0.6f, 0).setEasing(Easing.QUINTIC_IN_OUT).disableNormalize());
+        }
+        if (FluffyFurClientConfig.LIGHTNING_BOLT_EFFECT_LIGHT.get()) {
+            GlowPostProcess.INSTANCE.addInstance(new GlowPostProcessInstance(pos.toVector3f(), new Vector3f(1, 1, 1)).setRadius(10).setIntensity(2).setFadeTime(20));
+        }
     }
 
     public static void lightningBoltTickEffect(Level level, Vec3 pos) {
