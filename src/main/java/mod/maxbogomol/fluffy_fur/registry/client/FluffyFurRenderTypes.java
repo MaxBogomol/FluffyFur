@@ -69,6 +69,8 @@ public class FluffyFurRenderTypes {
     public static final RenderStateShard.ShaderStateShard ADDITIVE_DISTORTED_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getAdditiveDistorted);
     public static final RenderStateShard.ShaderStateShard TRANSLUCENT_DISTORTED_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getTranslucentDistorted);
 
+    public static final RenderStateShard.ShaderStateShard RAIN_FOG_OVERLAY_SHADER = new RenderStateShard.ShaderStateShard(FluffyFurShaders::getRainFogOverlay);
+
     //ADDITIVE
     public static RenderType ADDITIVE_PARTICLE = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":additive_particle",
             DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
@@ -132,6 +134,12 @@ public class FluffyFurRenderTypes {
                     .setWriteMaskState(COLOR_WRITE).setLightmapState(LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
                     .setTextureState(BLOCK_SHEET).setShaderState(TRANSLUCENT_DISTORTED_SHADER).createCompositeState(true));
 
+    //OVERLAY
+    public static RenderType RAIN_FOG_OVERLAY = FluffyFurRenderType.createRenderType(FluffyFur.MOD_ID + ":rain_fog_overlay",
+            DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+                    .setWriteMaskState(COLOR_WRITE).setLightmapState(NO_LIGHTMAP).setTransparencyState(NORMAL_TRANSPARENCY)
+                    .setShaderState(RAIN_FOG_OVERLAY_SHADER).createCompositeState(true));
+
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
@@ -148,7 +156,9 @@ public class FluffyFurRenderTypes {
             addTranslucentRenderType(TRANSLUCENT);
 
             addAdditiveRenderType(ADDITIVE_DISTORTED);
-            addAdditiveRenderType(TRANSLUCENT_DISTORTED);
+            addTranslucentRenderType(TRANSLUCENT_DISTORTED);
+
+            addTranslucentRenderType(RAIN_FOG_OVERLAY);
         }
     }
 

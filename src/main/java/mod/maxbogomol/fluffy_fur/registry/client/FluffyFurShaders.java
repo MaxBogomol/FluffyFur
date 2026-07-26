@@ -16,13 +16,13 @@ import java.io.IOException;
 public class FluffyFurShaders {
     public static ShaderInstance
             ADDITIVE_TEXTURE, ADDITIVE, TRANSLUCENT_TEXTURE, TRANSLUCENT,
-            ADDITIVE_DISTORTED, TRANSLUCENT_DISTORTED;
+            ADDITIVE_DISTORTED, TRANSLUCENT_DISTORTED,
+            RAIN_FOG_OVERLAY;
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
         @SubscribeEvent
         public static void registerShaders(FMLClientSetupEvent event) {
-            PostProcessHandler.addInstance(RainFogPostProcess.INSTANCE);
             PostProcessHandler.addInstance(DepthPostProcess.INSTANCE);
             PostProcessHandler.addInstance(GlowPostProcess.INSTANCE);
             PostProcessHandler.addInstance(NormalGlowPostProcess.INSTANCE);
@@ -38,6 +38,8 @@ public class FluffyFurShaders {
 
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "distorted/additive_distorted"), FluffyFurVertexFormats.ADDITIVE_DISTORTED), shader -> ADDITIVE_DISTORTED = shader);
             event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "distorted/translucent_distorted"), FluffyFurVertexFormats.TRANSLUCENT_DISTORTED), shader -> TRANSLUCENT_DISTORTED = shader);
+
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(FluffyFur.MOD_ID, "overlay/rain_fog"), DefaultVertexFormat.POSITION_TEX_COLOR), shader -> RAIN_FOG_OVERLAY = shader);
         }
     }
 
@@ -63,5 +65,9 @@ public class FluffyFurShaders {
 
     public static ShaderInstance getTranslucentDistorted() {
         return TRANSLUCENT_DISTORTED;
+    }
+
+    public static ShaderInstance getRainFogOverlay() {
+        return RAIN_FOG_OVERLAY;
     }
 }

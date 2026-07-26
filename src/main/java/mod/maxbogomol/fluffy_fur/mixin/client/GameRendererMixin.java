@@ -2,24 +2,27 @@ package mod.maxbogomol.fluffy_fur.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.client.render.LevelRenderHandler;
+import mod.maxbogomol.fluffy_fur.client.render.RainFogRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.render.RenderBuilder;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurRenderTypes;
 import net.minecraft.client.Camera;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-
-    @Shadow public abstract void renderLevel(float pPartialTicks, long pFinishTimeNano, PoseStack pPoseStack);
+    @Unique
+    public GuiGraphics fluffy_fur$guiGraphics;
 
     @Inject(at = @At(value = "RETURN"), method = "renderItemInHand")
-    private void fluffy_fur$renderItemInHand(PoseStack pPoseStack, Camera pActiveRenderInfo, float pPartialTicks, CallbackInfo ci) {
+    private void fluffy_fur$renderItemInHand(PoseStack poseStack, Camera activeRenderInfo, float partialTicks, CallbackInfo ci) {
         for (RenderBuilder builder : FluffyFurRenderTypes.customItemRenderBuilderFirst) {
             builder.endBatch();
         }
@@ -40,5 +43,16 @@ public abstract class GameRendererMixin {
     @Inject(at = @At(value = "RETURN"), method = "render")
     public void fluffy_fur$renderWindowPostProcess(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci) {
         PostProcessHandler.onWindowRender((GameRenderer) (Object) this, partialTicks, nanoTime, renderLevel);
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", ordinal = 0), method = "render")
+    public void fluffy_fur$renderScreenOverlay(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci) {
+        RainFogRenderHandler.renderOverlay(fluffy_fur$guiGraphics);
+    }
+
+    @ModifyVariable(method = "render", at = @At("STORE"), ordinal = 0)
+    public GuiGraphics fluffy_fur$getGui(GuiGraphics guiGraphics) {
+        fluffy_fur$guiGraphics = guiGraphics;
+        return guiGraphics;
     }
 }

@@ -1,27 +1,22 @@
 #version 150
 
-uniform sampler2D DiffuseSampler;
-
-uniform vec2 ScreenSize;
-
+uniform vec2 screenSize;
+uniform float totalTicks;
 uniform float rainStrength;
 uniform float thunderStrength;
 uniform float rainIntensity;
 uniform float thunderIntensity;
 uniform float enabledNoise;
 uniform float enabledIGN;
-uniform float totalTicks;
 
 in vec2 vertexUV;
+in vec4 vertexColor;
 
 out vec4 fragColor;
 
 const float ZOOM = 1.;
 const int OCTAVES = 4;
 const float INTENSITY = 5.;
-
-const vec3 COLOR = vec3(0.42, 0.40, 0.47);
-const vec3 BG = vec3(0.0, 0.0, 0.0);
 
 float random(vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9818,79.279)))*43758.5453123);
@@ -65,7 +60,7 @@ void main() {
 
     if (enabledNoise == 1) {
         float time = totalTicks / 20;
-        vec2 st = vertexUV.xy * vec2(ScreenSize.x / 3, ScreenSize.y / 3) + vec2(time * 50.0, time * 10.0);
+        vec2 st = vertexUV.xy * vec2(screenSize.x / 3, screenSize.y / 3) + vec2(time * 50.0, time * 10.0);
         st *= 0.0025;
         vec2 pos = vec2(st);
         vec2 motion = vec2(fractal_brownian_motion(pos + vec2(time * -0.5, time * -0.3)));
@@ -73,19 +68,15 @@ void main() {
     }
 
     if (enabledIGN == 1) {
-        final = final + (interleaved_gradient_noise(vertexUV * ScreenSize) * min(INTENSITY, 1) * 0.05f);
+        final = final + (interleaved_gradient_noise(vertexUV * screenSize) * min(INTENSITY, 1) * 0.05f);
         final = max(final, 0);
     }
 
-    float a = rainIntensity * rainStrength * (final / 255.0);
-    float r = mix(texture(DiffuseSampler, vertexUV).r, 255.0 / 3.0, a);
-    float g = mix(texture(DiffuseSampler, vertexUV).g, 255.0 / 3.0, a);
-    float b = mix(texture(DiffuseSampler, vertexUV).b, 255.0 / 3.0, a);
+    float a = rainIntensity * rainStrength * final;
+    a = mix(a, 0.0, thunderIntensity * thunderStrength);
 
-    a = thunderIntensity * thunderStrength;
-    r = mix(r, 0.0, a);
-    g = mix(g, 0.0, a);
-    b = mix(b, 0.0, a);
+    vec4 color = vertexColor;
+    color.a = color.a * a;
 
-    fragColor = vec4(r, g, b, 1.0);
+    fragColor = color;
 }

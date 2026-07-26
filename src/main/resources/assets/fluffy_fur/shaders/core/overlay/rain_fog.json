@@ -1,25 +1,27 @@
 {
     "blend": {
         "func": "add",
-        "srcrgb": "one",
-        "dstrgb": "zero"
+        "srcrgb": "srcalpha",
+        "dstrgb": "1-srcalpha"
     },
-    "vertex": "fluffy_fur:blit",
-    "fragment": "fluffy_fur:rain_fog",
-    "attributes": [ "Position" ],
-    "samplers": [
-        { "name": "DiffuseSampler" }
+    "vertex": "fluffy_fur:overlay/rain_fog",
+    "fragment": "fluffy_fur:overlay/rain_fog",
+    "attributes": [
+        "Position",
+        "UV0",
+        "Color"
     ],
+    "samplers": [],
     "uniforms": [
+        { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
         { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
-        { "name": "OutSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
-        { "name": "ScreenSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+        { "name": "screenSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+        { "name": "totalTicks", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "rainStrength", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "thunderStrength", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "rainIntensity", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "thunderIntensity", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "enabledNoise", "type": "float", "count": 1, "values": [ 1.0 ] },
-        { "name": "enabledIGN", "type": "float", "count": 1, "values": [ 1.0 ] },
-        { "name": "totalTicks", "type": "float", "count": 1, "values": [ 1.0 ] }
+        { "name": "enabledIGN", "type": "float", "count": 1, "values": [ 1.0 ] }
     ]
 }

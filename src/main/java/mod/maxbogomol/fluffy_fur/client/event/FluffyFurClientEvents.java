@@ -5,9 +5,9 @@ import mod.maxbogomol.fluffy_fur.client.bow.BowHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurButtonsHandler;
 import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.*;
+import mod.maxbogomol.fluffy_fur.client.render.RainFogRenderHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
-import mod.maxbogomol.fluffy_fur.client.shader.postprocess.RainFogPostProcess;
 import mod.maxbogomol.fluffy_fur.common.creativetab.MultiCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.creativetab.SubCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
@@ -99,7 +99,7 @@ public class FluffyFurClientEvents {
             }
             PostProcessHandler.tick();
             if (!minecraft.isPaused()) {
-                RainFogPostProcess.INSTANCE.tickEffect();
+                RainFogRenderHandler.tick();
             }
         }
     }
