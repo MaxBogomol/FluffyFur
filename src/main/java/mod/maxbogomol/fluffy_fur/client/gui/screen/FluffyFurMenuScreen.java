@@ -3,8 +3,10 @@ package mod.maxbogomol.fluffy_fur.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurDataPackButton;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
+import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurResourcePackButton;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
@@ -87,6 +89,8 @@ public class FluffyFurMenuScreen extends Screen {
         addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
             onClose();
         }).bounds(width / 2 - 80, height / 4 + 152, 160, 20).build());
+        addRenderableWidget(new FluffyFurResourcePackButton(width / 2 + 159, height / 4 + 152));
+        addRenderableWidget(new FluffyFurDataPackButton(width / 2 + 184, height / 4 + 152));
     }
 
     @Override
