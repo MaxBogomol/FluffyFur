@@ -21,7 +21,7 @@ public class RainFogOverlayHandler {
     public static int thunderLevel = 0;
 
     public static void tick() {
-        if (FluffyFurClientConfig.RAIN_FOG_SHADER.get()) {
+        if (FluffyFurClientConfig.RAIN_FOG_OVERLAY.get()) {
             oldRainTick = rainTick;
             oldThunderTick = thunderTick;
             if (rainTick < (getTickLightLevel() * rainLevel)) {
@@ -58,7 +58,7 @@ public class RainFogOverlayHandler {
     }
 
     public static void renderOverlay(GuiGraphics gui) {
-        if (FluffyFurClientConfig.RAIN_FOG_SHADER.get()) {
+        if (FluffyFurClientConfig.RAIN_FOG_OVERLAY.get()) {
             if (FluffyFur.proxy.getPlayer().isAlive() && FluffyFur.proxy.getLevel() != null) {
                 Minecraft minecraft = Minecraft.getInstance();
                 float width = (float) minecraft.getWindow().getWidth();
@@ -76,10 +76,10 @@ public class RainFogOverlayHandler {
                     FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("totalTicks").set(ClientTickHandler.getTotal());
                     FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("rainStrength").set(rain);
                     FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("thunderStrength").set(thunder);
-                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("rainIntensity").set(FluffyFurClientConfig.RAIN_FOG_SHADER_INTENSITY.get().floatValue() + (FluffyFurClientConfig.THUNDER_FOG_SHADER_INTENSITY.get().floatValue() * thunder));
-                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("thunderIntensity").set(FluffyFurClientConfig.THUNDER_FOG_FADE_SHADER_INTENSITY.get().floatValue());
-                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("enabledNoise").set(FluffyFurClientConfig.RAIN_FOG_SHADER_NOISE.get() ? 1f : 0f);
-                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("enabledIGN").set(FluffyFurClientConfig.RAIN_FOG_SHADER_IGN.get() ? 1f : 0f);
+                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("rainIntensity").set(FluffyFurClientConfig.RAIN_FOG_OVERLAY_INTENSITY.get().floatValue() + (FluffyFurClientConfig.THUNDER_FOG_OVERLAY_INTENSITY.get().floatValue() * thunder));
+                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("thunderIntensity").set(FluffyFurClientConfig.THUNDER_FOG_FADE_OVERLAY_INTENSITY.get().floatValue());
+                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("enabledNoise").set(FluffyFurClientConfig.RAIN_FOG_OVERLAY_NOISE.get() ? 1f : 0f);
+                    FluffyFurShaders.RAIN_FOG_OVERLAY.safeGetUniform("enabledIGN").set(FluffyFurClientConfig.RAIN_FOG_OVERLAY_IGN.get() ? 1f : 0f);
 
                     RenderBuilder.create().setRenderType(FluffyFurRenderTypes.RAIN_FOG_OVERLAY)
                             .setAlpha(1f / 3f)

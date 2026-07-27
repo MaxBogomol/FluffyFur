@@ -7,7 +7,7 @@ public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, LIGHTNING_BOLT_EFFECT_LIGHT, LIGHTNING_BOLT_EFFECT_SCREENSHAKE, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
-            RAIN_FOG_SHADER, RAIN_FOG_SHADER_NOISE, RAIN_FOG_SHADER_IGN,
+            RAIN_FOG_OVERLAY, RAIN_FOG_OVERLAY_NOISE, RAIN_FOG_OVERLAY_IGN,
             ENHANCED_MENU, VANILLA_PANORAMA_CONFLICT_PREVENTION, PANORAMA_LOGO, PANORAMA_MUSIC,
             MENU_BUTTON, PAUSE_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
@@ -15,7 +15,7 @@ public class FluffyFurClientConfig {
             PAUSE_BUTTON_ROW, PAUSE_BUTTON_ROW_X_OFFSET, PAUSE_BUTTON_X_OFFSET, PAUSE_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
             SCREENSHAKE_INTENSITY, FANCY_FOG_INTENSITY,
-            RAIN_FOG_SHADER_INTENSITY, THUNDER_FOG_SHADER_INTENSITY, THUNDER_FOG_FADE_SHADER_INTENSITY;
+            RAIN_FOG_OVERLAY_INTENSITY, THUNDER_FOG_OVERLAY_INTENSITY, THUNDER_FOG_FADE_OVERLAY_INTENSITY;
     public static ForgeConfigSpec.ConfigValue<String>
             PANORAMA;
 
@@ -40,13 +40,15 @@ public class FluffyFurClientConfig {
         EXPLOSION_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of explosion.").translation("config.client.fluffy_fur.graphics.particles.explosionEffectScreenshake").define("explosionEffectScreenshake", true);
         builder.pop();
 
-        builder.comment("Shaders").translation("config.client.fluffy_fur.graphics.shaders").push("shaders");
-        RAIN_FOG_SHADER = builder.comment("Enable Rain Fog effect post process shader.").translation("config.client.fluffy_fur.graphics.shaders.rainFogShader").define("rainFogShader", true);
-        RAIN_FOG_SHADER_INTENSITY = builder.comment("Intensity of Rain Fog effect post process shader.").translation("config.client.fluffy_fur.graphics.shaders.rainFogShaderIntensity").defineInRange("rainFogShaderIntensity", 0.3d, 0, 2d);
-        THUNDER_FOG_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog effect post process shader.").translation("config.client.fluffy_fur.graphics.shaders.thunderFogShaderIntensity").defineInRange("thunderFogShaderIntensity", 0.1d, 0, 2d);
-        THUNDER_FOG_FADE_SHADER_INTENSITY = builder.comment("Intensity of Thunder Fog fade effect post process shader.").translation("config.client.fluffy_fur.graphics.shaders.thunderFogFadeShaderIntensity").defineInRange("thunderFogFadeShaderIntensity", 0.25d, 0, 1d);
-        RAIN_FOG_SHADER_NOISE = builder.comment("Enable noise for Rain Fog effect.").translation("config.client.fluffy_fur.graphics.shaders.rainFogShaderNoise").define("rainFogShaderNoise", true);
-        RAIN_FOG_SHADER_IGN = builder.comment("Enable Interleaved Gradient Noise for Rain Fog effect.").translation("config.client.fluffy_fur.graphics.shaders.rainFogShaderIGN").define("rainFogShaderIGN", true);
+        builder.comment("Overlay").translation("config.client.fluffy_fur.graphics.overlay").push("overlay");
+        builder.comment("Rain Fog").push("rainFog");
+        RAIN_FOG_OVERLAY = builder.comment("Enable Rain Fog overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.rainFogOverlay").define("rainFogOverlay", true);
+        RAIN_FOG_OVERLAY_INTENSITY = builder.comment("Intensity of Rain Fog overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.rainFogOverlayIntensity").defineInRange("rainFogOverlayIntensity", 0.3d, 0, 2d);
+        THUNDER_FOG_OVERLAY_INTENSITY = builder.comment("Intensity of Thunder Fog overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.thunderFogOverlayIntensity").defineInRange("thunderFogOverlayIntensity", 0.1d, 0, 2d);
+        THUNDER_FOG_FADE_OVERLAY_INTENSITY = builder.comment("Intensity of Thunder Fog fade overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.thunderFogFadeOverlayIntensity").defineInRange("thunderFogFadeOverlayIntensity", 0.25d, 0, 1d);
+        RAIN_FOG_OVERLAY_NOISE = builder.comment("Enable noise for Rain Fog overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.rainFogOverlayNoise").define("rainFogOverlayNoise", true);
+        RAIN_FOG_OVERLAY_IGN = builder.comment("Enable Interleaved Gradient Noise for Rain Fog overlay effect.").translation("config.client.fluffy_fur.graphics.overlay.rainFog.rainFogOverlayIGN").define("rainFogOverlayIGN", true);
+        builder.pop();
         builder.pop();
         builder.pop();
 
