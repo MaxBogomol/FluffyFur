@@ -17,20 +17,20 @@ public class FluffyFurPackSelectionScreen extends Screen {
 
     @Override
     public void init() {
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
+        addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
             onClose();
-        }).bounds(this.width / 2 - 80, this.height / 4 + 152, 160, 20).build());
+        }).bounds(width / 2 - 80, height / 4 + 152, 160, 20).build());
     }
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTicks) {
-        this.renderDirtBackground(gui);
+        renderBackground(gui);
 
         super.render(gui, mouseX, mouseY, partialTicks);
     }
 
     @Override
     public void onClose() {
-        Minecraft.getInstance().setScreen(this.lastScreen);
+        Minecraft.getInstance().setScreen(lastScreen);
     }
 }

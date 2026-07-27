@@ -63,11 +63,11 @@ public class FluffyFurClientConfig {
         MENU_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur menu button X offset with row.").translation("config.client.fluffy_fur.menu.menuButtonRowXOffset").define("menuButtonRowXOffset", 4);
         MENU_BUTTON_X_OFFSET = builder.comment("Fluffy Fur menu button X offset.").translation("config.client.fluffy_fur.menu.menuButtonXOffset").define("menuButtonXOffset", 0);
         MENU_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur menu button Y offset.").translation("config.client.fluffy_fur.menu.menuButtonYOffset").define("menuButtonYOffset", 0);
-        PAUSE_BUTTON = builder.comment("Enable Fluffy Fur pause screen button.").translation("config.client.fluffy_fur.menu.screenButton").define("screenButton", true);
-        PAUSE_BUTTON_ROW = builder.comment("Fluffy Fur pause screen button row.").translation("config.client.fluffy_fur.menu.screenButtonRow").defineInRange("screenButtonRow", 4, 1, 6);
-        PAUSE_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset with row.").translation("config.client.fluffy_fur.menu.screenButtonRowXOffset").define("screenButtonRowXOffset", 4);
-        PAUSE_BUTTON_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset.").translation("config.client.fluffy_fur.menu.screenButtonXOffset").define("screenButtonXOffset", 0);
-        PAUSE_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur pause screen button Y offset.").translation("config.client.fluffy_fur.menu.screenButtonYOffset").define("screenButtonYOffset", 0);
+        PAUSE_BUTTON = builder.comment("Enable Fluffy Fur pause screen button.").translation("config.client.fluffy_fur.menu.pauseScreenButton").define("pauseScreenButton", true);
+        PAUSE_BUTTON_ROW = builder.comment("Fluffy Fur pause screen button row.").translation("config.client.fluffy_fur.menu.pauseScreenButtonRow").defineInRange("pauseScreenButtonRow", 4, 1, 6);
+        PAUSE_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset with row.").translation("config.client.fluffy_fur.menu.pauseScreenButtonRowXOffset").define("pauseScreenButtonRowXOffset", 4);
+        PAUSE_BUTTON_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset.").translation("config.client.fluffy_fur.menu.pauseScreenButtonXOffset").define("pauseScreenButtonXOffset", 0);
+        PAUSE_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur pause screen button Y offset.").translation("config.client.fluffy_fur.menu.pauseScreenButtonYOffset").define("pauseScreenButtonYOffset", 0);
         builder.pop();
     }
 
