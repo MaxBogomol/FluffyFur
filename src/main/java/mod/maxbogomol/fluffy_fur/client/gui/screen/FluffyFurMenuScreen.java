@@ -52,7 +52,7 @@ public class FluffyFurMenuScreen extends Screen {
 
     public FluffyFurMenuScreen(Screen lastScreen) {
         super(Component.empty());
-        lastScreen = lastScreen;
+        this.lastScreen = lastScreen;
         panorama = FluffyFurModsHandler.ACTIVE_PANORAMA;
         overlay = FluffyFurModsHandler.ACTIVE_OVERLAY;
         if (lastScreen instanceof TitleScreen titleScreen) {
