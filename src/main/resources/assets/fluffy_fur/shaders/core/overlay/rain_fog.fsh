@@ -76,6 +76,8 @@ void main() {
 
     vec4 color = vertexColor;
     color.a = color.a * a;
-
+    if (color.a == 0.0) {
+        discard;
+    }
     fragColor = color;
 }

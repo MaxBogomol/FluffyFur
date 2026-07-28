@@ -52,7 +52,7 @@ public class FluffyFurItems {
     public static final RegistryObject<Item> SPECKLE_PLUSH = ITEMS.register("speckle_plush", () -> new PlushItem(FluffyFurBlocks.SPECKLE_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> SEADRIVE_PLUSH = ITEMS.register("seadrive_plush", () -> new PlushItem(FluffyFurBlocks.SEADRIVE_PLUSH.get(), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 
-    public static final RegistryObject<Item> YONKABLOCK = ITEMS.register("yonkablock", () -> new PlushItem(FluffyFurBlocks.YONKABLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YONKABLOCK = ITEMS.register("yonkablock", () -> new YonKaBlockItem(FluffyFurBlocks.YONKABLOCK.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
