@@ -14,7 +14,6 @@ in vec4 vertexColor;
 
 out vec4 fragColor;
 
-const float ZOOM = 1.;
 const int OCTAVES = 4;
 const float INTENSITY = 5.;
 
@@ -42,7 +41,7 @@ float noise(vec2 st) {
 float fractal_brownian_motion(vec2 coord) {
     float value = 0.0;
     float scale = 0.2;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < OCTAVES; i++) {
         value += noise(coord) * scale;
         coord *= 2.0;
         scale *= 0.5;
@@ -58,18 +57,18 @@ float interleaved_gradient_noise(vec2 p) {
 void main() {
     float final = INTENSITY * 0.25f;
 
-    if (enabledNoise == 1) {
-        float time = totalTicks / 20;
-        vec2 st = vertexUV.xy * vec2(screenSize.x / 3, screenSize.y / 3) + vec2(time * 50.0, time * 10.0);
+    if (enabledNoise == 1.0) {
+        float time = totalTicks / 20.0;
+        vec2 st = vertexUV.xy * vec2(screenSize.x / 3.0, screenSize.y / 3.0) + vec2(time * 50.0, time * 10.0);
         st *= 0.0025;
         vec2 pos = vec2(st);
         vec2 motion = vec2(fractal_brownian_motion(pos + vec2(time * -0.5, time * -0.3)));
         final = fractal_brownian_motion(pos + motion) * INTENSITY;
     }
 
-    if (enabledIGN == 1) {
-        final = final + (interleaved_gradient_noise(vertexUV * screenSize) * min(INTENSITY, 1) * 0.05f);
-        final = max(final, 0);
+    if (enabledIGN == 1.0) {
+        final = final + (interleaved_gradient_noise(vertexUV * screenSize) * min(INTENSITY, 1.0) * 0.05f);
+        final = max(final, 0.0);
     }
 
     float a = rainIntensity * rainStrength * final;
