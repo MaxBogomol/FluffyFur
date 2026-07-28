@@ -8,6 +8,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurResourcePackButton;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
+import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurFonts;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -139,7 +140,7 @@ public class FluffyFurMenuScreen extends Screen {
             int index = descriptionScroll + i;
             if (index < 0) break;
             if (index > lines.size() - 1) break;
-            MutableComponent line = Component.empty().append(lines.get(index));
+            MutableComponent line = Component.empty().append(lines.get(index)).withStyle(Style.EMPTY.withFont(FluffyFurFonts.PAWSCRIPT_LOCATION));
             if (index >= l) {
                 if (mouseX >= x + 5 && mouseY >= y + 5 + (i * (font.lineHeight + 1)) && mouseX <= x + 5 + font.width(line) && mouseY < y + 5 + (i * (font.lineHeight + 1) + font.lineHeight)) {
                     line.withStyle(ChatFormatting.UNDERLINE);
