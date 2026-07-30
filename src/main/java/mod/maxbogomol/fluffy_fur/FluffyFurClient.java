@@ -12,6 +12,7 @@ import mod.maxbogomol.fluffy_fur.integration.client.ShadersIntegration;
 import mod.maxbogomol.fluffy_fur.integration.client.fusion.FluffyFurFusion;
 import mod.maxbogomol.fluffy_fur.integration.common.curios.FluffyFurCurios;
 import mod.maxbogomol.fluffy_fur.registry.common.item.FluffyFurCreativeTabs;
+import mod.maxbogomol.fluffy_fur.util.FileUtil;
 import net.minecraft.client.resources.language.LanguageInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -71,6 +72,8 @@ public class FluffyFurClient {
         if (FluffyFurCurios.isLoaded()) {
             FluffyFurCurios.ClientLoadedOnly.init();
         }
+
+        FileUtil.createSubFolder(FluffyFur.MOD_ID);
     }
 
     public static FluffyFurMod MOD_INSTANCE;
