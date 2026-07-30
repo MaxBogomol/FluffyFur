@@ -16,8 +16,6 @@ public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Double>
             SCREENSHAKE_INTENSITY, FANCY_FOG_INTENSITY,
             RAIN_FOG_OVERLAY_INTENSITY, THUNDER_FOG_OVERLAY_INTENSITY, THUNDER_FOG_FADE_OVERLAY_INTENSITY;
-    public static ForgeConfigSpec.ConfigValue<String>
-            PANORAMA;
 
     public FluffyFurClientConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Graphics").translation("config.client.fluffy_fur.graphics").push("graphics");
@@ -55,7 +53,6 @@ public class FluffyFurClientConfig {
         builder.comment("Menu").translation("config.client.fluffy_fur.menu").push("menu");
         ENHANCED_MENU = builder.comment(".").translation("config.client.fluffy_fur.menu.enhancedMenu").define("enhancedMenu", true);
         VANILLA_PANORAMA_CONFLICT_PREVENTION = builder.comment(".").translation("config.client.fluffy_fur.menu.vanillaPanoramaConflictPrevention").define("vanillaPanoramaConflictPrevention", true);
-        PANORAMA = builder.comment("Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panorama").define("panorama", "minecraft:vanilla");
         PANORAMA_LOGO = builder.comment("Enable logo in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaLogo").define("panoramaLogo", true);
         PANORAMA_MUSIC = builder.comment("Enable music in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaMusic").define("panoramaMusic", true);
         MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.").translation("config.client.fluffy_fur.menu.menuButton").define("menuButton", true);

@@ -12,7 +12,6 @@ import mod.maxbogomol.fluffy_fur.common.creativetab.MultiCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.creativetab.SubCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.network.FluffyFurPacketHandler;
 import mod.maxbogomol.fluffy_fur.common.network.item.StopUseItemPacket;
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.registry.client.FluffyFurKeyMappings;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -50,11 +49,9 @@ public class FluffyFurClientEvents {
 
     public static void setPanoramaScreen(Screen screen) {
         if (screen instanceof TitleScreen titleScreen) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
-            if (panorama != null) {
-                FluffyFurModsHandler.copyPanoramaRenderer(FluffyFurModsHandler.ACTIVE_PANORAMA, titleScreen.panorama);
-                FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
-            }
+            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama();
+            FluffyFurModsHandler.copyPanoramaRenderer(FluffyFurModsHandler.ACTIVE_PANORAMA, titleScreen.panorama);
+            FluffyFurModsHandler.setOpenPanorama(titleScreen, panorama);
         }
     }
 

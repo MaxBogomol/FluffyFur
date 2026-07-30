@@ -1,19 +1,28 @@
 package mod.maxbogomol.fluffy_fur.client.gui.screen;
 
+import com.google.gson.JsonObject;
+import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
 import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
+import mod.maxbogomol.fluffy_fur.util.FileUtil;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 
+import java.nio.file.Path;
 import java.util.*;
 
 public class FluffyFurModsHandler {
     public static FluffyFurPanoramaRenderer ACTIVE_PANORAMA = new FluffyFurPanoramaRenderer();
     public static FluffyFurLogoRenderer ACTIVE_LOGO = new FluffyFurLogoRenderer();
     public static ResourceLocation ACTIVE_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
+
+    public static FluffyFurPanorama FIRST_PANORAMA = FluffyFurClient.VANILLA_PANORAMA;
+    public static FluffyFurPanorama SECOND_PANORAMA = FluffyFurClient.VANILLA_PANORAMA;
+    public static boolean fileLoaded = false;
 
     public static Map<String, FluffyFurMod> mods = new HashMap<>();
     public static Map<String, FluffyFurPanorama> panoramas = new HashMap<>();
@@ -110,11 +119,59 @@ public class FluffyFurModsHandler {
     }
 
     public static FluffyFurPanorama getPanorama() {
-        return getPanorama(FluffyFurClientConfig.PANORAMA.get());
+        return getFirstPanorama();
     }
 
     public static void setPanorama(FluffyFurPanorama panorama) {
-        FluffyFurClientConfig.PANORAMA.set(panorama.getId());
+        setFirstPanorama(panorama);
+    }
+
+    public static FluffyFurPanorama getFirstPanorama() {
+        loadPanorama();
+        return FIRST_PANORAMA;
+    }
+
+    public static void setFirstPanorama(FluffyFurPanorama panorama) {
+        FIRST_PANORAMA = panorama;
+        savePanorama();
+    }
+
+    public static FluffyFurPanorama getSecondPanorama() {
+        loadPanorama();
+        return SECOND_PANORAMA;
+    }
+
+    public static void setSecondPanorama(FluffyFurPanorama panorama) {
+        SECOND_PANORAMA = panorama;
+        savePanorama();
+    }
+
+    private static Path getFilePath() {
+        return FileUtil.getSubFolder(FluffyFur.MOD_ID).resolve("panorama.json");
+    }
+
+    public static void loadPanorama() {
+        FileUtil.createSubFolder(FluffyFur.MOD_ID);
+        if (!fileLoaded) {
+            JsonObject json = FileUtil.loadJson(getFilePath());
+
+            String firstPanoramaId = GsonHelper.getAsString(json, "firstPanorama", FluffyFurClient.VANILLA_PANORAMA.getId());
+            FluffyFurPanorama firstPanorama = getPanorama(firstPanoramaId);
+            if (firstPanorama != null) {
+                FIRST_PANORAMA = firstPanorama;
+            }
+
+            fileLoaded = true;
+        }
+        if (!FileUtil.exist(getFilePath())) {
+            savePanorama();
+        }
+    }
+
+    public static void savePanorama() {
+        JsonObject json = new JsonObject();
+        json.addProperty("firstPanorama", FIRST_PANORAMA.getId());
+        FileUtil.saveJson(getFilePath(), json);
     }
 
     public static void setActivePanorama(FluffyFurPanorama panorama) {

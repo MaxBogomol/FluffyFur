@@ -7,7 +7,6 @@ import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurDataPackButton;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurResourcePackButton;
-import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -65,16 +64,13 @@ public class FluffyFurMenuScreen extends Screen {
         mods = FluffyFurModsHandler.getSortedMods();
         panoramas = FluffyFurModsHandler.getSortedPanoramas();
 
-        if (FluffyFurClientConfig.PANORAMA.get() instanceof String) {
-            FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama(FluffyFurClientConfig.PANORAMA.get());
-            if (panorama != null) {
-                if (panoramas.contains(panorama)) {
-                    selectedPanorama = panoramas.indexOf(panorama);
-                }
+        FluffyFurPanorama panorama = FluffyFurModsHandler.getPanorama();
+        if (panorama != null) {
+            if (panoramas.contains(panorama)) {
+                selectedPanorama = panoramas.indexOf(panorama);
             }
-        } else {
-            selectedPanorama = 0;
         }
+
         descriptionScroll = 0;
 
         logoRenderer.keepLogoThroughFade = ((panoramas.get(selectedPanorama) == FluffyFurClient.FLUFFY_PANORAMA));
