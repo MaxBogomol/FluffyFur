@@ -5,11 +5,9 @@
 uniform sampler2D DiffuseSampler;
 uniform sampler2D MainDepthSampler;
 
-uniform samplerBuffer DataBuffer;
-uniform int InstanceCount;
+uniform vec3 cameraPos;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;
-uniform vec3 cameraPos;
 uniform float fade;
 
 in vec2 vertexUV;

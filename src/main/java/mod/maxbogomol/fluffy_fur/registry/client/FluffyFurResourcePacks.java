@@ -1,12 +1,14 @@
 package mod.maxbogomol.fluffy_fur.registry.client;
 
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.client.pack.FluffyFurResourcePacksReloadListener;
 import mod.maxbogomol.fluffy_fur.common.pack.PackHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +23,11 @@ public class FluffyFurResourcePacks {
             if (event.getPackType() == PackType.CLIENT_RESOURCES) {
                 addPack(event, "yonkafishy");
             }
+        }
+
+        @SubscribeEvent
+        public static void onRegisterClientReloadListenersEvent(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener(new FluffyFurResourcePacksReloadListener());
         }
     }
 

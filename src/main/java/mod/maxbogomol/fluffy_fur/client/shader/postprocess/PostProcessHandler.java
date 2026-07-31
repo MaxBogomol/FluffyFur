@@ -93,6 +93,12 @@ public class PostProcessHandler {
         }
     }
 
+    public static void reload() {
+        for (PostProcess postProcess : getSortedInstances()) {
+            postProcess.reload();
+        }
+    }
+
     public static void tick() {
         Minecraft minecraft = Minecraft.getInstance();
         for (PostProcess postProcess : getSortedInstances()) {
