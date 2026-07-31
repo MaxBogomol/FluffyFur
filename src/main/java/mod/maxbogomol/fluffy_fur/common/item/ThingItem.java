@@ -18,6 +18,7 @@ import mod.maxbogomol.fluffy_fur.util.RenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -42,11 +43,13 @@ public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level level, List<Component> list, TooltipFlag flags) {
-        list.add(Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(" " + FluffyFur.mcreatorModsCount).withStyle(ChatFormatting.DARK_RED)
-                .append(Screen.hasShiftDown() || FluffyFur.mcreatorModsCount == 0 ? Component.empty() : Component.literal(" []").withStyle(ChatFormatting.GRAY)));
-        if (Screen.hasShiftDown()) {
-            for (String string : FluffyFur.mcreatorModsList) {
-                list.add(Component.literal(string).withStyle(ChatFormatting.RED));
+        if (FluffyFur.mcreatorModsCount > 0) {
+            list.add(Component.translatable("gui.fluffy_fur.menu.mcreator_mods").append(CommonComponents.SPACE).append(String.valueOf(FluffyFur.mcreatorModsCount)).withStyle(ChatFormatting.DARK_RED)
+                    .append(Screen.hasShiftDown() ? Component.empty() : Component.literal(" []").withStyle(ChatFormatting.GRAY)));
+            if (Screen.hasShiftDown()) {
+                for (String string : FluffyFur.mcreatorModsList) {
+                    list.add(Component.literal(string).withStyle(ChatFormatting.RED));
+                }
             }
         }
     }
