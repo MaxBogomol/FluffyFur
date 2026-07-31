@@ -3,6 +3,7 @@ package mod.maxbogomol.fluffy_fur.common.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.event.ClientTickHandler;
 import mod.maxbogomol.fluffy_fur.client.particle.ParticleBuilder;
 import mod.maxbogomol.fluffy_fur.client.particle.data.ColorParticleData;
@@ -51,6 +52,17 @@ public class ThingItem extends Item implements IParticleItem, IGuiParticleItem {
                     list.add(Component.literal(string).withStyle(ChatFormatting.RED));
                 }
             }
+            list.add(Component.empty());
+        }
+        if (FluffyFurClient.optifinePresent) {
+            list.add(Component.translatable("gui.fluffy_fur.menu.optifine.0").withStyle(ChatFormatting.RED));
+            list.add(Component.translatable("gui.fluffy_fur.menu.optifine.1").withStyle(ChatFormatting.RED));
+            list.add(Component.translatable("gui.fluffy_fur.menu.optifine.2").withStyle(ChatFormatting.RED));
+            list.add(Component.empty());
+        }
+        if (FluffyFurClient.piracyPresent) {
+            list.add(Component.translatable("gui.fluffy_fur.menu.piracy").withStyle(ChatFormatting.RED));
+            list.add(Component.empty());
         }
     }
 
