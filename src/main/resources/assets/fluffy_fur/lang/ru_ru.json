@@ -205,5 +205,13 @@
   "config.client.fluffy_fur.menu.pauseScreenButtonXOffset": "Pause Screen Button X Offset",
   "config.client.fluffy_fur.menu.pauseScreenButtonXOffset.desc": "Fluffy Fur pause screen button X offset.",
   "config.client.fluffy_fur.menu.pauseScreenButtonYOffset": "Pause Screen Button Y Offset",
-  "config.client.fluffy_fur.menu.pauseScreenButtonYOffset.desc": "Fluffy Fur pause screen button Y offset."
+  "config.client.fluffy_fur.menu.pauseScreenButtonYOffset.desc": "Fluffy Fur pause screen button Y offset.",
+  "config.client.fluffy_fur.menu.packButton": "Pack Button",
+  "config.client.fluffy_fur.menu.packButton.desc": "Enable custom pack selection button.",
+  "config.client.fluffy_fur.menu.packButtonRowXOffset": "Pack Button Row X Offset",
+  "config.client.fluffy_fur.menu.packButtonRowXOffset.desc": "Custom pack selection button X offset with row.",
+  "config.client.fluffy_fur.menu.packButtonXOffset": "Pack Button X Offset",
+  "config.client.fluffy_fur.menu.packButtonXOffset.desc": "Custom pack selection button X offset.",
+  "config.client.fluffy_fur.menu.packButtonYOffset": "Pack Button Y Offset",
+  "config.client.fluffy_fur.menu.packButtonYOffset.desc": "Custom pack selection button Y offset."
 }

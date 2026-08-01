@@ -9,10 +9,11 @@ public class FluffyFurClientConfig {
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, LIGHTNING_BOLT_EFFECT_LIGHT, LIGHTNING_BOLT_EFFECT_SCREENSHAKE, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
             RAIN_FOG_OVERLAY, RAIN_FOG_OVERLAY_NOISE, RAIN_FOG_OVERLAY_IGN,
             ENHANCED_MENU, VANILLA_PANORAMA_CONFLICT_PREVENTION, PANORAMA_LOGO, PANORAMA_MUSIC,
-            MENU_BUTTON, PAUSE_BUTTON;
+            MENU_BUTTON, PAUSE_BUTTON, PACK_BUTTON;
     public static ForgeConfigSpec.ConfigValue<Integer>
             MENU_BUTTON_ROW, MENU_BUTTON_ROW_X_OFFSET, MENU_BUTTON_X_OFFSET, MENU_BUTTON_Y_OFFSET,
-            PAUSE_BUTTON_ROW, PAUSE_BUTTON_ROW_X_OFFSET, PAUSE_BUTTON_X_OFFSET, PAUSE_BUTTON_Y_OFFSET;
+            PAUSE_BUTTON_ROW, PAUSE_BUTTON_ROW_X_OFFSET, PAUSE_BUTTON_X_OFFSET, PAUSE_BUTTON_Y_OFFSET,
+            PACK_BUTTON_ROW_X_OFFSET, PACK_BUTTON_X_OFFSET, PACK_BUTTON_Y_OFFSET;
     public static ForgeConfigSpec.ConfigValue<Double>
             SCREENSHAKE_INTENSITY, FANCY_FOG_INTENSITY,
             RAIN_FOG_OVERLAY_INTENSITY, THUNDER_FOG_OVERLAY_INTENSITY, THUNDER_FOG_FADE_OVERLAY_INTENSITY;
@@ -65,6 +66,10 @@ public class FluffyFurClientConfig {
         PAUSE_BUTTON_ROW_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset with row.").translation("config.client.fluffy_fur.menu.pauseScreenButtonRowXOffset").define("pauseScreenButtonRowXOffset", 4);
         PAUSE_BUTTON_X_OFFSET = builder.comment("Fluffy Fur pause screen button X offset.").translation("config.client.fluffy_fur.menu.pauseScreenButtonXOffset").define("pauseScreenButtonXOffset", 0);
         PAUSE_BUTTON_Y_OFFSET = builder.comment("Fluffy Fur pause screen button Y offset.").translation("config.client.fluffy_fur.menu.pauseScreenButtonYOffset").define("pauseScreenButtonYOffset", 0);
+        PACK_BUTTON = builder.comment("Enable custom pack selection button.").translation("config.client.fluffy_fur.menu.packButton").define("packButton", true);
+        PACK_BUTTON_ROW_X_OFFSET = builder.comment("Custom pack selection button X offset with row.").translation("config.client.fluffy_fur.menu.packButtonRowXOffset").define("packButtonRowXOffset", -4);
+        PACK_BUTTON_X_OFFSET = builder.comment("Custom pack selection button X offset.").translation("config.client.fluffy_fur.menu.packButtonXOffset").define("packButtonXOffset", 0);
+        PACK_BUTTON_Y_OFFSET = builder.comment("Custom pack selection button Y offset.").translation("config.client.fluffy_fur.menu.packButtonYOffset").define("packButtonYOffset", 0);
         builder.pop();
     }
 

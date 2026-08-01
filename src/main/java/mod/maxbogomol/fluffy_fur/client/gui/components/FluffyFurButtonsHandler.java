@@ -45,10 +45,14 @@ public class FluffyFurButtonsHandler {
                 offsetFreeY = FluffyFurClientConfig.PAUSE_BUTTON_Y_OFFSET.get();
             }
         }
-        if (screen instanceof PackSelectionScreen) {
-            menu = MenuRows.SELECT_PACK_MENU;
-            packButton = true;
-            offsetX = - 4;
+        if (FluffyFurClientConfig.PACK_BUTTON.get()) {
+            if (screen instanceof PackSelectionScreen) {
+                packButton = true;
+                menu = MenuRows.SELECT_PACK_MENU;
+                offsetX = FluffyFurClientConfig.PACK_BUTTON_ROW_X_OFFSET.get();
+                offsetFreeX = FluffyFurClientConfig.PACK_BUTTON_X_OFFSET.get();
+                offsetFreeY = FluffyFurClientConfig.PACK_BUTTON_Y_OFFSET.get();
+            }
         }
 
         if (menu != null) {
