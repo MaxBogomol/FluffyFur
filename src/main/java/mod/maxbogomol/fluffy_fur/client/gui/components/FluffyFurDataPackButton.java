@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class FluffyFurDataPackButton extends Button {
-    public static final ResourceLocation PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/data_pack.png");
+    public static final ResourceLocation DATA_PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/data_pack.png");
 
     public FluffyFurDataPackButton(int x, int y) {
         super(x, y, 20, 20, Component.empty(), FluffyFurDataPackButton::click, DEFAULT_NARRATION);
@@ -18,7 +18,7 @@ public class FluffyFurDataPackButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.blit(PACK_LOCATION, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(DATA_PACK_LOCATION, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
     }
 
     public static void click(Button button) {

@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class FluffyFurResourcePackButton extends Button {
-    public static final ResourceLocation PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/resource_pack.png");
+    public static final ResourceLocation RESOURCE_PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/resource_pack.png");
 
     public FluffyFurResourcePackButton(int x, int y) {
         super(x, y, 20, 20, Component.empty(), FluffyFurResourcePackButton::click, DEFAULT_NARRATION);
@@ -18,7 +18,7 @@ public class FluffyFurResourcePackButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.blit(PACK_LOCATION, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(RESOURCE_PACK_LOCATION, getX() + 2, getY() + 2, 0, 0, 16, 16, 16, 16);
     }
 
     public static void click(Button button) {
