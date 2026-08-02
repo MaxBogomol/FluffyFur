@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/%20-LICENSE%20GPL--2.0-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/%20-LICENSE-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/blob/master/LICENSE.md)
 [![Wiki](https://img.shields.io/badge/%20-WIKI-blue?style=for-the-badge&color=blue&logo=github&logoColor=000000&labelColor=FFFFFF)](https://github.com/MaxBogomol/FluffyFur/wiki)
 [![Release](https://img.shields.io/github/v/release/maxbogomol/FluffyFur?style=for-the-badge&color=6aa84f&logo=github&label=FLUFFY%20FUR)](https://github.com/MaxBogomol/FluffyFur/releases)
 [![Github](https://img.shields.io/github/stars/maxbogomol/FluffyFur?style=for-the-badge&color=6aa84f&logo=github&label=FLUFFY%20FUR)](https://github.com/MaxBogomol/FluffyFur)
