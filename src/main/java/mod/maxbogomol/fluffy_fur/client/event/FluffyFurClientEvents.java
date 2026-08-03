@@ -7,6 +7,7 @@ import mod.maxbogomol.fluffy_fur.client.gui.components.SubCreativeTabButton;
 import mod.maxbogomol.fluffy_fur.client.gui.screen.*;
 import mod.maxbogomol.fluffy_fur.client.render.RainFogOverlayHandler;
 import mod.maxbogomol.fluffy_fur.client.screenshake.ScreenshakeHandler;
+import mod.maxbogomol.fluffy_fur.client.shader.postprocess.DepthPostProcess;
 import mod.maxbogomol.fluffy_fur.client.shader.postprocess.PostProcessHandler;
 import mod.maxbogomol.fluffy_fur.common.creativetab.MultiCreativeTab;
 import mod.maxbogomol.fluffy_fur.common.creativetab.SubCreativeTab;
@@ -28,6 +29,7 @@ import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -144,5 +146,10 @@ public class FluffyFurClientEvents {
                 Minecraft.getInstance().setScreen(new PlayerSkinMenuScreen());
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        DepthPostProcess.INSTANCE.setActive(false);
     }
 }
