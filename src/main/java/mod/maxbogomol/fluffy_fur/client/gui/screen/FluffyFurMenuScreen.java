@@ -47,6 +47,10 @@ public class FluffyFurMenuScreen extends Screen {
     public static int panoramasScroll = 0;
     public static int modsScroll = 0;
 
+    public static boolean descriptionDrag = false;
+    public static boolean panoramasDrag = false;
+    public static boolean modsDrag = false;
+
     public static int selectedPanorama = 0;
     public static int selectedMod = 0;
     public static String selectedLink;
@@ -72,6 +76,11 @@ public class FluffyFurMenuScreen extends Screen {
         }
 
         descriptionScroll = 0;
+        panoramasScroll = 0;
+        modsScroll = 0;
+        descriptionDrag = false;
+        panoramasDrag = false;
+        modsDrag = false;
 
         logoRenderer.keepLogoThroughFade = ((panoramas.get(selectedPanorama) == FluffyFurClient.FLUFFY_PANORAMA));
     }
@@ -325,7 +334,6 @@ public class FluffyFurMenuScreen extends Screen {
         if (descriptionMouseClicked(width / 2 - 80, height / 4 + 48, mouseX, mouseY, button)) return true;
         if (panoramaListMouseClicked(width / 2 - 204, height / 4 + 48, mouseX, mouseY, button)) return true;
         if (modListMouseClicked(width / 2 + 84, height / 4 + 48, mouseX, mouseY, button)) return true;
-
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -349,7 +357,10 @@ public class FluffyFurMenuScreen extends Screen {
                 }
             }
         }
-
+        if (mouseX >= x + 147 && mouseY >= y + 4 && mouseX <= x + 157 && mouseY < y + 96) {
+            descriptionDrag = true;
+            return true;
+        }
         return false;
     }
 
@@ -374,7 +385,10 @@ public class FluffyFurMenuScreen extends Screen {
                 }
             }
         }
-
+        if (mouseX >= x + 107 && mouseY >= y + 4 && mouseX <= x + 117 && mouseY < y + 96) {
+            panoramasDrag = true;
+            return true;
+        }
         return false;
     }
 
@@ -392,8 +406,19 @@ public class FluffyFurMenuScreen extends Screen {
                 }
             }
         }
-
+        if (mouseX >= x + 107 && mouseY >= y + 4 && mouseX <= x + 117 && mouseY < y + 96) {
+            modsDrag = true;
+            return true;
+        }
         return false;
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        descriptionDrag = false;
+        panoramasDrag = false;
+        modsDrag = false;
+        return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
@@ -401,59 +426,100 @@ public class FluffyFurMenuScreen extends Screen {
         if (descriptionMouseScrolled(width / 2 - 80, height / 4 + 48, mouseX, mouseY, delta)) return true;
         if (panoramaListMouseScrolled(width / 2 - 204, height / 4 + 48, mouseX, mouseY, delta)) return true;
         if (modListMouseScrolled(width / 2 + 84, height / 4 + 48, mouseX, mouseY, delta)) return true;
-
         return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     public boolean descriptionMouseScrolled(int x, int y, double mouseX, double mouseY, double delta) {
         if (mouseX >= x && mouseY >= y && mouseX <= x + 160 && mouseY < y + 100) {
             List<Component> lines = getDescription(mods.get(selectedMod));
-            int add = (int) delta;
-            if (descriptionScroll - add < 0) {
-                return false;
-            }
-            if (descriptionScroll - add > lines.size() - 9) {
-                return false;
-            }
+            int add = (int) Math.round(delta);
+            if (descriptionScroll - add < 0) return false;
+            if (descriptionScroll - add > lines.size() - 9) return false;
             descriptionScroll = descriptionScroll - add;
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
             return true;
         }
-
         return false;
     }
 
     public boolean panoramaListMouseScrolled(int x, int y, double mouseX, double mouseY, double delta) {
         if (mouseX >= x && mouseY >= y && mouseX <= x + 120 && mouseY < y + 100) {
-            int add = (int) delta;
-            if (panoramasScroll - add < 0) {
-                return false;
-            }
-            if (panoramasScroll - add > panoramas.size() - 5) {
-                return false;
-            }
+            int add = (int) Math.round(delta);
+            if (panoramasScroll - add < 0) return false;
+            if (panoramasScroll - add > panoramas.size() - 5) return false;
             panoramasScroll = panoramasScroll - add;
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
             return true;
         }
-
         return false;
     }
 
     public boolean modListMouseScrolled(int x, int y, double mouseX, double mouseY, double delta) {
         if (mouseX >= x && mouseY >= y && mouseX <= x + 120 && mouseY < y + 100) {
-            int add = (int) delta;
-            if (modsScroll - add < 0) {
-                return false;
-            }
-            if (modsScroll - add > mods.size() - 5) {
-                return false;
-            }
+            int add = (int) Math.round(delta);
+            if (modsScroll - add < 0) return false;
+            if (modsScroll - add > mods.size() - 5) return false;
             modsScroll = modsScroll - add;
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
             return true;
         }
+        return false;
+    }
 
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (descriptionMouseDragged(width / 2 - 80, height / 4 + 48, mouseX, mouseY, button, dragX, dragY)) return true;
+        if (panoramaListMouseDragged(width / 2 - 204, height / 4 + 48, mouseX, mouseY, button, dragX, dragY)) return true;
+        if (modListMouseDragged(width / 2 + 84, height / 4 + 48, mouseX, mouseY, button, dragX, dragY)) return true;
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    }
+
+    public boolean descriptionMouseDragged(int x, int y, double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (descriptionDrag) {
+            List<Component> lines = getDescription(mods.get(selectedMod));
+            if (lines.size() > 9) {
+                int add = (int) Math.round(((mouseY - (y + 4)) / 92f) * (lines.size() - 9));
+                if (add < 0) add = 0;
+                if (add > lines.size() - 9) add = lines.size() - 9;
+                if (add != descriptionScroll) {
+                    descriptionScroll = add;
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean panoramaListMouseDragged(int x, int y, double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (panoramasDrag) {
+            if (panoramas.size() > 5) {
+                int add = (int) Math.round(((mouseY - (y + 4)) / 92f) * (panoramas.size() - 5));
+                if (add < 0) add = 0;
+                if (add > panoramas.size() - 5) add = panoramas.size() - 5;
+                if (add != panoramasScroll) {
+                    panoramasScroll = add;
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean modListMouseDragged(int x, int y, double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (modsDrag) {
+            if (mods.size() > 5) {
+                int add = (int) Math.round(((mouseY - (y + 4)) / 92f) * (mods.size() - 5));
+                if (add < 0) add = 0;
+                if (add > mods.size() - 5) add = mods.size() - 5;
+                if (add != modsScroll) {
+                    modsScroll = add;
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.get(), 2.0f, 0.1f));
+                }
+            }
+            return true;
+        }
         return false;
     }
 
