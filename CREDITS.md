@@ -8,6 +8,10 @@ Original soundtrack by [Onjerlay](https://fluffy-village.dev/pages/eng/yappers/o
 Plushies models and textures by [OnixTheCat](https://fluffy-village.dev/pages/eng/yappers/onixthecat.html)  
 Firch Plush texture by [Firch](https://github.com/Firch)  
 
+## Misc
+
+Pixelated YonKaBlock texture by [OnixTheCat](https://fluffy-village.dev/pages/eng/yappers/onixthecat.html)
+
 ## Languages
 
 ### Officially supported languages:
