@@ -7,6 +7,7 @@ public class FluffyFurClientConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean>
             FABULOUS_WEATHER_FIX, FANCY_FOG, FANCY_FOG_SPHERE, DAYLIGHT_CLOUDS, DAYLIGHT_CLOUDS_IGNORE,
             ITEM_PARTICLE, ITEM_GUI_PARTICLE, BLOOD_PARTICLE, LIGHTNING_BOLT_EFFECT, LIGHTNING_BOLT_EFFECT_LIGHT, LIGHTNING_BOLT_EFFECT_SCREENSHAKE, EXPLOSION_EFFECT, EXPLOSION_EFFECT_SCREENSHAKE,
+            POST_PROCCESS_SHADER_INSTANCE_LOG,
             RAIN_FOG_OVERLAY, RAIN_FOG_OVERLAY_NOISE, RAIN_FOG_OVERLAY_IGN,
             ENHANCED_MENU, VANILLA_PANORAMA_CONFLICT_PREVENTION, PANORAMA_LOGO, PANORAMA_MUSIC,
             MENU_BUTTON, PAUSE_BUTTON, PACK_BUTTON;
@@ -37,6 +38,10 @@ public class FluffyFurClientConfig {
         LIGHTNING_BOLT_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of lightning bolt.").translation("config.client.fluffy_fur.graphics.particles.lightningBoltEffectScreenshake").define("lightningBoltEffectScreenshake", true);
         EXPLOSION_EFFECT = builder.comment("Enable custom effect of explosion.").translation("config.client.fluffy_fur.graphics.particles.explosionEffect").define("explosionEffect", true);
         EXPLOSION_EFFECT_SCREENSHAKE = builder.comment("Enable screenshake for custom effect of explosion.").translation("config.client.fluffy_fur.graphics.particles.explosionEffectScreenshake").define("explosionEffectScreenshake", true);
+        builder.pop();
+
+        builder.comment("Shaders").translation("config.client.fluffy_fur.graphics.shaders").push("shaders");
+        POST_PROCCESS_SHADER_INSTANCE_LOG = builder.comment("Enable a log warning about exceeding the post-process shader instance limit").translation("config.client.fluffy_fur.graphics.shaders.postProcessShaderInstanceLog").define("postProcessShaderInstanceLog", true);
         builder.pop();
         builder.pop();
 

@@ -2,10 +2,10 @@ package mod.maxbogomol.fluffy_fur.client.shader.postprocess;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.maxbogomol.fluffy_fur.FluffyFur;
+import mod.maxbogomol.fluffy_fur.config.FluffyFurClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EffectInstance;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +22,12 @@ public abstract class PostProcessInstanceData {
         dataBuffer.generate((long) getMaxInstances() * getDataSizePerInstance());
     }
 
-    @Nullable
     public PostProcessInstance addInstance(PostProcessInstance instance) {
         if (instances.size() >= getMaxInstances()) {
-            FluffyFur.LOGGER.warn("Failed to add shader instance to " + this + ": reached max instance count of " + getMaxInstances());
-            return null;
+            if (FluffyFurClientConfig.POST_PROCCESS_SHADER_INSTANCE_LOG.get()) {
+                FluffyFur.LOGGER.warn("Failed to add shader instance to {}: reached max instance count of {}", this, getMaxInstances());
+            }
+            return instance;
         }
         instances.add(instance);
         return instance;
