@@ -52,8 +52,8 @@ public class FluffyFurClientConfig {
         builder.pop();
 
         builder.comment("Menu").translation("config.client.fluffy_fur.menu").push("menu");
-        ENHANCED_MENU = builder.comment(".").translation("config.client.fluffy_fur.menu.enhancedMenu").define("enhancedMenu", true);
-        VANILLA_PANORAMA_CONFLICT_PREVENTION = builder.comment(".").translation("config.client.fluffy_fur.menu.vanillaPanoramaConflictPrevention").define("vanillaPanoramaConflictPrevention", true);
+        ENHANCED_MENU = builder.comment("Enable enhanced menu.").comment("Replaces dirt background with a transparent one with a panorama.").translation("config.client.fluffy_fur.menu.enhancedMenu").define("enhancedMenu", true);
+        VANILLA_PANORAMA_CONFLICT_PREVENTION = builder.comment("Enable vanilla panorama conflict prevention.").comment("When other mods change the vanilla panorama texture, it tries to intercept that texture for seamless transitions between screens.").translation("config.client.fluffy_fur.menu.vanillaPanoramaConflictPrevention").define("vanillaPanoramaConflictPrevention", true);
         PANORAMA_LOGO = builder.comment("Enable logo in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaLogo").define("panoramaLogo", true);
         PANORAMA_MUSIC = builder.comment("Enable music in Fluffy Fur Panorama.").translation("config.client.fluffy_fur.menu.panoramaMusic").define("panoramaMusic", true);
         MENU_BUTTON = builder.comment("Enable Fluffy Fur menu button.").translation("config.client.fluffy_fur.menu.menuButton").define("menuButton", true);
