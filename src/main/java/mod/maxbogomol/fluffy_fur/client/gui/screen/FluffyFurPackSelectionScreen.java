@@ -17,9 +17,17 @@ public class FluffyFurPackSelectionScreen extends Screen {
 
     @Override
     public void init() {
+        addRenderableWidget(Button.builder(Component.translatable("pack.openFolder"), (button) -> {
+            onClose();
+        }).bounds(width / 2 - 204, height - 24, 200, 20).build());
+
         addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, (button) -> {
             onClose();
-        }).bounds(width / 2 - 80, height / 4 + 152, 160, 20).build());
+        }).bounds(width / 2 + 4, height - 24, 98, 20).build());
+
+        addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, (button) -> {
+            onClose();
+        }).bounds(width / 2 + 106, height - 24, 98, 20).build());
     }
 
     @Override
