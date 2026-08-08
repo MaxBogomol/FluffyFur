@@ -11,6 +11,7 @@
 - src/main/resources/assets/fluffy_fur/textures/entity/fox/maxbogomol_sleep.png
 - src/main/resources/assets/fluffy_fur/textures/entity/fox/furryfoxes.png
 - src/main/resources/assets/fluffy_fur/textures/entity/fox/furryfoxes_sleep.png
+- src/main/resources/resourcepacks/yonkafishy/pack.png
 - src/main/resources/resourcepacks/yonkafishy/assets/fluffy_fur/textures/block/yonkablock.png
 
 ### Firch's Assets:
