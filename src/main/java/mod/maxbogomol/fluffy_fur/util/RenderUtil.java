@@ -154,8 +154,12 @@ public class RenderUtil {
     }
 
     public static void renderBlockModel(ModelResourceLocation model, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        renderBlockModel(model, DIRT, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay);
+    }
+
+    public static void renderBlockModel(ModelResourceLocation model, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(model);
-        renderCustomModel(bakedModel, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay);
+        renderCustomModel(bakedModel, itemStack, displayContext, leftHand, poseStack, buffer, combinedLight, combinedOverlay);
     }
 
     public static void renderCustomModel(BakedModel bakedModel, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {

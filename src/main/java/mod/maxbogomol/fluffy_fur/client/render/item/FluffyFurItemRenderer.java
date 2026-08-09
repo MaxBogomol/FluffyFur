@@ -25,7 +25,7 @@ public class FluffyFurItemRenderer extends BlockEntityWithoutLevelRenderer {
         if (stack.getItem() == FluffyFurItems.FIRCH_PLUSH.get()) {
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.5f, 0.5f);
-            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_PIECE, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_PIECE, stack, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
 
             poseStack.pushPose();
@@ -34,7 +34,7 @@ public class FluffyFurItemRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.mulPose(Axis.ZP.rotationDegrees(-75));
             poseStack.mulPose(Axis.YP.rotationDegrees(-50));
             poseStack.mulPose(Axis.XP.rotationDegrees(15));
-            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, stack, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
 
             poseStack.pushPose();
@@ -42,7 +42,7 @@ public class FluffyFurItemRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.translate(0, 0.734375f, 0.015625f);
             poseStack.mulPose(Axis.XP.rotationDegrees(-25));
             poseStack.translate(0, 0.0625f, -0.0625f);
-            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, stack, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
 
             poseStack.pushPose();
@@ -51,7 +51,7 @@ public class FluffyFurItemRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.mulPose(Axis.ZP.rotationDegrees(75));
             poseStack.mulPose(Axis.YP.rotationDegrees(50));
             poseStack.mulPose(Axis.XP.rotationDegrees(15));
-            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
+            RenderUtil.renderCustomModel(FluffyFurModels.FIRCH_PLUSH_EAR, stack, ItemDisplayContext.NONE, false, poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
 
             poseStack.pushPose();
