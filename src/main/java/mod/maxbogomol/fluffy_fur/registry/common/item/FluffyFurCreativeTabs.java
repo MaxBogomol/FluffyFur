@@ -53,7 +53,7 @@ public class FluffyFurCreativeTabs {
     }
 
     public static void init() {
-        if (FluffyFurCreativeTabs.FLUFFY_FUR.get() instanceof MultiCreativeTab multiCreativeTab) {
+        if (FLUFFY_FUR.get() instanceof MultiCreativeTab multiCreativeTab) {
             multiCreativeTab.addSubTab(ALL);
             multiCreativeTab.addSubTab(SILLY_THINGS);
             multiCreativeTab.addSubTab(PLUSHIES);
@@ -61,7 +61,7 @@ public class FluffyFurCreativeTabs {
     }
 
     public static void addCreativeTabContent(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == FluffyFurCreativeTabs.FLUFFY_FUR.getKey()) {
+        if (event.getTabKey() == FLUFFY_FUR.getKey()) {
             addInSub(event, SILLY_THINGS, FluffyFurItems.MUSIC_DISC_FLUFFY);
 
             if (event.hasPermissions()) {
@@ -72,7 +72,7 @@ public class FluffyFurCreativeTabs {
             PLUSHIES.setSubShow(event::hasPermissions);
         }
 
-        if (event.getTabKey() == FluffyFurCreativeTabs.FLUFFY_FUR.getKey() && event.hasPermissions()) {
+        if (event.getTabKey() == FLUFFY_FUR.getKey() && event.hasPermissions()) {
             addInSub(event, SILLY_THINGS, FluffyFurItems.TEST_SHRIMP);
             addInSub(event, SILLY_THINGS, FluffyFurItems.THING);
             addInSub(event, SILLY_THINGS, FluffyFurItems.SILLY_TREAT);

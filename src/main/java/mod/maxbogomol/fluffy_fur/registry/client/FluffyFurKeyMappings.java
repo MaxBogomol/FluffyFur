@@ -13,7 +13,7 @@ import org.lwjgl.glfw.GLFW;
 public class FluffyFurKeyMappings {
     private static final String CATEGORY = "key.category."+ FluffyFur.MOD_ID+".general";
     public static final KeyMapping FLUFFY_FUR_MENU = new KeyMapping("key."+FluffyFur.MOD_ID+".fluffy_fur_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_HOME, CATEGORY);
-    public static final KeyMapping SKIN_MENU = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_ESCAPE, CATEGORY);
+    public static final KeyMapping SKIN_MENU = new KeyMapping("key."+FluffyFur.MOD_ID+".skin_menu", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY);
 
     @Mod.EventBusSubscriber(modid = FluffyFur.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientRegistryEvents {
