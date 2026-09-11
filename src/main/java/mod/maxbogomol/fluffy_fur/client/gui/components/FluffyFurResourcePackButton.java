@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.repository.PackRepository;
 
 public class FluffyFurResourcePackButton extends Button {
     public static final ResourceLocation RESOURCE_PACK_LOCATION = new ResourceLocation(FluffyFur.MOD_ID, "textures/gui/menu/button/resource_pack.png");
@@ -22,7 +23,16 @@ public class FluffyFurResourcePackButton extends Button {
     }
 
     public static void click(Button button) {
-        Minecraft.getInstance().setScreen(new FluffyFurPackSelectionScreen(Minecraft.getInstance().screen));
+        Minecraft minecraft = Minecraft.getInstance();
+        FluffyFurPackSelectionScreen screen = new FluffyFurPackSelectionScreen(Minecraft.getInstance().screen);
+        screen.setTitleName(Component.translatable("resourcePack.title"));
+        screen.setPackSelectionModel(minecraft.getResourcePackRepository(), FluffyFurResourcePackButton::applyPacks);
+        screen.setPath(minecraft.getResourcePackDirectory());
+        minecraft.setScreen(screen);
+    }
+
+    public static void applyPacks(PackRepository packRepository) {
+        Minecraft.getInstance().options.updateResourcePacks(packRepository);
     }
 
     @Override
