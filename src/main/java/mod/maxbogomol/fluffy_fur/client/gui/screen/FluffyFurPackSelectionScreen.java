@@ -104,6 +104,7 @@ public class FluffyFurPackSelectionScreen extends Screen {
         }).bounds(width / 2 + 4, height - 24, 98, 20).build());
 
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, (button) -> {
+            model.commit();
             onClose();
         }).bounds(width / 2 + 106, height - 24, 98, 20).build());
 

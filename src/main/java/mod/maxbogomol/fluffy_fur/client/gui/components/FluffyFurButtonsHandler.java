@@ -77,7 +77,7 @@ public class FluffyFurButtonsHandler {
                             toAdd.setValue(new FluffyFurMenuButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_));
                         }
                         if (packButton_) {
-                            toAdd.setValue(new FluffyFurPackButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_));
+                            //toAdd.setValue(new FluffyFurPackButton(w.getX() + offsetX_ + (onLeft ? -20 : w.getWidth()) + offsetFreeX_, w.getY() + offsetFreeY_));
                         }
                     });
             if (toAdd.getValue() != null) {

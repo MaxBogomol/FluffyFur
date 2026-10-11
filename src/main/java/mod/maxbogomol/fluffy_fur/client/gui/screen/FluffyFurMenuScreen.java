@@ -5,7 +5,6 @@ import mod.maxbogomol.fluffy_fur.FluffyFur;
 import mod.maxbogomol.fluffy_fur.FluffyFurClient;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurLogoRenderer;
 import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurPanoramaRenderer;
-import mod.maxbogomol.fluffy_fur.client.gui.components.FluffyFurResourcePackButton;
 import mod.maxbogomol.fluffy_fur.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -95,7 +94,6 @@ public class FluffyFurMenuScreen extends Screen {
         }).bounds(width / 2 - 80, height / 4 + 152, 160, 20).build());
         //addRenderableWidget(new FluffyFurResourcePackButton(width / 2 + 159, height / 4 + 152));
         //addRenderableWidget(new FluffyFurDataPackButton(width / 2 + 184, height / 4 + 152));
-        addRenderableWidget(new FluffyFurResourcePackButton(width / 2 + 184, height / 4 + 152));
     }
 
     @Override
